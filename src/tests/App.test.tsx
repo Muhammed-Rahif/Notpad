@@ -6,6 +6,6 @@ import "@testing-library/jest-dom";
 test("renders home page", () => {
   render(<App />);
 
-  const linkElement = screen.getByText(/untitled - notepad/i);
+  const linkElement = screen.getByText(/untitled.txt - notepad/i);
   expect(linkElement).toBeInTheDocument();
 });

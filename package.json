@@ -1,5 +1,10 @@
 {
   "name": "notepad",
+  "description": "Windows notepad in web!",
+  "main": "src/index.tsx",
+  "repository": "https://github.com/Muhammed-Rahif/Notepad",
+  "author": "Muhammed Rahif <rahifpalliyalil@gmail.com>",
+  "license": "MIT",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

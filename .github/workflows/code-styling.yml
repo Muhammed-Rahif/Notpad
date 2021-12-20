@@ -31,4 +31,5 @@ jobs:
             - related workflow file : [.github/workflows/code-styling.yml](https://github.com/Muhammed-Rahif/Notepad/blob/master/.github/workflows/code-styling.yml)
             - prettier config file : [.prettierrc.json](https://github.com/Muhammed-Rahif/Notepad/blob/master/.prettierrc.json)
           labels: code-styling
-          assignees: Muhammed-Rahif
+          reviewers: Muhammed-Rahif
+          # assignees: Muhammed-Rahif

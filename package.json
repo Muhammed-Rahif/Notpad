@@ -11,7 +11,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format-code": "yarn prettier --write .",
+    "check-format": "yarn prettier --check ."
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -57,5 +59,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
   }
 }

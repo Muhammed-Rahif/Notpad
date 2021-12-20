@@ -1,0 +1,17 @@
+dependencies:
+  - yarn.lock
+
+documentation:
+  - ["README.md", "CODE_OF_CONDUCT.md"]
+
+gh-actions:
+  - .github/workflows/**/*
+
+test:
+  - src/tests/**/*
+
+components:
+  - src/components/**/*
+
+ts-types:
+  - src/types/**/*

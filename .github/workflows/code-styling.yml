@@ -1,0 +1,34 @@
+name: Format code
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  format-code:
+    name: Format code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout to branch
+        uses: actions/checkout@v2
+
+      - name: Format code
+        id: check
+        run: yarn install && yarn format-code
+
+      - name: Create PR
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: code files prettified"
+          branch: code-styling
+          delete-branch: true
+          title: "chore: code files prettified"
+          body: |
+            ### Code files formatted using prettier style
+            - related workflow file : [.github/workflows/format-code.yml](https://github.com/Muhammed-Rahif/Notepad/blob/master/.github/workflows/format-code.yml)
+            - prettier config file : [.prettierrc.json](https://github.com/Muhammed-Rahif/Notepad/blob/master/.prettierrc.json)
+          labels: code-styling
+          assignees: Muhammed-Rahif

@@ -1,0 +1,52 @@
+#menu-bar {
+  box-shadow: 0px 0.5px 2px #33333326;
+  z-index: 68;
+  position: relative;
+
+  .btn {
+    padding: 0.45rem;
+    border: transparent 0;
+    width: 4rem;
+    background-color: transparent;
+  }
+
+  .btn:hover {
+    background-color: #e0ffff;
+  }
+
+  .btn:active:focus {
+    background-color: rgba(211, 211, 211, 0.5);
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 200px;
+      box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.2);
+      z-index: 88;
+    }
+
+    .menu-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+
+      kbd {
+        font-size: 0.56rem;
+      }
+    }
+
+    hr {
+      background-color: rgba(121, 150, 160, 0.25);
+      height: 0.8px;
+      border: none;
+    }
+  }
+}

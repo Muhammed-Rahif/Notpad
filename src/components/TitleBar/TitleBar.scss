@@ -3,6 +3,8 @@
   justify-content: space-between;
   background-color: #f0f8ff80;
   box-shadow: #7fffd480 0px 2px 8px;
+  z-index: 78;
+  position: relative;
 
   .title-section {
     display: flex;

@@ -28,7 +28,7 @@ jobs:
           title: "chore: code files prettified"
           body: |
             ### Code files formatted using prettier style
-            - related workflow file : [.github/workflows/format-code.yml](https://github.com/Muhammed-Rahif/Notepad/blob/master/.github/workflows/format-code.yml)
+            - related workflow file : [.github/workflows/code-styling.yml](https://github.com/Muhammed-Rahif/Notepad/blob/master/.github/workflows/code-styling.yml)
             - prettier config file : [.prettierrc.json](https://github.com/Muhammed-Rahif/Notepad/blob/master/.prettierrc.json)
           labels: code-styling
           assignees: Muhammed-Rahif

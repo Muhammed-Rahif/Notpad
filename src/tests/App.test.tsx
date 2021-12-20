@@ -6,9 +6,15 @@ import "@testing-library/jest-dom";
 describe("renders home page with contents", () => {
   afterEach(cleanup);
 
-  it("should have 'untitled.txt - notepad' title", () => {
+  it("should have the 'TitleBar' component in 'App'", () => {
     render(<App />);
-    const titleElement = screen.getByText(/untitled.txt - notepad/i);
-    expect(titleElement).toBeInTheDocument();
+    const titleBarComponent = screen.getByTestId("title-bar");
+    expect(titleBarComponent).toBeInTheDocument();
+  });
+
+  it("should have the 'MenuBar' component in 'App'", () => {
+    render(<App />);
+    const menuBarComponent = screen.getByTestId("menu-bar");
+    expect(menuBarComponent).toBeInTheDocument();
   });
 });

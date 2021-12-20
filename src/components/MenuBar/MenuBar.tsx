@@ -25,11 +25,17 @@ function MenuBar() {
         >
           File
         </button>
-        <div className="dropdown-content" style={{ display: showFile ? "block" : "none" }}>
+        <div
+          className="dropdown-content"
+          style={{ display: showFile ? "block" : "none" }}
+        >
           <button className="menu-btn btn" onClick={() => newFile({})}>
             New <kbd>Ctrl + N</kbd>
           </button>
-          <button className="menu-btn btn" onClick={() => newFile({ newWindow: true })}>
+          <button
+            className="menu-btn btn"
+            onClick={() => newFile({ newWindow: true })}
+          >
             New Window <kbd>Ctrl + Shift + N</kbd>
           </button>
           <button className="menu-btn btn">
@@ -50,7 +56,10 @@ function MenuBar() {
         >
           Edit
         </button>
-        <div className="dropdown-content" style={{ display: showEdit ? "block" : "none" }}>
+        <div
+          className="dropdown-content"
+          style={{ display: showEdit ? "block" : "none" }}
+        >
           <button className="menu-btn btn">
             Undo <kbd>Ctrl + Z</kbd>
           </button>
@@ -104,7 +113,10 @@ function MenuBar() {
         >
           View
         </button>
-        <div className="dropdown-content" style={{ display: showView ? "block" : "none" }}>
+        <div
+          className="dropdown-content"
+          style={{ display: showView ? "block" : "none" }}
+        >
           <button className="menu-btn btn">
             Fullscreen{" "}
             <p>
@@ -126,7 +138,10 @@ function MenuBar() {
         >
           Help
         </button>
-        <div className="dropdown-content" style={{ display: showHelp ? "block" : "none" }}>
+        <div
+          className="dropdown-content"
+          style={{ display: showHelp ? "block" : "none" }}
+        >
           <button className="menu-btn btn">
             Send Feedback
             <p>

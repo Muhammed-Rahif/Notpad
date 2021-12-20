@@ -8,7 +8,7 @@ import {
 
 function TitleBar() {
   return (
-    <div id="title-bar">
+    <div id="title-bar" data-testid="title-bar">
       <section className="title-section">
         <img src="assets/images/logo.png" alt="Notepad" width="20px" />
         <p className="title">Untitled.txt - Notepad</p>

@@ -1,11 +1,20 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import App from "../App";
 import "@testing-library/jest-dom";
 
-test("renders home page", () => {
-  render(<App />);
+describe("renders home page with contents", () => {
+  afterEach(cleanup);
 
-  const linkElement = screen.getByText(/untitled.txt - notepad/i);
-  expect(linkElement).toBeInTheDocument();
+  it("should have the 'TitleBar' component in 'App'", () => {
+    render(<App />);
+    const titleBarComponent = screen.getByTestId("title-bar");
+    expect(titleBarComponent).toBeInTheDocument();
+  });
+
+  it("should have the 'MenuBar' component in 'App'", () => {
+    render(<App />);
+    const menuBarComponent = screen.getByTestId("menu-bar");
+    expect(menuBarComponent).toBeInTheDocument();
+  });
 });

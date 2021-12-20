@@ -13,7 +13,7 @@ function MenuBar() {
   const [showHelp, setShowHelp] = useState(false);
 
   return (
-    <div id="menu-bar">
+    <div id="menu-bar" data-testid="menu-bar">
       {/* File */}
       <div className="dropdown">
         <button

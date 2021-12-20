@@ -1,6 +1,10 @@
 import React from "react";
 import "./TitleBar.scss";
-import { VscChromeMinimize, VscChromeMaximize, VscChromeClose } from "react-icons/vsc";
+import {
+  VscChromeMinimize,
+  VscChromeMaximize,
+  VscChromeClose,
+} from "react-icons/vsc";
 
 function TitleBar() {
   return (

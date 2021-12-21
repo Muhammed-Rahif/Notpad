@@ -18,7 +18,7 @@ function MenuBar() {
       <div className="dropdown">
         <button
           className="btn"
-          onClick={() => setShowFile(!showFile)}
+          onFocus={() => setShowFile(!showFile)}
           onBlur={() => {
             setTimeout(() => setShowFile(false), 150);
           }}
@@ -51,7 +51,7 @@ function MenuBar() {
       <div className="dropdown">
         <button
           className="btn"
-          onClick={() => setShowEdit(!showEdit)}
+          onFocus={() => setShowEdit(!showEdit)}
           onBlur={() => setShowEdit(false)}
         >
           Edit
@@ -108,7 +108,7 @@ function MenuBar() {
       <div className="dropdown">
         <button
           className="btn"
-          onClick={() => setShowView(!showView)}
+          onFocus={() => setShowView(!showView)}
           onBlur={() => setShowView(false)}
         >
           View
@@ -133,7 +133,7 @@ function MenuBar() {
       <div className="dropdown">
         <button
           className="btn"
-          onClick={() => setShowHelp(!showHelp)}
+          onFocus={() => setShowHelp(!showHelp)}
           onBlur={() => setShowHelp(false)}
         >
           Help

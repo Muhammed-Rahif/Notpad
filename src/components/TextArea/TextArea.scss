@@ -1,0 +1,35 @@
+#text-area-wrapper {
+  width: 100%;
+  height: 100%;
+
+  #text-area {
+    width: 100%;
+    height: 87vh;
+    background-color: #f9f9f9;
+    outline: none;
+    border: none;
+    resize: none;
+    font-size: 1rem;
+    padding: 4px 2px;
+  }
+
+  .details-tab {
+    position: fixed;
+    bottom: 0;
+    height: 1.5rem;
+    width: 100%;
+    background-color: #f0f4f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    z-index: 99;
+    box-shadow: 0 0 10px -6px #111;
+
+    .line-number {
+      p {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { newFile } from "../../helpers";
 import "./MenuBar.scss";
 import { MdOutlineDone } from "react-icons/md";
 import { BiFont } from "react-icons/bi";
 import { AiOutlineInfo } from "react-icons/ai";
 import { RiFeedbackLine } from "react-icons/ri";
+import { AlertBoxContext } from "../../contexts/Context";
 
 function MenuBar() {
   const [showFile, setShowFile] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showView, setShowView] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+
+  const { setAlertBox } = useContext(AlertBoxContext);
 
   return (
     <div id="menu-bar" data-testid="menu-bar">
@@ -46,7 +49,29 @@ function MenuBar() {
           </button>
           <hr />
 
-          <button className="menu-btn btn">
+          <button
+            className="menu-btn btn"
+            onClick={() => {
+              setAlertBox({
+                title: "Exit",
+                body: "Are sure to want exit?",
+                buttons: [
+                  {
+                    text: "No",
+                    onClick: () => {
+                      setAlertBox(null);
+                    },
+                  },
+                  {
+                    text: "Yes",
+                    onClick: () => {
+                      setAlertBox(null);
+                    },
+                  },
+                ],
+              });
+            }}
+          >
             Exit <kbd>Ctrl + E</kbd>
           </button>
         </div>

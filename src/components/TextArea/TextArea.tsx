@@ -44,11 +44,12 @@ function TextArea() {
         onKeyUp={handleTextAreaChange}
         onChange={handleTextAreaChange}
         onMouseUp={handleTextAreaChange}
+        data-testid="text-area"
       />
 
       <div className="details-tab">
         <div className="line-number">
-          <p>
+          <p data-testid="line-index">
             Ln {linesNum}, Col {columnIndex}
           </p>
         </div>

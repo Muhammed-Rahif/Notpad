@@ -17,4 +17,10 @@ describe("renders home page with contents", () => {
     const menuBarComponent = screen.getByTestId("menu-bar");
     expect(menuBarComponent).toBeInTheDocument();
   });
+
+  it("should have the 'TextArea' component in 'App'", () => {
+    render(<App />);
+    const textAreaComponent = screen.getByTestId("text-area-wrapper");
+    expect(textAreaComponent).toBeInTheDocument();
+  });
 });

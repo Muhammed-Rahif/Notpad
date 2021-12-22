@@ -44,6 +44,11 @@ function MenuBar() {
           <button className="menu-btn btn">
             Save <kbd>Ctrl + S</kbd>
           </button>
+          <hr />
+
+          <button className="menu-btn btn">
+            Exit <kbd>Ctrl + E</kbd>
+          </button>
         </div>
       </div>
 

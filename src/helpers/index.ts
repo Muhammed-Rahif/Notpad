@@ -28,11 +28,11 @@ function enableTabIndentation(
   inputElem: HTMLInputElement | HTMLTextAreaElement
 ) {
   inputElem.addEventListener("keydown", (e: Event) => {
-    let event = e as KeyboardEvent;
+    const event = e as KeyboardEvent;
     if (event.key === "Tab") {
       event.preventDefault();
-      var start = inputElem.selectionStart || 0;
-      var end = inputElem.selectionEnd || 0;
+      const start = inputElem.selectionStart || 0;
+      const end = inputElem.selectionEnd || 0;
 
       // set textarea value to: text before caret + tab + text after caret
       inputElem.value =

@@ -1,6 +1,16 @@
-import React, { useState, KeyboardEvent, ChangeEvent, MouseEvent } from "react";
+import React, {
+  useState,
+  KeyboardEvent,
+  ChangeEvent,
+  MouseEvent,
+  useEffect,
+} from "react";
 import "./TextArea.scss";
-import { getColumnIndex, getLineNumber } from "../../helpers";
+import {
+  getColumnIndex,
+  getLineNumber,
+  enableTabIndentation,
+} from "../../helpers";
 
 function TextArea() {
   const [linesNum, setLineNum] = useState(1);
@@ -16,6 +26,13 @@ function TextArea() {
 
     setColumnIndex(getColumnIndex(event.target as HTMLTextAreaElement));
   }
+
+  useEffect(() => {
+    let textAreaElem: HTMLTextAreaElement = document.getElementById(
+      "text-area"
+    ) as HTMLTextAreaElement;
+    enableTabIndentation(textAreaElem);
+  }, []);
 
   return (
     <div id="text-area-wrapper" data-testid="text-area-wrapper">

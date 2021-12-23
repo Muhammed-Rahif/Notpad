@@ -74,5 +74,14 @@
     "identity-obj-proxy": "^3.0.0",
     "jest-junit": "^13.0.0",
     "prettier": "^2.5.1"
+  },
+  "jest-junit": {
+    "outputDirectory": "reports",
+    "outputName": "jest-junit.xml",
+    "ancestorSeparator": " › ",
+    "uniqueOutputName": "false",
+    "suiteNameTemplate": "{filepath}",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}"
   }
 }

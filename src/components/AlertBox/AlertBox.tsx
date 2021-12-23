@@ -6,8 +6,6 @@ import { AlertBoxContext } from "../../contexts/Context";
 function AlertBox() {
   const { alertBox, setAlertBox } = useContext(AlertBoxContext);
 
-  console.log({ alertBox });
-
   return (
     <div
       id="alert-box-wrapper"

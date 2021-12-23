@@ -25,7 +25,7 @@ jobs:
           commit-message: "chore: code files prettified"
           branch: code-styling
           delete-branch: true
-          title: "chore: code files prettified"
+          title: "style: code files prettified"
           body: |
             ### Code files formatted using prettier style
             - related workflow file : [.github/workflows/code-styling.yml](https://github.com/Muhammed-Rahif/Notepad/blob/master/.github/workflows/code-styling.yml)

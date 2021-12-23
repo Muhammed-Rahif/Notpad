@@ -25,3 +25,5 @@ yarn-error.log*
 
 # jest junit output for github action workflow
 junit.xml
+reports/**/*
+reports

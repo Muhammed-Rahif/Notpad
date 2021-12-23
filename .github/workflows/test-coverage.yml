@@ -1,7 +1,6 @@
 name: Test coverage report
 on: pull_request
 
-
 jobs:
   test-report:
     name: Test coverage report comment
@@ -9,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: yarn install && yarn test
-      
+
       - uses: mattallty/jest-github-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

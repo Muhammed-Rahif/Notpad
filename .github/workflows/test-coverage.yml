@@ -3,13 +3,12 @@ on: pull_request
 
 
 jobs:
-  build-test:
-    name: 
+  test-report:
+    name: Test coverage report comment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        run: yarn install
-        run: yarn test
+      - run: yarn install && yarn test
       
       - uses: mattallty/jest-github-action@v1
         env:

@@ -11,7 +11,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "yarn jest --ci --reporters=default --reporters=jest-junit",
+    "test:watch": "react-scripts test --watchAll",
+    "test:coverage": "yarn test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build -m 'chore: production build'",

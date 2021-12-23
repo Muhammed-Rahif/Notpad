@@ -14,6 +14,7 @@
     "test": "yarn jest --ci --reporters=default --reporters=jest-junit",
     "test:watch": "react-scripts test --watchAll",
     "test:coverage": "yarn test --coverage --watchAll=false",
+    "test:watch:coverage": "yarn test --coverage --watchAll",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build -m 'chore: production build'",

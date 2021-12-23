@@ -23,4 +23,10 @@ describe("renders home page with contents", () => {
     const textAreaComponent = screen.getByTestId("text-area-wrapper");
     expect(textAreaComponent).toBeInTheDocument();
   });
+
+  it("should have the 'AlertBox' component in 'App'", () => {
+    render(<App />);
+    const alertBoxComponent = screen.getByTestId("alert-box-wrapper");
+    expect(alertBoxComponent).toBeInTheDocument();
+  });
 });

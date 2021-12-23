@@ -10,6 +10,7 @@ function AlertBox() {
     <div
       id="alert-box-wrapper"
       style={{ display: Boolean(alertBox) ? "flex" : "none" }}
+      data-testid="alert-box-wrapper"
     >
       <div id="alert-box" className="alert-box">
         <header>

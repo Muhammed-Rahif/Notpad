@@ -15,7 +15,11 @@ function AlertBox() {
       <div id="alert-box" className="alert-box">
         <header>
           <p>{alertBox?.title || "Alert"}</p>
-          <button className="btn-cls" onClick={() => setAlertBox(null)}>
+          <button
+            data-testid="btn-cls"
+            className="btn-cls"
+            onClick={() => setAlertBox(null)}
+          >
             <VscChromeClose />
           </button>
         </header>

@@ -1,0 +1,29 @@
+name: Upgrade dependencies
+on:
+  dispatch_workflow:
+  
+jobs:
+  upgrade-dependencies:
+    name: Upgrade dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout to branch
+        uses: actions/checkout@v2
+
+      - name: Upgrade
+        run: yarn upgrade --latest
+
+      - name: Create PR
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.WORKFLOW_ACCESS }}
+          commit-message: "chore(dependencies): upgrade dependencies"
+          branch: upgrade-dependencies
+          delete-branch: true
+          title: "chore(dependencies): upgrade dependencies"
+          body: |
+            ### Upgrade dependencies
+            - related workflow file : [.github/workflows/upgrade-dependencies.yml](https://github.com/Muhammed-Rahif/Notepad/blob/master/.github/workflows/upgrade-dependencies.yml)
+          labels: dependencies
+          assignees: Muhammed-Rahif

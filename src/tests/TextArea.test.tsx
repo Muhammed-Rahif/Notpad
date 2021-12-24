@@ -1,5 +1,5 @@
 import React from "react";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import TextArea from "../components/TextArea/TextArea";
 
@@ -40,8 +40,25 @@ describe("renders menu bar component with button", () => {
       "line-index"
     )) as HTMLParagraphElement;
 
-    let changeEvent = new Event("keyup", { bubbles: true, cancelable: false });
-    textArea.dispatchEvent(changeEvent);
+    let keyUpEvent = new Event("keyup", { bubbles: true, cancelable: false });
+    textArea.dispatchEvent(keyUpEvent);
     expect(lineIndexShower.innerHTML).toEqual("Ln 2, Col 24");
+  });
+
+  test("TextArea 'Tab' indentation must work", async () => {
+    render(<TextArea />);
+    const textArea: HTMLTextAreaElement = (await screen.findByTestId(
+      "text-area"
+    )) as HTMLTextAreaElement;
+
+    fireEvent.keyDown(textArea, { key: "Tab", code: "Tab" });
+
+    const lineIndexShower: HTMLParagraphElement = (await screen.findByTestId(
+      "line-index"
+    )) as HTMLParagraphElement;
+    let keyUpEvent = new Event("keyup", { bubbles: true, cancelable: false });
+    textArea.dispatchEvent(keyUpEvent);
+
+    expect(lineIndexShower.innerHTML).toEqual("Ln 1, Col 1");
   });
 });

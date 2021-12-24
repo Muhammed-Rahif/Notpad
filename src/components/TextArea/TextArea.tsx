@@ -42,6 +42,8 @@ function TextArea() {
         autoFocus
         spellCheck="false"
         onKeyUp={handleTextAreaChange}
+        onKeyDown={handleTextAreaChange}
+        onKeyPress={handleTextAreaChange}
         onChange={handleTextAreaChange}
         onMouseUp={handleTextAreaChange}
         data-testid="text-area"

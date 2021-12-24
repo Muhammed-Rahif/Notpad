@@ -1,6 +1,6 @@
 name: Upgrade dependencies
 on: workflow_dispatch
-  
+
 jobs:
   upgrade-dependencies:
     name: Upgrade dependencies

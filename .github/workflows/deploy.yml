@@ -1,13 +1,15 @@
+
 name: Deploy production
 on:
   workflow_dispatch:
   release:
     types:
-      - created
-      - published
-      - edited
-      - released
+        - created
+        - published
+        - edited
+        - released
 
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest

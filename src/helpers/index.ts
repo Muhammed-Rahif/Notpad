@@ -46,4 +46,41 @@ function enableTabIndentation(
   });
 }
 
-export { newFile, getLineNumber, getColumnIndex, enableTabIndentation };
+function downloadFile(data: string, filename: string, type: string) {
+  const file = new Blob([data], { type: type });
+  const anchorElem = document.createElement("a"),
+    url = URL.createObjectURL(file);
+  anchorElem.href = url;
+  anchorElem.download = filename;
+  document.body.appendChild(anchorElem);
+  anchorElem.click();
+  setTimeout(function () {
+    document.body.removeChild(anchorElem);
+    window.URL.revokeObjectURL(url);
+  }, 0);
+}
+
+function handleOpenFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+  const reader = new FileReader();
+  const textAreaElem: HTMLTextAreaElement = document.getElementById(
+    "text-area"
+  ) as HTMLTextAreaElement;
+
+  reader.onload = function (e: ProgressEvent<FileReader>) {
+    let fileContent: string = e.target?.result as string;
+    textAreaElem.value = fileContent;
+
+    textAreaElem.focus();
+  };
+  const files = event.target.files as FileList;
+  reader.readAsText(files[0]);
+}
+
+export {
+  newFile,
+  getLineNumber,
+  getColumnIndex,
+  enableTabIndentation,
+  downloadFile,
+  handleOpenFileChange,
+};

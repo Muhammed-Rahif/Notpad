@@ -45,6 +45,7 @@ function TextArea() {
         onKeyDown={handleTextAreaChange}
         onKeyPress={handleTextAreaChange}
         onChange={handleTextAreaChange}
+        onFocus={handleTextAreaChange}
         onMouseUp={handleTextAreaChange}
         data-testid="text-area"
       />

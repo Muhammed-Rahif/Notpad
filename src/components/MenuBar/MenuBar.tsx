@@ -33,7 +33,7 @@ function MenuBar() {
           style={{ display: showFile ? "block" : "none" }}
         >
           <button className="menu-btn btn" onClick={() => newFile({})}>
-            New <kbd>Ctrl + N</kbd>
+            New <kbd>Alt + N</kbd>
           </button>
           <button
             className="menu-btn btn"

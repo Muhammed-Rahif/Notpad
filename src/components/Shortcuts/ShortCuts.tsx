@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { downloadFile, newFile } from "../../helpers";
+import { downloadFile, insertTimeAndDate, newFile } from "../../helpers";
 
 function Shortcuts({ children }: { children: ReactNode }) {
   useHotkeys(
@@ -40,6 +40,18 @@ function Shortcuts({ children }: { children: ReactNode }) {
       e.stopPropagation();
       const openFileELem = document.getElementById("open-file");
       openFileELem?.click();
+    },
+    { enableOnTags: ["TEXTAREA"] }
+  );
+
+  useHotkeys(
+    "F5",
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      insertTimeAndDate(
+        document.getElementById("text-area") as HTMLTextAreaElement
+      );
     },
     { enableOnTags: ["TEXTAREA"] }
   );

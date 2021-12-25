@@ -76,6 +76,12 @@ function handleOpenFileChange(event: React.ChangeEvent<HTMLInputElement>) {
   reader.readAsText(files[0]);
 }
 
+function insertTimeAndDate(inputElem: HTMLInputElement | HTMLTextAreaElement) {
+  const Now: Date = new Date();
+  const timeAndDate: string = `${Now.getHours()}:${Now.getMinutes()} ${Now.getDay()}/${Now.getMonth()}/${Now.getFullYear()} `;
+  inputElem.value += timeAndDate;
+}
+
 export {
   newFile,
   getLineNumber,
@@ -83,4 +89,5 @@ export {
   enableTabIndentation,
   downloadFile,
   handleOpenFileChange,
+  insertTimeAndDate,
 };

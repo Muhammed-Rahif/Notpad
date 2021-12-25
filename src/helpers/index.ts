@@ -82,6 +82,10 @@ function insertTimeAndDate(inputElem: HTMLInputElement | HTMLTextAreaElement) {
   inputElem.value += timeAndDate;
 }
 
+function selectAllOfInput(inputElem: HTMLInputElement | HTMLTextAreaElement) {
+  inputElem.setSelectionRange(0, inputElem.value.length);
+}
+
 export {
   newFile,
   getLineNumber,
@@ -90,4 +94,5 @@ export {
   downloadFile,
   handleOpenFileChange,
   insertTimeAndDate,
+  selectAllOfInput,
 };

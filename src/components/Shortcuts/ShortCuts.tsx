@@ -1,6 +1,11 @@
 import React, { ReactNode } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { downloadFile, insertTimeAndDate, newFile } from "../../helpers";
+import {
+  downloadFile,
+  insertTimeAndDate,
+  newFile,
+  selectAllOfInput,
+} from "../../helpers";
 
 function Shortcuts({ children }: { children: ReactNode }) {
   useHotkeys(

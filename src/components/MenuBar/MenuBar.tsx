@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { newFile } from "../../helpers";
 import "./MenuBar.scss";
 import { MdOutlineDone } from "react-icons/md";
-import { BiFont } from "react-icons/bi";
+import { AiOutlineFontSize } from "react-icons/ai";
 import { AiOutlineInfo } from "react-icons/ai";
 import { RiFeedbackLine } from "react-icons/ri";
 import { AlertBoxContext } from "../../contexts/Context";
@@ -33,7 +33,7 @@ function MenuBar() {
           style={{ display: showFile ? "block" : "none" }}
         >
           <button className="menu-btn btn" onClick={() => newFile({})}>
-            New <kbd>Ctrl + N</kbd>
+            New <kbd>Alt + N</kbd>
           </button>
           <button
             className="menu-btn btn"
@@ -128,7 +128,7 @@ function MenuBar() {
           <button className="menu-btn btn">
             Font{" "}
             <p>
-              <BiFont />
+              <AiOutlineFontSize />
             </p>
           </button>
         </div>

@@ -20,7 +20,6 @@ jobs:
           yarn install
           yarn build
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          CI=false
           yarn gh-pages -d build -u "github-actions-bot <support+actions@github.com>" -m "chore: production build"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

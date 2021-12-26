@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
-import { newFile } from "../../helpers";
+import {
+  downloadFile,
+  insertTimeAndDate,
+  newFile,
+  selectAllOfInput,
+} from "../../helpers";
 import "./MenuBar.scss";
 import { MdOutlineDone } from "react-icons/md";
 import { AiOutlineFontSize } from "react-icons/ai";
@@ -41,10 +46,24 @@ function MenuBar() {
           >
             New Window <kbd>Ctrl + Shift + N</kbd>
           </button>
-          <button className="menu-btn btn">
+          <button
+            className="menu-btn btn"
+            onClick={() => {
+              const openFileELem = document.getElementById("open-file");
+              openFileELem?.click();
+            }}
+          >
             Open <kbd>Ctrl + O</kbd>
           </button>
-          <button className="menu-btn btn">
+          <button
+            className="menu-btn btn"
+            onClick={() => {
+              const textAreaElem: HTMLTextAreaElement = document.getElementById(
+                "text-area"
+              ) as HTMLTextAreaElement;
+              downloadFile(textAreaElem.value, "Untitled.txt", "text/plain");
+            }}
+          >
             Save <kbd>Ctrl + S</kbd>
           </button>
           <hr />
@@ -66,6 +85,7 @@ function MenuBar() {
                     text: "Yes",
                     onClick: () => {
                       setAlertBox(null);
+                      window.close();
                     },
                   },
                 ],
@@ -82,7 +102,9 @@ function MenuBar() {
         <button
           className="btn"
           onClick={() => setShowEdit(!showEdit)}
-          onBlur={() => setShowEdit(false)}
+          onBlur={() => {
+            setTimeout(() => setShowEdit(false), 150);
+          }}
         >
           Edit
         </button>
@@ -117,10 +139,24 @@ function MenuBar() {
           </button>
           <hr />
 
-          <button className="menu-btn btn">
+          <button
+            className="menu-btn btn"
+            onClick={() =>
+              selectAllOfInput(
+                document.getElementById("text-area") as HTMLTextAreaElement
+              )
+            }
+          >
             Select All <kbd>Ctrl + A</kbd>
           </button>
-          <button className="menu-btn btn">
+          <button
+            className="menu-btn btn"
+            onClick={() => {
+              insertTimeAndDate(
+                document.getElementById("text-area") as HTMLTextAreaElement
+              );
+            }}
+          >
             Time/Date <kbd>F5</kbd>
           </button>
           <hr />
@@ -139,7 +175,9 @@ function MenuBar() {
         <button
           className="btn"
           onClick={() => setShowView(!showView)}
-          onBlur={() => setShowView(false)}
+          onBlur={() => {
+            setTimeout(() => setShowView(false), 150);
+          }}
         >
           View
         </button>
@@ -164,7 +202,9 @@ function MenuBar() {
         <button
           className="btn"
           onClick={() => setShowHelp(!showHelp)}
-          onBlur={() => setShowHelp(false)}
+          onBlur={() => {
+            setTimeout(() => setShowHelp(false), 150);
+          }}
         >
           Help
         </button>

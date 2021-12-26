@@ -80,10 +80,12 @@ function insertTimeAndDate(inputElem: HTMLInputElement | HTMLTextAreaElement) {
   const Now: Date = new Date();
   const timeAndDate: string = `${Now.getHours()}:${Now.getMinutes()} ${Now.getDay()}/${Now.getMonth()}/${Now.getFullYear()} `;
   inputElem.value += timeAndDate;
+  inputElem.focus();
 }
 
 function selectAllOfInput(inputElem: HTMLInputElement | HTMLTextAreaElement) {
   inputElem.setSelectionRange(0, inputElem.value.length);
+  inputElem.focus();
 }
 
 export {

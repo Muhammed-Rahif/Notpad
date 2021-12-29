@@ -1,6 +1,6 @@
 name: Test report
 on:
-  pull_request:
+  pull_request_target:
   push:
 jobs:
   build-test:

@@ -1,5 +1,5 @@
 name: Test coverage report
-on: pull_request
+on: pull_request_target
 
 jobs:
   test-report:

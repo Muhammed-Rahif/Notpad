@@ -62,4 +62,4 @@ git push origin <your-branch-name>
 
 **In order to discuss changes, you are welcome to [open an issue](https://github.com/Muhammed-Rahif/Notepad/issues/new/choose) about what you would like to contribute. Enhancements are always encouraged and appreciated.**
 
-### **All the very best from the community.! 🤝🏼**
+### **All the very best from the community.! 🤝**

@@ -40,6 +40,9 @@
 ## 📝 Table of Contents
 
 - [🧐 About](#-about)
+  - [Why I created ?](#why-i-created-)
+  - [Helpful for ?](#helpful-for-)
+  - [Who can contribute ?](#who-can-contribute-)
 - [🏁 Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
   - [Installing](#installing)

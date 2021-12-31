@@ -37,9 +37,21 @@
 <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<details>
+<summary>## 📝 Table of Contents</summary>
 
+- [🧐 About](#-about)
+- [🏁 Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installing](#installing)
+- [🔧 Running the tests](#-running-the-tests)
+  - [Tests commands](#tests-commands)
+  - [And coding style tests](#and-coding-style-tests)
+- [🚀 Contributing](#-contributing)
+- [⛏️ Built Using](#-built-using)
+- [✍️ Authors](#-authors)
 
-
+</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
 

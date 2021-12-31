@@ -55,7 +55,23 @@
 
 ## 🧐 About
 
-<!-- Write about 1-2 paragraphs describing the purpose of your project. -->
+### Why I created ?
+
+I love open source and its maintaining so much. But I wanted a minimal and simple project to attract newcomers and everyone in general to contribute to my next project.
+
+That's when I think of windows notepad text editor. I used windows early, but now I use ubuntu, and ubuntu don't have notepad (have a text editor). So I decided to create a notepad (that's looks like the windows notepad) that is accessible for every platform, everyone. However the main goal was open sourcing.
+
+### Helpful for ?
+
+- Newcomers to open source
+- Developer who are new to react and typescript
+- For everyone who loves to use windows notepad
+
+### Who can contribute ?
+
+- Who is learning react and typescript or who already knows them both.
+- Who have minimal and simple ideas relating to this project.
+- Others who have interest
 
 ## 🏁 Getting Started
 

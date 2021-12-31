@@ -37,8 +37,7 @@
 <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<details>
-<summary>## 📝 Table of Contents</summary>
+## 📝 Table of Contents
 
 - [🧐 About](#-about)
 - [🏁 Getting Started](#-getting-started)
@@ -51,7 +50,6 @@
 - [⛏️ Built Using](#-built-using)
 - [✍️ Authors](#-authors)
 
-</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
 

@@ -3,7 +3,6 @@
 Building a [**Notepad**](https://rahif.me/Notepad) for **web** similar to Windows notepad with additional features.  
 Open for collaborating and contributing.
 
-
 <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->

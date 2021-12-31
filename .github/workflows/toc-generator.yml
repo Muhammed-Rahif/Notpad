@@ -16,4 +16,6 @@ jobs:
           TOC_TITLE: "## 📝 Table of Contents"
           CREATE_PR: true
           COMMIT_MESSAGE: "docs(readme): updated table of contents in 'README.md'"
-          PR_TITLE: docs(readme): updated table of contents in 'README.md'
+          PR_TITLE: "docs(readme): updated table of contents in 'README.md'"
+          FOLDING: true
+          PR_BRANCH_PREFIX: "toc-generator/"

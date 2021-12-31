@@ -1,7 +1,17 @@
-### Notepad
+# Notepad
 
 Building a [**Notepad**](https://rahif.me/Notepad) for **web** similar to Windows notepad with additional features.  
 Open for collaborating and contributing.
+
+
+<!-- prettier-ignore-start -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## 📝 Table of Contents
+
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
 
 Screenshot of the [Notepad](https://rahif.me/Notepad/) currently deployed.
 

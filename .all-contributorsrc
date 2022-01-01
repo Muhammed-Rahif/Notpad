@@ -13,7 +13,14 @@
       "contributions": [
         "bug",
         "code",
-        "doc"
+        "doc",
+        "content",
+        "design",
+        "ideas",
+        "maintenance",
+        "test",
+        "review",
+        "infra"
       ]
     },
     {

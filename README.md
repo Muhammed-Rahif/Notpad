@@ -58,7 +58,8 @@
   - [And coding style tests](#and-coding-style-tests)
 - [🚀 Contributing](#-contributing)
 - [⛏️ Built Using](#-built-using)
-- [✍️ Authors](#-authors)
+- [✍️ Author](#-author)
+- [Contributors ✨](#contributors-)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->

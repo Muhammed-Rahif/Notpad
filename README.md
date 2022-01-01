@@ -25,7 +25,7 @@
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <a href="#contributors-">
-<img src="https://img.shields.io/badge/all_contributors-1-orange.svg" alt="All Contributors">
+<img src="https://img.shields.io/badge/all_contributors-2-orange.svg" alt="All Contributors">
 </a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
@@ -186,6 +186,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://rahif.me"><img src="https://avatars.githubusercontent.com/u/73386156?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Muhammed Rahif</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/issues?q=author%3AMuhammed-Rahif" title="Bug reports">🐛</a> <a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Muhammed-Rahif" title="Code">💻</a> <a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Muhammed-Rahif" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/abrahamalen"><img src="https://avatars.githubusercontent.com/u/53680255?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alen Abraham</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=abrahamalen" title="Documentation">📖</a></td>
   </tr>
 </table>
 

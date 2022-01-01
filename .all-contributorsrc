@@ -1,5 +1,7 @@
 {
-  "files": ["README.md"],
+  "files": [
+    "README.md"
+  ],
   "imageSize": 100,
   "commit": false,
   "contributors": [
@@ -8,7 +10,11 @@
       "name": "Muhammed Rahif",
       "avatar_url": "https://avatars.githubusercontent.com/u/73386156?v=4",
       "profile": "http://rahif.me",
-      "contributions": ["bug"]
+      "contributions": [
+        "bug",
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,

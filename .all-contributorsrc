@@ -1,7 +1,5 @@
 {
-  "files": [
-    "README.md"
-  ],
+  "files": ["README.md"],
   "imageSize": 100,
   "commit": false,
   "contributors": [
@@ -10,9 +8,7 @@
       "name": "Muhammed Rahif",
       "avatar_url": "https://avatars.githubusercontent.com/u/73386156?v=4",
       "profile": "http://rahif.me",
-      "contributions": [
-        "bug"
-      ]
+      "contributions": ["bug"]
     }
   ],
   "contributorsPerLine": 7,
@@ -21,5 +17,5 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": false,
-  "badgeTemplate": "<a href="#contributors-">\n<img src="https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg" alt="All Contributors">\n</a>",
+  "badgeTemplate": "<a href='#contributors-\">\n<img src=\"https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg\" alt=\"All Contributors\">\n</a>"
 }

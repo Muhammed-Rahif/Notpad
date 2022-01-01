@@ -22,6 +22,13 @@
 <a href="https://github.com/Muhammed-Rahif/Notepad/actions/workflows/code-styling.yml">
 <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" alt="Code style">
 </a>
+<!-- prettier-ignore-start -->
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<a href="#contributors">
+<img src="https://img.shields.io/badge/all_contributors-1-orange.svg" alt="All Contributors">
+</a>
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+<!-- prettier-ignore-end -->
 <a href="/LICENSE">
 <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
 </a>
@@ -171,3 +178,23 @@ See also the list of [contributors](https://github.com/Muhammed-Rahif/Notepad/co
 - Hat tip to anyone whose code was used
 - Inspiration
 - References -->
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://rahif.me"><img src="https://avatars.githubusercontent.com/u/73386156?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Muhammed Rahif</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/issues?q=author%3AMuhammed-Rahif" title="Bug reports">🐛</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

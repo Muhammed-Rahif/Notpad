@@ -165,13 +165,9 @@ Read contributing instructions and guidlines from [here](/CONTRIBUTING.md).
 
 - [ReactJs](https://reactjs.org/) - A JavaScript library for building user interfaces
 
-## ✍️ Authors
+## ✍️ Author
 
-- [@Muhammed-Rahif](https://github.com/Muhammed-Rahif) - Idea & base project
-- [@Alen Abraham](https://github.com/abrahamalen) - Contributor
-- [@Muhammed radin](https://github.com/Muhammed-radin) - Contributor
-
-See also the list of [contributors](https://github.com/Muhammed-Rahif/Notepad/contributors) who participated in this project.
+- [@Muhammed-Rahif](https://github.com/Muhammed-Rahif) - Idea & Creator
 
 <!-- ## 🎉 Acknowledgements
 

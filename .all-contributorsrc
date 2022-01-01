@@ -20,5 +20,6 @@
   "projectOwner": "Muhammed-Rahif",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": false,
+  "badgeTemplate": "<a href="#contributors">\n<img src="https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg" alt="All Contributors">\n</a>",
 }

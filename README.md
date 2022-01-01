@@ -1,7 +1,4 @@
 <p align="center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
   <a href="https://rahif.me/Notepad" rel="noopener">
  <img width=115px height=115px src="public/assets/images/logo.png" alt="Notepad"></a>
 </p>
@@ -25,6 +22,13 @@
 <a href="https://github.com/Muhammed-Rahif/Notepad/actions/workflows/code-styling.yml">
 <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" alt="Code style">
 </a>
+<!-- prettier-ignore-start -->
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<a href="#contributors">
+<img src="https://img.shields.io/badge/all_contributors-1-orange.svg" alt="All Contributors">
+</a>
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+<!-- prettier-ignore-end -->
 <a href="/LICENSE">
 <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
 </a>

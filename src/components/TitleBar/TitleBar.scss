@@ -1,8 +1,8 @@
 #title-bar {
   display: flex;
   justify-content: space-between;
-  background-color: #eef4f9;
-  box-shadow: #7fffd480 0px 2px 8px;
+  background-color: var(--bg-color);
+  box-shadow: var(--primary-color) 0px 2px 8px;
   z-index: 78;
   position: relative;
 
@@ -23,25 +23,25 @@
 
   .btn-section {
     .btn {
-      background-color: #eff3f9;
+      background-color: var(--btn-bg-color);
       border-radius: 0;
       width: 2.85rem;
       height: 100%;
       outline: none;
-      border: 0.25px solid rgba(17, 17, 17, 0.025);
+      border: 0.25px solid rgba(17, 17, 17, 0.035);
       cursor: pointer;
     }
 
     .btn:hover {
-      background-color: #e4e4e4;
+      background-color: var(--btn-hover-bg-color);
     }
 
     .btn-cls:hover {
-      background-color: #fd1f1f;
+      background-color: var(--btn-cls-bg-color);
     }
 
     .btn:active:focus {
-      background-color: #e2e2e2;
+      background-color: var(--btn-active-bg-color);
     }
   }
 }

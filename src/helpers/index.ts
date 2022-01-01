@@ -88,6 +88,40 @@ function selectAllOfInput(inputElem: HTMLInputElement | HTMLTextAreaElement) {
   inputElem.focus();
 }
 
+function toggleTheme() {
+  const currentTheme: string =
+    document.documentElement.getAttribute("data-theme") ||
+    localStorage.getItem("theme") ||
+    "dark";
+
+  if (currentTheme === "light") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("theme", "dark");
+  } else if (currentTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light");
+  }
+}
+
+function setUserPreference() {
+  const preferedTheme: string = localStorage.getItem("theme") || "light";
+
+  if (preferedTheme === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light");
+  } else if (preferedTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("theme", "dark");
+  }
+}
+
+function isDarkTheme() {
+  const preferedTheme: string = localStorage.getItem("theme") || "light";
+
+  if (preferedTheme === "light") return false;
+  else if (preferedTheme === "dark") return true;
+}
+
 export {
   newFile,
   getLineNumber,
@@ -97,4 +131,7 @@ export {
   handleOpenFileChange,
   insertTimeAndDate,
   selectAllOfInput,
+  toggleTheme,
+  setUserPreference,
+  isDarkTheme,
 };

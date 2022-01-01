@@ -2,8 +2,10 @@ import React, { useContext, useState } from "react";
 import {
   downloadFile,
   insertTimeAndDate,
+  isDarkTheme,
   newFile,
   selectAllOfInput,
+  toggleTheme,
 } from "../../helpers";
 import "./MenuBar.scss";
 import { MdOutlineDone } from "react-icons/md";
@@ -191,8 +193,8 @@ function MenuBar() {
               <MdOutlineDone />
             </p>
           </button>
-          <button className="menu-btn btn">
-            Dark Mode <p>{/* <MdOutlineDone /> */}</p>
+          <button className="menu-btn btn" onClick={toggleTheme}>
+            Dark Mode <p>{isDarkTheme() && <MdOutlineDone />}</p>
           </button>
         </div>
       </div>

@@ -15,7 +15,7 @@
     min-height: 9rem;
     position: fixed;
     z-index: 101;
-    background-color: #fff;
+    background-color: var(--light-color);
     border: 2.8px rgba(18, 18, 18, 0.65) solid;
     box-shadow: 0px 4px 8px rgba(17, 17, 17, 0.5);
     display: flex;
@@ -33,7 +33,7 @@
       }
 
       .btn-cls {
-        background-color: #eff3f9;
+        background-color: var(--btn-bg);
         border-radius: 0;
         width: 2.85rem;
         height: 2rem;
@@ -43,15 +43,15 @@
       }
 
       .btn-cls:hover {
-        background-color: #e4e4e4;
+        background-color: var(--btn-bg-hover);
       }
 
       .btn-cls:hover {
-        background-color: #fd1f1f;
+        background-color: var(--btn-cls-bg-color);
       }
 
       .btn-cls:active:focus {
-        background-color: #e2e2e2;
+        background-color: var(--btn-active-bg-color);
       }
     }
 
@@ -74,17 +74,17 @@
         width: 5rem;
         border-radius: 0;
         outline: 0;
-        border: 2px rgba(17, 17, 17, 0.25) solid;
-        background-color: #eff3f9;
+        border: 2px var(--border-color) solid;
+        background-color: var(--btn-bg-color);
         cursor: pointer;
       }
 
       button:hover {
-        background-color: #e4e4e4;
+        background-color: var(--btn-hover-bg-color);
       }
 
       button:active:focus {
-        background-color: #cfcfcf;
+        background-color: var(--btn-active-bg-color);
       }
     }
   }

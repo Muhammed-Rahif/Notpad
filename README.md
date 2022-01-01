@@ -24,7 +24,7 @@
 </a>
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<a href='#contributors-">
+<a href="#contributors-">
 <img src="https://img.shields.io/badge/all_contributors-1-orange.svg" alt="All Contributors">
 </a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->

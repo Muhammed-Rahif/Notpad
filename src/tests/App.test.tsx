@@ -3,7 +3,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import App from "../App";
 import "@testing-library/jest-dom";
 
-describe("renders home page with contents", () => {
+describe("renders page with contents and basic features", () => {
   afterEach(cleanup);
 
   it("should have the 'TitleBar' component in 'App'", () => {

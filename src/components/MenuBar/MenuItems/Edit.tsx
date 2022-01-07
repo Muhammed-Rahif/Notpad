@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { AiOutlineFontSize } from "react-icons/ai";
+import { AiFillDelete, AiOutlineFontSize } from "react-icons/ai";
 import { insertTimeAndDate, selectAllOfInput } from "../../../helpers";
 import { DrawModeContext, DrawPadRefContext } from "../../../contexts/Context";
 
@@ -32,6 +32,12 @@ function Edit() {
 
             <button className="menu-btn btn" onClick={drawPadRef?.clear}>
               Clear <kbd>Ctrl + Y</kbd>
+            </button>
+            <button className="menu-btn btn" onClick={drawPadRef?.eraseAll}>
+              Erase all{" "}
+              <kbd>
+                <AiFillDelete />
+              </kbd>
             </button>
           </>
         ) : (

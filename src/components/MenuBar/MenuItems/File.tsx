@@ -1,10 +1,16 @@
 import React, { useContext, useState } from "react";
-import { AlertBoxContext } from "../../../contexts/Context";
-import { downloadFile, newFile } from "../../../helpers";
+import {
+  AlertBoxContext,
+  DrawModeContext,
+  DrawPadRefContext,
+} from "../../../contexts/Context";
+import { downloadFile, newFile, saveDrawAsImage } from "../../../helpers";
 
 function File() {
   const [showFile, setShowFile] = useState(false);
   const { setAlertBox } = useContext(AlertBoxContext);
+  const { drawMode } = useContext(DrawModeContext);
+  const { drawPadRef } = useContext(DrawPadRefContext);
 
   return (
     <div className="dropdown">
@@ -30,22 +36,35 @@ function File() {
         >
           New Window <kbd>Ctrl + Shift + N</kbd>
         </button>
+        {!drawMode && (
+          <button
+            className="menu-btn btn"
+            onClick={() => {
+              const openFileELem = document.getElementById("open-file");
+              openFileELem?.click();
+            }}
+          >
+            Open <kbd>Ctrl + O</kbd>
+          </button>
+        )}
         <button
           className="menu-btn btn"
           onClick={() => {
-            const openFileELem = document.getElementById("open-file");
-            openFileELem?.click();
-          }}
-        >
-          Open <kbd>Ctrl + O</kbd>
-        </button>
-        <button
-          className="menu-btn btn"
-          onClick={() => {
-            const textAreaElem: HTMLTextAreaElement = document.getElementById(
-              "text-area"
-            ) as HTMLTextAreaElement;
-            downloadFile(textAreaElem.value, "Untitled.txt", "text/plain");
+            if (drawMode)
+              saveDrawAsImage(
+                drawPadRef?.getDataURL(
+                  "image/png",
+                  null,
+                  drawPadRef.props.backgroundColor
+                ),
+                "draw.png"
+              );
+            else {
+              const textAreaElem: HTMLTextAreaElement = document.getElementById(
+                "text-area"
+              ) as HTMLTextAreaElement;
+              downloadFile(textAreaElem.value, "Untitled.txt", "text/plain");
+            }
           }}
         >
           Save <kbd>Ctrl + S</kbd>

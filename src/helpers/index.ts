@@ -122,6 +122,17 @@ function isDarkTheme() {
   else if (preferedTheme === "dark") return true;
 }
 
+function saveDrawAsImage(data: string, fileName: string) {
+  const anchorElem = document.createElement("a");
+  anchorElem.href = data;
+  anchorElem.download = fileName;
+  document.body.appendChild(anchorElem);
+  anchorElem.click();
+  setTimeout(function () {
+    document.body.removeChild(anchorElem);
+  }, 0);
+}
+
 export {
   newFile,
   getLineNumber,
@@ -134,4 +145,5 @@ export {
   toggleTheme,
   setUserPreference,
   isDarkTheme,
+  saveDrawAsImage,
 };

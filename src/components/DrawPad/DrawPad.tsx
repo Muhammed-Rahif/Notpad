@@ -5,7 +5,6 @@ import "./DrawPad.scss";
 import { IoMdBrush } from "react-icons/io";
 import { FaClipboard, FaVine } from "react-icons/fa";
 import { SiZerply } from "react-icons/si";
-import { useHotkeys } from "react-hotkeys-hook";
 import { DrawPadRefContext } from "../../contexts/Context";
 
 function DrawPad() {
@@ -14,19 +13,7 @@ function DrawPad() {
   const [canvasColor, setCanvasColor] = useState("#fff");
   const [brushSize, setBrushSize] = useState(8);
   const [hideInterface, setHideInterface] = useState(false);
-  const { drawPadRef, setDrawPadRef } = useContext(DrawPadRefContext);
-
-  useHotkeys("ctrl+z", e => {
-    e.preventDefault();
-    e.stopPropagation();
-    drawPadRef.undo();
-  });
-
-  useHotkeys("ctrl+y", e => {
-    e.preventDefault();
-    e.stopPropagation();
-    drawPadRef.clear();
-  });
+  const { setDrawPadRef } = useContext(DrawPadRefContext);
 
   return (
     <>

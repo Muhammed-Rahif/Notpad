@@ -1,8 +1,34 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
+import { DrawModeContext, DrawPadRefContext } from "../../contexts/Context";
 import { downloadFile, insertTimeAndDate, newFile } from "../../helpers";
 
 function Shortcuts({ children }: { children: ReactNode }) {
+  const { drawPadRef } = useContext(DrawPadRefContext);
+  const { drawMode } = useContext(DrawModeContext);
+
+  useHotkeys(
+    "ctrl+z",
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (drawMode) drawPadRef.undo();
+    },
+    undefined,
+    drawPadRef
+  );
+
+  useHotkeys(
+    "ctrl+y",
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (drawMode) drawPadRef.clear();
+    },
+    undefined,
+    drawPadRef
+  );
+
   useHotkeys(
     "alt+n",
     e => {

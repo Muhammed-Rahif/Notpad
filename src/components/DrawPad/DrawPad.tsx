@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CanvasDraw from "react-canvas-draw";
 import useWindowSize from "../../hooks/useWindowSize";
 import "./DrawPad.scss";
@@ -12,8 +12,15 @@ function DrawPad() {
   const [brushColor, setBrushColor] = useState("#111");
   const [canvasColor, setCanvasColor] = useState("#fff");
   const [brushSize, setBrushSize] = useState(8);
-  const [hideInterface, setHideInterface] = useState(false);
-  const { setDrawPadRef } = useContext(DrawPadRefContext);
+  const [lazyRadius, setLazyRadius] = useState(13);
+  const { drawPadRef, setDrawPadRef } = useContext(DrawPadRefContext);
+  const [catenaryColor, setCatenaryColor] = useState("#111");
+
+  useEffect(() => {
+    localStorage.getItem("drawPadData") &&
+      drawPadRef?.loadSaveData &&
+      drawPadRef?.loadSaveData(localStorage.getItem("drawPadData"));
+  }, [drawPadRef]);
 
   return (
     <>
@@ -24,12 +31,14 @@ function DrawPad() {
         gridColor={"black"}
         brushColor={brushColor}
         backgroundColor={canvasColor}
-        catenaryColor={hideInterface ? "tranparent" : "#111"}
-        lazyRadius={hideInterface ? 2 : 13}
+        catenaryColor={catenaryColor}
+        lazyRadius={lazyRadius}
         brushRadius={brushSize}
         hideGrid
-        hideInterface={hideInterface}
         ref={setDrawPadRef}
+        onChange={data =>
+          localStorage.setItem("drawPadData", data.getSaveData())
+        }
       />
       <div className="details-tab">
         <div className="tools">
@@ -38,7 +47,6 @@ function DrawPad() {
             <input
               type="color"
               onChange={e => setBrushColor(e.target.value)}
-              placeholder="Brush"
               className="color-picker input"
               value={brushColor}
               title="Brush color"
@@ -49,7 +57,6 @@ function DrawPad() {
             <input
               type="color"
               onChange={e => setCanvasColor(e.target.value)}
-              placeholder="Brush"
               className="color-picker input"
               value={canvasColor}
               title="Canvas color"
@@ -73,11 +80,27 @@ function DrawPad() {
           <div className="d-flex align-items-center">
             <FaVine />:
             <input
-              type="checkbox"
+              type="number"
               className="input"
-              title="Show catenary"
-              checked={hideInterface}
-              onChange={e => setHideInterface(e.target.checked)}
+              title="Catenary size"
+              onChange={e =>
+                setLazyRadius(
+                  parseInt(e.target.value) <= 0 ? 0 : parseInt(e.target.value)
+                )
+              }
+              value={lazyRadius}
+              max={80}
+            />
+          </div>
+
+          <div className="d-flex align-items-center">
+            <FaVine />:
+            <input
+              type="color"
+              onChange={e => setCatenaryColor(e.target.value)}
+              className="color-picker input"
+              value={catenaryColor}
+              title="Catenary color"
             />
           </div>
         </div>

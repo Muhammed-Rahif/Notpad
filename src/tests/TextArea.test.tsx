@@ -1,13 +1,13 @@
 import React from "react";
 import { cleanup, render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import TextArea from "../components/TextArea/TextArea";
+import WorkArea from "../components/WorkArea/WorkArea";
 
 describe("renders menu bar component with button", () => {
   afterEach(cleanup);
 
   test("TextArea component value must be changeable", async () => {
-    render(<TextArea />);
+    render(<WorkArea />);
     const textArea: HTMLTextAreaElement = (await screen.findByTestId(
       "text-area"
     )) as HTMLTextAreaElement;
@@ -21,7 +21,7 @@ describe("renders menu bar component with button", () => {
   });
 
   test("TextArea 'spellCheck' attribute must be 'false'", async () => {
-    render(<TextArea />);
+    render(<WorkArea />);
     const textArea: HTMLTextAreaElement = (await screen.findByTestId(
       "text-area"
     )) as HTMLTextAreaElement;
@@ -30,7 +30,7 @@ describe("renders menu bar component with button", () => {
   });
 
   test("TextArea line & column numbers must change when TextArea value changes", async () => {
-    render(<TextArea />);
+    render(<WorkArea />);
     const textArea: HTMLTextAreaElement = (await screen.findByTestId(
       "text-area"
     )) as HTMLTextAreaElement;
@@ -46,7 +46,7 @@ describe("renders menu bar component with button", () => {
   });
 
   test("TextArea 'Tab' indentation must work", async () => {
-    render(<TextArea />);
+    render(<WorkArea />);
     const textArea: HTMLTextAreaElement = (await screen.findByTestId(
       "text-area"
     )) as HTMLTextAreaElement;

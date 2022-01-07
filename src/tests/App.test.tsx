@@ -20,8 +20,8 @@ describe("renders page with contents and basic features", () => {
 
   it("should have the 'TextArea' component in 'App'", () => {
     render(<App />);
-    const textAreaComponent = screen.getByTestId("text-area-wrapper");
-    expect(textAreaComponent).toBeInTheDocument();
+    const workAreaComponent = screen.getByTestId("work-area");
+    expect(workAreaComponent).toBeInTheDocument();
   });
 
   it("should have the 'AlertBox' component in 'App'", () => {

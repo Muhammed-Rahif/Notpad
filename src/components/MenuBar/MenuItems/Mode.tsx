@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { MdOutlineDone } from "react-icons/md";
-import { DrawingModeContext } from "../../../contexts/Context";
+import { DrawModeContext } from "../../../contexts/Context";
 
 function Mode() {
   const [showMode, setShowMode] = useState(false);
 
-  const { drawMode, setDrawMode } = useContext(DrawingModeContext);
+  const { drawMode, setDrawMode } = useContext(DrawModeContext);
 
   return (
     <div className="dropdown">

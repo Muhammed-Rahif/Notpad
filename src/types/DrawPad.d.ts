@@ -1,6 +1,11 @@
 import { Dispatch } from "react";
 
-export type DrawingModeContextType = {
+export type DrawModeContextType = {
   drawMode: boolean;
-  setDrawMode: Dispatch<React.SetStateAction<boolean>>;
+  setDrawMode: (isDrawMode: boolean) => void;
+};
+
+export type DrawPadRefContextType = {
+  drawPadRef: any;
+  setDrawPadRef: Dispatch<React.SetStateAction<any>>;
 };

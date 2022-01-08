@@ -1,4 +1,5 @@
 import React from "react";
+import screenfull from 'screenfull';
 import "./TitleBar.scss";
 import {
   VscChromeMinimize,
@@ -7,6 +8,14 @@ import {
 } from "react-icons/vsc";
 
 function TitleBar() {
+  const getFullScreenNode = () => document.documentElement || document.body;
+
+  const handleMinimizeScreen = () => {
+    screenfull.exit();
+  }
+  const handleFullScreen = () => {
+    screenfull.request(getFullScreenNode());
+  }
   return (
     <div id="title-bar" data-testid="title-bar">
       <section className="title-section">
@@ -14,11 +23,11 @@ function TitleBar() {
         <p className="title">Untitled.txt - Notepad</p>
       </section>
       <section className="btn-section">
-        <button className="btn">
-          <VscChromeMinimize />
+        <button className="btn" onClick={handleMinimizeScreen}>
+          <VscChromeMinimize/>
         </button>
-        <button className="btn">
-          <VscChromeMaximize />
+        <button className="btn" onClick={handleFullScreen} >
+          <VscChromeMaximize/>
         </button>
         <button className="btn btn-cls" onClick={window.close}>
           <VscChromeClose />

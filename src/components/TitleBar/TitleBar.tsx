@@ -24,10 +24,10 @@ function TitleBar() {
       </section>
       <section className="btn-section">
         <button className="btn" onClick={handleMinimizeScreen}>
-          <VscChromeMinimize/>
+          <VscChromeMinimize />
         </button>
         <button className="btn" onClick={handleFullScreen} >
-          <VscChromeMaximize/>
+          <VscChromeMaximize />
         </button>
         <button className="btn btn-cls" onClick={window.close}>
           <VscChromeClose />

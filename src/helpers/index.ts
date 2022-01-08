@@ -122,7 +122,7 @@ function isDarkTheme() {
   else if (preferedTheme === "dark") return true;
 }
 
-function setToLocalStorage(key: string, { value = "" } = { value: "string" }) {
+function setToLocalStorage(key: string, { value = "" }: { value: string }) {
   localStorage.setItem(key, value);
 }
 

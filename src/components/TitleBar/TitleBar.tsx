@@ -10,11 +10,11 @@ import {
 function TitleBar() {
   const getFullScreenNode = () => document.documentElement || document.body;
 
-  const handleMinimizeScreen = () => {
-    screenfull.exit();
-  }
   const handleFullScreen = () => {
-    screenfull.request(getFullScreenNode());
+    if(!screenfull.isFullscreen){
+      screenfull.request(getFullScreenNode());
+    }
+    else screenfull.exit();
   }
   return (
     <div id="title-bar" data-testid="title-bar">
@@ -23,7 +23,7 @@ function TitleBar() {
         <p className="title">Untitled.txt - Notepad</p>
       </section>
       <section className="btn-section">
-        <button className="btn" onClick={handleMinimizeScreen}>
+        <button className="btn">
           <VscChromeMinimize />
         </button>
         <button className="btn" onClick={handleFullScreen} >

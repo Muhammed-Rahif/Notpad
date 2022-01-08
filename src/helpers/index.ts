@@ -133,6 +133,14 @@ function saveDrawAsImage(data: string, fileName: string) {
   }, 0);
 }
 
+function setToLocalStorage(key: string, { value = "" }: { value: string }) {
+  localStorage.setItem(key, value);
+}
+
+function getFromLocalStorage(key: string) {
+  return localStorage.getItem(key);
+}
+
 export {
   newFile,
   getLineNumber,
@@ -146,4 +154,6 @@ export {
   setUserPreference,
   isDarkTheme,
   saveDrawAsImage,
+  setToLocalStorage,
+  getFromLocalStorage,
 };

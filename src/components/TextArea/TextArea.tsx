@@ -9,12 +9,17 @@ import {
   enableTabIndentation,
   getColumnIndex,
   getLineNumber,
+  setToLocalStorage,
+  getFromLocalStorage,
 } from "../../helpers";
 import "./TextArea.scss";
 
 function TextArea() {
   const [linesNum, setLineNum] = useState(1);
   const [columnIndex, setColumnIndex] = useState(0);
+  const [textAreaContent, setTextAreaContent] = useState(() => {
+    return getFromLocalStorage("notepad_textarea_content") || "";
+  });
 
   function handleTextAreaChange(
     event:
@@ -23,8 +28,12 @@ function TextArea() {
       | MouseEvent<HTMLTextAreaElement>
   ) {
     setLineNum(getLineNumber(event.target as HTMLTextAreaElement));
-
     setColumnIndex(getColumnIndex(event.target as HTMLTextAreaElement));
+    setTextAreaContent((event.target as HTMLTextAreaElement).value);
+    setToLocalStorage(
+      "notepad_textarea_content",
+      event.target as HTMLTextAreaElement
+    );
   }
 
   useEffect(() => {
@@ -41,6 +50,7 @@ function TextArea() {
         id="text-area"
         autoFocus
         spellCheck="false"
+        value={textAreaContent}
         onKeyUp={handleTextAreaChange}
         onKeyDown={handleTextAreaChange}
         onKeyPress={handleTextAreaChange}

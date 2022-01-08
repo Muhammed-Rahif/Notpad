@@ -18,7 +18,7 @@ function TextArea() {
   const [linesNum, setLineNum] = useState(1);
   const [columnIndex, setColumnIndex] = useState(0);
   const [textAreaContent, setTextAreaContent] = useState(() => {
-    return getFromLocalStorage('notepad_textarea_content') || ''
+    return getFromLocalStorage("notepad_textarea_content") || "";
   });
 
   function handleTextAreaChange(
@@ -30,7 +30,10 @@ function TextArea() {
     setLineNum(getLineNumber(event.target as HTMLTextAreaElement));
     setColumnIndex(getColumnIndex(event.target as HTMLTextAreaElement));
     setTextAreaContent((event.target as HTMLTextAreaElement).value);
-    setToLocalStorage('notepad_textarea_content', event.target as HTMLTextAreaElement)
+    setToLocalStorage(
+      "notepad_textarea_content",
+      event.target as HTMLTextAreaElement
+    );
   }
 
   useEffect(() => {

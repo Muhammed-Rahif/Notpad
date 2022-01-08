@@ -122,8 +122,8 @@ function isDarkTheme() {
   else if (preferedTheme === "dark") return true;
 }
 
-function setToLocalStorage(key: string, { value = '' } = { value: 'string' }) {
-  localStorage.setItem(key, value)
+function setToLocalStorage(key: string, { value = "" }: { value: string }) {
+  localStorage.setItem(key, value);
 }
 
 function getFromLocalStorage(key: string) {
@@ -143,5 +143,5 @@ export {
   setUserPreference,
   isDarkTheme,
   setToLocalStorage,
-  getFromLocalStorage
+  getFromLocalStorage,
 };

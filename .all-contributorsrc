@@ -40,6 +40,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "anandsimmy",
+      "name": "Anand Simmy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22940059?v=4",
+      "profile": "https://medium.com/@anandsimmy7",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

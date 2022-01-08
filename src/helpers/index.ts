@@ -122,6 +122,14 @@ function isDarkTheme() {
   else if (preferedTheme === "dark") return true;
 }
 
+function setToLocalStorage(key: string, { value = '' } = { value: 'string' }) {
+  localStorage.setItem(key, value)
+}
+
+function getFromLocalStorage(key: string) {
+  return localStorage.getItem(key);
+}
+
 export {
   newFile,
   getLineNumber,
@@ -134,4 +142,6 @@ export {
   toggleTheme,
   setUserPreference,
   isDarkTheme,
+  setToLocalStorage,
+  getFromLocalStorage
 };

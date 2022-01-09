@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import AlertBox from "./components/AlertBox/AlertBox";
 import MenuBar from "./components/MenuBar/MenuBar";
 import Shortcuts from "./components/Shortcuts/Shortcuts";
-import TextArea from "./components/TextArea/TextArea";
+import WorkArea from "./components/WorkArea/WorkArea";
 import TitleBar from "./components/TitleBar/TitleBar";
 import { handleOpenFileChange, setUserPreference } from "./helpers";
 import "./App.scss";
@@ -16,7 +16,7 @@ function App() {
     <Shortcuts>
       <TitleBar />
       <MenuBar />
-      <TextArea />
+      <WorkArea />
       <AlertBox />
       <input
         type="file"

@@ -1,8 +1,39 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { downloadFile, insertTimeAndDate, newFile } from "../../helpers";
+import { DrawModeContext, DrawPadRefContext } from "../../contexts/Context";
+import {
+  downloadFile,
+  insertTimeAndDate,
+  newFile,
+  saveDrawAsImage,
+} from "../../helpers";
 
 function Shortcuts({ children }: { children: ReactNode }) {
+  const { drawPadRef } = useContext(DrawPadRefContext);
+  const { drawMode } = useContext(DrawModeContext);
+
+  useHotkeys(
+    "ctrl+z",
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (drawMode) drawPadRef.undo();
+    },
+    undefined,
+    drawPadRef
+  );
+
+  useHotkeys(
+    "ctrl+y",
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (drawMode) drawPadRef.clear();
+    },
+    undefined,
+    drawPadRef
+  );
+
   useHotkeys(
     "alt+n",
     e => {
@@ -38,8 +69,10 @@ function Shortcuts({ children }: { children: ReactNode }) {
     e => {
       e.preventDefault();
       e.stopPropagation();
-      const openFileELem = document.getElementById("open-file");
-      openFileELem?.click();
+      if (!drawMode) {
+        const openFileELem = document.getElementById("open-file");
+        openFileELem?.click();
+      }
     },
     { enableOnTags: ["TEXTAREA"] }
   );
@@ -61,10 +94,21 @@ function Shortcuts({ children }: { children: ReactNode }) {
     e => {
       e.preventDefault();
       e.stopPropagation();
-      const textAreaElem: HTMLTextAreaElement = document.getElementById(
-        "text-area"
-      ) as HTMLTextAreaElement;
-      downloadFile(textAreaElem.value, "Untitled.txt", "text/plain");
+      if (drawMode)
+        saveDrawAsImage(
+          drawPadRef?.getDataURL(
+            "image/png",
+            null,
+            drawPadRef.props.backgroundColor
+          ),
+          "draw.png"
+        );
+      else {
+        const textAreaElem: HTMLTextAreaElement = document.getElementById(
+          "text-area"
+        ) as HTMLTextAreaElement;
+        downloadFile(textAreaElem.value, "Untitled.txt", "text/plain");
+      }
     },
     { enableOnTags: ["TEXTAREA"] }
   );

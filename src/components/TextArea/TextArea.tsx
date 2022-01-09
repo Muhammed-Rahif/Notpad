@@ -1,18 +1,18 @@
 import React, {
+  useEffect,
   useState,
   KeyboardEvent,
   ChangeEvent,
   MouseEvent,
-  useEffect,
 } from "react";
-import "./TextArea.scss";
 import {
+  enableTabIndentation,
   getColumnIndex,
   getLineNumber,
-  enableTabIndentation,
   setToLocalStorage,
   getFromLocalStorage,
 } from "../../helpers";
+import "./TextArea.scss";
 
 function TextArea() {
   const [linesNum, setLineNum] = useState(1);
@@ -44,7 +44,7 @@ function TextArea() {
   }, []);
 
   return (
-    <div id="text-area-wrapper" data-testid="text-area-wrapper">
+    <>
       <textarea
         name="text-area"
         id="text-area"
@@ -59,7 +59,6 @@ function TextArea() {
         onMouseUp={handleTextAreaChange}
         data-testid="text-area"
       />
-
       <div className="details-tab">
         <div className="line-number">
           <p data-testid="line-index">
@@ -68,7 +67,7 @@ function TextArea() {
         </div>
         <div className="extra-details"></div>
       </div>
-    </div>
+    </>
   );
 }
 

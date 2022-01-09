@@ -1,0 +1,26 @@
+.draw-pad {
+}
+
+.details-tab {
+  justify-content: flex-start;
+
+  .tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+
+    .color-picker {
+      cursor: pointer;
+    }
+
+    .input {
+      border: none;
+      outline: none;
+      width: 42px;
+      height: 1rem;
+      background-color: var(--bg-color);
+      text-align: center;
+    }
+  }
+}

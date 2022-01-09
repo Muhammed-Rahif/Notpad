@@ -15,6 +15,7 @@ function TitleBar() {
       screenfull.request(getFullScreenNode());
     } else screenfull.exit();
   };
+
   return (
     <div id="title-bar" data-testid="title-bar">
       <section className="title-section">

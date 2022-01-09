@@ -25,7 +25,7 @@
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <a href="#contributors-">
-<img src="https://img.shields.io/badge/all_contributors-6-orange.svg" alt="All Contributors">
+<img src="https://img.shields.io/badge/all_contributors-7-orange.svg" alt="All Contributors">
 </a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
@@ -191,6 +191,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/abrahamalen"><img src="https://avatars.githubusercontent.com/u/53680255?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alen Abraham</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=abrahamalen" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Muhammed-radin"><img src="https://avatars.githubusercontent.com/u/84174838?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Muhammed radin</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Muhammed-radin" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Abhi-paul16"><img src="https://avatars.githubusercontent.com/u/68468264?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abhishek Pal</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Abhi-paul16" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/RishiKumarRay"><img src="https://avatars.githubusercontent.com/u/87641376?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rishi Kumar Ray</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=RishiKumarRay" title="Code">💻</a></td>
   </tr>
 </table>
 

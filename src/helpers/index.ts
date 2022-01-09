@@ -130,6 +130,11 @@ function getFromLocalStorage(key: string) {
   return localStorage.getItem(key);
 }
 
+function openLink(link: string | URL, options?: { newTab?: boolean }) {
+  window.open(link, options?.newTab ? "_blank" : "_top");
+}
+
+
 export {
   newFile,
   getLineNumber,
@@ -144,4 +149,5 @@ export {
   isDarkTheme,
   setToLocalStorage,
   getFromLocalStorage,
+  openLink
 };

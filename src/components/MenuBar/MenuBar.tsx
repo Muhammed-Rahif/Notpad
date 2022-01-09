@@ -6,6 +6,7 @@ import {
   newFile,
   selectAllOfInput,
   toggleTheme,
+  openLink
 } from "../../helpers";
 import "./MenuBar.scss";
 import { MdOutlineDone } from "react-icons/md";
@@ -224,6 +225,12 @@ function MenuBar() {
             About Notepad
             <p>
               <AiOutlineInfo />
+            </p>
+          </button>
+          <button className="menu-btn btn" onClick={() => openLink(new URL("https://github.com/Muhammed-Rahif/Notepad"), { newTab: true })}>
+            GitHub
+            <p>
+              <FaGithub />
             </p>
           </button>
         </div>

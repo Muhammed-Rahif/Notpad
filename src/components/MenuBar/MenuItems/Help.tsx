@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { AiOutlineInfo } from "react-icons/ai";
 import { RiFeedbackLine } from "react-icons/ri";
+import { FaGithub } from "react-icons/fa"
+import { openLink } from "../../../helpers";
 
 function Help() {
   const [showHelp, setShowHelp] = useState(false);
@@ -30,6 +32,14 @@ function Help() {
           About Notepad
           <p>
             <AiOutlineInfo />
+          </p>
+        </button>
+        <button className="menu-btn btn" 
+             onClick={() =>
+              openLink(new URL("https://github.com/Muhammed-Rahif/Notepad"), { newTab: true })}>
+          GitHub
+          <p>
+            <FaGithub />
           </p>
         </button>
       </div>

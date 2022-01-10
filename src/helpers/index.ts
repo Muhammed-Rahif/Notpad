@@ -160,5 +160,5 @@ export {
   saveDrawAsImage,
   setToLocalStorage,
   getFromLocalStorage,
-  openLink
+  openLink,
 };

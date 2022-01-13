@@ -11,12 +11,12 @@
 
   .alert-box {
     max-width: 26rem;
-    width: 20rem;
+    width: 22rem;
     min-height: 9rem;
     position: fixed;
     z-index: 101;
     background-color: var(--light-color);
-    border: 2.8px rgba(18, 18, 18, 0.65) solid;
+    border: 1px var(--font-color) solid;
     box-shadow: 0px 4px 8px rgba(17, 17, 17, 0.5);
     display: flex;
     flex-direction: column;
@@ -25,7 +25,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 0.25px solid rgba(17, 17, 17, 0.15);
+      border-bottom: 0.25px solid var(--font-color);
+      font-size: 14px;
 
       p {
         font-size: 1.1rem;
@@ -57,6 +58,8 @@
 
     .alert-body {
       flex: 1;
+      overflow-y: scroll;
+      max-height: 98vh;
 
       p {
         padding: 12px;
@@ -68,6 +71,9 @@
       align-items: center;
       justify-content: space-around;
       margin-bottom: 12px;
+      font-size: 14px;
+      font-family: "Lucida Console";
+      font-style: normal;
 
       button {
         padding: 0.4rem 0.5rem;

@@ -145,6 +145,28 @@ function openLink(link: string | URL, options?: { newTab?: boolean }) {
   window.open(link, options?.newTab ? "_blank" : "_top");
 }
 
+function changeFont({
+  family = "Lucida Console",
+  size = 14,
+  style = "normal",
+}) {
+  family = `${family}, sans-serif`;
+
+  const body = document.body;
+  body.style.fontFamily = family;
+  body.style.fontSize = `${size}px`;
+
+  if (/bold/i.test(style)) body.style.fontWeight = "900";
+  else body.style.fontWeight = "normal";
+  if (/italic/i.test(style)) body.style.fontStyle = "italic";
+  else body.style.fontStyle = "normal";
+
+  const textArea: HTMLTextAreaElement = document.getElementById(
+    "text-area"
+  ) as HTMLTextAreaElement;
+  textArea.style.fontSize = `${size}px`;
+}
+
 export {
   newFile,
   getLineNumber,
@@ -161,4 +183,5 @@ export {
   setToLocalStorage,
   getFromLocalStorage,
   openLink,
+  changeFont,
 };

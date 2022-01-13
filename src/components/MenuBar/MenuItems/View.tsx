@@ -10,9 +10,7 @@ function View() {
       <button
         className="btn"
         onClick={() => setShowView(!showView)}
-        onBlur={() => {
-          setTimeout(() => setShowView(false), 150);
-        }}
+        onBlur={() => setTimeout(() => setShowView(false), 150)}
       >
         View
       </button>

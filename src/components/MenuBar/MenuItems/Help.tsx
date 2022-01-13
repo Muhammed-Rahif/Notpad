@@ -12,9 +12,7 @@ function Help() {
       <button
         className="btn"
         onClick={() => setShowHelp(!showHelp)}
-        onBlur={() => {
-          setTimeout(() => setShowHelp(false), 150);
-        }}
+        onBlur={() => setTimeout(() => setShowHelp(false), 150)}
       >
         Help
       </button>

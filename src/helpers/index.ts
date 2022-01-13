@@ -1,3 +1,5 @@
+import { fontFamilies, fontSizes, fontStyles } from "../utils/fonts";
+
 function newFile({ newWindow = false }) {
   window.open(
     window.location.href,
@@ -113,6 +115,17 @@ function setUserPreference() {
     document.documentElement.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark");
   }
+
+  const fontStyle: string = localStorage.getItem("fontStyle") || "normal";
+  const fontSize: number = parseInt(localStorage.getItem("fontSize") || "14");
+  const fontFamily: string =
+    localStorage.getItem("fontFamily") || "Lucida Console";
+
+  changeFont({
+    style: (fontStyles.includes(fontStyle) && fontStyle) || undefined,
+    family: (fontFamilies.includes(fontFamily) && fontFamily) || undefined,
+    size: (fontSizes.includes(fontSize) && fontSize) || undefined,
+  });
 }
 
 function isDarkTheme() {
@@ -150,10 +163,8 @@ function changeFont({
   size = 14,
   style = "normal",
 }) {
-  family = `${family}, sans-serif`;
-
   const body = document.body;
-  body.style.fontFamily = family;
+  body.style.fontFamily = `${family}, sans-serif`;
   body.style.fontSize = `${size}px`;
 
   if (/bold/i.test(style)) body.style.fontWeight = "900";
@@ -165,6 +176,10 @@ function changeFont({
     "text-area"
   ) as HTMLTextAreaElement;
   textArea.style.fontSize = `${size}px`;
+
+  localStorage.setItem("fontSize", size.toString());
+  localStorage.setItem("fontFamily", family);
+  localStorage.setItem("fontStyle", style);
 }
 
 export {

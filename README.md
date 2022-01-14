@@ -52,7 +52,7 @@
   - [Who can contribute ?](#who-can-contribute-)
 - [🏁 Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installing](#installing)
+  - [Installation](#installation)
 - [🔧 Running the tests](#-running-the-tests)
   - [Tests commands](#tests-commands)
   - [And coding style tests](#and-coding-style-tests)
@@ -68,15 +68,15 @@
 
 ### Why I created ?
 
-I love open source and its maintaining so much. But I wanted a minimal and simple project to attract newcomers and everyone in general to contribute to my next project.
+I love open source and its maintaining so much. I wanted a minimal and simple project to attract newcomers and everyone in general to contribute to my next project.
 
-That's when I think of windows notepad text editor. I used windows early, but now I use ubuntu, and ubuntu don't have notepad (have a text editor). So I decided to create a notepad (that's looks like the windows notepad) that is accessible for every platform, everyone. However the main goal was open sourcing.
+That's when I think of windows notepad text editor. Earlier I used Windows, but now I am using Ubuntu, and Ubuntu doesn't have notepad (have a text editor). So I decided to create a notepad (that's looks like the windows notepad) that is accessible for every platform. However the main goal was to open-source.
 
 ### Helpful for ?
 
 - Newcomers to open source
-- Developer who are new to react and typescript
-- For everyone who loves to use windows notepad
+- Developers who are new to react and typescript
+- For everyone who loves to use Windows notepad
 
 ### Who can contribute ?
 
@@ -90,13 +90,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to run the software and how to get them.
+Requirements you need to run the software and how to get them.
 
 1. [Git](https://git-scm.com/downloads)
 2. [NodeJs](https://nodejs.org/en/download)
 3. [Yarn package manager](https://yarnpkg.com/getting-started/install)
 
-### Installing
+### Installation
 
 A step by step series of examples that tell you how to get a development env running.
 
@@ -200,4 +200,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!

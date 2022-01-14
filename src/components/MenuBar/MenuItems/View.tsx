@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdOutlineDone } from "react-icons/md";
-import { isDarkTheme, toggleTheme } from "../../../helpers";
+import { isDarkTheme, toggleTheme, toggleFullscreen } from "../../../helpers";
+import screenfull from "screenfull";
 
 function View() {
   const [showView, setShowView] = useState(false);
@@ -18,11 +19,8 @@ function View() {
         className="dropdown-content"
         style={{ display: showView ? "block" : "none" }}
       >
-        <button className="menu-btn btn">
-          Fullscreen{" "}
-          <p>
-            <MdOutlineDone />
-          </p>
+        <button className="menu-btn btn" onClick={toggleFullscreen}>
+          Fullscreen <p>{screenfull.isFullscreen && <MdOutlineDone />}</p>
         </button>
         <button className="menu-btn btn" onClick={toggleTheme}>
           Dark Mode <p>{isDarkTheme() && <MdOutlineDone />}</p>

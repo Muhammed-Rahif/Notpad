@@ -70,7 +70,7 @@
 
 I love open source and its maintaining so much. I wanted a minimal and simple project to attract newcomers and everyone in general to contribute to my next project.
 
-That's when I think of windows notepad text editor. Earlier I used Windows, but now I am using Ubuntu, and Ubuntu doesn't have notepad (have a text editor). So I decided to create a notepad (that's looks like the windows notepad) that is accessible for every platform. However the main goal was to open-source.
+That's when I think of windows notepad text editor. Earlier I used Windows, but now I am using Ubuntu, and Ubuntu doesn't have a notepad (have a text editor). So I decided to create a notepad (that looks like the windows notepad) that is accessible for every platform. However, the main goal was open-sourcing.
 
 ### Helpful for ?
 

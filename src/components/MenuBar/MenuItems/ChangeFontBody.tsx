@@ -1,4 +1,4 @@
-import React, { useState, MutableRefObject } from "react";
+import React, { useState, MutableRefObject, useEffect } from "react";
 import { changeFont } from "../../../helpers";
 import { fontFamilies, fontSizes, fontStyles } from "../../../utils/fonts";
 
@@ -47,6 +47,19 @@ function ChangeFontBody({
     if (/italic/i.test(style)) previewTxt.style.fontStyle = "italic";
     else previewTxt.style.fontStyle = "normal";
   };
+
+  useEffect(() => {
+    const fontStyle: string = localStorage.getItem("fontStyle") || "normal";
+    const fontSize: number = parseInt(localStorage.getItem("fontSize") || "14");
+    const fontFamily: string =
+      localStorage.getItem("fontFamily") || "Lucida Console";
+
+    changePreviewFontTo({
+      style: (fontStyles.includes(fontStyle) && fontStyle) || undefined,
+      family: (fontFamilies.includes(fontFamily) && fontFamily) || undefined,
+      size: (fontSizes.includes(fontSize) && fontSize) || undefined,
+    });
+  }, []);
 
   return (
     <div className="change-font-body">

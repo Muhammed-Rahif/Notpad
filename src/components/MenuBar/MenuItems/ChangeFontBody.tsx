@@ -59,6 +59,7 @@ function ChangeFontBody({
       family: (fontFamilies.includes(fontFamily) && fontFamily) || undefined,
       size: (fontSizes.includes(fontSize) && fontSize) || undefined,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

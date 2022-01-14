@@ -1,3 +1,4 @@
+import screenfull from "screenfull";
 import { fontFamilies, fontSizes, fontStyles } from "../utils/fonts";
 
 function newFile({ newWindow = false }) {
@@ -182,6 +183,12 @@ function changeFont({
   localStorage.setItem("fontStyle", style);
 }
 
+function toggleFullscreen() {
+  if (!screenfull.isFullscreen)
+    screenfull.request(document.documentElement || document.body);
+  else screenfull.exit();
+}
+
 export {
   newFile,
   getLineNumber,
@@ -199,4 +206,5 @@ export {
   getFromLocalStorage,
   openLink,
   changeFont,
+  toggleFullscreen,
 };

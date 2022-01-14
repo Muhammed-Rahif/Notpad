@@ -1,3 +1,6 @@
+import screenfull from "screenfull";
+import { fontFamilies, fontSizes, fontStyles } from "../utils/fonts";
+
 function newFile({ newWindow = false }) {
   window.open(
     window.location.href,
@@ -113,6 +116,17 @@ function setUserPreference() {
     document.documentElement.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark");
   }
+
+  const fontStyle: string = localStorage.getItem("fontStyle") || "normal";
+  const fontSize: number = parseInt(localStorage.getItem("fontSize") || "14");
+  const fontFamily: string =
+    localStorage.getItem("fontFamily") || "Lucida Console";
+
+  changeFont({
+    style: (fontStyles.includes(fontStyle) && fontStyle) || undefined,
+    family: (fontFamilies.includes(fontFamily) && fontFamily) || undefined,
+    size: (fontSizes.includes(fontSize) && fontSize) || undefined,
+  });
 }
 
 function isDarkTheme() {
@@ -145,6 +159,36 @@ function openLink(link: string | URL, options?: { newTab?: boolean }) {
   window.open(link, options?.newTab ? "_blank" : "_top");
 }
 
+function changeFont({
+  family = "Lucida Console",
+  size = 14,
+  style = "normal",
+}) {
+  const body = document.body;
+  body.style.fontFamily = `${family}, sans-serif`;
+  body.style.fontSize = `${size}px`;
+
+  if (/bold/i.test(style)) body.style.fontWeight = "900";
+  else body.style.fontWeight = "normal";
+  if (/italic/i.test(style)) body.style.fontStyle = "italic";
+  else body.style.fontStyle = "normal";
+
+  const textArea: HTMLTextAreaElement = document.getElementById(
+    "text-area"
+  ) as HTMLTextAreaElement;
+  textArea.style.fontSize = `${size}px`;
+
+  localStorage.setItem("fontSize", size.toString());
+  localStorage.setItem("fontFamily", family);
+  localStorage.setItem("fontStyle", style);
+}
+
+function toggleFullscreen() {
+  if (!screenfull.isFullscreen)
+    screenfull.request(document.documentElement || document.body);
+  else screenfull.exit();
+}
+
 export {
   newFile,
   getLineNumber,
@@ -161,4 +205,6 @@ export {
   setToLocalStorage,
   getFromLocalStorage,
   openLink,
+  changeFont,
+  toggleFullscreen,
 };

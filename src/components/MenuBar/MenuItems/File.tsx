@@ -17,9 +17,7 @@ function File() {
       <button
         className="btn"
         onClick={() => setShowFile(!showFile)}
-        onBlur={() => {
-          setTimeout(() => setShowFile(false), 150);
-        }}
+        onBlur={() => setTimeout(() => setShowFile(false), 150)}
       >
         File
       </button>

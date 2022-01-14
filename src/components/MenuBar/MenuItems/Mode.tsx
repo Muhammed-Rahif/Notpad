@@ -12,9 +12,7 @@ function Mode() {
       <button
         className="btn"
         onClick={() => setShowMode(!showMode)}
-        onBlur={() => {
-          setTimeout(() => setShowMode(false), 150);
-        }}
+        onBlur={() => setTimeout(() => setShowMode(false), 150)}
       >
         Mode
       </button>

@@ -1,21 +1,48 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { AiFillDelete, AiOutlineFontSize } from "react-icons/ai";
 import { insertTimeAndDate, selectAllOfInput } from "../../../helpers";
-import { DrawModeContext, DrawPadRefContext } from "../../../contexts/Context";
+import {
+  AlertBoxContext,
+  DrawModeContext,
+  DrawPadRefContext,
+} from "../../../contexts/Context";
+import ChangeFontBody from "./ChangeFontBody";
 
 function Edit() {
   const [showEdit, setShowEdit] = useState(false);
   const { drawMode } = useContext(DrawModeContext);
   const { drawPadRef } = useContext(DrawPadRefContext);
+  const { alertBox, setAlertBox } = useContext(AlertBoxContext);
+  const fontChangesRef = useRef<{ handleOkClick(): void }>();
+
+  const handleFontClick = () => {
+    !alertBox
+      ? setAlertBox({
+          title: "Font",
+          body: <ChangeFontBody fontChangesRef={fontChangesRef} />,
+          buttons: [
+            {
+              text: "Cancel",
+              onClick: () => setAlertBox(null),
+            },
+            {
+              text: "Ok",
+              onClick: () => {
+                fontChangesRef.current?.handleOkClick();
+                setAlertBox(null);
+              },
+            },
+          ],
+        })
+      : setAlertBox(null);
+  };
 
   return (
     <div className="dropdown">
       <button
         className="btn"
         onClick={() => setShowEdit(!showEdit)}
-        onBlur={() => {
-          setTimeout(() => setShowEdit(false), 150);
-        }}
+        onBlur={() => setTimeout(() => setShowEdit(false), 150)}
       >
         Edit
       </button>
@@ -91,7 +118,7 @@ function Edit() {
             </button>
             <hr />
 
-            <button className="menu-btn btn">
+            <button className="menu-btn btn" onClick={handleFontClick}>
               Font{" "}
               <p>
                 <AiOutlineFontSize />

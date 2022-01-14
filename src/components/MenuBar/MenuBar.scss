@@ -3,21 +3,7 @@
   z-index: 68;
   position: relative;
   background-color: var(--bg-color);
-
-  .btn {
-    padding: 0.45rem;
-    border: transparent 0;
-    width: 4rem;
-    background-color: transparent;
-  }
-
-  .btn:hover {
-    background-color: var(--btn-hover-bg-color);
-  }
-
-  .btn:active:focus {
-    background-color: var(--btn-active-bg-color);
-  }
+  font-size: 14px;
 
   .dropdown {
     position: relative;
@@ -43,11 +29,51 @@
         font-size: 0.56rem;
       }
     }
-
-    hr {
-      background-color: var(--secondary-color);
-      height: 0.8px;
-      border: none;
-    }
   }
+}
+
+.btn {
+  padding: 0.45rem;
+  border: transparent 0;
+  width: 4rem;
+  background-color: transparent;
+  text-transform: capitalize;
+}
+
+.btn:hover {
+  background-color: var(--btn-hover-bg-color);
+}
+
+.btn:active:focus {
+  background-color: var(--btn-active-bg-color);
+}
+
+hr {
+  background-color: var(--secondary-color);
+  height: 0.8px;
+  border: none;
+}
+
+.scroll-btns {
+  height: 6rem;
+  overflow-y: scroll;
+  border: #111 solid 1px;
+}
+
+.blue-border {
+  border: 2px dodgerblue solid;
+}
+
+#preview-font-change {
+  font-size: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.change-font-body {
+  font-size: 14px;
+  font-family: "Lucida Console";
+  font-style: normal;
 }

@@ -78,6 +78,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "divyakelaskar",
+      "name": "Divya Kelaskar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56636487?v=4",
+      "profile": "https://lu.ma/divya",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,

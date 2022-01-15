@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://rahif.me/Notepad" rel="noopener">
+  <a href="https://notepad.rahif.me" rel="noopener">
  <img width=115px height=115px src="public/assets/images/logo.png" alt="Notepad"></a>
 </p>
 
@@ -7,7 +7,7 @@
 
 <div align="center">
 
-<a href="https://rahif.me/Notepad">
+<a href="https://notepad.rahif.me">
 <img src="https://img.shields.io/badge/status-active-success.svg" alt="Status">
 </a>
 <a href="https://github.com/Muhammed-Rahif/Notepad/issues">

@@ -5868,6 +5868,13 @@ min-indent@^1.0.0:
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
+mini-css-extract-plugin@2.4.5:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.4.5.tgz#191d6c170226037212c483af1180b4010b7b9eef"
+  integrity sha512-oEIhRucyn1JbT/1tU2BhnwO6ft1jjH1iCX9Gc59WFMg0n5773rQU0oyQ0zzeYFFuBfONaRbQJyGoPtuNseMxjA==
+  dependencies:
+    schema-utils "^4.0.0"
+
 mini-css-extract-plugin@^2.4.5:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.5.0.tgz#4cc8300165fd408e8d2bf7381e6728fcda6fd1ae"
@@ -7448,7 +7455,7 @@ sass-loader@^12.3.0:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
-sass@^1.48.0:
+sass@^1.47.0:
   version "1.48.0"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.48.0.tgz#b53cfccc1b8ab4be375cc54f306fda9d4711162c"
   integrity sha512-hQi5g4DcfjcipotoHZ80l7GNJHGqQS5LwMBjVYB/TaT0vcSSpbgM8Ad7cgfsB2M0MinbkEQQPO9+sjjSiwxqmw==
@@ -8176,7 +8183,7 @@ tryer@^1.0.1:
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
-ts-jest@^27.1.3:
+ts-jest@^27.1.2:
   version "27.1.3"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-27.1.3.tgz#1f723e7e74027c4da92c0ffbd73287e8af2b2957"
   integrity sha512-6Nlura7s6uM9BVUAoqLH7JHyMXjz8gluryjpPXxr3IxZdAXnU6FhjvVLHFtfd1vsE1p8zD1OJfskkc0jhTSnkA==

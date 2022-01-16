@@ -11,6 +11,7 @@ import {
   getLineNumber,
   setToLocalStorage,
   getFromLocalStorage,
+  UserPreference,
 } from "../../helpers";
 import "./TextArea.scss";
 
@@ -41,6 +42,8 @@ function TextArea() {
       "text-area"
     ) as HTMLTextAreaElement;
     enableTabIndentation(textAreaElem);
+
+    new UserPreference().setFontSettings();
   }, []);
 
   return (

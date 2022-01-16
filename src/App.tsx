@@ -4,12 +4,12 @@ import MenuBar from "./components/MenuBar/MenuBar";
 import Shortcuts from "./components/Shortcuts/Shortcuts";
 import WorkArea from "./components/WorkArea/WorkArea";
 import TitleBar from "./components/TitleBar/TitleBar";
-import { handleOpenFileChange, setUserPreference } from "./helpers";
+import { handleOpenFileChange, UserPreference } from "./helpers";
 import "./App.scss";
 
 function App() {
   useEffect(() => {
-    setUserPreference();
+    new UserPreference().setTheme();
   }, []);
 
   return (

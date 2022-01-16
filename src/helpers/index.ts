@@ -106,27 +106,31 @@ function toggleTheme() {
   }
 }
 
-function setUserPreference() {
-  const preferedTheme: string = localStorage.getItem("theme") || "light";
+class UserPreference {
+  setTheme() {
+    const preferedTheme: string = localStorage.getItem("theme") || "light";
 
-  if (preferedTheme === "light") {
-    document.documentElement.setAttribute("data-theme", "light");
-    localStorage.setItem("theme", "light");
-  } else if (preferedTheme === "dark") {
-    document.documentElement.setAttribute("data-theme", "dark");
-    localStorage.setItem("theme", "dark");
+    if (preferedTheme === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
+    } else if (preferedTheme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
+    }
   }
 
-  const fontStyle: string = localStorage.getItem("fontStyle") || "normal";
-  const fontSize: number = parseInt(localStorage.getItem("fontSize") || "14");
-  const fontFamily: string =
-    localStorage.getItem("fontFamily") || "Lucida Console";
+  setFontSettings() {
+    const fontStyle: string = localStorage.getItem("fontStyle") || "normal";
+    const fontSize: number = parseInt(localStorage.getItem("fontSize") || "14");
+    const fontFamily: string =
+      localStorage.getItem("fontFamily") || "Lucida Console";
 
-  changeFont({
-    style: (fontStyles.includes(fontStyle) && fontStyle) || undefined,
-    family: (fontFamilies.includes(fontFamily) && fontFamily) || undefined,
-    size: (fontSizes.includes(fontSize) && fontSize) || undefined,
-  });
+    changeFont({
+      style: (fontStyles.includes(fontStyle) && fontStyle) || undefined,
+      family: (fontFamilies.includes(fontFamily) && fontFamily) || undefined,
+      size: (fontSizes.includes(fontSize) && fontSize) || undefined,
+    });
+  }
 }
 
 function isDarkTheme() {
@@ -199,7 +203,7 @@ export {
   insertTimeAndDate,
   selectAllOfInput,
   toggleTheme,
-  setUserPreference,
+  UserPreference,
   isDarkTheme,
   saveDrawAsImage,
   setToLocalStorage,

@@ -1,0 +1,10 @@
+.text-box-wrapper {
+  height: 95%;
+  position: relative;
+  z-index: 50;
+  resize: none;
+
+  #text-box {
+    height: 100%;
+  }
+}

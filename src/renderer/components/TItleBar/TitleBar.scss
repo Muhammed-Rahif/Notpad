@@ -1,0 +1,12 @@
+.title-bar {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.title-bar-controls,
+.title-bar-controls > button {
+  -webkit-user-select: auto;
+  user-select: auto;
+  -webkit-app-region: no-drag;
+}

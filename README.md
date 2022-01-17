@@ -25,7 +25,7 @@
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <a href="#contributors-">
-<img src="https://img.shields.io/badge/all_contributors-9-orange.svg" alt="All Contributors">
+<img src="https://img.shields.io/badge/all_contributors-10-orange.svg" alt="All Contributors">
 </a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
@@ -186,6 +186,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://rahif.me"><img src="https://avatars.githubusercontent.com/u/73386156?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Muhammed Rahif</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/issues?q=author%3AMuhammed-Rahif" title="Bug reports">🐛</a> <a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Muhammed-Rahif" title="Code">💻</a> <a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Muhammed-Rahif" title="Documentation">📖</a> <a href="#content-Muhammed-Rahif" title="Content">🖋</a> <a href="#design-Muhammed-Rahif" title="Design">🎨</a> <a href="#ideas-Muhammed-Rahif" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-Muhammed-Rahif" title="Maintenance">🚧</a> <a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Muhammed-Rahif" title="Tests">⚠️</a> <a href="https://github.com/Muhammed-Rahif/Notepad/pulls?q=is%3Apr+reviewed-by%3AMuhammed-Rahif" title="Reviewed Pull Requests">👀</a> <a href="#infra-Muhammed-Rahif" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/Aswin40"><img src="https://avatars.githubusercontent.com/u/25566385?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aswin_Pradeep</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Aswin40" title="Code">💻</a> <a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Aswin40" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://medium.com/@anandsimmy7"><img src="https://avatars.githubusercontent.com/u/22940059?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anand Simmy</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=anandsimmy" title="Code">💻</a> <a href="https://github.com/Muhammed-Rahif/Notepad/pulls?q=is%3Apr+reviewed-by%3Aanandsimmy" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/khushbooag4"><img src="https://avatars.githubusercontent.com/u/88361750?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Khushboo Agarwal</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=khushbooag4" title="Code">💻</a> <a href="#ideas-khushbooag4" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Muhammed-Rahif/Notepad/pulls?q=is%3Apr+reviewed-by%3Akhushbooag4" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/abrahamalen"><img src="https://avatars.githubusercontent.com/u/53680255?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alen Abraham</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=abrahamalen" title="Documentation">📖</a></td>

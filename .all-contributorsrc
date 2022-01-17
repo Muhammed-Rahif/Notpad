@@ -24,6 +24,16 @@
       ]
     },
     {
+      "login": "Aswin40",
+      "name": "Aswin_Pradeep",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25566385?v=4",
+      "profile": "https://github.com/Aswin40",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
       "login": "anandsimmy",
       "name": "Anand Simmy",
       "avatar_url": "https://avatars.githubusercontent.com/u/22940059?v=4",
@@ -96,16 +106,6 @@
       "profile": "https://github.com/Jaseem-v",
       "contributions": [
         "bug"
-      ]
-    },
-    {
-      "login": "Aswin40",
-      "name": "Aswin_Pradeep",
-      "avatar_url": "https://avatars.githubusercontent.com/u/25566385?v=4",
-      "profile": "https://github.com/Aswin40",
-      "contributions": [
-        "code",
-        "test"
       ]
     }
   ],

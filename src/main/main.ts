@@ -93,8 +93,8 @@ const createWindow = async () => {
     frame: false,
     autoHideMenuBar: true,
     transparent: true,
-    titleBarStyle: 'hiddenInset',
     minHeight: 500,
+    title: 'Notepad',
   });
 
   require('@electron/remote/main').enable(mainWindow.webContents);

@@ -12,8 +12,8 @@ const Notepad = () => {
       <div className="window-body">
         <MenuBar />
         <TextBox />
-        <StatusBar />
       </div>
+      <StatusBar />
     </>
   );
 };

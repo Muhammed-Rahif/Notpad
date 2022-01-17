@@ -14,7 +14,6 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
 require('@electron/remote/main').initialize();
@@ -95,6 +94,7 @@ const createWindow = async () => {
     autoHideMenuBar: true,
     transparent: true,
     titleBarStyle: 'hiddenInset',
+    minHeight: 500,
   });
 
   require('@electron/remote/main').enable(mainWindow.webContents);
@@ -115,9 +115,6 @@ const createWindow = async () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  const menuBuilder = new MenuBuilder(mainWindow);
-  menuBuilder.buildMenu();
 
   // Open urls in the user's browser
   mainWindow.webContents.on('new-window', (event, url) => {

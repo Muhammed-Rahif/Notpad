@@ -7,10 +7,14 @@
 body {
   width: 100vw;
   height: 100vh;
-  // overflow-y: hidden;
+  overflow: hidden;
+}
+
+.window {
+  height: 100vh;
 }
 
 .window-body {
-  height: calc(100vh - 2.2rem);
   padding: 0 !important;
+  height: 94vh;
 }

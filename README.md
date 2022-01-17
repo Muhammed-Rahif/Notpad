@@ -25,7 +25,7 @@
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <a href="#contributors-">
-<img src="https://img.shields.io/badge/all_contributors-9-orange.svg" alt="All Contributors">
+<img src="https://img.shields.io/badge/all_contributors-10-orange.svg" alt="All Contributors">
 </a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
@@ -196,6 +196,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://lu.ma/divya"><img src="https://avatars.githubusercontent.com/u/56636487?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Divya Kelaskar</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=divyakelaskar" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Jaseem-v"><img src="https://avatars.githubusercontent.com/u/71961260?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jaseem v</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/issues?q=author%3AJaseem-v" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/Aswin40"><img src="https://avatars.githubusercontent.com/u/25566385?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aswin_Pradeep</b></sub></a><br /><a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Aswin40" title="Code">💻</a> <a href="https://github.com/Muhammed-Rahif/Notepad/commits?author=Aswin40" title="Tests">⚠️</a></td>
   </tr>
 </table>
 

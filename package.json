@@ -231,9 +231,6 @@
     "node": ">=14.x",
     "npm": ">=7.x"
   },
-  "collective": {
-    "url": "https://opencollective.com/electron-react-boilerplate-594"
-  },
   "browserslist": [],
   "prettier": {
     "overrides": [

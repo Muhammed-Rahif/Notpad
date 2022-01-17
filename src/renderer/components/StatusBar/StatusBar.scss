@@ -1,7 +1,6 @@
 .status-bar {
-  margin: 0 !important;
+  border: 1.5px solid #888 !important;
+  bottom: 20px;
   position: relative;
   z-index: 55;
-  bottom: 9px;
-  border: 1.5px solid #888 !important;
 }

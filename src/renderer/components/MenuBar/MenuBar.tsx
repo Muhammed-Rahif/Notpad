@@ -1,12 +1,21 @@
+import { openFile } from '../helpers/files';
 import './MenuBar.scss';
 
 function MenuBar() {
+  const handleOpenClick = () => {
+    openFile(document.getElementById('open-file') as HTMLInputElement);
+  };
+
   return (
     <ul role="menubar">
       <li role="menuitem" tabIndex={0} aria-haspopup="true">
         File
         <ul role="menu">
-          <li role="menuitem">
+          <li
+            role="menuitem"
+            onClick={handleOpenClick}
+            onKeyPress={handleOpenClick}
+          >
             <a href="#menu">Open</a>
           </li>
           <li role="menuitem">

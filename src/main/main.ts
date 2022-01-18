@@ -93,7 +93,8 @@ const createWindow = async () => {
     frame: false,
     autoHideMenuBar: true,
     transparent: true,
-    minHeight: 500,
+    minHeight: 300,
+    minWidth: 500,
     title: 'Notepad',
   });
 

@@ -21,7 +21,7 @@ const Notepad = () => {
 export default function App() {
   return (
     <Router>
-      <div className="window">
+      <div className="window" data-testid="window">
         <Routes>
           <Route path="/" element={<Notepad />} />
         </Routes>

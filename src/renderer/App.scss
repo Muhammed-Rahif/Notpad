@@ -16,5 +16,5 @@ body {
 
 .window-body {
   padding: 0 !important;
-  height: 95vh;
+  height: calc(100vh - 35px);
 }

@@ -16,7 +16,9 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { resolveHtmlPath } from './util';
 
-require('@electron/remote/main').initialize();
+const remoteMain = require('@electron/remote/main');
+
+remoteMain.initialize();
 
 export default class AppUpdater {
   constructor() {
@@ -98,7 +100,7 @@ const createWindow = async () => {
     title: 'Notepad',
   });
 
-  require('@electron/remote/main').enable(mainWindow.webContents);
+  remoteMain.enable(mainWindow.webContents);
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 

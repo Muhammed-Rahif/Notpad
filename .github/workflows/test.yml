@@ -20,15 +20,15 @@ jobs:
           node-version: 16
           cache: npm
 
-      - name: npm install
+      - name: yarn install
         run: |
-          npm install
+          yarn install
 
       - name: npm test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm run package
-          npm run lint
-          npm exec tsc
-          npm test
+          yarn run package
+          yarn run lint
+          yarn exec tsc
+          yarn test

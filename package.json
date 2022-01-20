@@ -127,7 +127,8 @@
     },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.erb/mocks/fileMock.js",
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "electron": "<rootDir>/src/__mocks__/electron.js"
     },
     "moduleFileExtensions": [
       "js",
@@ -145,6 +146,9 @@
     ],
     "setupFiles": [
       "./.erb/scripts/check-build-exists.ts"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!screenfull)"
     ]
   },
   "devDependencies": {
@@ -215,8 +219,8 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@electron/remote": "^2.0.1",
     "7.css": "^0.5.0",
+    "@electron/remote": "^2.0.1",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.4",
     "electron-updater": "^4.6.4",

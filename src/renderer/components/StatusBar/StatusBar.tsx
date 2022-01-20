@@ -1,5 +1,5 @@
 import './StatusBar.scss';
-import os from 'os-utils';
+import { getCPUUsage } from 'process';
 import { useEffect, useState } from 'react';
 
 function StatusBar() {
@@ -7,7 +7,7 @@ function StatusBar() {
 
   useEffect(() => {
     setInterval(() => {
-      os.cpuUsage((usage) => setCpuUsage(Number((usage * 100).toFixed(1))));
+      setCpuUsage(Number(getCPUUsage().percentCPUUsage.toFixed(2)));
     }, 500);
   }, []);
 

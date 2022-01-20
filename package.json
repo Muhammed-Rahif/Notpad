@@ -2,14 +2,14 @@
   "name": "notepad-2.0",
   "description": "Window 7 notepad cross-platform and open-source desktop application",
   "scripts": {
-    "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
+    "build": "concurrently \"yarn run build:main\" \"yarn run build:renderer\"",
     "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.main.prod.ts",
     "build:renderer": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.prod.ts",
     "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
     "lint": "cross-env NODE_ENV=development eslint . --ext .js,.jsx,.ts,.tsx",
-    "package": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish never",
+    "package": "ts-node ./.erb/scripts/clean.js dist && yarn run build && electron-builder build --publish never",
     "postinstall": "ts-node .erb/scripts/check-native-dep.js && electron-builder install-app-deps && cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.dev.dll.ts && opencollective-postinstall",
-    "start": "ts-node ./.erb/scripts/check-port-in-use.js && npm run start:renderer",
+    "start": "ts-node ./.erb/scripts/check-port-in-use.js && yarn run start:renderer",
     "start:main": "cross-env NODE_ENV=development electron -r ts-node/register/transpile-only ./src/main/main.ts",
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
     "test": "jest",
@@ -127,7 +127,8 @@
     },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.erb/mocks/fileMock.js",
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "electron": "<rootDir>/src/__mocks__/electron.js"
     },
     "moduleFileExtensions": [
       "js",
@@ -145,6 +146,9 @@
     ],
     "setupFiles": [
       "./.erb/scripts/check-build-exists.ts"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!screenfull)"
     ]
   },
   "devDependencies": {
@@ -169,7 +173,7 @@
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.3.1",
     "detect-port": "^1.3.0",
-    "electron": "^16.0.5",
+    "electron": "^16.0.7",
     "electron-builder": "22.13.1",
     "electron-devtools-installer": "^3.2.0",
     "electron-notarize": "^1.1.1",
@@ -215,14 +219,12 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@electron/remote": "^2.0.1",
-    "@types/os-utils": "^0.0.1",
     "7.css": "^0.5.0",
+    "@electron/remote": "^2.0.1",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.4",
     "electron-updater": "^4.6.4",
     "history": "^5.2.0",
-    "os-utils": "^0.0.14",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
@@ -231,7 +233,7 @@
   },
   "devEngines": {
     "node": ">=14.x",
-    "npm": ">=7.x"
+    "yarn": ">=1.22.x"
   },
   "browserslist": [],
   "prettier": {

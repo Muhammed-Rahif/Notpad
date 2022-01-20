@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import '7.css/dist/7.css';
 import './App.scss';
 import TitleBar from './components/TItleBar/TitleBar';
 import MenuBar from './components/MenuBar/MenuBar';

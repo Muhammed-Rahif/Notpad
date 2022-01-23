@@ -1,11 +1,16 @@
+import { useEffect } from 'react';
 import './TextBox.scss';
+import { setupEditor } from 'renderer/helpers/editor';
 
 function TextBox() {
-  return (
-    <div className="field-row-stacked text-box-wrapper">
-      <textarea id="text-box" />
-    </div>
-  );
+  useEffect(() => {
+    const editor = setupEditor(
+      document.querySelector('.text-box-wrapper') || undefined
+    );
+    editor.focus();
+  }, []);
+
+  return <div className="text-box-wrapper" />;
 }
 
 export default TextBox;

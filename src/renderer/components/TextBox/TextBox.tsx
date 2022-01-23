@@ -1,11 +1,7 @@
 import './TextBox.scss';
 
 function TextBox() {
-  return (
-    <div className="field-row-stacked text-box-wrapper">
-      <textarea id="text-box" />
-    </div>
-  );
+  return <div className="text-box-wrapper" />;
 }
 
 export default TextBox;

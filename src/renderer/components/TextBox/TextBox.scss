@@ -1,8 +1,14 @@
 .text-box-wrapper {
   height: calc(100vh - 62px);
+  overflow-x: scroll;
+}
 
-  #text-box {
-    height: 100%;
-    resize: none;
-  }
+.cm-scroller {
+  margin-top: 0;
+  overflow-x: hidden !important;
+}
+
+.field-row-stacked * + *,
+[class^='field-row'] + [class^='field-row'] {
+  margin-top: 0;
 }

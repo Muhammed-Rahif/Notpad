@@ -6,16 +6,17 @@ import TitleBar from './components/TItleBar/TitleBar';
 import MenuBar from './components/MenuBar/MenuBar';
 import TextBox from './components/TextBox/TextBox';
 import StatusBar from './components/StatusBar/StatusBar';
-import { getInputFileContent } from './components/helpers/files';
+// import { getInputFileContent } from './helpers/files';
 
 const Notepad = () => {
   const handleOpenFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    getInputFileContent(e.target, (err, fileContent) => {
-      if (err) alert(err);
-      else
-        (document.getElementById('text-box') as HTMLTextAreaElement).value =
-          fileContent || '';
-    });
+    // getInputFileContent(e.target, (err, fileContent) => {
+    //   if (err) alert(err);
+    //   else
+    //     (document.getElementById('text-box') as HTMLTextAreaElement).value =
+    //       fileContent || '';
+    // });
+    console.log({ val: e.target.files });
   };
 
   return (
@@ -28,10 +29,11 @@ const Notepad = () => {
       <StatusBar />
       <input
         type="file"
-        accept="text/plain"
+        accept=".css,.js,.html,.md,.java,.py,.xml,.php,.json,.cpp,.rs"
         id="open-file"
         hidden
         onChange={handleOpenFileChange}
+        multiple={false}
       />
     </>
   );

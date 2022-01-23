@@ -128,7 +128,7 @@
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.erb/mocks/fileMock.js",
       "\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "electron": "<rootDir>/src/__mocks__/electron.js"
+      "electron": "<rootDir>/.erb/mocks/electron.js"
     },
     "moduleFileExtensions": [
       "js",
@@ -145,7 +145,8 @@
       "release/app/dist"
     ],
     "setupFiles": [
-      "./.erb/scripts/check-build-exists.ts"
+      "./.erb/scripts/check-build-exists.ts",
+      "./.erb/scripts/setupTests.js"
     ],
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/(?!screenfull)"
@@ -229,7 +230,7 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
     "regenerator-runtime": "^0.13.9",
-    "screenfull": "^6.0.1"
+    "screenfull": "5.2.0"
   },
   "devEngines": {
     "node": ">=14.x",
@@ -249,5 +250,6 @@
       }
     ],
     "singleQuote": true
-  }
+  },
+  "type": "commonjs"
 }

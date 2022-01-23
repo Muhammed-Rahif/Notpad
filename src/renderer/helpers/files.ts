@@ -1,7 +1,3 @@
-function openFile(inputFileElem: HTMLInputElement) {
-  inputFileElem.click();
-}
-
 function getInputFileContent(
   inputFileElem: HTMLInputElement,
   cb: (err: unknown, done?: string) => void
@@ -22,4 +18,5 @@ function getInputFileContent(
   reader.readAsText(files[0]);
 }
 
-export { openFile, getInputFileContent };
+// eslint-disable-next-line import/prefer-default-export
+export { getInputFileContent };

@@ -1,9 +1,8 @@
-import { openFile } from '../helpers/files';
 import './MenuBar.scss';
 
 function MenuBar() {
-  const handleOpenClick = () => {
-    openFile(document.getElementById('open-file') as HTMLInputElement);
+  const handleOpenBtnClick = () => {
+    document.getElementById('open-file')?.click();
   };
 
   return (
@@ -13,8 +12,8 @@ function MenuBar() {
         <ul role="menu">
           <li
             role="menuitem"
-            onClick={handleOpenClick}
-            onKeyPress={handleOpenClick}
+            onClick={handleOpenBtnClick}
+            onKeyPress={handleOpenBtnClick}
           >
             <a href="#menu">Open</a>
           </li>

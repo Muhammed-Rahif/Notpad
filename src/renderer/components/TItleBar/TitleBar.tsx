@@ -7,13 +7,8 @@ function TitleBar() {
   const [fullScreen, setFullScreen] = useState(screenfull.isFullscreen);
 
   const toggleFullscreen = () => {
-    if (!screenfull.isFullscreen) {
-      screenfull.request(document.documentElement || document.body);
-      setFullScreen(true);
-    } else {
-      screenfull.exit();
-      setFullScreen(false);
-    }
+    screenfull.toggle(document.documentElement || document.body);
+    setFullScreen(!fullScreen);
   };
 
   return (
@@ -29,6 +24,7 @@ function TitleBar() {
           type="button"
           aria-label={fullScreen ? 'Restore' : 'Maximize'}
           onClick={toggleFullscreen}
+          data-testid="fullscreen-btn"
         />
         <button type="button" aria-label="Close" onClick={window.close} />
       </div>

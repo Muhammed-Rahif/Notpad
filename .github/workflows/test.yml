@@ -20,11 +20,11 @@ jobs:
           node-version: 16
           cache: 'yarn'
 
-      - name: yarn install
+      - name: Install dependencies
         run: |
-          yarn install
+          npm install --no-package-lock
 
-      - name: yarn test
+      - name: Run tests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

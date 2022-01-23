@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import App from '../renderer/App';
 
-describe('App', () => {
+describe('App component tests', () => {
   it('should render without crashing', () => {
     expect(render(<App />)).toBeTruthy();
   });

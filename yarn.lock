@@ -441,7 +441,7 @@
     "@lezer/common" "^0.15.0"
     "@lezer/html" "^0.15.0"
 
-"@codemirror/lang-javascript@^0.19.0", "@codemirror/lang-javascript@^0.19.6":
+"@codemirror/lang-javascript@^0.19.0":
   version "0.19.6"
   resolved "https://registry.yarnpkg.com/@codemirror/lang-javascript/-/lang-javascript-0.19.6.tgz#bab4ea9ba65189e4bd77c9496275c82e2b6814e7"
   integrity sha512-NgkoCIc3hdTNTBRIRuPqfUJ0WB798qEgwAgtjwYy6yoiK5CzbDS2z5CFW17h9RmaAx6t1m64iY2CZ3tC7r15Gw==

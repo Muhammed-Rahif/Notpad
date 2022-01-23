@@ -1,6 +1,6 @@
 import { EditorView } from '@codemirror/basic-setup';
 import { createContext, ReactNode, useEffect, useState } from 'react';
-import { setupEditor } from 'renderer/helpers/editor';
+import { setupEditor } from '../helpers/editor';
 
 interface EditorViewContextType {
   editorView: EditorView;

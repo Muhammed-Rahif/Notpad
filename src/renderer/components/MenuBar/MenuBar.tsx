@@ -6,7 +6,7 @@ function MenuBar() {
   };
 
   return (
-    <ul role="menubar">
+    <ul role="menubar" className="menubar">
       <li role="menuitem" tabIndex={0} aria-haspopup="true">
         File
         <ul role="menu">

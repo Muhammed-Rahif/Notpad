@@ -11,7 +11,7 @@ import StatusBar from './components/StatusBar/StatusBar';
 import { EditorViewContext } from './contexts/EditorView';
 import { defaultExtensions } from './helpers/editor';
 
-const Notepad = () => {
+const Macropad = () => {
   const { editorView } = useContext(EditorViewContext);
 
   const handleOpenFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +54,7 @@ export default function App() {
     <Router>
       <div className="window" data-testid="window">
         <Routes>
-          <Route path="/" element={<Notepad />} />
+          <Route path="/" element={<Macropad />} />
         </Routes>
       </div>
     </Router>

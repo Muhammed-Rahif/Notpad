@@ -13,7 +13,7 @@ function TitleBar() {
 
   return (
     <div className="title-bar">
-      <div className="title-bar-text">Notepad</div>
+      <div className="title-bar-text">Macropad</div>
       <div className="title-bar-controls">
         <button
           type="button"

@@ -97,7 +97,7 @@ const createWindow = async () => {
     transparent: true,
     minHeight: 300,
     minWidth: 500,
-    title: 'Notepad',
+    title: 'Macropad',
   });
 
   remoteMain.enable(mainWindow.webContents);

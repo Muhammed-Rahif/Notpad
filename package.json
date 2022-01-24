@@ -1,5 +1,5 @@
 {
-  "name": "notepad-2.0",
+  "name": "macropad",
   "description": "Window 7 notepad cross-platform and open-source desktop application",
   "scripts": {
     "build": "concurrently \"yarn run build:main\" \"yarn run build:renderer\"",
@@ -30,8 +30,8 @@
     ]
   },
   "build": {
-    "productName": "Notepad-2.0",
-    "appId": "org.erb.Notepad-2.0",
+    "productName": "macropad",
+    "appId": "org.erb.macropad",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
@@ -70,12 +70,14 @@
     },
     "win": {
       "target": [
-        "nsis"
+        "nsis",
+        "msi"
       ]
     },
     "linux": {
       "target": [
-        "AppImage"
+        "AppImage",
+        "deb"
       ],
       "category": "Development"
     },
@@ -175,7 +177,7 @@
     "css-minimizer-webpack-plugin": "^3.3.1",
     "detect-port": "^1.3.0",
     "electron": "^16.0.7",
-    "electron-builder": "22.13.1",
+    "electron-builder": "^22.14.5",
     "electron-devtools-installer": "^3.2.0",
     "electron-notarize": "^1.1.1",
     "electron-rebuild": "^3.2.5",
@@ -228,7 +230,7 @@
     "@electron/remote": "^2.0.1",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.4",
-    "electron-updater": "^4.6.4",
+    "electron-updater": "4.3.9",
     "history": "^5.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

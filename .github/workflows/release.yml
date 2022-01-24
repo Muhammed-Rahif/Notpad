@@ -2,7 +2,7 @@ name: Build & release
 on: push
 
 jobs:
-  release-package:
+  build-release:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -19,11 +19,7 @@ jobs:
           node-version: 16
           cache: 'yarn'
 
-      - name: Install dependencies
-        run: |
-          npm install --no-package-lock
-
-      - name: Build/release Electron app
+      - name: Build & release
         uses: samuelmeuli/action-electron-builder@v1
         with:
           github_token: ${{ secrets.github_token }}

@@ -1,7 +1,7 @@
 {
   "name": "macropad",
-  "version": "0.1.0",
-  "description": "Window 7 notepad cross-platform and open-source desktop application",
+  "version": "1.0.0-beta.1",
+  "description": "Windows7 notepad cross-platform and open-source desktop application, Macropad.",
   "main": "./dist/main/main.js",
   "author": {
     "name": "Muhammed-Rahif",

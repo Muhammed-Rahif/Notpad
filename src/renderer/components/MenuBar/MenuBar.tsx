@@ -1,8 +1,60 @@
+/* eslint-disable no-console */
+import { EditorState } from '@codemirror/basic-setup';
+import { dialog, BrowserWindow } from '@electron/remote';
+import { OpenDialogReturnValue } from 'electron';
+import fs from 'fs';
+import { useContext } from 'react';
+import { acceptableFileExtentions } from '../../constants/files';
+import { EditorViewContext } from '../../contexts/EditorView';
+import { defaultEditorViewExtensions } from '../../helpers/editor';
 import './MenuBar.scss';
 
 function MenuBar() {
-  const handleOpenBtnClick = () => {
-    document.getElementById('open-file')?.click();
+  const { editorView } = useContext(EditorViewContext);
+
+  const handleOpenBtnClick = async () => {
+    try {
+      // configure options for openFile dialog
+      const openFileDialogOptions: Electron.OpenDialogOptions = {
+        properties: ['openFile'],
+        message: 'Open a file from your Computer',
+        filters: [
+          { name: 'All types', extensions: acceptableFileExtentions },
+          ...acceptableFileExtentions.map((fileExt) => ({
+            name: fileExt,
+            extensions: [fileExt],
+          })),
+        ],
+      };
+
+      // opening select file dialog
+      const filesList: OpenDialogReturnValue = await dialog.showOpenDialog(
+        BrowserWindow.getFocusedWindow() || new BrowserWindow(),
+        openFileDialogOptions
+      );
+
+      // reading file content if any file is selected
+      if (filesList.filePaths[0])
+        fs.readFile(filesList.filePaths[0], 'utf-8', (err, fileContent) => {
+          if (err)
+            dialog.showErrorBox(
+              "Can't open file!",
+              `An error ocurred reading the file :${err.message}`
+            );
+          else
+            editorView.setState(
+              EditorState.create({
+                doc: fileContent,
+                extensions: defaultEditorViewExtensions,
+              })
+            );
+        });
+    } catch (err) {
+      dialog.showErrorBox(
+        "Can't open file!",
+        `An error ocurred reading the file :${err}`
+      );
+    }
   };
 
   return (

@@ -10,7 +10,7 @@ const defaultTheme = EditorView.theme(
   { dark: false }
 );
 
-const defaultExtensions = [
+const defaultEditorViewExtensions = [
   basicSetup,
   keymap.of([indentWithTab]),
   defaultTheme,
@@ -22,7 +22,7 @@ function setupEditor(
 ): EditorView {
   const editor = new EditorView({
     state: EditorState.create({
-      extensions: defaultExtensions,
+      extensions: defaultEditorViewExtensions,
     }),
     parent,
   });
@@ -30,4 +30,4 @@ function setupEditor(
   return editor;
 }
 
-export { setupEditor, defaultExtensions, defaultTheme };
+export { setupEditor, defaultEditorViewExtensions, defaultTheme };

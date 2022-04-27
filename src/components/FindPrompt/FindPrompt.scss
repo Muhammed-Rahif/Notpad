@@ -33,6 +33,11 @@
     outline: none;
     border: 0.25px solid #999;
     transition: 0.5s;
+    background-color: var(--btn-bg-color);
+
+    svg path {
+      stroke: var(--font-color);
+    }
   }
 
   button:active {

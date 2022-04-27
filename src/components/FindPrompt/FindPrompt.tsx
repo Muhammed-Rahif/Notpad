@@ -40,10 +40,10 @@ function FindPrompt() {
         autoComplete="off"
       />
       <button style={{ marginRight: 0 }}>
-        <GrFormSearch size={20} />
+        <GrFormSearch size={20} color="var(--font-color)" />
       </button>
       <button onClick={e => setShowPrompt(false)}>
-        <IoIosClose size={20} />
+        <IoIosClose size={20} color="var(--font-color)" />
       </button>
     </div>
   );

@@ -3,7 +3,16 @@ import FooterBar from "@/components/FooterBar/FooterBar";
 import AppHead from "@/components/Head/Head";
 import MenuBar from "@/components/MenuBar/MenuBar";
 import TitleBar from "@/components/TitleBar/TitleBar";
-import { Divider, Textarea, useColorScheme } from "@mui/joy";
+import {
+  Box,
+  Divider,
+  Modal,
+  ModalClose,
+  ModalDialog,
+  Textarea,
+  Typography,
+  useColorScheme,
+} from "@mui/joy";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();
@@ -19,28 +28,53 @@ export default function Home() {
     <>
       <AppHead />
 
-      <TitleBar />
-      <CustomDivider />
-      <MenuBar />
-      <CustomDivider />
-      <Textarea
-        size="lg"
-        variant="soft"
-        color="neutral"
-        maxRows={10}
+      <Modal open>
+        <ModalDialog>
+          <ModalClose />
+          <Typography>Modal title</Typography>
+        </ModalDialog>
+      </Modal>
+
+      <Box
         sx={{
-          borderRadius: 0,
-          height: "calc(100vh - 7rem)",
-          maxHeight: "calc(100vh - 7rem)",
-          shadow: "none",
-          border: "0px solid transparent",
-          "--Textarea-focusedHighlight": "rgba(0,0,0,0)",
-          resize: "none",
-          paddingY: 0,
+          display: "flex",
+          alignItems: "stretch",
+          flexDirection: "column",
+          height: "100vh",
         }}
-      />
-      <CustomDivider />
-      <FooterBar />
+      >
+        <Box
+          sx={{
+            position: "sticky",
+            top: 0,
+            left: 0,
+          }}
+        >
+          <TitleBar />
+          <CustomDivider />
+          <MenuBar />
+          <CustomDivider />
+        </Box>
+        <Textarea
+          size="lg"
+          variant="soft"
+          color="neutral"
+          maxRows={10}
+          sx={{
+            flexGrow: 1,
+            pl: 1,
+            borderRadius: 0,
+            maxHeight: "calc(100vh - 7rem)",
+            shadow: "none",
+            border: "0px solid transparent",
+            "--Textarea-focusedHighlight": "rgba(0,0,0,0)",
+            resize: "none",
+            paddingY: 0,
+          }}
+        />
+        <CustomDivider />
+        <FooterBar />
+      </Box>
     </>
   );
 }

@@ -49,7 +49,15 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
             width={24}
             height={24}
           />
-          {title} - Notepad
+          <Box
+            sx={{ marginRight: "1.5rem" }}
+            component="span"
+            className="notepad-logo-font"
+            fontSize="1.25rem"
+          >
+            Notepad
+          </Box>
+          {title}
         </Typography>
 
         <Box sx={{ marginY: 0.5, marginX: 1 }}>
@@ -68,6 +76,7 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
               },
             }}
             onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+            size="sm"
           >
             Login
           </Button>

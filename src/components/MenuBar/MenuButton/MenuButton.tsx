@@ -32,11 +32,14 @@ export default function MenuButton({
         component={ListItemButton}
         ref={btnRef as any}
         sx={{
-          textAlign: "start",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           borderRadius: 4,
           margin: 0.01,
           minWidth: "3.5rem",
         }}
+        variant={open ? "soft" : "plain"}
         onClick={onOpen}
         onMouseEnter={() => onOpen && onHoverOpen && onOpen()}
       >

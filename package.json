@@ -11,7 +11,6 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@fontsource/public-sans": "^4.5.12",
     "@mui/joy": "^5.0.0-alpha.66",
     "@next/font": "13.1.6",
     "@types/node": "18.13.0",

@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Divider,
   Sheet,
   Typography,
@@ -52,12 +53,24 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
         </Typography>
 
         <Box sx={{ marginY: 0.5, marginX: 1 }}>
-          <Avatar
+          {/* <Avatar
             sx={{ borderRadius: 8 }}
             onClick={() => setMode(mode === "dark" ? "light" : "dark")}
           >
             MR
-          </Avatar>
+          </Avatar> */}
+          <Button
+            color="neutral"
+            variant="soft"
+            sx={{
+              ":hover": {
+                bgcolor: "rgba(var(--joy-palette-neutral-mainChannel) / 0.28)",
+              },
+            }}
+            onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+          >
+            Login
+          </Button>
         </Box>
 
         {/* <Box>

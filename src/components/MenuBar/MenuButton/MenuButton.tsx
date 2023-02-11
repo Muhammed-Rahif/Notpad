@@ -1,25 +1,47 @@
 import { Button, ListItemButton, Menu } from "@mui/joy";
-import React, { ReactElement, ReactNode, useState } from "react";
+import React, {
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
-type MenuButtonProps = { menu: ReactElement; children: ReactNode };
+type MenuButtonProps = {
+  menu: ReactElement;
+  children: ReactNode;
+  open?: boolean;
+  onHoverOpen?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
+};
 
-export default function MenuButton({ menu, children }: MenuButtonProps) {
-  const [open, setOpen] = useState(false);
-  const [anchorElem, setAnchorElem] = useState<EventTarget | null>(null);
+export default function MenuButton({
+  menu,
+  children,
+  onOpen,
+  onClose,
+  onHoverOpen,
+  open,
+}: MenuButtonProps) {
+  const btnRef = useRef();
 
   return (
     <>
       <ListItemButton
-        sx={{ textAlign: "start" }}
-        onClick={e => setAnchorElem(e.target)}
+        component={ListItemButton}
+        ref={btnRef as any}
+        sx={{ textAlign: "start", borderRadius: 4, margin: 0.01 }}
+        onClick={onOpen}
+        onMouseEnter={() => onOpen && onHoverOpen && onOpen()}
       >
         {children}
       </ListItemButton>
 
       {React.cloneElement(menu, {
-        open: Boolean(anchorElem),
-        onClose: () => setAnchorElem(null),
-        anchorEl: anchorElem,
+        open: Boolean(open),
+        onClose: onClose,
+        anchorEl: btnRef.current,
         placement: "bottom-start",
       })}
     </>

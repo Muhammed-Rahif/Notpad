@@ -14,17 +14,24 @@ import {
   Typography,
 } from "@mui/joy";
 import Image from "next/image";
+import { useState } from "react";
 import MenuButton from "./MenuButton/MenuButton";
 
 type MenuBarProps = {};
 
 export default function MenuBar({}: MenuBarProps) {
+  const [activeMenuIndx, setActiveMenuIndx] = useState<number | null>(null);
+
   return (
     <>
       <Sheet>
         <List size="sm" orientation="horizontal">
           <ListItem>
             <MenuButton
+              onOpen={() => setActiveMenuIndx(0)}
+              onClose={() => setActiveMenuIndx(null)}
+              open={activeMenuIndx === 0}
+              onHoverOpen={typeof activeMenuIndx === "number"}
               menu={
                 <Menu size="sm">
                   <MenuItem>New File</MenuItem>
@@ -42,6 +49,10 @@ export default function MenuBar({}: MenuBarProps) {
 
           <ListItem>
             <MenuButton
+              onOpen={() => setActiveMenuIndx(1)}
+              onClose={() => setActiveMenuIndx(null)}
+              open={activeMenuIndx === 1}
+              onHoverOpen={typeof activeMenuIndx === "number"}
               menu={
                 <Menu size="sm">
                   <MenuItem>Undo</MenuItem>
@@ -67,6 +78,10 @@ export default function MenuBar({}: MenuBarProps) {
 
           <ListItem>
             <MenuButton
+              onOpen={() => setActiveMenuIndx(2)}
+              onClose={() => setActiveMenuIndx(null)}
+              open={activeMenuIndx === 2}
+              onHoverOpen={typeof activeMenuIndx === "number"}
               menu={
                 <Menu size="sm">
                   <MenuItem>Fullscreen</MenuItem>
@@ -80,6 +95,10 @@ export default function MenuBar({}: MenuBarProps) {
 
           <ListItem>
             <MenuButton
+              onOpen={() => setActiveMenuIndx(3)}
+              onClose={() => setActiveMenuIndx(null)}
+              open={activeMenuIndx === 3}
+              onHoverOpen={typeof activeMenuIndx === "number"}
               menu={
                 <Menu size="sm">
                   <MenuItem>Help</MenuItem>

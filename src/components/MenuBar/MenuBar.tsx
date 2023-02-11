@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/joy";
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import MenuButton from "./MenuButton/MenuButton";
 
 type MenuBarProps = {};
@@ -22,22 +22,254 @@ type MenuBarProps = {};
 export default function MenuBar({}: MenuBarProps) {
   const [activeMenuIndx, setActiveMenuIndx] = useState<number | null>(null);
 
+  const menuItems = useMemo(
+    () => [
+      {
+        label: "File",
+        items: [
+          {
+            label: "New File",
+            shortcut: "Ctrl+N",
+            onClick: () => {},
+          },
+          {
+            label: "New Window",
+            shortcut: "Ctrl+Shift+N",
+            onClick: () => {},
+          },
+          {
+            label: "Open File",
+            shortcut: "Ctrl+O",
+            onClick: () => {},
+          },
+          {
+            label: "Save File",
+            shortcut: "Ctrl+S",
+            onClick: () => {},
+          },
+          null,
+          {
+            label: "Exit",
+            shortcut: null,
+            onClick: () => {},
+          },
+        ],
+      },
+      {
+        label: "Edit",
+        items: [
+          {
+            label: "Undo",
+            shortcut: "Ctrl+Z",
+            onClick: () => {},
+          },
+          {
+            label: "Redo",
+            shortcut: "Ctrl+Y",
+            onClick: () => {},
+          },
+          null,
+          {
+            label: "Cut",
+            shortcut: "Ctrl+X",
+            onClick: () => {},
+          },
+          {
+            label: "Copy",
+            shortcut: "Ctrl+C",
+            onClick: () => {},
+          },
+          {
+            label: "Paste",
+            shortcut: "Ctrl+V",
+            onClick: () => {},
+          },
+          {
+            label: "Delete",
+            shortcut: "Del",
+            onClick: () => {},
+          },
+          null,
+          {
+            label: "Find",
+            shortcut: "Ctrl+F",
+            onClick: () => {},
+          },
+          {
+            label: "Find Next",
+            shortcut: "F3",
+            onClick: () => {},
+          },
+          {
+            label: "Replace",
+            shortcut: "Ctrl+H",
+            onClick: () => {},
+          },
+          {
+            label: "Go To",
+            shortcut: "Ctrl+G",
+            onClick: () => {},
+          },
+          null,
+          {
+            label: "Select All",
+            shortcut: "Ctrl+A",
+            onClick: () => {},
+          },
+          {
+            label: "Time/Date",
+            shortcut: "F5",
+            onClick: () => {},
+          },
+        ],
+      },
+      {
+        label: "View",
+        items: [
+          {
+            label: "Zoom In",
+            shortcut: "Ctrl+Plus",
+            onClick: () => {},
+          },
+          {
+            label: "Zoom Out",
+            shortcut: "Ctrl+Minus",
+            onClick: () => {},
+          },
+          {
+            label: "Reset Zoom",
+            shortcut: "Ctrl+0",
+            onClick: () => {},
+          },
+          null,
+          {
+            label: "Toggle Full Screen",
+            shortcut: "F11",
+            onClick: () => {},
+          },
+          null,
+          {
+            label: "Toggle Status Bar",
+            shortcut: null,
+            onClick: () => {},
+          },
+        ],
+      },
+      {
+        label: "About",
+        items: [
+          {
+            label: "About Us",
+            shortcut: null,
+            onClick: () => {},
+          },
+          {
+            label: "Send Feedback",
+            shortcut: null,
+            onClick: () => {},
+          },
+          {
+            label: "Report a Problem",
+            shortcut: null,
+            onClick: () => {},
+          },
+        ],
+      },
+    ],
+    []
+  );
+
   return (
     <>
       <Sheet>
         <List size="sm" orientation="horizontal">
           <ListItem>
+            {menuItems.map(({ items, label }, menuIndx) => (
+              <MenuButton
+                key={menuIndx}
+                onOpen={() => setActiveMenuIndx(menuIndx)}
+                onClose={() => setActiveMenuIndx(null)}
+                open={activeMenuIndx === menuIndx}
+                onHoverOpen={typeof activeMenuIndx === "number"}
+                menu={
+                  <Menu size="sm" sx={{ minWidth: "11rem" }}>
+                    {items.map((item, itemIndx) =>
+                      item ? (
+                        <MenuItem key={itemIndx}>
+                          {item.label}{" "}
+                          {item.shortcut && (
+                            <Typography
+                              fontSize=".6rem"
+                              sx={{ marginLeft: "auto" }}
+                              variant="outlined"
+                              color="info"
+                            >
+                              {item.shortcut}
+                            </Typography>
+                          )}
+                        </MenuItem>
+                      ) : (
+                        <ListDivider key={itemIndx} />
+                      )
+                    )}
+                  </Menu>
+                }
+              >
+                {label}
+              </MenuButton>
+            ))}
+            {/* 
             <MenuButton
               onOpen={() => setActiveMenuIndx(0)}
               onClose={() => setActiveMenuIndx(null)}
               open={activeMenuIndx === 0}
               onHoverOpen={typeof activeMenuIndx === "number"}
               menu={
-                <Menu size="sm">
-                  <MenuItem>New File</MenuItem>
-                  <MenuItem>New Window</MenuItem>
-                  <MenuItem>Open File</MenuItem>
-                  <MenuItem>Save File</MenuItem>
+                <Menu size="sm" sx={{ minWidth: "11rem" }}>
+                  <MenuItem>
+                    New File{" "}
+                    <Typography
+                      fontSize=".6rem"
+                      sx={{ marginLeft: "auto" }}
+                      variant="outlined"
+                      color="info"
+                    >
+                      Ctrl+N
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    New Window
+                    <Typography
+                      fontSize=".6rem"
+                      sx={{ marginLeft: "auto" }}
+                      variant="outlined"
+                      color="info"
+                    >
+                      Ctrl+Shift+N
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    Open File
+                    <Typography
+                      fontSize=".6rem"
+                      sx={{ marginLeft: "auto" }}
+                      variant="outlined"
+                      color="info"
+                    >
+                      Ctrl+O
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    Save File
+                    <Typography
+                      fontSize=".6rem"
+                      sx={{ marginLeft: "auto" }}
+                      variant="outlined"
+                      color="info"
+                    >
+                      Ctrl+S
+                    </Typography>
+                  </MenuItem>
                   <ListDivider />
                   <MenuItem>Exit</MenuItem>
                 </Menu>
@@ -54,7 +286,7 @@ export default function MenuBar({}: MenuBarProps) {
               open={activeMenuIndx === 1}
               onHoverOpen={typeof activeMenuIndx === "number"}
               menu={
-                <Menu size="sm">
+                <Menu size="sm" sx={{ minWidth: "11rem" }}>
                   <MenuItem>Undo</MenuItem>
                   <ListDivider />
                   <MenuItem>Cut</MenuItem>
@@ -108,7 +340,7 @@ export default function MenuBar({}: MenuBarProps) {
               }
             >
               Help
-            </MenuButton>
+            </MenuButton> */}
           </ListItem>
         </List>
       </Sheet>

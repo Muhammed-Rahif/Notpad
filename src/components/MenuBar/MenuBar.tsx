@@ -188,7 +188,14 @@ export default function MenuBar({}: MenuBarProps) {
   );
 
   return (
-    <Sheet sx={{ height: "2.5rem", position: "sticky", top: 0, left: 0 }}>
+    <Sheet
+      sx={{
+        height: "2.5rem",
+        position: "sticky",
+        top: 0,
+        left: 0,
+      }}
+    >
       <List size="sm" orientation="horizontal">
         <ListItem>
           {menuItems.map(({ items, label }, menuIndx) => (

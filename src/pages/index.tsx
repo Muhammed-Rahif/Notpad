@@ -9,7 +9,11 @@ const CustomDivider = () => {
   const { mode } = useColorScheme();
   return (
     <ClientOnly>
-      <Divider sx={{ bgcolor: mode === "light" ? "divider" : "#25252D" }} />
+      <Divider
+        sx={{
+          bgcolor: mode === "light" ? "divider" : "#25252D",
+        }}
+      />
     </ClientOnly>
   );
 };

@@ -1,3 +1,4 @@
+import FooterBar from "@/components/FooterBar/FooterBar";
 import AppHead from "@/components/Head/Head";
 import MenuBar from "@/components/MenuBar/MenuBar";
 import TitleBar from "@/components/TitleBar/TitleBar";
@@ -11,9 +12,9 @@ export default function Home() {
       <AppHead />
 
       <TitleBar />
-      <Divider sx={{ bgcolor: mode === "light" ? "divider" : "#25252D" }} />
+      <Divider sx={{ bgcolor: mode === "dark" ? "#25252D" : "divider" }} />
       <MenuBar />
-      <Divider sx={{ bgcolor: mode === "light" ? "divider" : "#25252D" }} />
+      <Divider sx={{ bgcolor: mode === "dark" ? "#25252D" : "divider" }} />
       <Textarea
         size="lg"
         variant="soft"
@@ -30,7 +31,8 @@ export default function Home() {
           paddingY: 0,
         }}
       />
-      <Divider />
+      <Divider sx={{ bgcolor: mode === "dark" ? "#25252D" : "divider" }} />
+      <FooterBar />
     </>
   );
 }

@@ -87,7 +87,7 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
           onClick={() => setMode(mode === "dark" ? "light" : "dark")}
           size="sm"
         >
-          Login
+          Theme
         </Button>
       </Box>
 

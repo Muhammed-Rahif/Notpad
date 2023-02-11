@@ -4,7 +4,7 @@ import { CssVarsProvider } from "@mui/joy/styles";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <CssVarsProvider>
+    <CssVarsProvider defaultMode="light">
       <Component {...pageProps} />
     </CssVarsProvider>
   );

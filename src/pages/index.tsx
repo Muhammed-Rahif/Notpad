@@ -1,20 +1,28 @@
+import ClientOnly from "@/components/ClientOnly/ClientOnly";
 import FooterBar from "@/components/FooterBar/FooterBar";
 import AppHead from "@/components/Head/Head";
 import MenuBar from "@/components/MenuBar/MenuBar";
 import TitleBar from "@/components/TitleBar/TitleBar";
 import { Divider, Textarea, useColorScheme } from "@mui/joy";
 
-export default function Home() {
+const CustomDivider = () => {
   const { mode } = useColorScheme();
+  return (
+    <ClientOnly>
+      <Divider sx={{ bgcolor: mode === "light" ? "divider" : "#25252D" }} />
+    </ClientOnly>
+  );
+};
 
+export default function Home() {
   return (
     <>
       <AppHead />
 
       <TitleBar />
-      <Divider sx={{ bgcolor: mode === "dark" ? "#25252D" : "divider" }} />
+      <CustomDivider />
       <MenuBar />
-      <Divider sx={{ bgcolor: mode === "dark" ? "#25252D" : "divider" }} />
+      <CustomDivider />
       <Textarea
         size="lg"
         variant="soft"
@@ -31,7 +39,7 @@ export default function Home() {
           paddingY: 0,
         }}
       />
-      <Divider sx={{ bgcolor: mode === "dark" ? "#25252D" : "divider" }} />
+      <CustomDivider />
       <FooterBar />
     </>
   );

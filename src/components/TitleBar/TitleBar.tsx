@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Divider,
-  Sheet,
-  Typography,
-  useColorScheme,
-} from "@mui/joy";
+import { Avatar, Box, Button, Divider, Sheet, Typography } from "@mui/joy";
 import Image from "next/image";
 // import { MdMinimize, MdOutlineClose } from "react-icons/md";
 // import { VscChromeMaximize } from "react-icons/vsc";
@@ -16,7 +8,6 @@ type TitleBarProps = {
 };
 
 export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
-  const { mode, setMode } = useColorScheme();
   //   const actionBtns = [
   //     {
   //       icon: <MdMinimize />,
@@ -84,10 +75,9 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
               bgcolor: "rgba(var(--joy-palette-neutral-mainChannel) / 0.28)",
             },
           }}
-          onClick={() => setMode(mode === "dark" ? "light" : "dark")}
           size="sm"
         >
-          Theme
+          Login
         </Button>
       </Box>
 

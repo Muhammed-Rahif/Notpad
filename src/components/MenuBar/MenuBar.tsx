@@ -12,6 +12,7 @@ import {
   MenuItem,
   Sheet,
   Typography,
+  useColorScheme,
 } from "@mui/joy";
 import Image from "next/image";
 import { useMemo, useState } from "react";
@@ -21,6 +22,7 @@ type MenuBarProps = {};
 
 export default function MenuBar({}: MenuBarProps) {
   const [activeMenuIndx, setActiveMenuIndx] = useState<number | null>(null);
+  const { mode, setMode } = useColorScheme();
 
   const menuItems = useMemo(
     () => [
@@ -149,9 +151,15 @@ export default function MenuBar({}: MenuBarProps) {
           },
           null,
           {
-            label: "Toggle Status Bar",
+            label: "Toggle Title Bar",
             shortcut: null,
             onClick: () => {},
+          },
+          null,
+          {
+            label: "Toggle Theme",
+            shortcut: null,
+            onClick: () => setMode(mode === "dark" ? "light" : "dark"),
           },
         ],
       },
@@ -176,7 +184,7 @@ export default function MenuBar({}: MenuBarProps) {
         ],
       },
     ],
-    []
+    [mode, setMode]
   );
 
   return (
@@ -194,7 +202,7 @@ export default function MenuBar({}: MenuBarProps) {
                 <Menu size="sm" sx={{ minWidth: "11rem" }}>
                   {items.map((item, itemIndx) =>
                     item ? (
-                      <MenuItem key={itemIndx}>
+                      <MenuItem key={itemIndx} onClick={item.onClick}>
                         {item.label}{" "}
                         {item.shortcut && (
                           <Typography

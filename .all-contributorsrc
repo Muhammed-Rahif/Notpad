@@ -1,0 +1,119 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "Muhammed-Rahif",
+      "name": "Muhammed Rahif",
+      "avatar_url": "https://avatars.githubusercontent.com/u/73386156?v=4",
+      "profile": "http://rahif.me",
+      "contributions": [
+        "bug",
+        "code",
+        "doc",
+        "content",
+        "design",
+        "ideas",
+        "maintenance",
+        "test",
+        "review",
+        "infra"
+      ]
+    },
+    {
+      "login": "Aswin40",
+      "name": "Aswin_Pradeep",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25566385?v=4",
+      "profile": "https://github.com/Aswin40",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "anandsimmy",
+      "name": "Anand Simmy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22940059?v=4",
+      "profile": "https://medium.com/@anandsimmy7",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "khushbooag4",
+      "name": "Khushboo Agarwal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/88361750?v=4",
+      "profile": "https://github.com/khushbooag4",
+      "contributions": [
+        "code",
+        "ideas",
+        "review"
+      ]
+    },
+    {
+      "login": "abrahamalen",
+      "name": "Alen Abraham",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53680255?v=4",
+      "profile": "https://github.com/abrahamalen",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Muhammed-radin",
+      "name": "Muhammed radin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/84174838?v=4",
+      "profile": "https://github.com/Muhammed-radin",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Abhi-paul16",
+      "name": "Abhishek Pal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68468264?v=4",
+      "profile": "https://github.com/Abhi-paul16",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "RishiKumarRay",
+      "name": "Rishi Kumar Ray",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87641376?v=4",
+      "profile": "https://github.com/RishiKumarRay",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "divyakelaskar",
+      "name": "Divya Kelaskar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56636487?v=4",
+      "profile": "https://lu.ma/divya",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Jaseem-v",
+      "name": "Jaseem v",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71961260?v=4",
+      "profile": "https://github.com/Jaseem-v",
+      "contributions": [
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Notepad",
+  "projectOwner": "Muhammed-Rahif",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": false,
+  "badgeTemplate": "<a href=\"#contributors-\">\n<img src=\"https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg\" alt=\"All Contributors\">\n</a>"
+}

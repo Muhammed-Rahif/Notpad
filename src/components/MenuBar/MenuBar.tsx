@@ -199,7 +199,15 @@ export default function MenuBar({}: MenuBarProps) {
               open={activeMenuIndx === menuIndx}
               onHoverOpen={typeof activeMenuIndx === "number"}
               menu={
-                <Menu size="sm" sx={{ minWidth: "11rem" }}>
+                <Menu
+                  container={
+                    typeof document !== "undefined"
+                      ? document.querySelector(".fullscreen")
+                      : undefined
+                  }
+                  size="sm"
+                  sx={{ minWidth: "11rem" }}
+                >
                   {items.map((item, itemIndx) =>
                     item ? (
                       <MenuItem key={itemIndx} onClick={item.onClick}>

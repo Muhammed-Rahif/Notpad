@@ -64,7 +64,7 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
           >
             MR
           </Avatar> */}
-        <Button
+        {/* <Button
           color="neutral"
           variant="soft"
           sx={{
@@ -75,7 +75,7 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
           size="sm"
         >
           Login
-        </Button>
+        </Button> */}
       </Box>
 
       {/* <Box>

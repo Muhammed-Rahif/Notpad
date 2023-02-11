@@ -28,7 +28,6 @@ body {
 
 ::-webkit-scrollbar-thumb {
   width: 4px;
-  background-color: gray;
-  outline: 1px solid whitesmoke;
+  background-color: #80808080;
   border-radius: 4px;
 }

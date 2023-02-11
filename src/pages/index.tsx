@@ -1,17 +1,19 @@
 import AppHead from "@/components/Head/Head";
 import MenuBar from "@/components/MenuBar/MenuBar";
 import TitleBar from "@/components/TitleBar/TitleBar";
-import { Divider, Textarea } from "@mui/joy";
+import { Divider, Textarea, useColorScheme } from "@mui/joy";
 
 export default function Home() {
+  const { mode } = useColorScheme();
+
   return (
     <>
       <AppHead />
 
       <TitleBar />
-      <Divider />
+      <Divider sx={{ bgcolor: mode === "light" ? "divider" : "#25252D" }} />
       <MenuBar />
-      <Divider />
+      <Divider sx={{ bgcolor: mode === "light" ? "divider" : "#25252D" }} />
       <Textarea
         size="lg"
         variant="soft"

@@ -45,6 +45,9 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
         justifyContent: "space-between",
         alignItems: "center",
         height: "3rem",
+        position: "sticky",
+        top: 0,
+        left: 0,
       }}
     >
       <Typography padding={1} display="flex" alignItems="center">

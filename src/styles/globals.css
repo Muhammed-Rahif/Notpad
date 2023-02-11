@@ -16,3 +16,19 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  margin: 2px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  width: 4px;
+  background-color: gray;
+  outline: 1px solid whitesmoke;
+  border-radius: 4px;
+}

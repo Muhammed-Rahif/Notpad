@@ -39,50 +39,56 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
   //   ];
 
   return (
-    <>
-      <Sheet sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography padding={1} display="flex" alignItems="center">
-          <Image
-            style={{ marginRight: ".5rem" }}
-            src="/assets/images/logo.png"
-            alt={""}
-            width={24}
-            height={24}
-          />
-          <Box
-            sx={{ marginRight: "1.5rem" }}
-            component="span"
-            className="notepad-logo-font"
-            fontSize="1.25rem"
-          >
-            Notepad
-          </Box>
-          {title}
-        </Typography>
+    <Sheet
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        height: "3rem",
+      }}
+    >
+      <Typography padding={1} display="flex" alignItems="center">
+        <Image
+          style={{ marginRight: ".5rem" }}
+          src="/assets/images/logo.png"
+          alt={""}
+          width={24}
+          height={24}
+        />
+        <Box
+          sx={{ marginRight: "1.5rem" }}
+          component="span"
+          className="notepad-logo-font"
+          fontSize="1.25rem"
+        >
+          Notepad
+        </Box>
+        {title}
+      </Typography>
 
-        <Box sx={{ marginY: 0.5, marginX: 1 }}>
-          {/* <Avatar
+      <Box sx={{ marginY: 0.5, marginX: 1 }}>
+        {/* <Avatar
             sx={{ borderRadius: 8 }}
             onClick={() => setMode(mode === "dark" ? "light" : "dark")}
           >
             MR
           </Avatar> */}
-          <Button
-            color="neutral"
-            variant="soft"
-            sx={{
-              ":hover": {
-                bgcolor: "rgba(var(--joy-palette-neutral-mainChannel) / 0.28)",
-              },
-            }}
-            onClick={() => setMode(mode === "dark" ? "light" : "dark")}
-            size="sm"
-          >
-            Login
-          </Button>
-        </Box>
+        <Button
+          color="neutral"
+          variant="soft"
+          sx={{
+            ":hover": {
+              bgcolor: "rgba(var(--joy-palette-neutral-mainChannel) / 0.28)",
+            },
+          }}
+          onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+          size="sm"
+        >
+          Login
+        </Button>
+      </Box>
 
-        {/* <Box>
+      {/* <Box>
           {actionBtns.map((btn, i) => (
             <Button
               key={i}
@@ -103,9 +109,6 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
             </Button>
           ))}
         </Box> */}
-      </Sheet>
-
-      <Divider />
-    </>
+    </Sheet>
   );
 }

@@ -180,172 +180,45 @@ export default function MenuBar({}: MenuBarProps) {
   );
 
   return (
-    <>
-      <Sheet>
-        <List size="sm" orientation="horizontal">
-          <ListItem>
-            {menuItems.map(({ items, label }, menuIndx) => (
-              <MenuButton
-                key={menuIndx}
-                onOpen={() => setActiveMenuIndx(menuIndx)}
-                onClose={() => setActiveMenuIndx(null)}
-                open={activeMenuIndx === menuIndx}
-                onHoverOpen={typeof activeMenuIndx === "number"}
-                menu={
-                  <Menu size="sm" sx={{ minWidth: "11rem" }}>
-                    {items.map((item, itemIndx) =>
-                      item ? (
-                        <MenuItem key={itemIndx}>
-                          {item.label}{" "}
-                          {item.shortcut && (
-                            <Typography
-                              fontSize=".6rem"
-                              sx={{ marginLeft: "auto" }}
-                              variant="outlined"
-                              color="info"
-                            >
-                              {item.shortcut}
-                            </Typography>
-                          )}
-                        </MenuItem>
-                      ) : (
-                        <ListDivider key={itemIndx} />
-                      )
-                    )}
-                  </Menu>
-                }
-              >
-                {label}
-              </MenuButton>
-            ))}
-            {/* 
+    <Sheet sx={{ height: "2.5rem" }}>
+      <List size="sm" orientation="horizontal">
+        <ListItem>
+          {menuItems.map(({ items, label }, menuIndx) => (
             <MenuButton
-              onOpen={() => setActiveMenuIndx(0)}
+              key={menuIndx}
+              onOpen={() => setActiveMenuIndx(menuIndx)}
               onClose={() => setActiveMenuIndx(null)}
-              open={activeMenuIndx === 0}
+              open={activeMenuIndx === menuIndx}
               onHoverOpen={typeof activeMenuIndx === "number"}
               menu={
                 <Menu size="sm" sx={{ minWidth: "11rem" }}>
-                  <MenuItem>
-                    New File{" "}
-                    <Typography
-                      fontSize=".6rem"
-                      sx={{ marginLeft: "auto" }}
-                      variant="outlined"
-                      color="info"
-                    >
-                      Ctrl+N
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem>
-                    New Window
-                    <Typography
-                      fontSize=".6rem"
-                      sx={{ marginLeft: "auto" }}
-                      variant="outlined"
-                      color="info"
-                    >
-                      Ctrl+Shift+N
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem>
-                    Open File
-                    <Typography
-                      fontSize=".6rem"
-                      sx={{ marginLeft: "auto" }}
-                      variant="outlined"
-                      color="info"
-                    >
-                      Ctrl+O
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem>
-                    Save File
-                    <Typography
-                      fontSize=".6rem"
-                      sx={{ marginLeft: "auto" }}
-                      variant="outlined"
-                      color="info"
-                    >
-                      Ctrl+S
-                    </Typography>
-                  </MenuItem>
-                  <ListDivider />
-                  <MenuItem>Exit</MenuItem>
+                  {items.map((item, itemIndx) =>
+                    item ? (
+                      <MenuItem key={itemIndx}>
+                        {item.label}{" "}
+                        {item.shortcut && (
+                          <Typography
+                            fontSize=".6rem"
+                            sx={{ marginLeft: "auto" }}
+                            variant="outlined"
+                            color="info"
+                          >
+                            {item.shortcut}
+                          </Typography>
+                        )}
+                      </MenuItem>
+                    ) : (
+                      <ListDivider key={itemIndx} />
+                    )
+                  )}
                 </Menu>
               }
             >
-              File
+              {label}
             </MenuButton>
-          </ListItem>
-
-          <ListItem>
-            <MenuButton
-              onOpen={() => setActiveMenuIndx(1)}
-              onClose={() => setActiveMenuIndx(null)}
-              open={activeMenuIndx === 1}
-              onHoverOpen={typeof activeMenuIndx === "number"}
-              menu={
-                <Menu size="sm" sx={{ minWidth: "11rem" }}>
-                  <MenuItem>Undo</MenuItem>
-                  <ListDivider />
-                  <MenuItem>Cut</MenuItem>
-                  <MenuItem>Copy</MenuItem>
-                  <MenuItem>Paste</MenuItem>
-                  <MenuItem>Delete</MenuItem>
-                  <ListDivider />
-                  <MenuItem>Find</MenuItem>
-                  <MenuItem>Go To</MenuItem>
-                  <ListDivider />
-                  <MenuItem>Select All</MenuItem>
-                  <MenuItem>Time/Date</MenuItem>
-                  <ListDivider />
-                  <MenuItem>Font</MenuItem>
-                </Menu>
-              }
-            >
-              Edit
-            </MenuButton>
-          </ListItem>
-
-          <ListItem>
-            <MenuButton
-              onOpen={() => setActiveMenuIndx(2)}
-              onClose={() => setActiveMenuIndx(null)}
-              open={activeMenuIndx === 2}
-              onHoverOpen={typeof activeMenuIndx === "number"}
-              menu={
-                <Menu size="sm">
-                  <MenuItem>Fullscreen</MenuItem>
-                  <MenuItem>Dark Mode</MenuItem>
-                </Menu>
-              }
-            >
-              View
-            </MenuButton>
-          </ListItem>
-
-          <ListItem>
-            <MenuButton
-              onOpen={() => setActiveMenuIndx(3)}
-              onClose={() => setActiveMenuIndx(null)}
-              open={activeMenuIndx === 3}
-              onHoverOpen={typeof activeMenuIndx === "number"}
-              menu={
-                <Menu size="sm">
-                  <MenuItem>Help</MenuItem>
-                  <MenuItem>Send Feedback</MenuItem>
-                  <MenuItem>Report a Problem</MenuItem>
-                </Menu>
-              }
-            >
-              Help
-            </MenuButton> */}
-          </ListItem>
-        </List>
-      </Sheet>
-
-      <Divider />
-    </>
+          ))}
+        </ListItem>
+      </List>
+    </Sheet>
   );
 }

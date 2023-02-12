@@ -1,3 +1,4 @@
+import { newFile } from "@/helpers/file";
 import {
   Avatar,
   Box,
@@ -32,12 +33,12 @@ export default function MenuBar({}: MenuBarProps) {
           {
             label: "New File",
             shortcut: "Ctrl+N",
-            onClick: () => {},
+            onClick: () => newFile({}),
           },
           {
             label: "New Window",
             shortcut: "Ctrl+Shift+N",
-            onClick: () => {},
+            onClick: () => newFile({ newWindow: true }),
           },
           {
             label: "Open File",

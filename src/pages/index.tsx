@@ -22,6 +22,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();
+  console.log(mode);
+
   return (
     <ClientOnly>
       <Divider

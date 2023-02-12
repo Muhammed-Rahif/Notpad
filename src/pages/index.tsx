@@ -56,7 +56,13 @@ export default function Home() {
           </Typography>
         ),
         footer: (
-          <Button size="sm" onClick={handleFullscreen.enter}>
+          <Button
+            size="sm"
+            onClick={() => {
+              handleFullscreen.enter();
+              dispatch(closeModal());
+            }}
+          >
             Okay
           </Button>
         ),
@@ -68,7 +74,15 @@ export default function Home() {
     <>
       <AppHead />
 
-      <Modal open={open} onClose={() => dispatch(closeModal())}>
+      <Modal
+        container={
+          typeof document !== "undefined"
+            ? document.querySelector(".fullscreen")
+            : undefined
+        }
+        open={open}
+        onClose={() => dispatch(closeModal())}
+      >
         <ModalDialog>
           <ModalClose />
           <Typography fontSize="lg">{title}</Typography>

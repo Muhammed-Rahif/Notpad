@@ -1,6 +1,5 @@
 import { Avatar, Box, Button, Divider, Sheet, Typography } from "@mui/joy";
 import Image from "next/image";
-import { NextSeo } from "next-seo";
 // import { MdMinimize, MdOutlineClose } from "react-icons/md";
 // import { VscChromeMaximize } from "react-icons/vsc";
 

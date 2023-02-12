@@ -1,5 +1,6 @@
 import { Avatar, Box, Button, Divider, Sheet, Typography } from "@mui/joy";
 import Image from "next/image";
+import { NextSeo } from "next-seo";
 // import { MdMinimize, MdOutlineClose } from "react-icons/md";
 // import { VscChromeMaximize } from "react-icons/vsc";
 
@@ -7,7 +8,7 @@ type TitleBarProps = {
   title?: string;
 };
 
-export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
+export default function TitleBar({ title = "Untitled" }: TitleBarProps) {
   //   const actionBtns = [
   //     {
   //       icon: <MdMinimize />,
@@ -54,6 +55,23 @@ export default function TitleBar({ title = "Untitled.txt" }: TitleBarProps) {
         >
           Notepad
         </Box>
+      </Typography>
+
+      <Typography
+        sx={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          outline: "none",
+          ":focus-visible": {
+            outline:
+              "solid 1px rgba(var(--joy-palette-neutral-mainChannel) / .75)",
+          },
+        }}
+        contentEditable
+        onInput={e => console.log(e.currentTarget.textContent)}
+      >
         {title}
       </Typography>
 

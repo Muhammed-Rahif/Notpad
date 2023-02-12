@@ -1,33 +1,33 @@
-import { Avatar, Box, Button, Divider, Sheet, Typography } from "@mui/joy";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  ListDivider,
+  ListItem,
+  Menu,
+  MenuItem,
+  Sheet,
+  Typography,
+} from "@mui/joy";
 import Image from "next/image";
-// import { MdMinimize, MdOutlineClose } from "react-icons/md";
-// import { VscChromeMaximize } from "react-icons/vsc";
+import { useState } from "react";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { closeModal, openModal } from "@/redux/reducers/modelReducer";
+import DeleteForever from "@mui/icons-material/DeleteForever";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 
 type TitleBarProps = {
   title?: string;
 };
 
 export default function TitleBar({ title = "Untitled" }: TitleBarProps) {
-  //   const actionBtns = [
-  //     {
-  //       icon: <MdMinimize />,
-  //       onClick: () => {
-  //         console.log("minimize");
-  //       },
-  //     },
-  //     {
-  //       icon: <VscChromeMaximize />,
-  //       onClick: () => {
-  //         console.log("maximize");
-  //       },
-  //     },
-  //     {
-  //       icon: <MdOutlineClose />,
-  //       onClick: () => {
-  //         console.log("close");
-  //       },
-  //     },
-  //   ];
+  const [profileOpen, setProfileOpen] = useState<EventTarget | null>(null);
+  const dispatch = useDispatch();
 
   return (
     <Sheet
@@ -75,47 +75,135 @@ export default function TitleBar({ title = "Untitled" }: TitleBarProps) {
       </Typography>
 
       <Box sx={{ marginY: 0.5, marginX: 1 }}>
-        {/* <Avatar
-            sx={{ borderRadius: 8 }}
-            onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+        {true ? (
+          <IconButton
+            color="neutral"
+            sx={{
+              marginInlineStart: "var(--Avatar-marginInlineStart)",
+              boxShadow: "var(--Avatar-ring)",
+            }}
+            onClick={e =>
+              Boolean(profileOpen)
+                ? setProfileOpen(null)
+                : setProfileOpen(e.target)
+            }
           >
             MR
-          </Avatar> */}
-        {/* <Button
-          color="neutral"
-          variant="soft"
-          sx={{
-            ":hover": {
-              bgcolor: "rgba(var(--joy-palette-neutral-mainChannel) / 0.28)",
-            },
-          }}
-          size="sm"
-        >
-          Login
-        </Button> */}
+          </IconButton>
+        ) : (
+          <Button
+            color="neutral"
+            variant="soft"
+            sx={{
+              ":hover": {
+                bgcolor: "rgba(var(--joy-palette-neutral-mainChannel) / 0.28)",
+              },
+            }}
+            size="sm"
+          >
+            Login
+          </Button>
+        )}
       </Box>
 
-      {/* <Box>
-          {actionBtns.map((btn, i) => (
-            <Button
-              key={i}
-              color="neutral"
-              variant="soft"
-              sx={{
-                borderRadius: 0,
-                ":hover": {
-                  bgcolor:
-                    i == actionBtns.length - 1
-                      ? "red"
-                      : "rgba(var(--joy-palette-neutral-mainChannel) / 0.28)",
-                },
-              }}
-              onClick={btn.onClick}
+      <Menu
+        container={
+          typeof document !== "undefined"
+            ? document.querySelector(".fullscreen")
+            : undefined
+        }
+        anchorEl={profileOpen as any}
+        open={Boolean(profileOpen)}
+        onClose={() => setProfileOpen(null)}
+        aria-labelledby="profile"
+        placement="bottom-end"
+        sx={{ p: 2, minWidth: "16rem" }}
+      >
+        <Typography fontWeight="600" fontSize="xl">
+          John Due
+        </Typography>
+        <Typography fontSize="sm" fontStyle="italic">
+          johndue@email.com
+        </Typography>
+
+        <Divider sx={{ my: 2 }} />
+
+        <Typography sx={{ mb: 0.75 }} fontSize="sm">
+          Notepads:-
+        </Typography>
+        <Sheet
+          variant="outlined"
+          sx={{
+            borderRadius: 8,
+            p: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          My Works
+          <Box>
+            <IconButton sx={{ mx: 0.4 }} size="sm" variant="plain">
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              sx={{ mx: 0.4 }}
+              color="danger"
+              size="sm"
+              variant="plain"
             >
-              {btn.icon}
-            </Button>
-          ))}
-        </Box> */}
+              <DeleteIcon />
+            </IconButton>
+          </Box>
+        </Sheet>
+
+        <Divider sx={{ my: 2 }} />
+
+        <Button
+          onClick={() => {
+            dispatch(
+              openModal({
+                title: "Confirmation",
+                content: (
+                  <Typography textColor="text.tertiary">
+                    Are you sure you want to logout?
+                  </Typography>
+                ),
+                open: true,
+                footer: (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: 1,
+                      justifyContent: "flex-end",
+                      pt: 2,
+                    }}
+                  >
+                    <Button
+                      onClick={() => dispatch(closeModal())}
+                      variant="plain"
+                      color="neutral"
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={() => dispatch(closeModal())}
+                      variant="solid"
+                      color="danger"
+                    >
+                      Logout
+                    </Button>
+                  </Box>
+                ),
+              })
+            );
+          }}
+          color="danger"
+          size="sm"
+        >
+          Logout
+        </Button>
+      </Menu>
     </Sheet>
   );
 }

@@ -1,4 +1,5 @@
 import { Button, ListItemButton, Menu } from "@mui/joy";
+import { SxProps } from "@mui/joy/styles/types";
 import React, {
   ReactElement,
   ReactNode,
@@ -14,6 +15,7 @@ type MenuButtonProps = {
   onHoverOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
+  sx?: SxProps;
 };
 
 export default function MenuButton({
@@ -23,6 +25,7 @@ export default function MenuButton({
   onClose,
   onHoverOpen,
   open,
+  sx,
 }: MenuButtonProps) {
   const btnRef = useRef();
 
@@ -36,8 +39,9 @@ export default function MenuButton({
           alignItems: "center",
           justifyContent: "center",
           borderRadius: 4,
-          margin: 0.01,
+          m: 0.01,
           minWidth: "3.5rem",
+          ...sx,
         }}
         variant={open ? "soft" : "plain"}
         onClick={onOpen}

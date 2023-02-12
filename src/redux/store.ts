@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import modelReducer from "./reducers/modelReducer";
+import modelReducer from "./reducers/modal";
+import notepadReducer from "./reducers/notepad";
 
 export const store = configureStore({
   reducer: {
     modal: modelReducer,
+    notepad: notepadReducer,
   },
 });
 

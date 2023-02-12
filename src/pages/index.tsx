@@ -3,7 +3,7 @@ import FooterBar from "@/components/FooterBar/FooterBar";
 import AppHead from "@/components/Head/Head";
 import MenuBar from "@/components/MenuBar/MenuBar";
 import TitleBar from "@/components/TitleBar/TitleBar";
-import { closeModal, openModal } from "@/redux/reducers/modelReducer";
+import { closeModal, openModal } from "@/redux/reducers/modal";
 import { RootState } from "@/redux/store";
 import { useEffect, cloneElement } from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
@@ -19,6 +19,7 @@ import {
   useColorScheme,
 } from "@mui/joy";
 import { useDispatch, useSelector } from "react-redux";
+import { setNotepad, updateNotepad } from "@/redux/reducers/notepad";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();
@@ -37,8 +38,14 @@ const CustomDivider = () => {
 
 export default function Home() {
   const handleFullscreen = useFullScreenHandle();
-  const { open, content, title, footer } = useSelector(
-    (store: RootState) => store.modal
+  const {
+    open,
+    content: alertContent,
+    title,
+    footer,
+  } = useSelector((store: RootState) => store.modal);
+  const { content: notepadContent, name } = useSelector(
+    (store: RootState) => store.notepad
   );
   const dispatch = useDispatch();
 
@@ -99,7 +106,7 @@ export default function Home() {
               py: 2,
             }}
           >
-            {content}
+            {alertContent}
           </Box>
           <Box
             sx={{
@@ -155,6 +162,30 @@ export default function Home() {
               resize: "none",
               paddingY: 0,
             }}
+            value={notepadContent}
+            defaultValue={notepadContent}
+            onChange={e => {
+              dispatch(updateNotepad({ content: e.target.value }));
+            }}
+          />
+          <input
+            type="file"
+            onChange={e => {
+              if (!e.target.files) return;
+
+              const file = e.target.files[0];
+              const reader = new FileReader();
+              reader.onload = e => {
+                if (!e.target) return;
+                const text = e.target.result;
+                dispatch(setNotepad({ content: text as string }));
+              };
+              reader.readAsText(file);
+            }}
+            name="open-file"
+            id="open-file"
+            hidden
+            accept=".txt,.js,.html,.ts,.json,.md,.css,.scss,.sass,.less,.yml,.yaml,.xml,.jsx,.tsx,.mdx,.mdxjs,.mdown,.markdown,.markdn,.mkdn,.mkd,.mdwn,.mdtxt,.mdtext,.text,.rmd,.org,.rst,.adoc,.asciidoc,.ad,.asc,.creole,.mediawiki,.wiki,.rest,.pod,.pandoc,.ipynb,.tex,.latex,.ltx,.bib,.cls,.sty,.dtx,.ins,.lco,.dtx,.cfg,.ini,.conf,.properties,.prop,.toml,.tmlanguage"
           />
           <CustomDivider />
           <FooterBar />

@@ -23,10 +23,8 @@ export const modalSlice = createSlice({
       state.content = action.payload.content;
       state.footer = action.payload.footer;
     },
-    closeModal: state => {
-      state.open = false;
-      state.title = undefined;
-      state.content = undefined;
+    closeModal: (state: any) => {
+      Object.keys(state).forEach(key => (state[key] = undefined));
     },
   },
 });

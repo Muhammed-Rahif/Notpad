@@ -17,7 +17,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { closeModal, openModal } from "@/redux/reducers/modelReducer";
+import { closeModal, openModal } from "@/redux/reducers/modal";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 

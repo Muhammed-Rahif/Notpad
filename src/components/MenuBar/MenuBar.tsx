@@ -1,8 +1,11 @@
 import { newFile } from "@/helpers/file";
+import { closeModal, openModal } from "@/redux/reducers/modal";
 import {
   Avatar,
   Box,
+  Button,
   Divider,
+  Input,
   List,
   ListDivider,
   ListItem,
@@ -17,6 +20,7 @@ import {
 } from "@mui/joy";
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 import MenuButton from "./MenuButton/MenuButton";
 
 type MenuBarProps = {};
@@ -24,6 +28,7 @@ type MenuBarProps = {};
 export default function MenuBar({}: MenuBarProps) {
   const [activeMenuIndx, setActiveMenuIndx] = useState<number | null>(null);
   const { mode, setMode } = useColorScheme();
+  const dispatch = useDispatch();
 
   const menuItems = useMemo(
     () => [
@@ -43,11 +48,24 @@ export default function MenuBar({}: MenuBarProps) {
           {
             label: "Open File",
             shortcut: "Ctrl+O",
+            onClick: () => {
+              document.getElementById("open-file")?.click();
+            },
+          },
+          null,
+          {
+            label: "Save",
+            shortcut: "Ctrl+S",
             onClick: () => {},
           },
           {
-            label: "Save File",
-            shortcut: "Ctrl+S",
+            label: "Auto Save",
+            shortcut: null,
+            onClick: () => {},
+          },
+          {
+            label: "Save in Browser",
+            shortcut: null,
             onClick: () => {},
           },
           null,

@@ -63,11 +63,6 @@ export default function MenuBar({}: MenuBarProps) {
             shortcut: null,
             onClick: () => {},
           },
-          {
-            label: "Save in Browser",
-            shortcut: null,
-            onClick: () => {},
-          },
           null,
           {
             label: "Exit",

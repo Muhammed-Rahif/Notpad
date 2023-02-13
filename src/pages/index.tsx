@@ -19,11 +19,15 @@ import {
   useColorScheme,
 } from "@mui/joy";
 import { useDispatch, useSelector } from "react-redux";
-import { setNotepad, updateNotepad } from "@/redux/reducers/notepad";
+import {
+  NotepadState,
+  setNotepad,
+  updateNotepad,
+} from "@/redux/reducers/notepad";
+import useLocalStorage from "use-local-storage";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();
-  console.log(mode);
 
   return (
     <ClientOnly>
@@ -37,6 +41,9 @@ const CustomDivider = () => {
 };
 
 export default function Home() {
+  const [notepadLocalStorage, setNotepadLocalStorage] = useLocalStorage<
+    NotepadState | undefined
+  >("notepad-state", undefined);
   const handleFullscreen = useFullScreenHandle();
   const {
     open,
@@ -44,12 +51,28 @@ export default function Home() {
     title,
     footer,
   } = useSelector((store: RootState) => store.modal);
-  const { content: notepadContent, name } = useSelector(
-    (store: RootState) => store.notepad
-  );
+  const {
+    content: notepadContent,
+    name: notepadName,
+    id: notepadId,
+  } = useSelector((store: RootState) => store.notepad);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!notepadContent) return;
+    if (!notepadName) return;
+    if (!notepadId) return;
+    setNotepadLocalStorage({
+      content: notepadContent,
+      name: notepadName,
+      id: notepadId,
+    });
+  }, [notepadContent, notepadName, notepadId, setNotepadLocalStorage]);
+
+  //  ==== after render useEffect ====
+  useEffect(() => {
+    if (notepadLocalStorage) dispatch(setNotepad(notepadLocalStorage));
+
     dispatch(
       openModal({
         open: true,
@@ -161,9 +184,10 @@ export default function Home() {
               "--Textarea-focusedHighlight": "rgba(0,0,0,0)",
               resize: "none",
               paddingY: 0,
+              fontFamily: "monospace !important",
             }}
             value={notepadContent}
-            defaultValue={notepadContent}
+            defaultValue={notepadLocalStorage?.content}
             onChange={e => {
               dispatch(updateNotepad({ content: e.target.value }));
             }}
@@ -178,7 +202,9 @@ export default function Home() {
               reader.onload = e => {
                 if (!e.target) return;
                 const text = e.target.result;
-                dispatch(setNotepad({ content: text as string }));
+                dispatch(
+                  updateNotepad({ content: text as string, name: file.name })
+                );
               };
               reader.readAsText(file);
             }}

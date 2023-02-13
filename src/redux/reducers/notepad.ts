@@ -1,26 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { ReactNode } from "react";
+import uuid from "short-uuid";
 
 export interface NotepadState {
-  name?: string;
-  content?: string;
-  id?: string;
+  name: string;
+  content: string;
+  id: string;
 }
 
-const initialState: NotepadState = {};
+const initialState: Partial<NotepadState> = {};
 
 export const notepadSlice = createSlice({
   name: "notepad",
   initialState,
   reducers: {
     setNotepad: (state, action: PayloadAction<NotepadState>) => {
-      state.content = action.payload.content;
-      state.name = action.payload.name;
-      state.id = action.payload.id;
+      return { ...action.payload };
     },
-    updateNotepad: (state, action: PayloadAction<NotepadState>) => {
-      state = { ...state, ...action.payload };
+    updateNotepad: (state, action: PayloadAction<Partial<NotepadState>>) => {
+      return { ...state, ...action.payload, id: state.id || uuid.generate() };
     },
   },
 });

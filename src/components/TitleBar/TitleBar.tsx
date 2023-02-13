@@ -4,6 +4,7 @@ import {
   Button,
   Divider,
   IconButton,
+  Input,
   ListDivider,
   ListItem,
   Menu,
@@ -12,7 +13,7 @@ import {
   Typography,
 } from "@mui/joy";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +21,7 @@ import { RootState } from "@/redux/store";
 import { closeModal, openModal } from "@/redux/reducers/modal";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+import { updateNotepad } from "@/redux/reducers/notepad";
 
 type TitleBarProps = {
   title?: string;
@@ -28,6 +30,15 @@ type TitleBarProps = {
 export default function TitleBar({ title = "Untitled" }: TitleBarProps) {
   const [profileOpen, setProfileOpen] = useState<EventTarget | null>(null);
   const dispatch = useDispatch();
+  const {
+    content: notepadContent,
+    name: notepadName,
+    id: notepadId,
+  } = useSelector((store: RootState) => store.notepad);
+
+  useEffect(() => {
+    if (!notepadName) dispatch(updateNotepad({ name: title }));
+  }, []);
 
   return (
     <Sheet
@@ -56,7 +67,9 @@ export default function TitleBar({ title = "Untitled" }: TitleBarProps) {
         </Box>
       </Typography>
 
-      <Typography
+      <Input
+        variant="plain"
+        color="neutral"
         sx={{
           position: "absolute",
           left: "50%",
@@ -67,12 +80,28 @@ export default function TitleBar({ title = "Untitled" }: TitleBarProps) {
             outline:
               "solid 1px rgba(var(--joy-palette-neutral-mainChannel) / .75)",
           },
+          textAlign: "center",
+          maxWidth: "8rem",
         }}
-        contentEditable
-        onInput={e => console.log(e.currentTarget.textContent)}
-      >
-        {title}
-      </Typography>
+        slotProps={{
+          input: {
+            style: {
+              textAlign: "center",
+            },
+          },
+        }}
+        size="sm"
+        value={notepadName}
+        required
+        onChange={e => {
+          if (!e.target.value) return;
+          dispatch(
+            updateNotepad({
+              name: e.target.value,
+            })
+          );
+        }}
+      />
 
       <Box sx={{ marginY: 0.5, marginX: 1 }}>
         {true ? (

@@ -1,5 +1,6 @@
-import { newFile } from "@/helpers/file";
+import { downloadFile, newFile } from "@/helpers/file";
 import { closeModal, openModal } from "@/redux/reducers/modal";
+import { RootState, store } from "@/redux/store";
 import {
   Avatar,
   Box,
@@ -20,7 +21,8 @@ import {
 } from "@mui/joy";
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ActionCreators } from "redux-undo";
 import MenuButton from "./MenuButton/MenuButton";
 
 type MenuBarProps = {};
@@ -29,6 +31,9 @@ export default function MenuBar({}: MenuBarProps) {
   const [activeMenuIndx, setActiveMenuIndx] = useState<number | null>(null);
   const { mode, setMode } = useColorScheme();
   const dispatch = useDispatch();
+  const {
+    present: { content: notepadContent, name: notepadName },
+  } = useSelector((store: RootState) => store.notepad);
 
   const menuItems = useMemo(
     () => [
@@ -63,11 +68,24 @@ export default function MenuBar({}: MenuBarProps) {
             shortcut: null,
             onClick: () => {},
           },
+          {
+            label: "Download",
+            shortcut: null,
+            onClick: () => {
+              if (!notepadContent) return;
+
+              downloadFile(
+                notepadContent,
+                notepadName || "Untitled.txt",
+                "text/plain"
+              );
+            },
+          },
           null,
           {
             label: "Exit",
             shortcut: null,
-            onClick: () => {},
+            onClick: () => window.close(),
           },
         ],
       },
@@ -77,12 +95,16 @@ export default function MenuBar({}: MenuBarProps) {
           {
             label: "Undo",
             shortcut: "Ctrl+Z",
-            onClick: () => {},
+            onClick: () => {
+              dispatch(ActionCreators.undo());
+            },
           },
           {
             label: "Redo",
             shortcut: "Ctrl+Y",
-            onClick: () => {},
+            onClick: () => {
+              dispatch(ActionCreators.redo());
+            },
           },
           null,
           {
@@ -198,7 +220,7 @@ export default function MenuBar({}: MenuBarProps) {
         ],
       },
     ],
-    [mode, setMode]
+    [mode, notepadContent, notepadName, setMode]
   );
 
   return (

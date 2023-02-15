@@ -25,6 +25,7 @@ import {
   updateNotepad,
 } from "@/redux/reducers/notepad";
 import useLocalStorage from "use-local-storage";
+import CustomTextarea from "@/components/CustomTextarea/CustomTextarea";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();
@@ -52,27 +53,12 @@ export default function Home() {
     footer,
   } = useSelector((store: RootState) => store.modal);
   const {
-    content: notepadContent,
-    name: notepadName,
-    id: notepadId,
+    present: { content: notepadContent, name: notepadName, id: notepadId },
   } = useSelector((store: RootState) => store.notepad);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!notepadContent) return;
-    if (!notepadName) return;
-    if (!notepadId) return;
-    setNotepadLocalStorage({
-      content: notepadContent,
-      name: notepadName,
-      id: notepadId,
-    });
-  }, [notepadContent, notepadName, notepadId, setNotepadLocalStorage]);
-
   //  ==== after render useEffect ====
   useEffect(() => {
-    if (notepadLocalStorage) dispatch(setNotepad(notepadLocalStorage));
-
     dispatch(
       openModal({
         open: true,
@@ -169,29 +155,7 @@ export default function Home() {
             <MenuBar />
             <CustomDivider />
           </Box>
-          <Textarea
-            size="lg"
-            variant="soft"
-            color="neutral"
-            maxRows={10}
-            sx={{
-              flexGrow: 1,
-              pl: 1,
-              borderRadius: 0,
-              maxHeight: "calc(100vh - 7rem)",
-              shadow: "none",
-              border: "0px solid transparent",
-              "--Textarea-focusedHighlight": "rgba(0,0,0,0)",
-              resize: "none",
-              paddingY: 0,
-              fontFamily: "monospace !important",
-            }}
-            value={notepadContent}
-            defaultValue={notepadLocalStorage?.content}
-            onChange={e => {
-              dispatch(updateNotepad({ content: e.target.value }));
-            }}
-          />
+          <CustomTextarea />
           <input
             type="file"
             onChange={e => {

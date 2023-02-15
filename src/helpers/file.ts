@@ -12,3 +12,17 @@ export function newFile({
       )
     : window.open("/", "_blank");
 }
+
+export function downloadFile(data: string, filename: string, type: string) {
+  const file = new Blob([data], { type: type });
+  const anchorElem = document.createElement("a"),
+    url = URL.createObjectURL(file);
+  anchorElem.href = url;
+  anchorElem.download = filename;
+  document.body.appendChild(anchorElem);
+  anchorElem.click();
+  setTimeout(function () {
+    document.body.removeChild(anchorElem);
+    window.URL.revokeObjectURL(url);
+  }, 0);
+}

@@ -31,9 +31,7 @@ export default function TitleBar({ title = "Untitled" }: TitleBarProps) {
   const [profileOpen, setProfileOpen] = useState<EventTarget | null>(null);
   const dispatch = useDispatch();
   const {
-    content: notepadContent,
-    name: notepadName,
-    id: notepadId,
+    present: { content: notepadContent, name: notepadName, id: notepadId },
   } = useSelector((store: RootState) => store.notepad);
 
   useEffect(() => {

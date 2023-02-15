@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modelReducer from "./reducers/modal";
 import notepadReducer from "./reducers/notepad";
+import undoable, { ActionTypes } from "redux-undo";
 
 export const store = configureStore({
   reducer: {
     modal: modelReducer,
-    notepad: notepadReducer,
+    notepad: undoable(notepadReducer),
   },
 });
 

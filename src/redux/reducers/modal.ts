@@ -25,6 +25,7 @@ export const modalSlice = createSlice({
     },
     closeModal: (state: any) => {
       Object.keys(state).forEach(key => (state[key] = undefined));
+      state.open = false;
     },
   },
 });

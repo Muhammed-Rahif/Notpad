@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { ReactNode } from "react";
 import uuid from "short-uuid";
 
 export interface NotepadState {
@@ -9,7 +8,11 @@ export interface NotepadState {
   id: string;
 }
 
-const initialState: Partial<NotepadState> = {};
+const initialState: Partial<NotepadState> = {
+  name: "Untitled",
+  content: "",
+  id: uuid.generate(),
+};
 
 export const notepadSlice = createSlice({
   name: "notepad",

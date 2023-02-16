@@ -65,32 +65,30 @@ export default function CustomTextarea() {
   }, []);
 
   return (
-    <>
-      <Textarea
-        size="lg"
-        variant="soft"
-        color="neutral"
-        maxRows={10}
-        sx={{
-          flexGrow: 1,
-          pl: 1,
-          borderRadius: 0,
-          maxHeight: "calc(100vh - 7rem)",
-          shadow: "none",
-          border: "0px solid transparent",
-          "--Textarea-focusedHighlight": "rgba(0,0,0,0)",
-          resize: "none",
-          paddingY: 0,
-          fontFamily: "monospace !important",
-        }}
-        value={notepadContent}
-        defaultValue={notepadLocalStorage?.content}
-        onChange={e => {
-          dispatch(updateNotepad({ content: e.target.value }));
-        }}
-      >
-        <Box sx={{ height: "100px" }} />
-      </Textarea>
-    </>
+    <Textarea
+      size="lg"
+      variant="soft"
+      color="neutral"
+      maxRows={10}
+      minRows={10}
+      sx={{
+        flexGrow: 1,
+        pl: 1,
+        borderRadius: 0,
+        maxHeight: "calc(100vh - 7rem)",
+        shadow: "none",
+        border: "0px solid transparent",
+        "--Textarea-focusedHighlight": "rgba(0,0,0,0)",
+        resize: "none",
+        paddingY: 0,
+        fontFamily: "monospace !important",
+      }}
+      value={notepadContent}
+      onChange={e => {
+        dispatch(updateNotepad({ content: e.target.value }));
+      }}
+    >
+      <Box sx={{ height: "100px" }} />
+    </Textarea>
   );
 }

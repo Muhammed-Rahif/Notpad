@@ -22,8 +22,10 @@ import {
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ActionCreators } from "redux-undo";
 import MenuButton from "./MenuButton/MenuButton";
+import { slateToHtml } from "slate-serializers";
+import { useSlate } from "slate-react";
+import { HistoryEditor } from "slate-history";
 
 type MenuBarProps = {};
 
@@ -31,9 +33,10 @@ export default function MenuBar({}: MenuBarProps) {
   const [activeMenuIndx, setActiveMenuIndx] = useState<number | null>(null);
   const { mode, setMode } = useColorScheme();
   const dispatch = useDispatch();
-  const {
-    present: { content: notepadContent, name: notepadName },
-  } = useSelector((store: RootState) => store.notepad);
+  const { content: notepadContent, name: notepadName } = useSelector(
+    (store: RootState) => store.notepad
+  );
+  const editor = useSlate();
 
   const menuItems = useMemo(
     () => [
@@ -75,7 +78,10 @@ export default function MenuBar({}: MenuBarProps) {
               if (!notepadContent) return;
 
               downloadFile(
-                notepadContent,
+                slateToHtml(notepadContent)
+                  .replaceAll("</p><p>", "\n")
+                  .replace(/<\/?[^>]+(>|$)/g, "")
+                  .replace(/&quot;/g, '"'),
                 notepadName || "Untitled.txt",
                 "text/plain"
               );
@@ -96,14 +102,14 @@ export default function MenuBar({}: MenuBarProps) {
             label: "Undo",
             shortcut: "Ctrl+Z",
             onClick: () => {
-              dispatch(ActionCreators.undo());
+              (editor as HistoryEditor).undo();
             },
           },
           {
             label: "Redo",
             shortcut: "Ctrl+Y",
             onClick: () => {
-              dispatch(ActionCreators.redo());
+              (editor as HistoryEditor).redo();
             },
           },
           null,
@@ -220,7 +226,7 @@ export default function MenuBar({}: MenuBarProps) {
         ],
       },
     ],
-    [mode, notepadContent, notepadName, setMode]
+    [dispatch, mode, notepadContent, notepadName, setMode]
   );
 
   return (

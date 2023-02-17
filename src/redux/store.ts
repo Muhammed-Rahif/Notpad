@@ -1,12 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modelReducer from "./reducers/modal";
 import notepadReducer, { NotepadState } from "./reducers/notepad";
-import undoable, { ActionTypes } from "redux-undo";
 
 export const store = configureStore({
   reducer: {
     modal: modelReducer,
-    notepad: undoable<Partial<NotepadState>>(notepadReducer),
+    notepad: notepadReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

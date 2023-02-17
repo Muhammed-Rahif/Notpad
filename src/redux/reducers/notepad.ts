@@ -1,16 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import uuid from "short-uuid";
+import { Descendant } from "slate";
 
 export interface NotepadState {
   name: string;
-  content: string;
+  content: Descendant[];
   id: string;
 }
 
-const initialState: Partial<NotepadState> = {
+const initialState: NotepadState = {
   name: "Untitled",
-  content: "",
+  content: [
+    {
+      type: "paragraph",
+      children: [{ text: "" }],
+    } as Descendant,
+  ],
   id: uuid.generate(),
 };
 

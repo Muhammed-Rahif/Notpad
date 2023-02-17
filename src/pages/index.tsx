@@ -5,7 +5,7 @@ import MenuBar from "@/components/MenuBar/MenuBar";
 import TitleBar from "@/components/TitleBar/TitleBar";
 import { closeModal, openModal } from "@/redux/reducers/modal";
 import { RootState } from "@/redux/store";
-import { useEffect, cloneElement } from "react";
+import { useEffect, cloneElement, useMemo } from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import {
   Box,
@@ -26,6 +26,10 @@ import {
 } from "@/redux/reducers/notepad";
 import useLocalStorage from "use-local-storage";
 import CustomTextarea from "@/components/CustomTextarea/CustomTextarea";
+import { createEditor, Descendant, Transforms } from "slate";
+import { Slate, Editable, withReact } from "slate-react";
+import { withHistory } from "slate-history";
+import { htmlToSlate } from "slate-serializers";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();
@@ -42,9 +46,7 @@ const CustomDivider = () => {
 };
 
 export default function Home() {
-  const [notepadLocalStorage, setNotepadLocalStorage] = useLocalStorage<
-    NotepadState | undefined
-  >("notepad-state", undefined);
+  const editor = useMemo(() => withReact(withHistory(createEditor())), []);
   const handleFullscreen = useFullScreenHandle();
   const {
     open,
@@ -53,7 +55,9 @@ export default function Home() {
     footer,
   } = useSelector((store: RootState) => store.modal);
   const {
-    present: { content: notepadContent, name: notepadName, id: notepadId },
+    content: notepadContent,
+    name: notepadName,
+    id: notepadId,
   } = useSelector((store: RootState) => store.notepad);
   const dispatch = useDispatch();
 
@@ -88,99 +92,89 @@ export default function Home() {
     );
   }, []);
 
+  console.log({ notepadContent });
+
   return (
     <>
       <AppHead />
 
-      <Modal
-        container={
-          typeof document !== "undefined"
-            ? document.querySelector(".fullscreen")
-            : undefined
-        }
-        open={open}
-        onClose={() => dispatch(closeModal())}
+      <Slate
+        editor={editor}
+        value={notepadContent}
+        onChange={value => {
+          dispatch(updateNotepad({ content: value }));
+        }}
       >
-        <ModalDialog>
-          <ModalClose />
-          <Typography fontSize="lg">{title}</Typography>
-          <Divider
-            sx={{
-              mt: 2,
-            }}
-            inset="none"
-          />
-          <Box
-            sx={{
-              py: 2,
-            }}
-          >
-            {alertContent}
-          </Box>
-          <Box
-            sx={{
-              bgcolor: "background.level1",
-              px: 2,
-              py: 1.5,
-              m: "calc(-1 * var(--ModalDialog-padding))",
-              mt: 0,
-              borderBottomLeftRadius: "var(--ModalDialog-radius)",
-              borderBottomRightRadius: "var(--ModalDialog-radius)",
-              textAlign: "right",
-            }}
-          >
-            {footer}
-          </Box>
-        </ModalDialog>
-      </Modal>
-
-      <FullScreen handle={handleFullscreen}>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "stretch",
-            flexDirection: "column",
-            height: "100vh",
-          }}
+        <Modal
+          container={
+            typeof document !== "undefined"
+              ? document.querySelector(".fullscreen")
+              : undefined
+          }
+          open={open}
+          onClose={() => dispatch(closeModal())}
         >
+          <ModalDialog>
+            <ModalClose />
+            <Typography fontSize="lg">{title}</Typography>
+            <Divider
+              sx={{
+                mt: 2,
+              }}
+              inset="none"
+            />
+            <Box
+              sx={{
+                py: 2,
+              }}
+            >
+              {alertContent}
+            </Box>
+            <Box
+              sx={{
+                bgcolor: "background.level1",
+                px: 2,
+                py: 1.5,
+                m: "calc(-1 * var(--ModalDialog-padding))",
+                mt: 0,
+                borderBottomLeftRadius: "var(--ModalDialog-radius)",
+                borderBottomRightRadius: "var(--ModalDialog-radius)",
+                textAlign: "right",
+              }}
+            >
+              {footer}
+            </Box>
+          </ModalDialog>
+        </Modal>
+
+        <FullScreen handle={handleFullscreen}>
           <Box
             sx={{
-              position: "sticky",
-              top: 0,
-              left: 0,
+              display: "flex",
+              alignItems: "stretch",
+              flexDirection: "column",
+              height: "100vh",
             }}
           >
-            <TitleBar />
-            <CustomDivider />
-            <MenuBar />
-            <CustomDivider />
-          </Box>
-          <CustomTextarea />
-          <input
-            type="file"
-            onChange={e => {
-              if (!e.target.files) return;
+            <Box
+              sx={{
+                position: "sticky",
+                top: 0,
+                left: 0,
+              }}
+            >
+              <TitleBar />
+              <CustomDivider />
+              <MenuBar />
+              <CustomDivider />
+            </Box>
+            <CustomTextarea />
 
-              const file = e.target.files[0];
-              const reader = new FileReader();
-              reader.onload = e => {
-                if (!e.target) return;
-                const text = e.target.result;
-                dispatch(
-                  updateNotepad({ content: text as string, name: file.name })
-                );
-              };
-              reader.readAsText(file);
-            }}
-            name="open-file"
-            id="open-file"
-            hidden
-            accept=".txt,.js,.html,.ts,.json,.md,.css,.scss,.sass,.less,.yml,.yaml,.xml,.jsx,.tsx,.mdx,.mdxjs,.mdown,.markdown,.markdn,.mkdn,.mkd,.mdwn,.mdtxt,.mdtext,.text,.rmd,.org,.rst,.adoc,.asciidoc,.ad,.asc,.creole,.mediawiki,.wiki,.rest,.pod,.pandoc,.ipynb,.tex,.latex,.ltx,.bib,.cls,.sty,.dtx,.ins,.lco,.dtx,.cfg,.ini,.conf,.properties,.prop,.toml,.tmlanguage"
-          />
-          <CustomDivider />
-          <FooterBar />
-        </Box>
-      </FullScreen>
+            <CustomDivider />
+            <FooterBar />
+          </Box>
+        </FullScreen>
+      </Slate>
     </>
   );
 }

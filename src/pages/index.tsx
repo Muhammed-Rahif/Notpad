@@ -92,8 +92,6 @@ export default function Home() {
     );
   }, []);
 
-  console.log({ notepadContent });
-
   return (
     <>
       <AppHead />

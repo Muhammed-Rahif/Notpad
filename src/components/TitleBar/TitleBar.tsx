@@ -1,27 +1,22 @@
+/* eslint-disable no-constant-condition */
+import { closeModal, openModal } from "@/redux/reducers/modal";
+import { updateNotepad } from "@/redux/reducers/notepad";
+import { RootState } from "@/redux/store";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import {
-  Avatar,
   Box,
   Button,
   Divider,
   IconButton,
   Input,
-  ListDivider,
-  ListItem,
   Menu,
-  MenuItem,
   Sheet,
   Typography,
 } from "@mui/joy";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import { closeModal, openModal } from "@/redux/reducers/modal";
-import DeleteForever from "@mui/icons-material/DeleteForever";
-import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
-import { updateNotepad } from "@/redux/reducers/notepad";
 
 type TitleBarProps = {
   title?: string;
@@ -112,9 +107,7 @@ export default function TitleBar({ title = "Untitled" }: TitleBarProps) {
               boxShadow: "var(--Avatar-ring)",
             }}
             onClick={e =>
-              Boolean(profileOpen)
-                ? setProfileOpen(null)
-                : setProfileOpen(e.target)
+              profileOpen ? setProfileOpen(null) : setProfileOpen(e.target)
             }
           >
             MR

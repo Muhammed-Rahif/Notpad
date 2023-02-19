@@ -1,35 +1,25 @@
 import { downloadFile, newFile } from "@/helpers/file";
-import { closeModal, openModal } from "@/redux/reducers/modal";
-import { RootState, store } from "@/redux/store";
+import { RootState } from "@/redux/store";
 import {
-  Avatar,
-  Box,
-  Button,
-  Divider,
-  Input,
   List,
   ListDivider,
   ListItem,
-  ListItemButton,
-  ListItemContent,
-  ListItemDecorator,
   Menu,
   MenuItem,
   Sheet,
   Typography,
   useColorScheme,
 } from "@mui/joy";
-import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MenuButton from "./MenuButton/MenuButton";
-import { slateToHtml } from "slate-serializers";
-import { useSlate } from "slate-react";
 import { HistoryEditor } from "slate-history";
+import { useSlate } from "slate-react";
+import { slateToHtml } from "slate-serializers";
+import MenuButton from "./MenuButton/MenuButton";
 
 type MenuBarProps = {};
 
-export default function MenuBar({}: MenuBarProps) {
+export default function MenuBar() {
   const [activeMenuIndx, setActiveMenuIndx] = useState<number | null>(null);
   const { mode, setMode } = useColorScheme();
   const dispatch = useDispatch();

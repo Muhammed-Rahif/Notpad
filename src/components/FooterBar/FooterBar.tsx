@@ -1,11 +1,4 @@
-import {
-  Divider,
-  List,
-  Sheet,
-  Textarea,
-  Typography,
-  useColorScheme,
-} from "@mui/joy";
+import { Sheet, Typography } from "@mui/joy";
 
 export default function FooterBar() {
   return (

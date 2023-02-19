@@ -1,12 +1,6 @@
-import { Button, ListItemButton, Menu } from "@mui/joy";
+import { ListItemButton } from "@mui/joy";
 import { SxProps } from "@mui/joy/styles/types";
-import React, {
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ReactElement, ReactNode, useRef } from "react";
 
 type MenuButtonProps = {
   menu: ReactElement;

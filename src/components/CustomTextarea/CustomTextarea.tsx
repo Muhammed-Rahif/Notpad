@@ -1,34 +1,14 @@
+import { NotepadState, setNotepad } from "@/redux/reducers/notepad";
 import { RootState } from "@/redux/store";
-import { useEffect, cloneElement, useCallback } from "react";
-import { Box, Textarea } from "@mui/joy";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  NotepadState,
-  setNotepad,
-  updateNotepad,
-} from "@/redux/reducers/notepad";
-import useLocalStorage from "use-local-storage";
-import {
-  createEditor,
-  Descendant,
-  Editor,
-  Node,
-  NodeEntry,
-  Text,
-  Transforms,
-} from "slate";
-import {
-  Slate,
-  Editable,
-  withReact,
-  useSlate,
-  useFocused,
-  RenderLeafProps,
-} from "slate-react";
-import React, { useMemo } from "react";
 import { css } from "@emotion/css";
-import Prism, { Token } from "prismjs";
+import { Box } from "@mui/joy";
+import Prism from "prismjs";
 import "prismjs/components/prism-markdown";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Editor, Node, NodeEntry, Text, Transforms } from "slate";
+import { Editable, RenderLeafProps, useSlate } from "slate-react";
+import useLocalStorage from "use-local-storage";
 
 export default function CustomTextarea() {
   const [notepadLocalStorage, setNotepadLocalStorage] = useLocalStorage<
@@ -162,7 +142,7 @@ const Leaf = ({
           display: inline-block;
           font-weight: bold;
           font-size: 20px;
-          margin: 20px 0 10px 0;
+          margin: 6px 0 3px 0;
         `}
         ${leaf.list &&
         css`

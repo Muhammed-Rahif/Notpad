@@ -1,12 +1,13 @@
 import ClientOnly from "@/components/ClientOnly/ClientOnly";
+import CustomTextarea from "@/components/CustomTextarea/CustomTextarea";
 import FooterBar from "@/components/FooterBar/FooterBar";
 import AppHead from "@/components/Head/Head";
 import MenuBar from "@/components/MenuBar/MenuBar";
+import OpenInputFile from "@/components/OpenInputFile/OpenInputFile";
 import TitleBar from "@/components/TitleBar/TitleBar";
 import { closeModal, openModal } from "@/redux/reducers/modal";
+import { updateNotepad } from "@/redux/reducers/notepad";
 import { RootState } from "@/redux/store";
-import { useEffect, cloneElement, useMemo } from "react";
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import {
   Box,
   Button,
@@ -14,23 +15,15 @@ import {
   Modal,
   ModalClose,
   ModalDialog,
-  Textarea,
   Typography,
   useColorScheme,
 } from "@mui/joy";
+import { useEffect, useMemo } from "react";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  NotepadState,
-  setNotepad,
-  updateNotepad,
-} from "@/redux/reducers/notepad";
-import useLocalStorage from "use-local-storage";
-import CustomTextarea from "@/components/CustomTextarea/CustomTextarea";
-import { createEditor, Descendant, Transforms } from "slate";
-import { Slate, Editable, withReact } from "slate-react";
+import { createEditor } from "slate";
 import { withHistory } from "slate-history";
-import { htmlToSlate } from "slate-serializers";
-import OpenInputFile from "@/components/OpenInputFile/OpenInputFile";
+import { Slate, withReact } from "slate-react";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();

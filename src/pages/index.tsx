@@ -30,6 +30,7 @@ import { createEditor, Descendant, Transforms } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { htmlToSlate } from "slate-serializers";
+import OpenInputFile from "@/components/OpenInputFile/OpenInputFile";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();
@@ -167,7 +168,7 @@ export default function Home() {
               <CustomDivider />
             </Box>
             <CustomTextarea />
-
+            <OpenInputFile />
             <CustomDivider />
             <FooterBar />
           </Box>

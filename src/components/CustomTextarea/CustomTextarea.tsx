@@ -26,7 +26,6 @@ import {
   RenderLeafProps,
 } from "slate-react";
 import React, { useMemo } from "react";
-import { htmlToSlate } from "slate-serializers";
 import { css } from "@emotion/css";
 import Prism, { Token } from "prismjs";
 import "prismjs/components/prism-markdown";
@@ -193,14 +192,19 @@ const Leaf = ({
         ${leaf.code &&
         css`
           font-family: monospace !important;
-          background-color: #eee;
-          padding: 3px;
+          background-color: rgba(0, 0, 0, 0.5);
+          padding: 6px;
+          border-radius: 5px;
+          display: inline-block;
+          min-width: 288px;
         `}
         ${leaf.tag &&
         css`
           font-family: monospace !important;
           background-color: rgba(0, 0, 0, 0.5);
           padding: 3px;
+          border-radius: 5px;
+          display: inline-block;
         `}
       `}
     >

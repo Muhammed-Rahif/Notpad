@@ -42,7 +42,6 @@
     "slate": "^0.90.0",
     "slate-history": "^0.86.0",
     "slate-react": "^0.91.0",
-    "slate-serializers": "^0.0.27",
     "typescript": "4.9.5",
     "use-local-storage": "^2.3.6"
   },

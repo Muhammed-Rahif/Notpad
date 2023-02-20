@@ -14,7 +14,7 @@ import {
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HistoryEditor } from "slate-history";
-import { useSlate } from "slate-react";
+import { ReactEditor, useSlate } from "slate-react";
 import MenuButton from "./MenuButton/MenuButton";
 
 type MenuBarProps = {};
@@ -104,24 +104,37 @@ export default function MenuBar() {
             label: "Cut",
             shortcut: "Ctrl+X",
             onClick: () => {
-              console.log("Anchor:", editor.selection?.anchor);
-              console.log("Focus:", editor.selection?.focus);
+              ReactEditor.focus(editor as ReactEditor);
+
+              document.execCommand("cut");
             },
           },
           {
             label: "Copy",
             shortcut: "Ctrl+C",
-            onClick: () => {},
+            onClick: () => {
+              ReactEditor.focus(editor as ReactEditor);
+
+              document.execCommand("copy");
+            },
           },
           {
             label: "Paste",
             shortcut: "Ctrl+V",
-            onClick: () => {},
+            onClick: async () => {
+              ReactEditor.focus(editor as ReactEditor);
+
+              document.execCommand("paste");
+            },
           },
           {
             label: "Delete",
             shortcut: "Del",
-            onClick: () => {},
+            onClick: () => {
+              ReactEditor.focus(editor as ReactEditor);
+
+              document.execCommand("delete");
+            },
           },
           null,
           {

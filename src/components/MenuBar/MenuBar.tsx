@@ -14,7 +14,7 @@ import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HistoryEditor } from "slate-history";
 import { useSlate } from "slate-react";
-import { slateToHtml } from "slate-serializers";
+import slateSerializers from "slate-serializers";
 import MenuButton from "./MenuButton/MenuButton";
 
 type MenuBarProps = {};
@@ -68,7 +68,8 @@ export default function MenuBar() {
               if (!notepadContent) return;
 
               downloadFile(
-                slateToHtml(notepadContent)
+                slateSerializers
+                  .slateToHtml(notepadContent)
                   .replaceAll("</p><p>", "\n")
                   .replace(/<\/?[^>]+(>|$)/g, "")
                   .replace(/&quot;/g, '"'),

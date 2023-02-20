@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modelReducer from "./reducers/modal";
-import notepadReducer, { NotepadState } from "./reducers/notepad";
+import notepadReducer from "./reducers/notepad";
 
 export const store = configureStore({
   reducer: {

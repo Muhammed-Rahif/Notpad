@@ -103,7 +103,10 @@ export default function MenuBar() {
           {
             label: "Cut",
             shortcut: "Ctrl+X",
-            onClick: () => {},
+            onClick: () => {
+              console.log("Anchor:", editor.selection?.anchor);
+              console.log("Focus:", editor.selection?.focus);
+            },
           },
           {
             label: "Copy",

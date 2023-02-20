@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createEditor } from "slate";
 import { withHistory } from "slate-history";
 import { Slate, withReact } from "slate-react";
+import useLocalStorage from "use-local-storage";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();
@@ -43,47 +44,53 @@ export default function Home() {
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
   const handleFullscreen = useFullScreenHandle();
   const {
-    open,
+    open: alertOpen,
     content: alertContent,
-    title,
-    footer,
+    title: alertTitle,
+    footer: alertFooter,
+    onClose: alertOnClose,
   } = useSelector((store: RootState) => store.modal);
-  const {
-    content: notepadContent,
-    name: notepadName,
-    id: notepadId,
-  } = useSelector((store: RootState) => store.notepad);
+  const { content: notepadContent } = useSelector(
+    (store: RootState) => store.notepad
+  );
   const dispatch = useDispatch();
+  const [fullscreenAlertShowed, setFullscreenAlertShowed] = useLocalStorage(
+    "fullscreen-alert-showed",
+    0
+  );
 
-  //  ==== after render useEffect ====
   useEffect(() => {
-    dispatch(
-      openModal({
-        open: true,
-        title: "Full Screen",
-        content: (
-          <Typography>
-            We recommend using full screen mode for the best experience. Because
-            of the way the editor is designed, it works best with the full
-            screen. You can still use the app in a smaller window, but some
-            features may not work as expected. We&apos;ve found some UI
-            alignment and override issues when not in full screen mode on mobile
-            devices.
-          </Typography>
-        ),
-        footer: (
-          <Button
-            size="sm"
-            onClick={() => {
-              handleFullscreen.enter();
-              dispatch(closeModal());
-            }}
-          >
-            Okay
-          </Button>
-        ),
-      })
-    );
+    if (fullscreenAlertShowed <= 1)
+      dispatch(
+        openModal({
+          open: true,
+          title: "Full Screen",
+          onClose: () => {
+            setFullscreenAlertShowed(fullscreenAlertShowed + 1);
+          },
+          content: (
+            <Typography>
+              We recommend using full screen mode for the best experience.
+              Because of the way the editor is designed, it works best with the
+              full screen. You can still use the app in a smaller window, but
+              some features may not work as expected. We&apos;ve found some UI
+              alignment and override issues when not in full screen mode on
+              mobile devices.
+            </Typography>
+          ),
+          footer: (
+            <Button
+              size="sm"
+              onClick={() => {
+                handleFullscreen.enter();
+                dispatch(closeModal());
+              }}
+            >
+              Okay
+            </Button>
+          ),
+        })
+      );
   }, []);
 
   return (
@@ -103,12 +110,15 @@ export default function Home() {
               ? document.querySelector(".fullscreen")
               : undefined
           }
-          open={open}
-          onClose={() => dispatch(closeModal())}
+          open={alertOpen}
+          onClose={() => {
+            alertOnClose && alertOnClose();
+            dispatch(closeModal());
+          }}
         >
           <ModalDialog>
             <ModalClose />
-            <Typography fontSize="lg">{title}</Typography>
+            <Typography fontSize="lg">{alertTitle}</Typography>
             <Divider
               sx={{
                 mt: 2,
@@ -134,7 +144,7 @@ export default function Home() {
                 textAlign: "right",
               }}
             >
-              {footer}
+              {alertFooter}
             </Box>
           </ModalDialog>
         </Modal>
@@ -157,7 +167,7 @@ export default function Home() {
             >
               <TitleBar />
               <CustomDivider />
-              <MenuBar />
+              <MenuBar handleFullscreen={handleFullscreen} />
               <CustomDivider />
             </Box>
             <CustomTextarea />

@@ -12,14 +12,17 @@ import {
   useColorScheme,
 } from "@mui/joy";
 import { useMemo, useState } from "react";
+import { FullScreenHandle } from "react-full-screen";
 import { useDispatch, useSelector } from "react-redux";
 import { HistoryEditor } from "slate-history";
 import { ReactEditor, useSlate } from "slate-react";
 import MenuButton from "./MenuButton/MenuButton";
 
-type MenuBarProps = {};
+type MenuBarProps = {
+  handleFullscreen?: FullScreenHandle;
+};
 
-export default function MenuBar() {
+export default function MenuBar({ handleFullscreen }: MenuBarProps) {
   const [activeMenuIndx, setActiveMenuIndx] = useState<number | null>(null);
   const { mode, setMode } = useColorScheme();
   const dispatch = useDispatch();
@@ -192,7 +195,11 @@ export default function MenuBar() {
           {
             label: "Toggle Full Screen",
             shortcut: "F11",
-            onClick: () => {},
+            onClick: () => {
+              handleFullscreen?.active
+                ? handleFullscreen.exit()
+                : handleFullscreen?.enter();
+            },
           },
           null,
           {
@@ -229,7 +236,7 @@ export default function MenuBar() {
         ],
       },
     ],
-    [dispatch, mode, notepadContent, notepadName, setMode]
+    [editor, handleFullscreen, mode, notepadContent, notepadName, setMode]
   );
 
   return (

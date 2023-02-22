@@ -25,6 +25,9 @@ export default function CustomTextarea() {
     (props: RenderLeafProps) => <Leaf {...props} />,
     []
   );
+  const { family: fontFamily, size: fontSize } = useSelector(
+    (store: RootState) => store.font
+  );
 
   useEffect(() => {
     if (!notepadContent) return;
@@ -111,10 +114,10 @@ export default function CustomTextarea() {
           "--Textarea-focusedHighlight": "rgba(0,0,0,0)",
           resize: "none",
           paddingY: 0,
-          fontFamily: "monospace !important",
           bgcolor: "neutral.softBg",
           color: "neutral.softColor",
           overflowY: "scroll",
+          fontFamily: `${fontFamily}, sans-serif`,
         }}
         renderLeaf={renderLeaf}
         decorate={decorate}
@@ -171,7 +174,6 @@ const Leaf = ({
         `}
         ${leaf.code &&
         css`
-          font-family: monospace !important;
           background-color: rgba(0, 0, 0, 0.5);
           padding: 6px;
           border-radius: 5px;
@@ -180,7 +182,6 @@ const Leaf = ({
         `}
         ${leaf.tag &&
         css`
-          font-family: monospace !important;
           background-color: rgba(0, 0, 0, 0.5);
           padding: 3px;
           border-radius: 5px;

@@ -128,24 +128,27 @@ export default function Home() {
             <Box
               sx={{
                 py: 2,
+                pb: alertFooter ? 2 : 0,
               }}
             >
               {alertContent}
             </Box>
-            <Box
-              sx={{
-                bgcolor: "background.level1",
-                px: 2,
-                py: 1.5,
-                m: "calc(-1 * var(--ModalDialog-padding))",
-                mt: 0,
-                borderBottomLeftRadius: "var(--ModalDialog-radius)",
-                borderBottomRightRadius: "var(--ModalDialog-radius)",
-                textAlign: "right",
-              }}
-            >
-              {alertFooter}
-            </Box>
+            {alertFooter && (
+              <Box
+                sx={{
+                  bgcolor: "background.level1",
+                  px: 2,
+                  py: 1.5,
+                  m: "calc(-1 * var(--ModalDialog-padding))",
+                  mt: 0,
+                  borderBottomLeftRadius: "var(--ModalDialog-radius)",
+                  borderBottomRightRadius: "var(--ModalDialog-radius)",
+                  textAlign: "right",
+                }}
+              >
+                {alertFooter}
+              </Box>
+            )}
           </ModalDialog>
         </Modal>
 

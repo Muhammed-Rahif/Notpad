@@ -1,5 +1,6 @@
 import { downloadFile, newFile } from "@/helpers/file";
 import { serialize } from "@/helpers/slate";
+import { openModal } from "@/redux/reducers/modal";
 import { RootState } from "@/redux/store";
 import {
   List,
@@ -16,6 +17,7 @@ import { FullScreenHandle } from "react-full-screen";
 import { useDispatch, useSelector } from "react-redux";
 import { HistoryEditor } from "slate-history";
 import { ReactEditor, useSlate } from "slate-react";
+import CustomizeFont from "./CustomizeFont/CustomizeFont";
 import MenuButton from "./MenuButton/MenuButton";
 
 type MenuBarProps = {
@@ -28,6 +30,9 @@ export default function MenuBar({ handleFullscreen }: MenuBarProps) {
   const dispatch = useDispatch();
   const { content: notepadContent, name: notepadName } = useSelector(
     (store: RootState) => store.notepad
+  );
+  const { family: fontFamily, size: fontSize } = useSelector(
+    (store: RootState) => store.font
   );
   const editor = useSlate();
 
@@ -170,6 +175,25 @@ export default function MenuBar({ handleFullscreen }: MenuBarProps) {
             label: "Time/Date",
             shortcut: "F5",
             onClick: () => {},
+          },
+        ],
+      },
+      {
+        label: "Format",
+        items: [
+          {
+            label: "Font",
+            shortcut: null,
+            onClick: () => {
+              dispatch(
+                openModal({
+                  open: true,
+                  title: "Font",
+                  content: <CustomizeFont />,
+                  footer: null,
+                })
+              );
+            },
           },
         ],
       },

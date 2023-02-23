@@ -39,6 +39,7 @@
     "react-full-screen": "^1.1.1",
     "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
+    "redux-localstorage-simple": "^2.5.1",
     "short-uuid": "^4.2.2",
     "slate": "^0.90.0",
     "slate-history": "^0.86.0",

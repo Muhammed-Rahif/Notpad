@@ -1,4 +1,7 @@
-import { NotepadState, setNotepad } from "@/redux/reducers/notepad";
+import {
+  NotepadState,
+  NOTEPAD_STATE_STORE_KEY,
+} from "@/redux/reducers/notepad";
 import { RootState } from "@/redux/store";
 import { css } from "@emotion/css";
 import { Box } from "@mui/joy";
@@ -11,14 +14,10 @@ import { Editable, RenderLeafProps, useSlate } from "slate-react";
 import useLocalStorage from "use-local-storage";
 
 export default function CustomTextarea() {
-  const [notepadLocalStorage, setNotepadLocalStorage] = useLocalStorage<
-    NotepadState | undefined
-  >("notepad-state", undefined);
-  const {
-    content: notepadContent,
-    name: notepadName,
-    id: notepadId,
-  } = useSelector((store: RootState) => store.notepad);
+  const [notepadLocalStorage] = useLocalStorage<NotepadState | undefined>(
+    NOTEPAD_STATE_STORE_KEY,
+    undefined
+  );
   const dispatch = useDispatch();
   const editor = useSlate();
   const renderLeaf = useCallback(
@@ -28,17 +27,6 @@ export default function CustomTextarea() {
   const { family: fontFamily, size: fontSize } = useSelector(
     (store: RootState) => store.font
   );
-
-  useEffect(() => {
-    if (!notepadContent) return;
-    if (!notepadName) return;
-    if (!notepadId) return;
-    setNotepadLocalStorage({
-      content: notepadContent,
-      name: notepadName,
-      id: notepadId,
-    });
-  }, [notepadContent, notepadName, notepadId, setNotepadLocalStorage]);
 
   useEffect(() => {
     if (!notepadLocalStorage) return;
@@ -54,8 +42,6 @@ export default function CustomTextarea() {
     });
 
     Transforms.insertNodes(editor, notepadLocalStorage.content);
-
-    dispatch(setNotepad(notepadLocalStorage));
   }, []);
 
   const decorate = useCallback(([node, path]: NodeEntry<Node>) => {
@@ -131,8 +117,6 @@ const Leaf = ({
   children,
   leaf,
 }: RenderLeafProps & { leaf: any }) => {
-  console.log(Object.keys(leaf));
-
   return (
     <span
       {...attributes}

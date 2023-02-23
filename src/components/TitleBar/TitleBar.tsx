@@ -32,7 +32,7 @@ export default function TitleBar({ title = "Untitled" }: TitleBarProps) {
   } = useSelector((store: RootState) => store.notepad);
 
   useEffect(() => {
-    if (!notepadName) dispatch(updateNotepad({ name: title }));
+    if (!notepadName) dispatch(updateNotepad({ name: "Untitled" }));
   }, []);
 
   return (

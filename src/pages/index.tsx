@@ -2,6 +2,7 @@ import ClientOnly from "@/components/ClientOnly/ClientOnly";
 import CustomTextarea from "@/components/CustomTextarea/CustomTextarea";
 import FooterBar from "@/components/FooterBar/FooterBar";
 import AppHead from "@/components/Head/Head";
+import LocalStorage from "@/components/LocalStorage/LocalStorage";
 import MenuBar from "@/components/MenuBar/MenuBar";
 import OpenInputFile from "@/components/OpenInputFile/OpenInputFile";
 import TitleBar from "@/components/TitleBar/TitleBar";
@@ -60,6 +61,7 @@ export default function Home() {
   );
 
   useEffect(() => {
+    // below code is for showing fullscreen alert
     if (fullscreenAlertShowed <= 1)
       dispatch(
         openModal({
@@ -91,6 +93,7 @@ export default function Home() {
           ),
         })
       );
+    // above code is for showing fullscreen alert
   }, []);
 
   return (
@@ -153,6 +156,7 @@ export default function Home() {
         </Modal>
 
         <FullScreen handle={handleFullscreen}>
+          <LocalStorage />
           <Box
             sx={{
               display: "flex",

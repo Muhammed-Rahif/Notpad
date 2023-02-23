@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import uuid from "short-uuid";
 import { Descendant } from "slate";
 
@@ -19,6 +19,8 @@ const initialState: NotepadState = {
   ],
   id: uuid.generate(),
 };
+
+export const NOTEPAD_STATE_STORE_KEY = "notepad-state";
 
 export const notepadSlice = createSlice({
   name: "notepad",

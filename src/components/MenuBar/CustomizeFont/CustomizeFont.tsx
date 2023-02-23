@@ -17,6 +17,8 @@ export default function CustomizeFont() {
   //   const [fontSize, setFontSize] = useState<FontState["size"]>(size);
   const quote = useMemo(() => Quote.getQuote(), []);
 
+  console.log(family);
+
   return (
     <>
       <Box sx={{ mb: 2 }}>

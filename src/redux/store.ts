@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
+import fontReducer from "./reducers/font";
 import modelReducer from "./reducers/modal";
-import notepadReducer, { NotepadState } from "./reducers/notepad";
+import notepadReducer from "./reducers/notepad";
 
 export const store = configureStore({
   reducer: {
     modal: modelReducer,
     notepad: notepadReducer,
+    font: fontReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -1,12 +1,14 @@
 import ClientOnly from "@/components/ClientOnly/ClientOnly";
+import CustomTextarea from "@/components/CustomTextarea/CustomTextarea";
 import FooterBar from "@/components/FooterBar/FooterBar";
 import AppHead from "@/components/Head/Head";
+import LocalStorage from "@/components/LocalStorage/LocalStorage";
 import MenuBar from "@/components/MenuBar/MenuBar";
+import OpenInputFile from "@/components/OpenInputFile/OpenInputFile";
 import TitleBar from "@/components/TitleBar/TitleBar";
 import { closeModal, openModal } from "@/redux/reducers/modal";
+import { updateNotepad } from "@/redux/reducers/notepad";
 import { RootState } from "@/redux/store";
-import { useEffect, cloneElement, useMemo } from "react";
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import {
   Box,
   Button,
@@ -14,23 +16,16 @@ import {
   Modal,
   ModalClose,
   ModalDialog,
-  Textarea,
   Typography,
   useColorScheme,
 } from "@mui/joy";
+import { useEffect, useMemo } from "react";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  NotepadState,
-  setNotepad,
-  updateNotepad,
-} from "@/redux/reducers/notepad";
-import useLocalStorage from "use-local-storage";
-import CustomTextarea from "@/components/CustomTextarea/CustomTextarea";
-import { createEditor, Descendant, Transforms } from "slate";
-import { Slate, Editable, withReact } from "slate-react";
+import { createEditor } from "slate";
 import { withHistory } from "slate-history";
-import { htmlToSlate } from "slate-serializers";
-import OpenInputFile from "@/components/OpenInputFile/OpenInputFile";
+import { Slate, withReact } from "slate-react";
+import useLocalStorage from "use-local-storage";
 
 const CustomDivider = () => {
   const { mode } = useColorScheme();
@@ -50,47 +45,55 @@ export default function Home() {
   const editor = useMemo(() => withReact(withHistory(createEditor())), []);
   const handleFullscreen = useFullScreenHandle();
   const {
-    open,
+    open: alertOpen,
     content: alertContent,
-    title,
-    footer,
+    title: alertTitle,
+    footer: alertFooter,
+    onClose: alertOnClose,
   } = useSelector((store: RootState) => store.modal);
-  const {
-    content: notepadContent,
-    name: notepadName,
-    id: notepadId,
-  } = useSelector((store: RootState) => store.notepad);
+  const { content: notepadContent } = useSelector(
+    (store: RootState) => store.notepad
+  );
   const dispatch = useDispatch();
+  const [fullscreenAlertShowed, setFullscreenAlertShowed] = useLocalStorage(
+    "fullscreen-alert-showed",
+    0
+  );
 
-  //  ==== after render useEffect ====
   useEffect(() => {
-    dispatch(
-      openModal({
-        open: true,
-        title: "Full Screen",
-        content: (
-          <Typography>
-            We recommend using full screen mode for the best experience. Because
-            of the way the editor is designed, it works best with the full
-            screen. You can still use the app in a smaller window, but some
-            features may not work as expected. We&apos;ve found some UI
-            alignment and override issues when not in full screen mode on mobile
-            devices.
-          </Typography>
-        ),
-        footer: (
-          <Button
-            size="sm"
-            onClick={() => {
-              handleFullscreen.enter();
-              dispatch(closeModal());
-            }}
-          >
-            Okay
-          </Button>
-        ),
-      })
-    );
+    // below code is for showing fullscreen alert
+    if (fullscreenAlertShowed <= 1)
+      dispatch(
+        openModal({
+          open: true,
+          title: "Full Screen",
+          onClose: () => {
+            setFullscreenAlertShowed(fullscreenAlertShowed + 1);
+          },
+          content: (
+            <Typography>
+              We recommend using full screen mode for the best experience.
+              Because of the way the editor is designed, it works best with the
+              full screen. You can still use the app in a smaller window, but
+              some features may not work as expected. We&apos;ve found some UI
+              alignment and override issues when not in full screen mode on
+              mobile devices.
+            </Typography>
+          ),
+          footer: (
+            <Button
+              size="sm"
+              onClick={() => {
+                handleFullscreen.enter();
+                dispatch(closeModal());
+              }}
+            >
+              Okay
+            </Button>
+          ),
+        })
+      );
+    // above code is for showing fullscreen alert
   }, []);
 
   return (
@@ -110,12 +113,15 @@ export default function Home() {
               ? document.querySelector(".fullscreen")
               : undefined
           }
-          open={open}
-          onClose={() => dispatch(closeModal())}
+          open={alertOpen}
+          onClose={() => {
+            alertOnClose && alertOnClose();
+            dispatch(closeModal());
+          }}
         >
           <ModalDialog>
             <ModalClose />
-            <Typography fontSize="lg">{title}</Typography>
+            <Typography fontSize="lg">{alertTitle}</Typography>
             <Divider
               sx={{
                 mt: 2,
@@ -125,28 +131,32 @@ export default function Home() {
             <Box
               sx={{
                 py: 2,
+                pb: alertFooter ? 2 : 0,
               }}
             >
               {alertContent}
             </Box>
-            <Box
-              sx={{
-                bgcolor: "background.level1",
-                px: 2,
-                py: 1.5,
-                m: "calc(-1 * var(--ModalDialog-padding))",
-                mt: 0,
-                borderBottomLeftRadius: "var(--ModalDialog-radius)",
-                borderBottomRightRadius: "var(--ModalDialog-radius)",
-                textAlign: "right",
-              }}
-            >
-              {footer}
-            </Box>
+            {alertFooter && (
+              <Box
+                sx={{
+                  bgcolor: "background.level1",
+                  px: 2,
+                  py: 1.5,
+                  m: "calc(-1 * var(--ModalDialog-padding))",
+                  mt: 0,
+                  borderBottomLeftRadius: "var(--ModalDialog-radius)",
+                  borderBottomRightRadius: "var(--ModalDialog-radius)",
+                  textAlign: "right",
+                }}
+              >
+                {alertFooter}
+              </Box>
+            )}
           </ModalDialog>
         </Modal>
 
         <FullScreen handle={handleFullscreen}>
+          <LocalStorage />
           <Box
             sx={{
               display: "flex",
@@ -164,7 +174,7 @@ export default function Home() {
             >
               <TitleBar />
               <CustomDivider />
-              <MenuBar />
+              <MenuBar handleFullscreen={handleFullscreen} />
               <CustomDivider />
             </Box>
             <CustomTextarea />

@@ -1,9 +1,12 @@
+import { updateNotepad } from "@/redux/reducers/notepad";
 import { Box } from "@mui/joy";
+import { useDispatch } from "react-redux";
 import { Editor, Transforms } from "slate";
 import { useSlate } from "slate-react";
 
 export default function OpenInputFile() {
   const editor = useSlate();
+  const dispatch = useDispatch();
 
   return (
     <Box
@@ -36,6 +39,12 @@ export default function OpenInputFile() {
               type: "paragraph",
               children: [{ text: line }],
             }))
+          );
+
+          dispatch(
+            updateNotepad({
+              name: file.name,
+            })
           );
         };
         reader.readAsText(file);

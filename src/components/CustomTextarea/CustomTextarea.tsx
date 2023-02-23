@@ -1,61 +1,32 @@
-import { RootState } from "@/redux/store";
-import { useEffect, cloneElement, useCallback } from "react";
-import { Box, Textarea } from "@mui/joy";
-import { useDispatch, useSelector } from "react-redux";
 import {
   NotepadState,
-  setNotepad,
-  updateNotepad,
+  NOTEPAD_STATE_STORE_KEY,
 } from "@/redux/reducers/notepad";
-import useLocalStorage from "use-local-storage";
-import {
-  createEditor,
-  Descendant,
-  Editor,
-  Node,
-  NodeEntry,
-  Text,
-  Transforms,
-} from "slate";
-import {
-  Slate,
-  Editable,
-  withReact,
-  useSlate,
-  useFocused,
-  RenderLeafProps,
-} from "slate-react";
-import React, { useMemo } from "react";
+import { RootState } from "@/redux/store";
 import { css } from "@emotion/css";
-import Prism, { Token } from "prismjs";
+import { Box } from "@mui/joy";
+import Prism from "prismjs";
 import "prismjs/components/prism-markdown";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Editor, Node, NodeEntry, Text, Transforms } from "slate";
+import { Editable, RenderLeafProps, useSlate } from "slate-react";
+import useLocalStorage from "use-local-storage";
 
 export default function CustomTextarea() {
-  const [notepadLocalStorage, setNotepadLocalStorage] = useLocalStorage<
-    NotepadState | undefined
-  >("notepad-state", undefined);
-  const {
-    content: notepadContent,
-    name: notepadName,
-    id: notepadId,
-  } = useSelector((store: RootState) => store.notepad);
+  const [notepadLocalStorage] = useLocalStorage<NotepadState | undefined>(
+    NOTEPAD_STATE_STORE_KEY,
+    undefined
+  );
   const dispatch = useDispatch();
   const editor = useSlate();
   const renderLeaf = useCallback(
     (props: RenderLeafProps) => <Leaf {...props} />,
     []
   );
-
-  useEffect(() => {
-    if (!notepadContent) return;
-    if (!notepadName) return;
-    if (!notepadId) return;
-    setNotepadLocalStorage({
-      content: notepadContent,
-      name: notepadName,
-      id: notepadId,
-    });
-  }, [notepadContent, notepadName, notepadId, setNotepadLocalStorage]);
+  const { family: fontFamily, size: fontSize } = useSelector(
+    (store: RootState) => store.font
+  );
 
   useEffect(() => {
     if (!notepadLocalStorage) return;
@@ -71,8 +42,6 @@ export default function CustomTextarea() {
     });
 
     Transforms.insertNodes(editor, notepadLocalStorage.content);
-
-    dispatch(setNotepad(notepadLocalStorage));
   }, []);
 
   const decorate = useCallback(([node, path]: NodeEntry<Node>) => {
@@ -131,10 +100,10 @@ export default function CustomTextarea() {
           "--Textarea-focusedHighlight": "rgba(0,0,0,0)",
           resize: "none",
           paddingY: 0,
-          fontFamily: "monospace !important",
           bgcolor: "neutral.softBg",
           color: "neutral.softColor",
           overflowY: "scroll",
+          fontFamily: `${fontFamily}, sans-serif`,
         }}
         renderLeaf={renderLeaf}
         decorate={decorate}
@@ -148,8 +117,6 @@ const Leaf = ({
   children,
   leaf,
 }: RenderLeafProps & { leaf: any }) => {
-  console.log(Object.keys(leaf));
-
   return (
     <span
       {...attributes}
@@ -162,7 +129,7 @@ const Leaf = ({
           display: inline-block;
           font-weight: bold;
           font-size: 20px;
-          margin: 20px 0 10px 0;
+          margin: 6px 0 3px 0;
         `}
         ${leaf.list &&
         css`
@@ -191,7 +158,6 @@ const Leaf = ({
         `}
         ${leaf.code &&
         css`
-          font-family: monospace !important;
           background-color: rgba(0, 0, 0, 0.5);
           padding: 6px;
           border-radius: 5px;
@@ -200,7 +166,6 @@ const Leaf = ({
         `}
         ${leaf.tag &&
         css`
-          font-family: monospace !important;
           background-color: rgba(0, 0, 0, 0.5);
           padding: 3px;
           border-radius: 5px;

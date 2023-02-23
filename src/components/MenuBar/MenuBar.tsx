@@ -1,40 +1,38 @@
 import { downloadFile, newFile } from "@/helpers/file";
-import { closeModal, openModal } from "@/redux/reducers/modal";
-import { RootState, store } from "@/redux/store";
+import { serialize } from "@/helpers/slate";
+import { openModal } from "@/redux/reducers/modal";
+import { RootState } from "@/redux/store";
 import {
-  Avatar,
-  Box,
-  Button,
-  Divider,
-  Input,
   List,
   ListDivider,
   ListItem,
-  ListItemButton,
-  ListItemContent,
-  ListItemDecorator,
   Menu,
   MenuItem,
   Sheet,
   Typography,
   useColorScheme,
 } from "@mui/joy";
-import Image from "next/image";
 import { useMemo, useState } from "react";
+import { FullScreenHandle } from "react-full-screen";
 import { useDispatch, useSelector } from "react-redux";
-import MenuButton from "./MenuButton/MenuButton";
-import { slateToHtml } from "slate-serializers";
-import { useSlate } from "slate-react";
 import { HistoryEditor } from "slate-history";
+import { ReactEditor, useSlate } from "slate-react";
+import CustomizeFont from "./CustomizeFont/CustomizeFont";
+import MenuButton from "./MenuButton/MenuButton";
 
-type MenuBarProps = {};
+type MenuBarProps = {
+  handleFullscreen?: FullScreenHandle;
+};
 
-export default function MenuBar({}: MenuBarProps) {
+export default function MenuBar({ handleFullscreen }: MenuBarProps) {
   const [activeMenuIndx, setActiveMenuIndx] = useState<number | null>(null);
   const { mode, setMode } = useColorScheme();
   const dispatch = useDispatch();
   const { content: notepadContent, name: notepadName } = useSelector(
     (store: RootState) => store.notepad
+  );
+  const { family: fontFamily, size: fontSize } = useSelector(
+    (store: RootState) => store.font
   );
   const editor = useSlate();
 
@@ -78,10 +76,7 @@ export default function MenuBar({}: MenuBarProps) {
               if (!notepadContent) return;
 
               downloadFile(
-                slateToHtml(notepadContent)
-                  .replaceAll("</p><p>", "\n")
-                  .replace(/<\/?[^>]+(>|$)/g, "")
-                  .replace(/&quot;/g, '"'),
+                serialize(notepadContent),
                 notepadName || "Untitled.txt",
                 "text/plain"
               );
@@ -116,22 +111,38 @@ export default function MenuBar({}: MenuBarProps) {
           {
             label: "Cut",
             shortcut: "Ctrl+X",
-            onClick: () => {},
+            onClick: () => {
+              ReactEditor.focus(editor as ReactEditor);
+
+              document.execCommand("cut");
+            },
           },
           {
             label: "Copy",
             shortcut: "Ctrl+C",
-            onClick: () => {},
+            onClick: () => {
+              ReactEditor.focus(editor as ReactEditor);
+
+              document.execCommand("copy");
+            },
           },
           {
             label: "Paste",
             shortcut: "Ctrl+V",
-            onClick: () => {},
+            onClick: async () => {
+              ReactEditor.focus(editor as ReactEditor);
+
+              document.execCommand("paste");
+            },
           },
           {
             label: "Delete",
             shortcut: "Del",
-            onClick: () => {},
+            onClick: () => {
+              ReactEditor.focus(editor as ReactEditor);
+
+              document.execCommand("delete");
+            },
           },
           null,
           {
@@ -168,6 +179,25 @@ export default function MenuBar({}: MenuBarProps) {
         ],
       },
       {
+        label: "Format",
+        items: [
+          {
+            label: "Font",
+            shortcut: null,
+            onClick: () => {
+              dispatch(
+                openModal({
+                  open: true,
+                  title: "Font",
+                  content: <CustomizeFont />,
+                  footer: null,
+                })
+              );
+            },
+          },
+        ],
+      },
+      {
         label: "View",
         items: [
           {
@@ -189,7 +219,11 @@ export default function MenuBar({}: MenuBarProps) {
           {
             label: "Toggle Full Screen",
             shortcut: "F11",
-            onClick: () => {},
+            onClick: () => {
+              handleFullscreen?.active
+                ? handleFullscreen.exit()
+                : handleFullscreen?.enter();
+            },
           },
           null,
           {
@@ -226,7 +260,7 @@ export default function MenuBar({}: MenuBarProps) {
         ],
       },
     ],
-    [dispatch, mode, notepadContent, notepadName, setMode]
+    [editor, handleFullscreen, mode, notepadContent, notepadName, setMode]
   );
 
   return (

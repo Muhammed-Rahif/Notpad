@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { ReactNode } from "react";
 
 export interface ModalState {
   title?: string;
   content?: string | ReactNode;
-  open: boolean;
   footer?: ReactNode;
+  open: boolean;
+  onClose?: () => void;
 }
 
 const initialState: ModalState = {
@@ -22,6 +23,7 @@ export const modalSlice = createSlice({
       state.title = action.payload.title;
       state.content = action.payload.content;
       state.footer = action.payload.footer;
+      state.onClose = action.payload.onClose;
     },
     closeModal: (state: any) => {
       Object.keys(state).forEach(key => (state[key] = undefined));

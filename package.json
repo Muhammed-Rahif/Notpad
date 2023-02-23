@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write .",
+    "prepare": "husky install"
+  },
+  "engines": {
+    "node": ">=18.12.1",
+    "yarn": ">=1.22.17",
+    "npm": "please-use-yarn"
   },
   "dependencies": {
     "@emotion/css": "^11.10.6",
@@ -24,6 +31,7 @@
     "css-select": "^5.1.0",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
+    "inspirational-quotes": "^2.0.1",
     "next": "13.1.6",
     "prismjs": "^1.29.0",
     "react": "18.2.0",
@@ -31,12 +39,18 @@
     "react-full-screen": "^1.1.1",
     "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
+    "redux-localstorage-simple": "^2.5.1",
     "short-uuid": "^4.2.2",
     "slate": "^0.90.0",
     "slate-history": "^0.86.0",
     "slate-react": "^0.91.0",
-    "slate-serializers": "^0.0.27",
     "typescript": "4.9.5",
     "use-local-storage": "^2.3.6"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.4"
   }
 }

@@ -13,6 +13,12 @@ export default function AppHead() {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/assets/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
+        <link
+          rel="apple-touch-icon"
+          href="/assets/images/icon-256x256.png"
+        ></link>
+        <meta name="theme-color" content="#000000" />
 
         <meta
           name="title"

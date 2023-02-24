@@ -1,7 +1,8 @@
 import {
   fontFamilies,
+  fontSizes,
   FontState,
-  setFontFamily as setFontFamilyAction,
+  setFont as setFontAction,
 } from "@/redux/reducers/font";
 import { closeModal } from "@/redux/reducers/modal";
 import { RootState } from "@/redux/store";
@@ -14,7 +15,7 @@ export default function CustomizeFont() {
   const dispatch = useDispatch();
   const { family, size } = useSelector((store: RootState) => store.font);
   const [fontFamily, setFontFamily] = useState<FontState["family"]>(family);
-  //   const [fontSize, setFontSize] = useState<FontState["size"]>(size);
+  const [fontSize, setFontSize] = useState<FontState["size"]>(size);
   const quote = useMemo(() => Quote.getQuote(), []);
 
   console.log(family);
@@ -36,7 +37,7 @@ export default function CustomizeFont() {
         >
           <Typography
             sx={{
-              //   fontSize: `${fontSize}px`,
+              fontSize: `${fontSize}px`,
               fontFamily: `${fontFamily}, sans-serif`,
             }}
           >{`${quote.text} - ${quote.author}`}</Typography>
@@ -68,8 +69,8 @@ export default function CustomizeFont() {
           ))}
         </Select>
 
-        {/* <Typography>Size</Typography> */}
-        {/* <Select
+        <Typography>Size</Typography>
+        <Select
           onChange={(e, value) => {
             setFontSize(value as FontState["size"]);
           }}
@@ -91,7 +92,7 @@ export default function CustomizeFont() {
               {size}
             </Option>
           ))}
-        </Select> */}
+        </Select>
       </Box>
       <Box
         sx={{
@@ -119,7 +120,12 @@ export default function CustomizeFont() {
         <Button
           size="sm"
           onClick={() => {
-            dispatch(setFontFamilyAction(fontFamily));
+            dispatch(
+              setFontAction({
+                family: fontFamily,
+                size: fontSize,
+              })
+            );
             dispatch(closeModal());
           }}
         >

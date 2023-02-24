@@ -104,6 +104,7 @@ export default function CustomTextarea() {
           color: "neutral.softColor",
           overflowY: "scroll",
           fontFamily: `${fontFamily}, sans-serif`,
+          fontSize: `${fontSize}px`,
         }}
         renderLeaf={renderLeaf}
         decorate={decorate}
@@ -117,6 +118,10 @@ const Leaf = ({
   children,
   leaf,
 }: RenderLeafProps & { leaf: any }) => {
+  const { family: fontFamily, size: fontSize } = useSelector(
+    (store: RootState) => store.font
+  );
+
   return (
     <span
       {...attributes}
@@ -124,17 +129,18 @@ const Leaf = ({
         font-weight: ${leaf.bold && "bold"};
         font-style: ${leaf.italic && "italic"};
         text-decoration: ${leaf.underlined && "underline"};
+        font-size: ${fontSize}px;
         ${leaf.title &&
         css`
           display: inline-block;
           font-weight: bold;
-          font-size: 20px;
+          font-size: ${fontSize + fontSize * 0.2}px;
           margin: 6px 0 3px 0;
         `}
         ${leaf.list &&
         css`
           padding-left: 10px;
-          font-size: 20px;
+          font-size: ${fontSize + fontSize * 0.1}px;
           line-height: 10px;
         `}
         ${leaf.url &&

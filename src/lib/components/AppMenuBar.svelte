@@ -1,5 +1,7 @@
 <script lang="ts">
   import * as Menubar from '$lib/components/ui/menubar';
+  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { isElectron } from '@/utils';
   import { toggleMode } from 'mode-watcher';
 
   interface MenuItems {
@@ -18,7 +20,11 @@
     {
       label: 'File',
       items: [
-        { label: 'New', shortcut: 'Ctrl+N' },
+        {
+          label: 'New',
+          shortcut: isElectron() ? 'Ctrl+N' : 'Ctrl+Alt+N',
+          onClick: NotepadHelper.createNew
+        },
         { label: 'Open...', shortcut: 'Ctrl+O' },
         { label: 'Save', shortcut: 'Ctrl+S' },
         { label: 'Save as...' },
@@ -81,8 +87,8 @@
           {#if type === 'separator'}
             <Menubar.Separator />
           {:else}
-            <Menubar.Item on:click={onClick}
-              >{label}
+            <Menubar.Item on:click={onClick}>
+              {label}
               {#if shortcut}
                 <Menubar.Shortcut>{shortcut}</Menubar.Shortcut>
               {/if}

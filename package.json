@@ -18,6 +18,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@types/eslint": "^9.6.0",
     "@types/lodash.throttle": "^4.1.9",
+    "@types/node": "^22.5.5",
     "@types/textarea-caret": "^3.0.3",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.7.0",
@@ -36,6 +37,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@svelte-put/shortcut": "^3.1.1",
     "bits-ui": "^0.21.15",
     "clsx": "^2.1.1",
     "lodash.throttle": "^4.1.1",

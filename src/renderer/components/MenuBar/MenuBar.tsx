@@ -4,6 +4,7 @@ import { dialog, BrowserWindow } from '@electron/remote';
 import { OpenDialogReturnValue } from 'electron';
 import fs from 'fs';
 import { useContext } from 'react';
+import { OpenFileContext } from '../../contexts/OpenFile';
 import { acceptableFileExtentions } from '../../constants/files';
 import { EditorViewContext } from '../../contexts/EditorView';
 import { defaultEditorViewExtensions } from '../../helpers/editor';
@@ -11,6 +12,7 @@ import './MenuBar.scss';
 
 function MenuBar() {
   const { editorView } = useContext(EditorViewContext);
+  const { setOpenFile } = useContext(OpenFileContext);
 
   const handleOpenBtnClick = async () => {
     try {
@@ -32,22 +34,26 @@ function MenuBar() {
         BrowserWindow.getFocusedWindow() || new BrowserWindow(),
         openFileDialogOptions
       );
+      const fileName = filesList.filePaths[0].replace(/^.*[\\\\/]/, '');
+      const filePath = filesList.filePaths[0];
 
       // reading file content if any file is selected
-      if (filesList.filePaths[0])
-        fs.readFile(filesList.filePaths[0], 'utf-8', (err, fileContent) => {
+      if (filePath)
+        fs.readFile(filePath, 'utf-8', (err, fileContent) => {
           if (err)
             dialog.showErrorBox(
               "Can't open file!",
               `An error ocurred reading the file :${err.message}`
             );
-          else
+          else {
             editorView.setState(
               EditorState.create({
                 doc: fileContent,
                 extensions: defaultEditorViewExtensions,
               })
             );
+            setOpenFile({ filePath, fileName });
+          }
         });
     } catch (err) {
       dialog.showErrorBox(

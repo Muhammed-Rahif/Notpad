@@ -4,23 +4,23 @@
   import { cn } from '$lib/utils.js';
   import { onMount } from 'svelte';
   import throttle from 'lodash.throttle';
-  import Separator from '../separator/separator.svelte';
+  import Separator from '$lib/components/ui/separator/separator.svelte';
 
-  let textarea: HTMLTextAreaElement | null = null;
+  export let textarea: HTMLTextAreaElement | null = null;
+
   let fakeCaret: HTMLDivElement | null = null;
-  let caretPosition = { top: 0, left: 0, height: 20 };
+  let caretPosition = { top: 10, left: 8, height: 24 };
   let lineNo = 1;
   let column = 1;
-
   // Import the textarea-caret module
   let getCaretCoordinates: any;
-
   let updateScheduled = false; // Flag to track if update is already scheduled
 
   onMount(async () => {
     const module = await import('textarea-caret');
     getCaretCoordinates = module.default;
     updateCaretPosition();
+    textarea?.focus();
   });
 
   function updateLineAndColumn() {
@@ -59,7 +59,9 @@
     }
   }, 50); // Adjust the delay as needed
 
-  type $$Props = HTMLTextareaAttributes;
+  type $$Props = HTMLTextareaAttributes & {
+    textarea: HTMLTextAreaElement | null;
+  };
   type $$Events = TextareaEvents;
 
   let className: $$Props['class'] = undefined;
@@ -71,16 +73,18 @@
   export let readonly: $$Props['readonly'] = undefined;
 </script>
 
-<div class="textarea-wrapper relative h-[calc(100%-62px)]">
+<div class="textarea-wrapper relative h-full">
   <textarea
     class={cn(
-      'flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm caret-transparent shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+      'flex min-h-[60px] w-full rounded-md border border-input bg-transparent p-2 text-sm caret-transparent shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
       className
     )}
     bind:this={textarea}
     on:input={updateCaretPosition}
     on:scroll={updateCaretPosition}
     on:click={updateCaretPosition}
+    on:keydown={updateCaretPosition}
+    on:focus={updateCaretPosition}
     bind:value
     {readonly}
     on:blur
@@ -95,7 +99,7 @@
     on:mouseleave
     on:paste
     {...$$restProps}
-  ></textarea>
+  />
   <!-- Fake caret -->
   <div
     class="fake-caret"
@@ -104,7 +108,9 @@
   />
 </div>
 <Separator />
-<div class="flex h-[24px] items-center justify-start gap-1 px-1 text-sm">
+<div
+  class="relative z-10 flex h-[24px] items-center justify-start gap-1 bg-primary-foreground px-1 text-sm"
+>
   <span>Line: {lineNo},</span>
   <span>Column: {column}</span>
 </div>
@@ -112,5 +118,20 @@
 <style>
   .fake-caret {
     @apply absolute z-0 w-1 rounded-[2px] bg-primary duration-75;
+  }
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fake-caret {
+    animation: blink 1s infinite;
   }
 </style>

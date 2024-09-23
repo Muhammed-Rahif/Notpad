@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { EditorHelper } from '@/helpers/editor-helper';
   import { isElectron } from '@/utils';
   import { shortcut, type ShortcutEventDetail } from '@svelte-put/shortcut';
 
@@ -14,7 +14,7 @@
     trigger: {
       key: 'n',
       modifier: isElectron() ? ['ctrl'] : ['ctrl', 'alt'],
-      callback: (d) => dispatch(d, NotepadHelper.createNew)
+      callback: (d) => dispatch(d, EditorHelper.createNew)
     }
   }}
 />

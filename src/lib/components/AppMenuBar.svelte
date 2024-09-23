@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as Menubar from '$lib/components/ui/menubar';
-  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { EditorHelper } from '@/helpers/editor-helper';
   import { isElectron } from '@/utils';
   import { toggleMode } from 'mode-watcher';
 
@@ -23,7 +23,7 @@
         {
           label: 'New',
           shortcut: isElectron() ? 'Ctrl+N' : 'Ctrl+Alt+N',
-          onClick: NotepadHelper.createNew
+          onClick: EditorHelper.createNew
         },
         { label: 'Open...', shortcut: 'Ctrl+O' },
         { label: 'Save', shortcut: 'Ctrl+S' },

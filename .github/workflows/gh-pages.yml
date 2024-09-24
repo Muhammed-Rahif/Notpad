@@ -6,6 +6,7 @@ on:
       - main
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

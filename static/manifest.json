@@ -1,0 +1,14 @@
+{
+  "name": "Notepad",
+  "description": "Windows like notepad for cross platform.",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icons/myIcon512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

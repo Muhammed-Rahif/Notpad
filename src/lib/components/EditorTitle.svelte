@@ -31,13 +31,18 @@
       }
     }
   }
+
+  async function onBlur() {
+    if (!readonly) input.focus();
+  }
 </script>
 
 <input
   bind:this={input}
   use:autoWidth
   on:dblclick|stopPropagation={onDbClick}
-  on:keydown={onKeydown}
+  on:keydown|stopPropagation={onKeydown}
+  on:blur={onBlur}
   bind:value={title}
   type="text"
   class="border-none bg-transparent font-semibold outline-none"

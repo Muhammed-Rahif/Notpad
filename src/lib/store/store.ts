@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import localforage from 'localforage';
 import { browser } from '$app/environment';
 
-type EditorData = {
-  name: string; // Name of the textarea (or the file name, label, etc.)
+export type EditorData = {
+  title: string; // Name of the textarea (or the file name, label, etc.)
   content: string; // The content of the textarea
   id: string; // Unique ID for the editor
 };
@@ -12,7 +12,7 @@ type EditorData = {
 export const saveDialog = writable(false);
 export const editors = writable<EditorData[]>([
   {
-    name: 'Untitled',
+    title: 'Untitled',
     content: '',
     id: uuidv4()
   }

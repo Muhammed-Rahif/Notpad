@@ -2,17 +2,19 @@ import { activeTabId, editors } from '@/store/store';
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 
-export class EditorHelper {
+export class NotepadHelper {
   static createNew() {
+    const newId = uuidv4();
     editors.update((value) => {
       value.push({
-        name: 'Untitled',
+        title: 'Untitled',
         content: '',
-        id: uuidv4()
+        id: newId
       });
 
       return value;
     });
+    activeTabId.update(() => newId);
   }
 
   static remove(id: string) {
@@ -32,6 +34,17 @@ export class EditorHelper {
       return value.map((editor) => {
         if (editor.id === id) {
           editor.content = content;
+        }
+        return editor;
+      });
+    });
+  }
+
+  static updateTitle(id: string, title: string) {
+    editors.update((value) => {
+      return value.map((editor) => {
+        if (editor.id === id) {
+          editor.title = title;
         }
         return editor;
       });

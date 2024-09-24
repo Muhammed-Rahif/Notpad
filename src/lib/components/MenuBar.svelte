@@ -1,8 +1,11 @@
 <script lang="ts">
   import * as Menubar from '$lib/components/ui/menubar';
-  import { EditorHelper } from '@/helpers/editor-helper';
+  import { NotepadHelper } from '@/helpers/notepad-helper';
   import { isElectron } from '@/utils';
   import { toggleMode } from 'mode-watcher';
+  import EditorTitle from './EditorTitle.svelte';
+  import { editors } from '@/store/store';
+  import { fade } from 'svelte/transition';
 
   interface MenuItems {
     label: string;
@@ -23,7 +26,7 @@
         {
           label: 'New',
           shortcut: isElectron() ? 'Ctrl+N' : 'Ctrl+Alt+N',
-          onClick: EditorHelper.createNew
+          onClick: NotepadHelper.createNew
         },
         { label: 'Open...', shortcut: 'Ctrl+O' },
         { label: 'Save', shortcut: 'Ctrl+S' },
@@ -76,6 +79,10 @@
       items: [{ label: 'About Notepad' }]
     }
   ];
+
+  $: isSingleEditor = $editors.length == 1;
+  $: singleEditorId = $editors.at(0)!.id;
+  $: singleEditorTitle = $editors.at(0)!.title;
 </script>
 
 <Menubar.Root class="relative z-10 rounded-sm">
@@ -98,4 +105,13 @@
       </Menubar.Content>
     </Menubar.Menu>
   {/each}
+
+  {#if isSingleEditor}
+    <div
+      transition:fade
+      class="max-md:!ml-auto max-md:pr-3 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+    >
+      <EditorTitle id={singleEditorId} title={singleEditorTitle} />
+    </div>
+  {/if}
 </Menubar.Root>

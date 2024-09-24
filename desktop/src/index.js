@@ -8,7 +8,7 @@ if (require('electron-squirrel-startup')) {
 }
 
 // https://github.com/electron/electron/issues/7714#issuecomment-255835799
-function isDev() {
+export function isDev() {
   return process.argv[2] == '--dev';
 }
 

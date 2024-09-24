@@ -2,6 +2,7 @@
   "name": "notepad",
   "version": "0.0.1",
   "private": true,
+  "homepage": "https://Muhammed-Rahif.github.io/Notepad",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -9,7 +10,9 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -m 'chore(build): updates' -f --nojekyll"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
@@ -25,6 +28,7 @@
     "eslint": "^9.7.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.36.0",
+    "gh-pages": "^6.1.1",
     "globals": "^15.0.0",
     "prettier": "^3.3.3",
     "prettier-plugin-svelte": "^3.2.5",

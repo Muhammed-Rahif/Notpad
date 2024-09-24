@@ -1,7 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
-const dev = process.env.NODE_ENV === 'development';
+// const dev = process.env.NODE_ENV === 'development';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -18,7 +18,8 @@ const config = {
     }),
     // https://stackoverflow.com/a/72733222/14781260
     paths: {
-      base: dev ? '' : '/Notepad'
+      // base: dev ? '' : '/Notepad'
+      base: '/Notepad'
     },
     alias: {
       '@/*': 'src/lib/*'

@@ -1,0 +1,35 @@
+{
+  "applicationId": "js.neutralino.zero",
+  "version": "1.0.0",
+  "defaultMode": "window",
+  "documentRoot": "/build/",
+  "url": "/",
+  "enableServer": true,
+  "enableNativeAPI": true,
+  "nativeAllowList": ["app.*"],
+  "modes": {
+    "window": {
+      "title": "Notepad",
+      "width": 800,
+      "height": 500,
+      "minWidth": 400,
+      "minHeight": 200,
+      "icon": "/build/favicon.png"
+    }
+  },
+  "cli": {
+    "binaryName": "Notepad",
+    "resourcesPath": "/build/",
+    "extensionsPath": "/extensions/",
+    "binaryVersion": "5.4.0",
+    "clientVersion": "5.4.0",
+    "frontendLibrary": {
+      "patchFile": "/src/app.html",
+      "devUrl": "http://localhost:5173",
+      "projectPath": ".",
+      "initCommand": "npm install",
+      "devCommand": "npm run dev",
+      "buildCommand": "npm run build"
+    }
+  }
+}

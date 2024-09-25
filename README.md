@@ -94,6 +94,7 @@
 [![SvelteKit][svelte-logo]][svelte-url]
 [![Tailwindcss][tailwind-logo]][tailwind-url]
 [![Shadcn][shadcnui-logo]][shadcnui-url]
+[![neutralino][neutralino-logo]][neutralino-url]
 
 [svelte-logo]: https://img.shields.io/badge/sveltekit-000000?style=for-the-badge&logo=svelte
 [svelte-url]: https://kit.svelte.dev/
@@ -103,6 +104,9 @@
 
 [shadcnui-logo]: https://img.shields.io/badge/shadcn/svelte-000000?style=for-the-badge&logo=shadcnui&logoColor=orange
 [shadcnui-url]: https://shadcn-svelte.com/
+
+[neutralino-logo]: https://img.shields.io/badge/Neutralino-000000?style=for-the-badge&logo=neutralinojs
+[neutralino-url]: https://neutralino.js.org/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -122,20 +126,34 @@ To get a local copy up and running follow these steps.
 _Below is how to install and set up the app._
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/Muhammed-Rahif/Notepad.git
-   ```
+    ```sh
+    git clone https://github.com/Muhammed-Rahif/Notepad.git
+    ```
+1. Get inside:
+    ```sh
+    cd Notepad
+    ```
 1. Install npm packages
-   ```sh
-   npm install
-   ```
-### Running
+    ```sh
+    npm install
+    ```
+1. Optional: Neutralino for desktop development
+    ```sh
+    npm i -g @neutralinojs/neu
+    ```
+### Running the project
 #### Development: 
-```bash
-npm run dev
-```
+- Sveltekit:
+  ```sh
+  npm run dev
+  ```
+- Neutralino (desktop):
+  ```sh
+  neu update # or npx @neutralinojs/neu update
+  neu run # or npx @neutralinojs/neu run
+  ```
 #### Preview: 
-```bash
+```sh
 npm run build
 npm run preview
 ```

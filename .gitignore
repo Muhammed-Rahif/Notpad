@@ -4,7 +4,7 @@ node_modules
 .output
 .vercel
 /.svelte-kit
-/build
+build/
 
 # OS
 .DS_Store
@@ -19,3 +19,21 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+
+# Neutralinojs: from below
+
+# Developer tools' files
+.lite_workspace.lua
+
+# Neutralinojs binaries and builds
+/bin
+/dist
+/build
+
+# Neutralinojs client (minified)
+neutralino.js
+
+# Neutralinojs related files
+.storage
+*.log

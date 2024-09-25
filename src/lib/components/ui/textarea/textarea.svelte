@@ -107,17 +107,16 @@
     style="top: calc({caretPosition.top}px - 2px); left: {caretPosition.left}px; height: {caretPosition.height}px;"
   />
 </div>
-<Separator />
-<div
-  class="relative z-10 flex h-[24px] items-center justify-start gap-1 bg-primary-foreground px-1 text-sm"
->
-  <span>Line: {lineNo},</span>
-  <span>Column: {column}</span>
+<div class="absolute bottom-0 z-10 h-[24px] w-full bg-primary-foreground px-1">
+  <Separator />
+  <p class="flex h-full w-full items-center justify-start text-sm">
+    Line: {lineNo}, Column: {column}
+  </p>
 </div>
 
 <style>
   .fake-caret {
-    @apply absolute z-0 w-1 rounded-[2px] bg-primary duration-75;
+    @apply absolute z-0 w-0.5 rounded-[2px] bg-primary duration-75;
   }
   @keyframes blink {
     0% {

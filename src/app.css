@@ -82,6 +82,8 @@
 html,
 body {
   height: 100%;
+  overflow: scroll;
+  overflow: hidden;
 }
 
 * {
@@ -92,10 +94,6 @@ body {
 }
 
 /* https://stackoverflow.com/a/30680994/14781260 */
-.html {
-  overflow: scroll;
-  overflow-x: hidden;
-}
 ::-webkit-scrollbar {
   height: 0;
   width: 0; /* Remove scrollbar space */

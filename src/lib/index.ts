@@ -1,1 +1,1 @@
-export * from './helpers/editor-helper';
+export * from './helpers/notepad-helper';

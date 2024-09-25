@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-  import AppMenuBar from '@/components/AppMenuBar.svelte';
+  import MenuBar from '@/components/MenuBar.svelte';
   import Editors from '@/components/Editors.svelte';
   import SaveDialog from '@/components/SaveDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
@@ -10,5 +10,5 @@
 <Shortcuts />
 
 <!-- Actual UI -->
-<AppMenuBar />
+<MenuBar />
 <Editors />

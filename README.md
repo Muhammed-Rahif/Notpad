@@ -18,6 +18,8 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+<div align="center">
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -25,16 +27,18 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
+</div>
+
 
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Muhammed-Rahif/Notepad">
-    <img src="static/favicon.png" alt="Logo" width="80" height="80">
+  <a href="https://muhammed-rahif.github.io/Notepad/">
+    <img src="static/logo.png" alt="Logo" width="80" >
+    <h3 align="center">Notepad</h3>
   </a>
 
-  <h3 align="center">Notepad</h3>
   <p align="center">
     Windows like notepad for cross platform.
     <br />
@@ -174,7 +178,7 @@ Refer [CONTRIBUTING.md](CONTRIBUTING.md).
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

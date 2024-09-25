@@ -6,6 +6,7 @@
   import EditorTitle from './EditorTitle.svelte';
   import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
+  import { browser } from '$app/environment';
 
   interface MenuItems {
     label: string;
@@ -80,10 +81,15 @@
     }
   ];
 
-  $: isSingleEditor = $editors.length == 1;
+  let innerWidth = browser ? window.innerWidth : 0;
+
+  $: isXS = innerWidth <= 450;
+  $: tabsMode = $editors.length > 1; // compact mode will not available on mobile width (w<=450), also on pc when multiple editors.
   $: singleEditorId = $editors.at(0)!.id;
   $: singleEditorTitle = $editors.at(0)!.title;
 </script>
+
+<svelte:window bind:innerWidth />
 
 <Menubar.Root class="relative z-10 rounded-sm">
   {#each menuItems as { label, items }}
@@ -106,7 +112,7 @@
     </Menubar.Menu>
   {/each}
 
-  {#if isSingleEditor}
+  {#if !isXS && !tabsMode}
     <div
       transition:fade
       class="max-md:!ml-auto max-md:pr-3 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"

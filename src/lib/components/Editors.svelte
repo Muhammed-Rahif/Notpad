@@ -8,21 +8,11 @@
   import type { ButtonEventHandler } from 'bits-ui';
   import type { FormTextareaEvent } from './ui/textarea';
   import EditorTitle from './EditorTitle.svelte';
-  import { flyAndScale } from '@/utils';
   import { slide } from 'svelte/transition';
+  import { browser } from '$app/environment';
 
   let textarea: HTMLTextAreaElement | null = null; // reference to the textarea
-
-  // Focus on the textarea when the active tab changes
-  $: txtArea = textarea;
-  $: if (textarea && $activeTabId && txtArea) {
-    setTimeout(() => {
-      // console.info('Focusing on textarea:', $activeTabId);
-      txtArea.focus();
-      txtArea.setSelectionRange(txtArea.value.length, txtArea.value.length);
-    }, 120);
-  }
-  $: isSingleEditor = $editors.length == 1;
+  let innerWidth = browser ? window.innerWidth : 0;
 
   function onEditorClose(e: ButtonEventHandler<MouseEvent>, id: string) {
     e.preventDefault();
@@ -34,18 +24,31 @@
     NotepadHelper.updateContent($activeTabId, (e.target as HTMLTextAreaElement).value);
   }
 
-  $: tabsClass = isSingleEditor ? 'h-[calc(100%-60px)] w-full' : 'h-[calc(100%-96px)] w-full';
+  // Focus on the textarea when the active tab changes
+  $: txtArea = textarea;
+  $: if (textarea && $activeTabId && txtArea) {
+    setTimeout(() => {
+      // console.info('Focusing on textarea:', $activeTabId);
+      txtArea.focus();
+      txtArea.setSelectionRange(txtArea.value.length, txtArea.value.length);
+    }, 120);
+  }
+  $: isXS = innerWidth <= 450;
+  $: tabsMode = $editors.length > 1; // compact mode will not available on mobile width (w<=450), also on pc when multiple editors.
+  $: tabsClass = tabsMode ? 'h-[calc(100%-60px)] w-full' : 'h-[calc(100%-96px)] w-full';
 </script>
 
+<svelte:window bind:innerWidth />
+
 <Tabs.Root bind:value={$activeTabId} class={tabsClass}>
-  {#if !isSingleEditor}
+  {#if tabsMode || isXS}
     <div transition:slide>
       <Tabs.List class="w-full justify-start overflow-x-scroll rounded-t-none py-0.5 shadow">
         {#each $editors as { title, id }}
-          <Tabs.Trigger value={id} class={isSingleEditor ? '' : 'pr-1'}>
+          <Tabs.Trigger value={id} class={tabsMode ? 'pr-1' : ''}>
             <EditorTitle {title} {id} />
 
-            {#if !isSingleEditor}
+            {#if tabsMode}
               <Button
                 on:click={(e) => onEditorClose(e, id)}
                 size="sm"
@@ -61,7 +64,7 @@
     </div>
   {/if}
 
-  <!-- Only render one Textarea, which is active based on selected tab -->
+  <!-- Only render one Textarea, which is focused based on selected tab -->
   <Tabs.Content value={$activeTabId} class="mt-0 h-full">
     <Textarea
       bind:textarea

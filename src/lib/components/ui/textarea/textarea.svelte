@@ -85,6 +85,7 @@
     on:click={updateCaretPosition}
     on:keydown={updateCaretPosition}
     on:focus={updateCaretPosition}
+    on:resize={updateCaretPosition}
     bind:value
     {readonly}
     on:blur

@@ -2,6 +2,7 @@
   import { NotepadHelper } from '@/helpers/notepad-helper';
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
+  import { longpress } from '@/actions/longpress';
 
   export let title: string;
   export let id: string;
@@ -9,7 +10,7 @@
   let readonly = true;
   let input: HTMLInputElement;
 
-  function onDbClick(e: MouseEvent & { currentTarget: EventTarget & HTMLInputElement }) {
+  function allowEditing() {
     readonly = false;
 
     setTimeout(() => {
@@ -45,13 +46,16 @@
   <input
     bind:this={input}
     use:autoWidth
-    on:dblclick|stopPropagation={onDbClick}
+    on:dblclick|stopPropagation={allowEditing}
+    on:keydown={onKeydown}
+    on:longpress|stopPropagation={allowEditing}
     on:blur={onBlur}
     bind:value={title}
+    use:longpress={1000}
     type="text"
-    class="border-none bg-transparent font-semibold outline-none"
+    class="bordeone bg-transparent"
     maxlength={24}
     {readonly}
   />
-  <span class="-ml-1 text-primary/50">.txt</span>
+  <span class="-ml-2 text-primary/50">.txt</span>
 </form>

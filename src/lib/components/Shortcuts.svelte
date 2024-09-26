@@ -1,6 +1,5 @@
 <script lang="ts">
   import { NotepadHelper } from '@/helpers/notepad-helper';
-  import { isNeutralino } from '@/utils';
   import { shortcut, type ShortcutEventDetail } from '@svelte-put/shortcut';
 
   function dispatch(d: ShortcutEventDetail, cb: () => void) {
@@ -13,7 +12,7 @@
   use:shortcut={{
     trigger: {
       key: 'n',
-      modifier: isNeutralino() ? ['ctrl'] : ['ctrl', 'alt'],
+      modifier: window.isNeutralino ? ['ctrl'] : ['ctrl', 'alt'],
       callback: (d) => dispatch(d, NotepadHelper.createNew)
     }
   }}

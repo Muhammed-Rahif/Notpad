@@ -1,7 +1,6 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
   import { NotepadHelper } from '@/helpers/notepad-helper';
-  import { isNeutralino } from '@/utils';
   import { toggleMode } from 'mode-watcher';
   import EditorTitle from './EditorTitle.svelte';
   import { editors } from '@/store/store';
@@ -25,7 +24,7 @@
       items: [
         {
           label: 'New',
-          shortcut: isNeutralino() ? 'Ctrl+N' : 'Ctrl+Alt+N',
+          shortcut: isNeutralino ? 'Ctrl+N' : 'Ctrl+Alt+N',
           onClick: NotepadHelper.createNew
         },
         { label: 'Open...', shortcut: 'Ctrl+O' },

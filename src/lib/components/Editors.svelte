@@ -34,7 +34,7 @@
   }
   $: isXS = innerWidth <= 450;
   $: tabsMode = $editors.length > 1; // compact mode will not available on mobile width (w<=450), also on pc when multiple editors.
-  $: tabsClass = tabsMode ? 'h-[calc(100%-60px)] w-full' : 'h-[calc(100%-96px)] w-full';
+  $: tabsClass = tabsMode ? 'h-[calc(100%-96px)] w-full' : 'h-[calc(100%-60px)] w-full';
 </script>
 
 <svelte:window bind:innerWidth />

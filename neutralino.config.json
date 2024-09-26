@@ -16,7 +16,8 @@
       "height": 500,
       "minWidth": 400,
       "minHeight": 200,
-      "icon": "/www/favicon.png"
+      "icon": "/www/favicon.png",
+      "enableInspector": true
     }
   },
   "cli": {
@@ -25,7 +26,6 @@
     "extensionsPath": "/extensions/",
     "binaryVersion": "5.4.0",
     "clientVersion": "5.4.0",
-    "clientLibrary": "/public/js/neutralino.js",
     "frontendLibrary": {
       "patchFile": "/index.html",
       "devUrl": "http://localhost:5173",

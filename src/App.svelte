@@ -6,9 +6,6 @@
   import favIcon from '@/assets/imgs/favicon.png';
   import favIconDark from '@/assets/imgs/favicon-dark.png';
   import { mode, ModeWatcher } from 'mode-watcher';
-  import { init } from '@neutralinojs/lib';
-
-  init();
 </script>
 
 <!-- Procedually -->

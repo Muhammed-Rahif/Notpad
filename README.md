@@ -35,7 +35,7 @@
 <br />
 <div align="center">
   <a href="https://muhammed-rahif.github.io/Notepad/">
-    <img src="static/logo.png" alt="Logo" width="80" >
+    <img src="public/logo.png" alt="Logo" width="80" >
     <h3 align="center">Notepad</h3>
   </a>
 
@@ -268,5 +268,5 @@ export default writable(0)
 [license-url]: https://github.com/Muhammed-Rahif/Notepad/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/Muhammed-Rahif
-[product-screenshot]: static/screenshot.png
+[product-screenshot]: public/screenshot.png
 

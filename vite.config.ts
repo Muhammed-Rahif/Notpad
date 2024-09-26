@@ -5,7 +5,7 @@ import path from 'path';
 import fs from 'fs';
 
 const authInfoFilePath = path.join(__dirname, './.tmp', 'auth_info.json');
-const isNeutralino = process.env._?.includes('neu');
+const isNeutralino = process.env.isNeutralino || process.env._?.includes('neu');
 
 // https://github.com/neutralinojs/neutralinojs/issues/909#issuecomment-1493518600.
 const neutralino = (): Plugin => {

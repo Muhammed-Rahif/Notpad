@@ -22,6 +22,8 @@ jobs:
 
       - name: Build Neutralino
         run: npm run build-neu
+        env:
+          isNeutralino: true
 
       - name: Semantic Release
         run: npx semantic-release

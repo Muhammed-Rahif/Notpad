@@ -11,9 +11,13 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d www -m 'chore(gh-pages): updates' -f --nojekyll",
     "lint": "prettier --check . && eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prebuild-neu": "npx @neutralinojs/neu update",
+    "build-neu": "npx @neutralinojs/neu build --release"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@sveltejs/vite-plugin-svelte": "^3.1.0",
     "@tsconfig/svelte": "^5.0.4",
     "@types/eslint": "^9.6.0",
@@ -31,6 +35,8 @@
     "prettier": "^3.3.2",
     "prettier-plugin-svelte": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.6.5",
+    "semantic-release": "^24.1.1",
+    "semantic-release-replace-plugin": "^1.2.7",
     "svelte": "^4.2.15",
     "svelte-check": "^3.7.0",
     "tailwindcss": "^3.4.9",

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/semantic-release.json",
+  "branches": [
+    "main",
+    {
+      "name": "alpha",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "semantic-release-replace-plugin",
+      {
+        "replacements": [
+          {
+            "files": [
+              "package.json",
+              "neutralino.config.json"
+            ],
+            "from": "\"version\": \".*\"",
+            "to": "\"version\": \"${nextRelease.version}\"",
+            "results": [
+              {
+                "file": "package.json",
+                "hasChanged": true,
+                "numMatches": 1,
+                "numReplacements": 1
+              },
+              {
+                "file": "neutralino.config.json",
+                "hasChanged": true,
+                "numMatches": 1,
+                "numReplacements": 1
+              }
+            ],
+            "countMatches": true
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dist/Notepad/Notepad-linux_arm64",
+            "label": "Notepad-linux_arm64-v${nextRelease.version}"
+          },
+          {
+            "path": "dist/Notepad/Notepad-linux_armhf",
+            "label": "Notepad-linux_armhf-v${nextRelease.version}"
+          },
+          {
+            "path": "dist/Notepad/Notepad-linux_x64",
+            "label": "Notepad-linux_x64-v${nextRelease.version}"
+          },
+          {
+            "path": "dist/Notepad/Notepad-mac_arm64",
+            "label": "Notepad-mac_arm64-v${nextRelease.version}"
+          },
+          {
+            "path": "dist/Notepad/Notepad-mac_universal",
+            "label": "Notepad-mac_universal-v${nextRelease.version}"
+          },
+          {
+            "path": "dist/Notepad/Notepad-mac_x64",
+            "label": "Notepad-mac_x64-v${nextRelease.version}"
+          },
+          {
+            "path": "dist/Notepad/Notepad-win_x64.exe",
+            "label": "Notepad-win_x64-v${nextRelease.version}.exe"
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json",
+          "neutralino.config.json",
+          "CHANGELOG.md"
+        ]
+      }
+    ]
+  ],
+  "dryRun": false
+}

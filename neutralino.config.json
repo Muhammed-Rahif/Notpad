@@ -17,7 +17,7 @@
       "minWidth": 400,
       "minHeight": 200,
       "icon": "/www/favicon.png",
-      "enableInspector": true
+      "enableInspector": false
     }
   },
   "cli": {

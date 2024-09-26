@@ -5,6 +5,8 @@ import path from 'path';
 import fs from 'fs';
 
 const authInfoFilePath = path.join(__dirname, './.tmp', 'auth_info.json');
+const isNeutralino = process.env._?.includes('neu');
+
 // https://github.com/neutralinojs/neutralinojs/issues/909#issuecomment-1493518600.
 const neutralino = (): Plugin => {
   let config: ConfigEnv;
@@ -43,7 +45,7 @@ export default defineConfig({
       '@': path.resolve('./src/lib')
     }
   },
-  // base: '/Notepad',
+  base: isNeutralino ? '' : '/Notepad',
   build: {
     outDir: 'www'
   },
@@ -52,7 +54,7 @@ export default defineConfig({
     strictPort: true
   },
   define: {
-    isNeutralino: fs.existsSync(authInfoFilePath)
+    isNeutralino
   },
   plugins: [
     svelte(),

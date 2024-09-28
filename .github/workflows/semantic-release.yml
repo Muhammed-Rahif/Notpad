@@ -5,12 +5,11 @@ on:
       - main
       - alpha
 jobs:
-  semantic-release:
-    name: Semantic Release
+  build-and-upload:
+    name: Build and Upload Artifacts
     permissions:
       contents: write
     strategy:
-      fail-fast: false
       matrix:
         include:
           # - platform: 'macos-latest' # for Arm based macs (M1 and above).
@@ -59,7 +58,64 @@ jobs:
       - name: Build Tauri
         run: npm run tauri build ${{ matrix.args }}
 
-      - name: Semantic Release
-        run: npx semantic-release
+      - name: Move artifacts to outputs
+        run: |
+          mkdir outputs
+
+      - name: Move macOS artifacts to outputs
+        if: matrix.platform == 'macos-latest'
+        run: |
+          cp -r src-tauri/target/universal-apple-darwin/release/bundle/dmg/Notepad_*_universal.dmg outputs/
+
+      - name: Move Ubuntu artifacts to outputs
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          cp src-tauri/target/release/bundle/deb/notepad_*_amd64.deb outputs/
+          cp src-tauri/target/release/bundle/rpm/notepad-*.x86_64.rpm outputs/
+
+      - name: Move Windows artifacts to outputs
+        if: matrix.platform == 'windows-latest'
+        run: |
+          cp src-tauri/target/release/bundle/msi/Notepad_*_x64_en-US.msi outputs/
+          cp src-tauri/target/release/bundle/nsis/Notepad_*_x64-setup.exe outputs/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-artifacts-${{ strategy.job-index }}
+          path: outputs/
+          # path: |
+          #   src-tauri/target/universal-apple-darwin/release/bundle/macos/Notepad.app
+          #   src-tauri/target/universal-apple-darwin/release/bundle/dmg/Notepad_*_universal.dmg
+          #   src-tauri/target/release/bundle/deb/notepad_*_amd64.deb
+          #   src-tauri/target/release/bundle/rpm/notepad-*.x86_64.rpm
+          #   src-tauri/target/release/bundle/msi/Notepad_*_x64_en-US.msi
+          #   src-tauri/target/release/bundle/nsis/Notepad_*_x64-setup.exe
+          retention-days: 1
+
+  semantic-release:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    needs: build-and-upload
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: tauri-artifacts-*
+          merge-multiple: true
+
+      - name: Run Semantic Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npx semantic-release

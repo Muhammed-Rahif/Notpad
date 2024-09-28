@@ -61,12 +61,11 @@
       "@semantic-release/github",
       {
         "assets": [
-          "src-tauri/target/universal-apple-darwin/release/bundle/macos/Notepad.app",
-          "src-tauri/target/universal-apple-darwin/release/bundle/dmg/Notepad_*_universal.dmg",
-          "src-tauri/target/release/bundle/deb/notepad_*_amd64.deb",
-          "src-tauri/target/release/bundle/rpm/notepad-*-1.x86_64.rpm",
-          "src-tauri/target/release/bundle/msi/Notepad_*_x64_en-US.msi",
-          "src-tauri/target/release/bundle/nsis/Notepad_*_x64-setup.exe"
+          "Notepad_*_universal.dmg",
+          "notepad_*_amd64.deb",
+          "notepad-*.x86_64.rpm",
+          "Notepad_*_x64_en-US.msi",
+          "Notepad_*_x64-setup.exe"
         ]
       }
     ],

@@ -40,7 +40,7 @@
       },
       "resources": [],
       "shortDescription": "",
-      "targets": "all",
+      "targets": ["app", "deb", "dmg", "msi", "rpm", "nsis", "updater"],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",

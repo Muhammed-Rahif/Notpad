@@ -5,7 +5,7 @@ description = "Windows like notepad for cross platform."
 authors = ["Muhammed-Rahif"]
 license = "MIT"
 repository = "https://github.com/Muhammed-Rahif/Notepad"
-default-run = "app"
+default-run = "notepad"
 edition = "2021"
 rust-version = "1.60"
 

@@ -20,7 +20,7 @@ This project uses **semantic versioning** and **`semantic-release`** to automate
 
 Branches:
 - **`main`**: Production-ready code
-- **`develop`**: Alpha and pre-release code
+- **`alpha`**: Alpha and pre-release code
 
 ### Semantic Commit Messages:
 While using semantic commit messages is not mandatory, it helps ensure that automated releases follow [semantic versioning](https://semver.org/). You can learn more about the [semantic commit guidelines here](https://www.conventionalcommits.org/).
@@ -40,10 +40,10 @@ While using semantic commit messages is not mandatory, it helps ensure that auto
     cd Notepad
     ```
 
-4. Checkout the `develop` branch (for new features and fixes) or `main` (for hotfixes):
+4. Checkout the `alpha` branch (for new features and fixes) or `main` (for hotfixes):
 
     ```bash
-    git checkout develop
+    git checkout alpha
     ```
 
 5. Create a new branch for your changes:

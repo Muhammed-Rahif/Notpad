@@ -12,49 +12,9 @@
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
     [
-      "semantic-release-replace-plugin",
+      "@semantic-release/exec",
       {
-        "replacements": [
-          {
-            "files": [
-              "package.json",
-              "src-tauri/tauri.conf.json"
-            ],
-            "from": "\"version\": \".*\"",
-            "to": "\"version\": \"${nextRelease.version}\"",
-            "results": [
-              {
-                "file": "package.json",
-                "hasChanged": true,
-                "numMatches": 1,
-                "numReplacements": 1
-              },
-              {
-                "file": "src-tauri/tauri.conf.json",
-                "hasChanged": true,
-                "numMatches": 1,
-                "numReplacements": 1
-              }
-            ],
-            "countMatches": true
-          },
-          {
-            "files": [
-              "src-tauri/Cargo.toml"
-            ],
-            "from": "^version = \".*\"",
-            "to": "version = \"${nextRelease.version}\"",
-            "results": [
-              {
-                "file": "src-tauri/Cargo.toml",
-                "hasChanged": true,
-                "numMatches": 1,
-                "numReplacements": 1
-              }
-            ],
-            "countMatches": true
-          }
-        ]
+        "verifyReleaseCmd": "node scripts/versioning.js ${nextRelease.version}"
       }
     ],
     [
@@ -80,6 +40,5 @@
         ]
       }
     ]
-  ],
-  "dryRun": false
+  ]
 }

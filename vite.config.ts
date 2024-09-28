@@ -1,41 +1,7 @@
 import { VitePWA } from 'vite-plugin-pwa';
-import { ConfigEnv, defineConfig, Plugin } from 'vite';
+import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import path from 'path';
-import fs from 'fs';
-
-const authInfoFilePath = path.join(__dirname, './.tmp', 'auth_info.json');
-const isNeutralino = process.env.isNeutralino || process.env._?.includes('neu');
-
-// https://github.com/neutralinojs/neutralinojs/issues/909#issuecomment-1493518600.
-const neutralino = (): Plugin => {
-  let config: ConfigEnv;
-
-  return {
-    name: 'neutralino',
-    configResolved(resolvedConfig: ConfigEnv) {
-      config = resolvedConfig;
-    },
-    async transformIndexHtml(html: string) {
-      if (config.mode === 'development') {
-        if (!fs.existsSync(authInfoFilePath)) return;
-
-        const auth_info_file = fs.readFileSync(authInfoFilePath, {
-          encoding: 'utf-8'
-        });
-
-        const auth_info = JSON.parse(auth_info_file);
-
-        const port = auth_info.nlPort;
-        return html.replace(
-          '<script src="__neutralino_globals.js"></script>',
-          `<script src="http://localhost:${port}/__neutralino_globals.js"></script>`
-        );
-      }
-      return html;
-    }
-  };
-};
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -45,7 +11,7 @@ export default defineConfig({
       '@': path.resolve('./src/lib')
     }
   },
-  base: isNeutralino ? '' : '/Notepad',
+  base: '/Notepad',
   build: {
     outDir: 'www'
   },
@@ -53,12 +19,8 @@ export default defineConfig({
     port: 5173,
     strictPort: true
   },
-  define: {
-    isNeutralino
-  },
   plugins: [
     svelte(),
-    neutralino(),
     VitePWA({
       registerType: 'prompt',
       injectRegister: false,

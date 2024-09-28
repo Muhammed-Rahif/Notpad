@@ -12,13 +12,13 @@
     "deploy": "gh-pages -d www -m 'chore(gh-pages): updates' -f --nojekyll",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
-    "prebuild-neu": "npx @neutralinojs/neu update",
-    "build-neu": "npx @neutralinojs/neu build --release"
+    "tauri": "tauri"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@sveltejs/vite-plugin-svelte": "^3.1.0",
+    "@tauri-apps/cli": "^1.6.2",
     "@tsconfig/svelte": "^5.0.4",
     "@types/eslint": "^9.6.0",
     "@types/lodash.throttle": "^4.1.9",
@@ -52,7 +52,6 @@
     "sharp-ico": "0.1.5"
   },
   "dependencies": {
-    "@neutralinojs/lib": "^5.4.0",
     "@svelte-put/shortcut": "^3.1.1",
     "bits-ui": "^0.21.15",
     "clsx": "^2.1.1",

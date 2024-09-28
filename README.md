@@ -90,7 +90,7 @@
 [![Svelte][svelte-logo]][svelte-url]
 [![Tailwindcss][tailwind-logo]][tailwind-url]
 [![Shadcn][shadcnui-logo]][shadcnui-url]
-[![neutralino][neutralino-logo]][neutralino-url]
+[![Tauri][tauri-logo]][tauri-url]
 
 [svelte-logo]: https://img.shields.io/badge/svelte-000000?style=for-the-badge&logo=svelte
 [svelte-url]: https://svelte.dev/
@@ -98,8 +98,8 @@
 [tailwind-url]: https://tailwindcss.com/
 [shadcnui-logo]: https://img.shields.io/badge/shadcn/svelte-000000?style=for-the-badge&logo=shadcnui&logoColor=orange
 [shadcnui-url]: https://shadcn-svelte.com/
-[neutralino-logo]: https://img.shields.io/badge/Neutralino-000000?style=for-the-badge&logo=neutralinojs
-[neutralino-url]: https://neutralino.js.org/
+[tauri-logo]: https://img.shields.io/badge/Tauri-000000?style=for-the-badge&logo=tauri
+[tauri-url]: https://tauri.app/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,10 +130,6 @@ _Below is how to install and set up the app._
    ```sh
    npm install
    ```
-1. Optional: Neutralino for desktop development
-   ```sh
-   npm i -g @neutralinojs/neu
-   ```
 
 ### Running the project
 
@@ -142,11 +138,6 @@ _Below is how to install and set up the app._
 - Svelte:
   ```sh
   npm run dev
-  ```
-- Neutralino (desktop):
-  ```sh
-  neu update # or npx @neutralinojs/neu update
-  neu run # or npx @neutralinojs/neu run
   ```
 
 #### Preview:
@@ -162,7 +153,7 @@ npm run preview
 
 ## Roadmap
 
-- [ ] Semantic Release
+- [x] Semantic Release
 - [x] Desktop Support
 - [ ] Multi-language Support
   - [ ] Chinese
@@ -199,7 +190,7 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 
 ## Contact
 
-Your Name - [@Muhammed_Rahif](https://x.com/Muhammed_Rahif) - rahifpalliyalil@gmail.com
+Muhammed Rahif - [@Muhammed_Rahif](https://x.com/Muhammed_Rahif) - rahifpalliyalil@gmail.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -207,9 +198,8 @@ Your Name - [@Muhammed_Rahif](https://x.com/Muhammed_Rahif) - rahifpalliyalil@gm
 
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+Resources that are helpful and would like to give credit to.
 
-- [Is there a way to create a NeutralinoJS project based on Svelte and Typescript?](https://stackoverflow.com/a/71714042/14781260)
 - [Localforage](https://localforage.github.io/localForage)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

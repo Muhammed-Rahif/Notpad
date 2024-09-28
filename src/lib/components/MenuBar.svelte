@@ -24,7 +24,7 @@
       items: [
         {
           label: 'New',
-          shortcut: isNeutralino ? 'Ctrl+N' : 'Ctrl+Alt+N',
+          shortcut: 'Ctrl+Alt+N',
           onClick: NotepadHelper.createNew
         },
         { label: 'Open...', shortcut: 'Ctrl+O' },

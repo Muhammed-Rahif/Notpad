@@ -7,7 +7,18 @@ on:
 jobs:
   semantic-release:
     name: Semantic Release
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      matrix:
+        include:
+          - platform: 'macos-latest' # for Arm based macs (M1 and above).
+            args: '--target aarch64-apple-darwin'
+          - platform: 'macos-latest' # for Intel based macs.
+            args: '--target x86_64-apple-darwin'
+          - platform: 'ubuntu-22.04' # for Tauri v1 you could replace this with ubuntu-20.04.
+            args: ''
+          - platform: 'windows-latest'
+            args: ''
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,12 +31,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Neutralino
-        run: npm run build-neu
-        env:
-          isNeutralino: true
+      - name: Build Tauri
+        run: npm run tauri build ${{ matrix.args }}
 
       - name: Semantic Release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Log outputs
+        run: |
+          tree src-tauri/target/release/bundle -L 2

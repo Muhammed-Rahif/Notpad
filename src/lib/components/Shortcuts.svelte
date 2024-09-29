@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { isTauri } from '$lib';
   import { NotepadHelper } from '@/helpers/notepad-helper';
   import { NotepadFileHelper } from '@/helpers/notepad-file-save'; 
   import { shortcut, type ShortcutEventDetail } from '@svelte-put/shortcut';
@@ -28,7 +29,7 @@
     trigger: [
       {
       key: 'n',
-      modifier: window.isNeutralino ? ['ctrl'] : ['ctrl', 'alt'],
+      modifier: isTauri ? ['ctrl'] : ['ctrl', 'alt'],
       callback: (d) => dispatch(d, NotepadHelper.createNew)
     },
     {
@@ -40,5 +41,12 @@
     ]
     
    
+  }}
+  use:shortcut={{
+    trigger: {
+      key: 'o',
+      modifier: ['ctrl'],
+      callback: (d) => dispatch(d, NotepadHelper.openFile)
+    }
   }}
 />

@@ -11,7 +11,7 @@ export type EditorData = {
 export const saveDialog = writable(false);
 export const editors = writable<EditorData[]>([
   {
-    title: 'Untitled',
+    title: 'Untitled.txt',
     content: '',
     id: uuidv4()
   }

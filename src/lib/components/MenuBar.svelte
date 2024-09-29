@@ -1,10 +1,13 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
-  import { NotepadHelper } from '@/helpers/notepad-helper';
   import { toggleMode } from 'mode-watcher';
   import EditorTitle from './EditorTitle.svelte';
   import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
+  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { NotepadFile } from '@/helpers/open';
+
+
 
   interface MenuItems {
     label: string;
@@ -23,11 +26,13 @@
       label: 'File',
       items: [
         {
-          label: 'New',
-          shortcut: isNeutralino ? 'Ctrl+N' : 'Ctrl+Alt+N',
-          onClick: NotepadHelper.createNew
-        },
-        { label: 'Open...', shortcut: 'Ctrl+O' },
+        label: 'New',
+        shortcut: isNeutralino ? 'Ctrl+N' : 'Ctrl+Alt+N',
+        onClick: NotepadHelper.createNew
+      },
+        { label: 'Open...', shortcut: 'Ctrl+O',    onClick: () => {
+          NotepadFile.openFile();
+        }},
         { label: 'Save', shortcut: 'Ctrl+S' },
         { label: 'Save as...' },
         { type: 'separator' },

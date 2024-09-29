@@ -60,5 +60,4 @@
     maxlength={24}
     {readonly}
   />
-  <span class="-ml-2 text-primary/50">.txt</span>
 </form>

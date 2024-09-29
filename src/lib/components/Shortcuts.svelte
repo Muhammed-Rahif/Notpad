@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { isTauri } from '$lib';
   import { NotepadHelper } from '@/helpers/notepad-helper';
   import { shortcut, type ShortcutEventDetail } from '@svelte-put/shortcut';
 
@@ -12,8 +13,15 @@
   use:shortcut={{
     trigger: {
       key: 'n',
-      modifier: ['ctrl', 'alt'],
+      modifier: isTauri ? ['ctrl'] : ['ctrl', 'alt'],
       callback: (d) => dispatch(d, NotepadHelper.createNew)
+    }
+  }}
+  use:shortcut={{
+    trigger: {
+      key: 'o',
+      modifier: ['ctrl'],
+      callback: (d) => dispatch(d, NotepadHelper.openFile)
     }
   }}
 />

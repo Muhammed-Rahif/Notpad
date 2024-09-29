@@ -1,10 +1,14 @@
 <script lang="ts">
-  import * as Menubar from '@/components/ui/menubar';
+ import * as Menubar from '@/components/ui/menubar';
   import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { NotepadFileHelper } from '@/helpers/notepad-file-save';  
   import { toggleMode } from 'mode-watcher';
   import EditorTitle from './EditorTitle.svelte';
   import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
+
+  export let currentEditorContent: string; // Accept currentEditorContent as a prop
+ 
 
   interface MenuItems {
     label: string;
@@ -28,8 +32,14 @@
           onClick: NotepadHelper.createNew
         },
         { label: 'Open...', shortcut: 'Ctrl+O' },
-        { label: 'Save', shortcut: 'Ctrl+S' },
-        { label: 'Save as...' },
+        { 
+          label: 'Save', 
+          shortcut: 'Ctrl+S', 
+          onClick: () => NotepadFileHelper.saveFile(currentEditorContent)
+        },
+        { label: 'Save as...',
+         onClick: () => NotepadFileHelper.saveFile(currentEditorContent)
+        },
         { type: 'separator' },
         { label: 'Print', shortcut: 'Ctrl+P' },
         { type: 'separator' },

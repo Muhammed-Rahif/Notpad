@@ -1,5 +1,7 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/Muhammed-Rahif/Notepad/pull/73 -->
+
 <a id="readme-top"></a>
+
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -7,8 +9,6 @@
 *** Don't forget to give the project a star!
 *** Thanks again! Now go create something AMAZING! :D
 -->
-
-
 
 <!-- PROJECT SHIELDS -->
 <!--
@@ -29,15 +29,13 @@
 
 </div>
 
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://muhammed-rahif.github.io/Notepad/">
     <img src="public/logo.png" alt="Logo" width="80" >
-    <h3 align="center">Notepad</h3>
   </a>
+  <h3 align="center">Notepad</h3>
 
   <p align="center">
     Windows like notepad for cross platform.
@@ -52,8 +50,6 @@
     <a href="https://github.com/Muhammed-Rahif/Notepad/issues/new?labels=enhancement">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -85,8 +81,8 @@
 <!-- ## About The Project -->
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
-
 ## Screenshot
+
 [![Product Name Screen Shot][product-screenshot]](https://muhammed-rahif.github.io/Notepad/)
 
 ## Built With
@@ -94,24 +90,21 @@
 [![Svelte][svelte-logo]][svelte-url]
 [![Tailwindcss][tailwind-logo]][tailwind-url]
 [![Shadcn][shadcnui-logo]][shadcnui-url]
-[![neutralino][neutralino-logo]][neutralino-url]
+[![Tauri][tauri-logo]][tauri-url]
 
 [svelte-logo]: https://img.shields.io/badge/svelte-000000?style=for-the-badge&logo=svelte
 [svelte-url]: https://svelte.dev/
-
 [tailwind-logo]: https://img.shields.io/badge/tailwind-000000?style=for-the-badge&logo=tailwindcss
 [tailwind-url]: https://tailwindcss.com/
-
 [shadcnui-logo]: https://img.shields.io/badge/shadcn/svelte-000000?style=for-the-badge&logo=shadcnui&logoColor=orange
 [shadcnui-url]: https://shadcn-svelte.com/
-
-[neutralino-logo]: https://img.shields.io/badge/Neutralino-000000?style=for-the-badge&logo=neutralinojs
-[neutralino-url]: https://neutralino.js.org/
+[tauri-logo]: https://img.shields.io/badge/Tauri-000000?style=for-the-badge&logo=tauri
+[tauri-url]: https://tauri.app/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 This is how you can setup this project locally.
@@ -119,40 +112,36 @@ To get a local copy up and running follow these steps.
 
 ### Prerequisites
 
-* [Node.js with npm](https://nodejs.org/en/download/)
+- [Node.js with npm](https://nodejs.org/en/download/)
 
 ### Installation
 
 _Below is how to install and set up the app._
 
 1. Clone the repo
-    ```sh
-    git clone https://github.com/Muhammed-Rahif/Notepad.git
-    ```
+   ```sh
+   git clone https://github.com/Muhammed-Rahif/Notepad.git
+   ```
 1. Get inside:
-    ```sh
-    cd Notepad
-    ```
+   ```sh
+   cd Notepad
+   ```
 1. Install npm packages
-    ```sh
-    npm install
-    ```
-1. Optional: Neutralino for desktop development
-    ```sh
-    npm i -g @neutralinojs/neu
-    ```
+   ```sh
+   npm install
+   ```
+
 ### Running the project
-#### Development: 
+
+#### Development:
+
 - Svelte:
   ```sh
   npm run dev
   ```
-- Neutralino (desktop):
-  ```sh
-  neu update # or npx @neutralinojs/neu update
-  neu run # or npx @neutralinojs/neu run
-  ```
-#### Preview: 
+
+#### Preview:
+
 ```sh
 npm run build
 npm run preview
@@ -160,24 +149,23 @@ npm run preview
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- ROADMAP -->
+
 ## Roadmap
 
-- [ ] Semantic Release
-- [ ] Desktop Support
+- [x] Semantic Release
+- [x] Desktop Support
 - [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
+  - [ ] Chinese
+  - [ ] Spanish
+  - [ ] Malayalam
 
 See the [open issues](https://github.com/Muhammed-Rahif/Notepad/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Refer [CONTRIBUTING.md](CONTRIBUTING.md).
@@ -190,38 +178,31 @@ Refer [CONTRIBUTING.md](CONTRIBUTING.md).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
+
 ## Contact
 
-Your Name - [@Muhammed_Rahif](https://x.com/Muhammed_Rahif) - rahifpalliyalil@gmail.com
-
+Muhammed Rahif - [@Muhammed_Rahif](https://x.com/Muhammed_Rahif) - rahifpalliyalil@gmail.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+Resources that are helpful and would like to give credit to.
 
-* [Is there a way to create a NeutralinoJS project based on Svelte and Typescript?](
-https://stackoverflow.com/a/71714042/14781260)
-* [Localforage](https://localforage.github.io/localForage)
+- [Localforage](https://localforage.github.io/localForage)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ## FAQ
 
@@ -246,16 +227,15 @@ If you have state that's important to retain within a component, consider creati
 ```ts
 // store.ts
 // An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+import { writable } from 'svelte/store';
+export default writable(0);
 ```
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/Muhammed-Rahif/Notepad.svg?style=for-the-badge
 [contributors-url]: https://github.com/Muhammed-Rahif/Notepad/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Muhammed-Rahif/Notepad.svg?style=for-the-badge
@@ -269,4 +249,3 @@ export default writable(0)
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/Muhammed-Rahif
 [product-screenshot]: public/screenshot.png
-

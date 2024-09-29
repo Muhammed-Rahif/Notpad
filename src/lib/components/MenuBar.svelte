@@ -5,9 +5,6 @@
   import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
   import { NotepadHelper } from '@/helpers/notepad-helper';
-  import { NotepadFile } from '@/helpers/open';
-
-
 
   interface MenuItems {
     label: string;
@@ -26,13 +23,11 @@
       label: 'File',
       items: [
         {
-        label: 'New',
-        shortcut: isNeutralino ? 'Ctrl+N' : 'Ctrl+Alt+N',
-        onClick: NotepadHelper.createNew
-      },
-        { label: 'Open...', shortcut: 'Ctrl+O',    onClick: () => {
-          NotepadFile.openFile();
-        }},
+          label: 'New',
+          shortcut: 'Ctrl+Alt+N',
+          onClick: NotepadHelper.openFile
+        },
+        { label: 'Open...', shortcut: 'Ctrl+O' },
         { label: 'Save', shortcut: 'Ctrl+S' },
         { label: 'Save as...' },
         { type: 'separator' },

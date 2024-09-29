@@ -12,7 +12,7 @@
   use:shortcut={{
     trigger: {
       key: 'n',
-      modifier: window.isNeutralino ? ['ctrl'] : ['ctrl', 'alt'],
+      modifier: ['ctrl', 'alt'],
       callback: (d) => dispatch(d, NotepadHelper.createNew)
     }
   }}

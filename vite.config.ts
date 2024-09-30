@@ -11,7 +11,7 @@ export default defineConfig({
       '@': path.resolve('./src/lib')
     }
   },
-  base: '/Notepad',
+  base: '/Notpad',
   build: {
     outDir: 'www'
   },
@@ -31,9 +31,9 @@ export default defineConfig({
       },
 
       manifest: {
-        name: 'Notepad',
-        short_name: 'Notepad',
-        description: 'Windows like notepad for cross platform.',
+        name: 'Notpad',
+        short_name: 'Notpad',
+        description: 'Windows like notpad for cross platform.',
         theme_color: '#888888',
         background_color: '#d4d4d4',
         icons: [
@@ -54,7 +54,7 @@ export default defineConfig({
         display: 'standalone',
         dir: 'ltr',
         lang: 'en-IN',
-        start_url: '/Notepad',
+        start_url: '/Notpad',
         scope: '.'
       },
 

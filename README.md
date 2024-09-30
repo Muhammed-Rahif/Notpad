@@ -1,4 +1,4 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/Muhammed-Rahif/Notepad/pull/73 -->
+<!-- Improved compatibility of back to top link: See: https://github.com/Muhammed-Rahif/Notpad/pull/73 -->
 
 <a id="readme-top"></a>
 
@@ -32,22 +32,22 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://muhammed-rahif.github.io/Notepad/">
+  <a href="https://muhammed-rahif.github.io/Notpad/">
     <img src="public/logo.png" alt="Logo" width="80" >
   </a>
-  <h3 align="center">Notepad</h3>
+  <h3 align="center">Notpad</h3>
 
   <p align="center">
-    Windows like notepad for cross platform.
+    Windows like notpad for cross platform.
     <br />
-    <a href="https://github.com/Muhammed-Rahif/Notepad/releases"><strong>Releases »</strong></a>
+    <a href="https://github.com/Muhammed-Rahif/Notpad/releases"><strong>Releases »</strong></a>
     <br />
     <br />
-    <a href="https://muhammed-rahif.github.io/Notepad/">Live</a>
+    <a href="https://muhammed-rahif.github.io/Notpad/">Live</a>
     ·
-    <a href="https://github.com/Muhammed-Rahif/Notepad/issues/new?labels=bug">Report Bug</a>
+    <a href="https://github.com/Muhammed-Rahif/Notpad/issues/new?labels=bug">Report Bug</a>
     ·
-    <a href="https://github.com/Muhammed-Rahif/Notepad/issues/new?labels=enhancement">Request Feature</a>
+    <a href="https://github.com/Muhammed-Rahif/Notpad/issues/new?labels=enhancement">Request Feature</a>
   </p>
 </div>
 
@@ -83,7 +83,7 @@
 
 ## Screenshot
 
-[![Product Name Screen Shot][product-screenshot]](https://muhammed-rahif.github.io/Notepad/)
+[![Product Name Screen Shot][product-screenshot]](https://muhammed-rahif.github.io/Notpad/)
 
 ## Built With
 
@@ -120,11 +120,11 @@ _Below is how to install and set up the app._
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Muhammed-Rahif/Notepad.git
+   git clone https://github.com/Muhammed-Rahif/Notpad.git
    ```
 1. Get inside:
    ```sh
-   cd Notepad
+   cd Notpad
    ```
 1. Install npm packages
    ```sh
@@ -160,7 +160,7 @@ npm run preview
   - [ ] Spanish
   - [ ] Malayalam
 
-See the [open issues](https://github.com/Muhammed-Rahif/Notepad/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/Muhammed-Rahif/Notpad/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -172,8 +172,8 @@ Refer [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Top contributors:
 
-<a href="https://github.com/Muhammed-Rahif/Notepad/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Muhammed-Rahif/Notepad" alt="contrib.rocks image" />
+<a href="https://github.com/Muhammed-Rahif/Notpad/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Muhammed-Rahif/Notpad" alt="contrib.rocks image" />
 </a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -236,16 +236,16 @@ export default writable(0);
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/Muhammed-Rahif/Notepad.svg?style=for-the-badge
-[contributors-url]: https://github.com/Muhammed-Rahif/Notepad/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Muhammed-Rahif/Notepad.svg?style=for-the-badge
-[forks-url]: https://github.com/Muhammed-Rahif/Notepad/network/members
-[stars-shield]: https://img.shields.io/github/stars/Muhammed-Rahif/Notepad.svg?style=for-the-badge
-[stars-url]: https://github.com/Muhammed-Rahif/Notepad/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Muhammed-Rahif/Notepad.svg?style=for-the-badge
-[issues-url]: https://github.com/Muhammed-Rahif/Notepad/issues
-[license-shield]: https://img.shields.io/github/license/Muhammed-Rahif/Notepad.svg?style=for-the-badge
-[license-url]: https://github.com/Muhammed-Rahif/Notepad/blob/main/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/Muhammed-Rahif/Notpad.svg?style=for-the-badge
+[contributors-url]: https://github.com/Muhammed-Rahif/Notpad/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Muhammed-Rahif/Notpad.svg?style=for-the-badge
+[forks-url]: https://github.com/Muhammed-Rahif/Notpad/network/members
+[stars-shield]: https://img.shields.io/github/stars/Muhammed-Rahif/Notpad.svg?style=for-the-badge
+[stars-url]: https://github.com/Muhammed-Rahif/Notpad/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Muhammed-Rahif/Notpad.svg?style=for-the-badge
+[issues-url]: https://github.com/Muhammed-Rahif/Notpad/issues
+[license-shield]: https://img.shields.io/github/license/Muhammed-Rahif/Notpad.svg?style=for-the-badge
+[license-url]: https://github.com/Muhammed-Rahif/Notpad/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/Muhammed-Rahif
 [product-screenshot]: public/screenshot.png

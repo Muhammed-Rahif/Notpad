@@ -1,6 +1,6 @@
 <script>
   import * as AlertDialog from '@/components/ui/alert-dialog';
-  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { NotpadHelper } from '@/helpers/notpad-helper';
   import { saveDialog } from '@/store/store';
 </script>
 
@@ -13,7 +13,7 @@
     <AlertDialog.Footer>
       <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
       <AlertDialog.Cancel>No</AlertDialog.Cancel>
-      <AlertDialog.Action autofocus on:click={() => NotepadHelper.createNew()}>
+      <AlertDialog.Action autofocus on:click={() => NotpadHelper.createNew()}>
         Yes
       </AlertDialog.Action>
     </AlertDialog.Footer>

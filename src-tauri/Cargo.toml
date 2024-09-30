@@ -1,11 +1,11 @@
 [package]
-name = "notepad"
+name = "notpad"
 version = "0.0.0"
-description = "Windows like notepad for cross platform."
+description = "Windows like notpad for cross platform."
 authors = ["Muhammed-Rahif"]
 license = "MIT"
-repository = "https://github.com/Muhammed-Rahif/Notepad"
-default-run = "notepad"
+repository = "https://github.com/Muhammed-Rahif/Notpad"
+default-run = "notpad"
 edition = "2021"
 rust-version = "1.60"
 

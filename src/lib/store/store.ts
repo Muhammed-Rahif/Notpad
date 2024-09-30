@@ -35,7 +35,7 @@ localforage.getItem<string>(ACTIVE_TAB_ID_STORAGE_KEY).then((value) => {
 });
 
 localforage.config({
-  name: 'Notepad',
+  name: 'Notpad',
   driver: localforage.INDEXEDDB
 });
 

@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { NotpadHelper } from '@/helpers/notpad-helper';
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
+  import type { EditorData } from '@/store/store';
 
-  export let title: string;
-  export let id: string;
+  export let editor: EditorData;
 
   let readonly = true;
   let input: HTMLInputElement;
@@ -20,10 +20,10 @@
 
   async function submit() {
     const t = input.value.trim();
-    const isValidTitle = t !== '' && t.length > 0 && t.length <= 24;
+    const isValidFileName = t !== '' && t.length > 0 && t.length <= 24;
 
-    if (isValidTitle) {
-      NotepadHelper.updateTitle(id, t);
+    if (isValidFileName) {
+      NotpadHelper.updateFileName(editor.id, t);
       readonly = true;
 
       await tick(); // Ensure the DOM reflects the readonly change
@@ -38,14 +38,18 @@
   }
 
   async function onBlur() {
-    const t = input.value.trim();
-    const isValidTitle = t !== '' && t.length > 0 && t.length <= 24;
-    if (isValidTitle) return submit();
-    if (!readonly && isValidTitle) input.focus();
+    input.value = editor.fileName;
+    readonly = true;
   }
 </script>
 
 <form on:submit|preventDefault={submit}>
+  <!-- A expected behaviour is that the title will not be available to edit on file that opened from local or saved locally.
+  If you want to, you have save as it with new file-name/title. 
+  
+  Meaning only non-saved (saved on user local file system)
+  files can be rename the title by double click. 
+  -->
   <input
     bind:this={input}
     use:autoWidth
@@ -53,11 +57,13 @@
     on:keydown={onKeydown}
     on:longpress|stopPropagation={allowEditing}
     on:blur={onBlur}
-    bind:value={title}
+    value={editor.fileName}
     use:longpress={1000}
     type="text"
-    class="bordeone bg-transparent"
+    class="bordeone bg-transparent {!!editor.fileHandle
+      ? 'border-none border-transparent outline-none outline-transparent'
+      : ''}"
     maxlength={24}
-    {readonly}
+    readonly={!!editor.fileHandle || readonly}
   />
 </form>

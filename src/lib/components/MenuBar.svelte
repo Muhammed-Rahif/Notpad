@@ -1,17 +1,11 @@
 <script lang="ts">
-
   import * as Menubar from '@/components/ui/menubar';
-  import { NotepadHelper } from '@/helpers/notepad-helper';
-  import { NotepadFileHelper } from '@/helpers/notepad-file-save';  
   import { toggleMode } from 'mode-watcher';
   import EditorTitle from './EditorTitle.svelte';
   import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
- 
+  import { NotpadHelper } from '@/helpers/notpad-helper';
   import { isTauri } from '$lib';
-
-  export let currentEditorContent: string; // Accept currentEditorContent as a prop
- 
 
   interface MenuItems {
     label: string;
@@ -32,18 +26,16 @@
         {
           label: 'New',
           shortcut: isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N',
-          onClick: NotepadHelper.createNew
+          onClick: NotpadHelper.createNew
         },
- 
-        { label: 'Open...', shortcut: 'Ctrl+O', onClick: NotepadHelper.openFile },
-        { 
-          label: 'Save', 
-          shortcut: 'Ctrl+S', 
-          onClick: () => NotepadFileHelper.saveFile(currentEditorContent)
+
+        { label: 'Open...', shortcut: 'Ctrl+O', onClick: NotpadHelper.openFile },
+        {
+          label: 'Save',
+          shortcut: 'Ctrl+S',
+          onClick: NotpadHelper.saveFile
         },
-        { label: 'Save as...',
-         onClick: () => NotepadFileHelper.saveFile(currentEditorContent)
-        },
+        { label: 'Save as...', onClick: () => NotpadHelper.saveFile({ saveAs: true }) },
 
         { type: 'separator' },
         { label: 'Print', shortcut: 'Ctrl+P' },
@@ -90,7 +82,7 @@
     },
     {
       label: 'Help',
-      items: [{ label: 'About Notepad' }]
+      items: [{ label: 'About Notpad' }]
     }
   ];
 
@@ -98,8 +90,7 @@
 
   $: isXS = innerWidth <= 450;
   $: tabsMode = $editors.length > 1; // compact mode will not available on mobile width (w<=450), also on pc when multiple editors.
-  $: singleEditorId = $editors.at(0)!.id;
-  $: singleEditorTitle = $editors.at(0)!.title;
+  $: singleEditor = $editors.at(0)!;
 </script>
 
 <svelte:window bind:innerWidth />
@@ -130,7 +121,7 @@
       transition:fade
       class="max-md:!ml-auto md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
     >
-      <EditorTitle id={singleEditorId} title={singleEditorTitle} />
+      <EditorTitle editor={singleEditor} />
     </div>
   {/if}
 </Menubar.Root>

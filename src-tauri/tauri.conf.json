@@ -7,7 +7,7 @@
     "distDir": "../www"
   },
   "package": {
-    "productName": "Notepad",
+    "productName": "Notpad",
     "version": "0.0.0"
   },
   "tauri": {
@@ -29,7 +29,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "tech.rahif.notepad",
+      "identifier": "tech.rahif.notpad",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -58,7 +58,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "Notepad",
+        "title": "Notpad",
         "width": 800
       }
     ]

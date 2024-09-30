@@ -1,20 +1,22 @@
-<script lang="ts" context="module">
+<script lang="ts">
   import MenuBar from '@/components/MenuBar.svelte';
   import Editors from '@/components/Editors.svelte';
   import SaveDialog from '@/components/SaveDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
+  import { Toaster } from '@/components/ui/sonner';
   import favIcon from '@/assets/imgs/favicon.png';
   import favIconDark from '@/assets/imgs/favicon-dark.png';
   import { mode, ModeWatcher } from 'mode-watcher';
 </script>
 
-<!-- Procedually -->
-<SaveDialog />
-<Shortcuts />
-
 <!-- Actual UI -->
 <MenuBar />
 <Editors />
+
+<!-- Procedually -->
+<SaveDialog />
+<Shortcuts />
+<Toaster />
 
 <ModeWatcher />
 

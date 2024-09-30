@@ -4,7 +4,7 @@
   import CloseIcon from '@/components/icons/close.svelte';
   import Button from '@/components/ui/button/button.svelte';
   import { activeTabId, editors } from '@/store/store';
-  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { NotpadHelper } from '@/helpers/notpad-helper';
   import type { ButtonEventHandler } from 'bits-ui';
   import type { FormTextareaEvent } from './ui/textarea';
   import EditorTitle from './EditorTitle.svelte';
@@ -16,11 +16,11 @@
   function onEditorClose(e: ButtonEventHandler<MouseEvent>, id: string) {
     e.preventDefault();
     e.stopPropagation();
-    NotepadHelper.remove(id);
+    NotpadHelper.remove(id);
   }
 
   function onTextareaChange(e: FormTextareaEvent<Event>) {
-    NotepadHelper.updateContent($activeTabId, (e.target as HTMLTextAreaElement).value);
+    NotpadHelper.updateContent($activeTabId, (e.target as HTMLTextAreaElement).value);
   }
 
   // Focus on the textarea when the active tab changes
@@ -43,13 +43,13 @@
   {#if tabsMode || isXS}
     <div transition:slide>
       <Tabs.List class="w-full justify-start overflow-x-scroll rounded-t-none py-0.5 shadow">
-        {#each $editors as { title, id }}
-          <Tabs.Trigger value={id} class={tabsMode ? 'pr-1' : ''}>
-            <EditorTitle {title} {id} />
+        {#each $editors as editor}
+          <Tabs.Trigger value={editor.id} class={tabsMode ? 'pr-1' : ''}>
+            <EditorTitle {editor} />
 
             {#if tabsMode}
               <Button
-                on:click={(e) => onEditorClose(e, id)}
+                on:click={(e) => onEditorClose(e, editor.id)}
                 size="sm"
                 class="ml-1 h-6 w-6 p-0"
                 variant="secondary"

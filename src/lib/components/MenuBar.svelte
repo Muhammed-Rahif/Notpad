@@ -1,11 +1,17 @@
 <script lang="ts">
+
   import * as Menubar from '@/components/ui/menubar';
+  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { NotepadFileHelper } from '@/helpers/notepad-file-save';  
   import { toggleMode } from 'mode-watcher';
   import EditorTitle from './EditorTitle.svelte';
   import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
-  import { NotepadHelper } from '@/helpers/notepad-helper';
+ 
   import { isTauri } from '$lib';
+
+  export let currentEditorContent: string; // Accept currentEditorContent as a prop
+ 
 
   interface MenuItems {
     label: string;
@@ -28,9 +34,17 @@
           shortcut: isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N',
           onClick: NotepadHelper.createNew
         },
+ 
         { label: 'Open...', shortcut: 'Ctrl+O', onClick: NotepadHelper.openFile },
-        { label: 'Save', shortcut: 'Ctrl+S' },
-        { label: 'Save as...' },
+        { 
+          label: 'Save', 
+          shortcut: 'Ctrl+S', 
+          onClick: () => NotepadFileHelper.saveFile(currentEditorContent)
+        },
+        { label: 'Save as...',
+         onClick: () => NotepadFileHelper.saveFile(currentEditorContent)
+        },
+
         { type: 'separator' },
         { label: 'Print', shortcut: 'Ctrl+P' },
         { type: 'separator' },

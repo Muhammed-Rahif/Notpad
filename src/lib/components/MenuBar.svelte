@@ -28,9 +28,15 @@
           shortcut: isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N',
           onClick: NotpadHelper.createNew
         },
+
         { label: 'Open...', shortcut: 'Ctrl+O', onClick: NotpadHelper.openFile },
-        { label: 'Save', shortcut: 'Ctrl+S' },
-        { label: 'Save as...' },
+        {
+          label: 'Save',
+          shortcut: 'Ctrl+S',
+          onClick: NotpadHelper.saveFile
+        },
+        { label: 'Save as...', onClick: () => NotpadHelper.saveFile({ saveAs: true }) },
+
         { type: 'separator' },
         { label: 'Print', shortcut: 'Ctrl+P' },
         { type: 'separator' },
@@ -84,8 +90,7 @@
 
   $: isXS = innerWidth <= 450;
   $: tabsMode = $editors.length > 1; // compact mode will not available on mobile width (w<=450), also on pc when multiple editors.
-  $: singleEditorId = $editors.at(0)!.id;
-  $: singleEditorTitle = $editors.at(0)!.title;
+  $: singleEditor = $editors.at(0)!;
 </script>
 
 <svelte:window bind:innerWidth />
@@ -116,7 +121,7 @@
       transition:fade
       class="max-md:!ml-auto md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
     >
-      <EditorTitle id={singleEditorId} title={singleEditorTitle} />
+      <EditorTitle editor={singleEditor} />
     </div>
   {/if}
 </Menubar.Root>

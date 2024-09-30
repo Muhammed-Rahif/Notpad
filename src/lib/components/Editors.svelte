@@ -43,13 +43,13 @@
   {#if tabsMode || isXS}
     <div transition:slide>
       <Tabs.List class="w-full justify-start overflow-x-scroll rounded-t-none py-0.5 shadow">
-        {#each $editors as { title, id }}
-          <Tabs.Trigger value={id} class={tabsMode ? 'pr-1' : ''}>
-            <EditorTitle {title} {id} />
+        {#each $editors as editor}
+          <Tabs.Trigger value={editor.id} class={tabsMode ? 'pr-1' : ''}>
+            <EditorTitle {editor} />
 
             {#if tabsMode}
               <Button
-                on:click={(e) => onEditorClose(e, id)}
+                on:click={(e) => onEditorClose(e, editor.id)}
                 size="sm"
                 class="ml-1 h-6 w-6 p-0"
                 variant="secondary"

@@ -11,11 +11,18 @@
 
 <svelte:window
   use:shortcut={{
-    trigger: {
-      key: 'n',
-      modifier: isTauri ? ['ctrl'] : ['ctrl', 'alt'],
-      callback: (d) => dispatch(d, NotpadHelper.createNew)
-    }
+    trigger: [
+      {
+        key: 'n',
+        modifier: isTauri ? ['ctrl'] : ['ctrl', 'alt'],
+        callback: (d) => dispatch(d, NotpadHelper.createNew)
+      },
+      {
+        key: 's',
+        modifier: ['ctrl'],
+        callback: (d) => dispatch(d, NotpadHelper.saveFile)
+      }
+    ]
   }}
   use:shortcut={{
     trigger: {

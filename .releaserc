@@ -1,0 +1,44 @@
+{
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/semantic-release.json",
+  "branches": [
+    "main",
+    {
+      "name": "alpha",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "verifyReleaseCmd": "node scripts/versioning.js ${nextRelease.version}"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          "Notepad_*_universal.dmg",
+          "notepad_*_amd64.deb",
+          "notepad-*.x86_64.rpm",
+          "Notepad_*_x64_en-US.msi",
+          "Notepad_*_x64-setup.exe"
+        ]
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json",
+          "CHANGELOG.md",
+          "src-tauri/tauri.conf.json",
+          "src-tauri/Cargo.toml"
+        ]
+      }
+    ]
+  ]
+}

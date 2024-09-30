@@ -1,10 +1,11 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
-  import { NotepadHelper } from '@/helpers/notepad-helper';
   import { toggleMode } from 'mode-watcher';
   import EditorTitle from './EditorTitle.svelte';
   import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
+  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { isTauri } from '$lib';
 
   interface MenuItems {
     label: string;
@@ -24,10 +25,10 @@
       items: [
         {
           label: 'New',
-          shortcut: isNeutralino ? 'Ctrl+N' : 'Ctrl+Alt+N',
+          shortcut: isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N',
           onClick: NotepadHelper.createNew
         },
-        { label: 'Open...', shortcut: 'Ctrl+O' },
+        { label: 'Open...', shortcut: 'Ctrl+O', onClick: NotepadHelper.openFile },
         { label: 'Save', shortcut: 'Ctrl+S' },
         { label: 'Save as...' },
         { type: 'separator' },
@@ -113,7 +114,7 @@
   {#if !isXS && !tabsMode}
     <div
       transition:fade
-      class="max-md:!ml-auto max-md:pr-3 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+      class="max-md:!ml-auto md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
     >
       <EditorTitle id={singleEditorId} title={singleEditorTitle} />
     </div>

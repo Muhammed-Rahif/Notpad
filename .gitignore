@@ -26,22 +26,3 @@ dev-dist
 
 build/
 www/
-
-# Neutralinojs: from below
-
-# Developer tools' files
-.lite_workspace.lua
-
-# Neutralinojs binaries and builds
-/bin
-/dist
-/build
-
-# Neutralinojs client (minified)
-neutralino.js
-
-# Neutralinojs related files
-.storage
-*.log
-
-.tmp

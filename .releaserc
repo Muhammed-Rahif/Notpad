@@ -21,11 +21,11 @@
       "@semantic-release/github",
       {
         "assets": [
-          "Notepad_*_universal.dmg",
-          "notepad_*_amd64.deb",
-          "notepad-*.x86_64.rpm",
-          "Notepad_*_x64_en-US.msi",
-          "Notepad_*_x64-setup.exe"
+          "Notpad_*_universal.dmg",
+          "notpad_*_amd64.deb",
+          "notpad-*.x86_64.rpm",
+          "Notpad_*_x64_en-US.msi",
+          "Notpad_*_x64-setup.exe"
         ]
       }
     ],

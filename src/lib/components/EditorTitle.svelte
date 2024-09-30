@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { NotpadHelper } from '@/helpers/notpad-helper';
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
@@ -23,7 +23,7 @@
     const isValidTitle = t !== '' && t.length > 0 && t.length <= 24;
 
     if (isValidTitle) {
-      NotepadHelper.updateTitle(id, t);
+      NotpadHelper.updateTitle(id, t);
       readonly = true;
 
       await tick(); // Ensure the DOM reflects the readonly change

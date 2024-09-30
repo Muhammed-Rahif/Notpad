@@ -2,7 +2,7 @@ import { activeTabId, editors, type EditorData } from '@/store/store';
 import { get } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
 
-export class NotepadHelper {
+export class NotpadHelper {
   static createNew({ content, title }: Partial<EditorData> = {}) {
     const newId = uuidv4();
     editors.update((value) => {
@@ -31,7 +31,7 @@ export class NotepadHelper {
         reader.onload = (e) => {
           const content = e.target?.result as string;
           const fileName = file.name;
-          NotepadHelper.createNew({
+          NotpadHelper.createNew({
             title: fileName,
             content
           });

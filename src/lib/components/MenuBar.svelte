@@ -4,7 +4,7 @@
   import EditorTitle from './EditorTitle.svelte';
   import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
-  import { NotepadHelper } from '@/helpers/notepad-helper';
+  import { NotpadHelper } from '@/helpers/notpad-helper';
   import { isTauri } from '$lib';
 
   interface MenuItems {
@@ -26,9 +26,9 @@
         {
           label: 'New',
           shortcut: isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N',
-          onClick: NotepadHelper.createNew
+          onClick: NotpadHelper.createNew
         },
-        { label: 'Open...', shortcut: 'Ctrl+O', onClick: NotepadHelper.openFile },
+        { label: 'Open...', shortcut: 'Ctrl+O', onClick: NotpadHelper.openFile },
         { label: 'Save', shortcut: 'Ctrl+S' },
         { label: 'Save as...' },
         { type: 'separator' },
@@ -76,7 +76,7 @@
     },
     {
       label: 'Help',
-      items: [{ label: 'About Notepad' }]
+      items: [{ label: 'About Notpad' }]
     }
   ];
 

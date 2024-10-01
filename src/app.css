@@ -104,8 +104,11 @@ body,
 ::-webkit-scrollbar-thumb {
   background: #ff0000;
 }
+
 ::selection,
-::-moz-selection,
 ::-webkit-selection {
+  @apply bg-zinc-400 dark:bg-zinc-700;
+}
+::-moz-selection {
   @apply bg-zinc-400 dark:bg-zinc-700;
 }

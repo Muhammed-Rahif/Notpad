@@ -9,7 +9,6 @@ export type EditorData = {
   fileHandle?: FileSystemFileHandle; // The file system handle that is used to save without a popup; editing already saved file.
 };
 
-export const saveDialog = writable(false);
 export const editors = writable<EditorData[]>([
   {
     fileName: 'Untitled.txt',

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { isTauri } from '$lib';
-  import { NotpadHelper } from '@/helpers/notpad-helper';
+  import { Notpad } from '@/helpers/notpad';
   import { shortcut, type ShortcutEventDetail } from '@svelte-put/shortcut';
 
   function dispatch(d: ShortcutEventDetail, cb: () => void) {
@@ -15,12 +15,12 @@
       {
         key: 'n',
         modifier: isTauri ? ['ctrl'] : ['ctrl', 'alt'],
-        callback: (d) => dispatch(d, NotpadHelper.createNew)
+        callback: (d) => dispatch(d, Notpad.editors.createNew)
       },
       {
         key: 's',
         modifier: ['ctrl'],
-        callback: (d) => dispatch(d, NotpadHelper.saveFile)
+        callback: (d) => dispatch(d, Notpad.file.save)
       }
     ]
   }}
@@ -28,7 +28,7 @@
     trigger: {
       key: 'o',
       modifier: ['ctrl'],
-      callback: (d) => dispatch(d, NotpadHelper.openFile)
+      callback: (d) => dispatch(d, Notpad.file.open)
     }
   }}
 />

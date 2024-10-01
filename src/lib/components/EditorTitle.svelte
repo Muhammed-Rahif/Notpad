@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { NotpadHelper } from '@/helpers/notpad-helper';
+  import { Notpad } from '@/helpers/notpad';
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
@@ -23,7 +23,7 @@
     const isValidFileName = t !== '' && t.length > 0 && t.length <= 24;
 
     if (isValidFileName) {
-      NotpadHelper.updateFileName(editor.id, t);
+      Notpad.editors.updateFileName(editor.id, t);
       readonly = true;
 
       await tick(); // Ensure the DOM reflects the readonly change

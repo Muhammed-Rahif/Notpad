@@ -1,10 +1,10 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
-  import { toggleMode } from 'mode-watcher';
-  import EditorTitle from './EditorTitle.svelte';
-  import { editors } from '@/store/store';
-  import { fade } from 'svelte/transition';
+  import EditorTitle from '@/components/EditorTitle.svelte';
   import { Notpad } from '@/helpers/notpad';
+  import { editors } from '@/store/store';
+  import { toggleMode } from 'mode-watcher';
+  import { fade } from 'svelte/transition';
   import { isTauri } from '$lib';
 
   interface MenuItems {
@@ -29,16 +29,16 @@
           onClick: Notpad.editors.createNew
         },
 
-        { label: 'Open...', shortcut: 'Ctrl+O', onClick: Notpad.file.open },
+        { label: 'Open...', shortcut: 'Ctrl+O', onClick: Notpad.fileOptions.open },
         {
           label: 'Save',
           shortcut: 'Ctrl+S',
-          onClick: Notpad.file.save
+          onClick: Notpad.fileOptions.save
         },
-        { label: 'Save as...', onClick: () => Notpad.file.save({ saveAs: true }) },
+        { label: 'Save as...', onClick: () => Notpad.fileOptions.save({ saveAs: true }) },
 
         { type: 'separator' },
-        { label: 'Print', shortcut: 'Ctrl+P' },
+        { label: 'Print', shortcut: 'Ctrl+P', onClick: Notpad.editors.printActive },
         { type: 'separator' },
         { label: 'Exit' }
       ]

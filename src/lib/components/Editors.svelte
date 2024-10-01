@@ -6,8 +6,8 @@
   import { activeTabId, editors } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import type { ButtonEventHandler } from 'bits-ui';
-  import type { FormTextareaEvent } from './ui/textarea';
-  import EditorTitle from './EditorTitle.svelte';
+  import type { FormTextareaEvent } from '@/components/ui/textarea';
+  import EditorTitle from '@/components/EditorTitle.svelte';
   import { slide } from 'svelte/transition';
 
   let textarea: HTMLTextAreaElement | null = null; // reference to the textarea

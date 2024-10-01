@@ -59,6 +59,7 @@
     "localforage": "^1.10.0",
     "lodash.throttle": "^4.1.1",
     "mode-watcher": "^0.4.1",
+    "print-js": "^1.6.0",
     "short-uuid": "^5.2.0",
     "svelte-input-auto-width": "^2.1.0",
     "svelte-radix": "^1.1.1",

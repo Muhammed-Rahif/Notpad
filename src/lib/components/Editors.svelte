@@ -4,7 +4,7 @@
   import CloseIcon from '@/components/icons/close.svelte';
   import Button from '@/components/ui/button/button.svelte';
   import { activeTabId, editors } from '@/store/store';
-  import { NotpadHelper } from '@/helpers/notpad-helper';
+  import { Notpad } from '@/helpers/notpad';
   import type { ButtonEventHandler } from 'bits-ui';
   import type { FormTextareaEvent } from './ui/textarea';
   import EditorTitle from './EditorTitle.svelte';
@@ -16,11 +16,11 @@
   function onEditorClose(e: ButtonEventHandler<MouseEvent>, id: string) {
     e.preventDefault();
     e.stopPropagation();
-    NotpadHelper.remove(id);
+    Notpad.editors.remove(id);
   }
 
   function onTextareaChange(e: FormTextareaEvent<Event>) {
-    NotpadHelper.updateContent($activeTabId, (e.target as HTMLTextAreaElement).value);
+    Notpad.editors.updateContent($activeTabId, (e.target as HTMLTextAreaElement).value);
   }
 
   // Focus on the textarea when the active tab changes

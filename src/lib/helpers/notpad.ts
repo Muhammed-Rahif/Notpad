@@ -1,10 +1,16 @@
 import { toast } from 'svelte-sonner';
 import { FileOptions } from '@/helpers/file-options';
 import { Editors } from '@/helpers/editors';
+import { NotpadStorage } from '@/store/storage';
 
 export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();
   public static editors: Editors = new Editors();
+  public static storage: NotpadStorage = new NotpadStorage();
+
+  static init = () => {
+    this.storage.init();
+  };
 
   static close = () => {
     try {

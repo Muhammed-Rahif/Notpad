@@ -10,14 +10,15 @@ import { Notpad } from '@/helpers/notpad';
  * a new editor, removing an editor, etc.
  */
 export class Editors {
-  createNew({ content, fileName, fileHandle }: Partial<EditorData> = {}) {
+  createNew({ content, fileName, fileHandle, filePath }: Partial<EditorData> = {}) {
     const newId = genId();
     editors.update((value) => {
       value.push({
         fileName: fileName ?? 'Untitled.txt',
         content: content ?? '',
         id: newId,
-        fileHandle
+        fileHandle,
+        filePath
       });
 
       return value;
@@ -78,6 +79,17 @@ export class Editors {
       return value.map((e) => {
         if (e.id === editorId) {
           return { ...e, fileHandle, fileName: fileHandle.name };
+        }
+        return e;
+      });
+    });
+  }
+
+  updateFilePath(editorId: string, filePath: string) {
+    editors.update((value) => {
+      return value.map((e) => {
+        if (e.id === editorId) {
+          return { ...e, filePath };
         }
         return e;
       });

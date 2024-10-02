@@ -19,8 +19,14 @@ export interface EditorData {
   id: string;
   /**
    * The file system handle that is used to save without a popup; editing already saved file.
+   * Used in desktop browsers.
    */
   fileHandle?: FileSystemFileHandle;
+  /**
+   * The file path of the file that is being edited.
+   * Used in tauri app.
+   */
+  filePath?: string;
 }
 
 /**

@@ -107,8 +107,8 @@ body,
 
 ::selection,
 ::-webkit-selection {
-  @apply bg-zinc-400 dark:bg-zinc-700;
+  @apply bg-neutral-500/50;
 }
 ::-moz-selection {
-  @apply bg-zinc-400 dark:bg-zinc-700;
+  @apply bg-neutral-500/50;
 }

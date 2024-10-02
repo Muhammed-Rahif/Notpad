@@ -7,6 +7,10 @@
   import favIcon from '@/assets/imgs/favicon.png';
   import favIconDark from '@/assets/imgs/favicon-dark.png';
   import { mode, ModeWatcher } from 'mode-watcher';
+  import { Notpad } from '@/helpers/notpad';
+  import { onMount } from 'svelte';
+
+  onMount(() => Notpad.init());
 </script>
 
 <!-- Actual UI -->

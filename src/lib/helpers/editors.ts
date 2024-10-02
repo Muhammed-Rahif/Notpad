@@ -1,21 +1,24 @@
-import { activeTabId, editors, type EditorData } from '@/store/store';
+import { activeTabId, editors, type EditorData } from '@/store';
 import { get } from 'svelte/store';
 import { generate as genId } from 'short-uuid';
 import { toast } from 'svelte-sonner';
+import print from 'print-js';
+import { Notpad } from '@/helpers/notpad';
 
 /**
  * A helper class for performing various editor-related tasks such as opening
  * a new editor, removing an editor, etc.
  */
-export class NotpadEditors {
-  createNew({ content, fileName, fileHandle }: Partial<EditorData> = {}) {
+export class Editors {
+  createNew({ content, fileName, fileHandle, filePath }: Partial<EditorData> = {}) {
     const newId = genId();
     editors.update((value) => {
       value.push({
         fileName: fileName ?? 'Untitled.txt',
         content: content ?? '',
         id: newId,
-        fileHandle
+        fileHandle,
+        filePath
       });
 
       return value;
@@ -81,4 +84,53 @@ export class NotpadEditors {
       });
     });
   }
+
+  updateFilePath(editorId: string, filePath: string) {
+    editors.update((value) => {
+      return value.map((e) => {
+        if (e.id === editorId) {
+          return { ...e, filePath };
+        }
+        return e;
+      });
+    });
+  }
+
+  /**
+   * Prints active editor.
+   */
+  printActive = async () => {
+    const activeEditor = this.getActive();
+    if (!activeEditor) return;
+    try {
+      print({
+        printable: 'textarea',
+        type: 'html',
+        style: `@import url('https://fonts.googleapis.com/css2?family=SUSE');
+        * {
+          font-family: 'SUSE', system-ui;
+          color: white;
+          background-color: black;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          color-adjust: exact;
+        }
+        textarea {
+          border: none;
+          resize: none;
+          padding: 8px;
+        }
+        h1 {
+          font-size: 20px;
+          padding: 8px;
+        }
+        `,
+        font: 'SUSE',
+        header: `${activeEditor.fileName} - Notpad`
+      });
+    } catch (err) {
+      Notpad.showError(err);
+      self.print();
+    }
+  };
 }

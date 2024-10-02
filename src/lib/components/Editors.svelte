@@ -3,11 +3,11 @@
   import * as Tabs from '@/components/ui/tabs';
   import CloseIcon from '@/components/icons/close.svelte';
   import Button from '@/components/ui/button/button.svelte';
-  import { activeTabId, editors } from '@/store/store';
+  import { activeTabId, editors } from '@/store';
   import { Notpad } from '@/helpers/notpad';
   import type { ButtonEventHandler } from 'bits-ui';
-  import type { FormTextareaEvent } from './ui/textarea';
-  import EditorTitle from './EditorTitle.svelte';
+  import type { FormTextareaEvent } from '@/components/ui/textarea';
+  import EditorTitle from '@/components/EditorTitle.svelte';
   import { slide } from 'svelte/transition';
 
   let textarea: HTMLTextAreaElement | null = null; // reference to the textarea
@@ -23,9 +23,9 @@
     Notpad.editors.updateContent($activeTabId, (e.target as HTMLTextAreaElement).value);
   }
 
-  // Focus on the textarea when the active tab changes
   $: txtArea = textarea;
   $: if (textarea && $activeTabId && txtArea) {
+    // Focus on the textarea when the active tab changes
     setTimeout(() => {
       // console.info('Focusing on textarea:', $activeTabId);
       txtArea.focus();
@@ -33,13 +33,16 @@
     }, 120);
   }
   $: isXS = innerWidth <= 450;
-  $: tabsMode = $editors.length > 1; // compact mode will not available on mobile width (w<=450), also on pc when multiple editors.
-  $: tabsClass = tabsMode ? 'w-full' : 'w-full';
+  /**
+   * Compact mode is disabled on mobile devices (width <= 450px)
+   * and on PCs when multiple editors are open.
+   */
+  $: tabsMode = $editors.length > 1;
 </script>
 
 <svelte:window bind:innerWidth />
 
-<Tabs.Root bind:value={$activeTabId} class={tabsClass} asChild>
+<Tabs.Root bind:value={$activeTabId} class="w-full" asChild>
   {#if tabsMode || isXS}
     <div transition:slide>
       <Tabs.List

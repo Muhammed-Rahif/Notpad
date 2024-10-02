@@ -1,10 +1,27 @@
 import { toast } from 'svelte-sonner';
-import { FileOptions } from './file-options';
-import { NotpadEditors } from './notpad-editors';
+import { FileOptions } from '@/helpers/file-options';
+import { Editors } from '@/helpers/editors';
+import { NotpadStorage } from '@/store/storage';
 
 export class Notpad {
-  public static file: FileOptions = new FileOptions();
-  public static editors: NotpadEditors = new NotpadEditors();
+  public static fileOptions: FileOptions = new FileOptions();
+  public static editors: Editors = new Editors();
+  public static storage: NotpadStorage = new NotpadStorage();
+
+  static init = () => {
+    this.storage.init();
+  };
+
+  static close = () => {
+    try {
+      window.close();
+      toast.info(
+        'Closing the Notpad may not work in web browsers due to security restrictions. Please close the tab manually.'
+      );
+    } catch (err) {
+      this.showError(err);
+    }
+  };
 
   static showError(err: unknown) {
     if (err instanceof Error) {

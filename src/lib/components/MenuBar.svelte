@@ -1,10 +1,10 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
+  import EditorTitle from '@/components/EditorTitle.svelte';
+  import { Notpad } from '@/helpers/notpad';
+  import { editors } from '@/store';
   import { toggleMode } from 'mode-watcher';
-  import EditorTitle from './EditorTitle.svelte';
-  import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
-  import { NotpadHelper } from '@/helpers/notpad-helper';
   import { isTauri } from '$lib';
 
   interface MenuItems {
@@ -36,21 +36,21 @@
         {
           label: 'New',
           shortcut: isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N',
-          onClick: NotpadHelper.createNew
+          onClick: Notpad.editors.createNew
         },
 
-        { label: 'Open...', shortcut: 'Ctrl+O', onClick: NotpadHelper.openFile },
+        { label: 'Open...', shortcut: 'Ctrl+O', onClick: Notpad.fileOptions.open },
         {
           label: 'Save',
           shortcut: 'Ctrl+S',
-          onClick: NotpadHelper.saveFile
+          onClick: Notpad.fileOptions.save
         },
-        { label: 'Save as...', onClick: () => NotpadHelper.saveFile({ saveAs: true }) },
+        { label: 'Save as...', onClick: () => Notpad.fileOptions.save({ saveAs: true }) },
 
         { type: 'separator' },
-        { label: 'Print', shortcut: 'Ctrl+P' },
+        { label: 'Print', shortcut: 'Ctrl+P', onClick: Notpad.editors.printActive },
         { type: 'separator' },
-        { label: 'Exit' }
+        { label: 'Exit', onClick: Notpad.close }
       ]
     },
     {
@@ -100,7 +100,11 @@
   let innerWidth = window.innerWidth;
 
   $: isXS = innerWidth <= 450;
-  $: tabsMode = $editors.length > 1; // compact mode will not available on mobile width (w<=450), also on pc when multiple editors.
+  /**
+   * Compact mode is disabled on mobile devices (width <= 450px)
+   * and on PCs when multiple editors are open.
+   */
+  $: tabsMode = $editors.length > 1;
   $: singleEditor = $editors.at(0)!;
 </script>
 

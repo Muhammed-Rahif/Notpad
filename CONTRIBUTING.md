@@ -16,13 +16,15 @@
 
 ## ![Getting started](https://user-images.githubusercontent.com/73386156/147833818-dca9fcba-c8a9-49ad-b961-66b7b813ef55.png) Getting Started
 
-This project uses **semantic versioning** and **`semantic-release`** to automate versioning and package publishing. The project follows the [semantic-release](https://semantic-release.gitbook.io/) npm package, which automatically determines the next version number based on your commit messages and updates the release accordingly. 
+This project uses **semantic versioning** and **`semantic-release`** to automate versioning and package publishing. The project follows the [semantic-release](https://semantic-release.gitbook.io/) npm package, which automatically determines the next version number based on your commit messages and updates the release accordingly.
 
 Branches:
+
 - **`main`**: Production-ready code
 - **`alpha`**: Alpha and pre-release code
 
 ### Semantic Commit Messages:
+
 While using semantic commit messages is not mandatory, it helps ensure that automated releases follow [semantic versioning](https://semver.org/). You can learn more about the [semantic commit guidelines here](https://www.conventionalcommits.org/).
 
 ### Steps to contribute:
@@ -30,40 +32,40 @@ While using semantic commit messages is not mandatory, it helps ensure that auto
 1. [Fork our repo](https://github.com/Muhammed-Rahif/Notpad/fork) by clicking the fork button in the top-right corner.
 2. Clone the forked repo to your local system:
 
-    ```bash
-    git clone https://github.com/<your-github-username>/Notpad
-    ```
+   ```bash
+   git clone https://github.com/<your-github-username>/Notpad
+   ```
 
 3. Navigate to the cloned repo:
 
-    ```bash
-    cd Notpad
-    ```
+   ```bash
+   cd Notpad
+   ```
 
 4. Checkout the `alpha` branch (for new features and fixes) or `main` (for hotfixes):
 
-    ```bash
-    git checkout alpha
-    ```
+   ```bash
+   git checkout alpha
+   ```
 
 5. Create a new branch for your changes:
 
-    ```bash
-    git checkout -b <your-branch-name>
-    ```
+   ```bash
+   git checkout -b <your-branch-name>
+   ```
 
 6. Make your changes, then stage and commit them. If possible, follow semantic commit guidelines:
 
-    ```bash
-    git add <folder-or-file-paths>
-    git commit -m "feat: add new feature to enhance performance"
-    ```
+   ```bash
+   git add <folder-or-file-paths>
+   git commit -m "feat: add new feature to enhance performance"
+   ```
 
 7. Push your changes to the remote repo:
 
-    ```bash
-    git push origin <your-branch-name>
-    ```
+   ```bash
+   git push origin <your-branch-name>
+   ```
 
 8. [Create a Pull Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)
 

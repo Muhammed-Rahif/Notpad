@@ -201,6 +201,7 @@ Muhammed Rahif - [@Muhammed_Rahif](https://x.com/Muhammed_Rahif) - rahifpalliyal
 Resources that are helpful and would like to give credit to.
 
 - [Localforage](https://localforage.github.io/localForage)
+- [What you need to know about persistent state in Tauri apps](https://aptabase.com/blog/persistent-state-tauri-apps)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

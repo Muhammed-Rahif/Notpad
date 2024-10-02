@@ -12,6 +12,8 @@
   let caretPosition = { top: 10, left: 8, height: 24 };
   let lineNo = 1;
   let column = 1;
+  let characterCount = 0; // New variable for character count
+
   // Import the textarea-caret module
   let getCaretCoordinates: any;
   let updateScheduled = false; // Flag to track if update is already scheduled
@@ -33,6 +35,9 @@
 
       // Calculate column (length of last line before caret)
       column = textBeforeCaret.length - textBeforeCaret.lastIndexOf('\n');
+
+      // Update character count
+      characterCount = textarea.value.length; // Update character count
     }
   }
 
@@ -111,7 +116,9 @@
 <div class="absolute bottom-0 z-10 h-[24px] w-full bg-primary-foreground px-1">
   <Separator />
   <p class="flex h-full w-full items-center justify-start text-sm">
-    Line: {lineNo}, Column: {column}
+    Line: {lineNo}, Column: {column},
+    {characterCount <= 1 ? 'Character: ' : 'Characters: '}
+    {characterCount}
   </p>
 </div>
 

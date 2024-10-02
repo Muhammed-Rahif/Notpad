@@ -6,6 +6,7 @@
   import { toggleMode } from 'mode-watcher';
   import { fade } from 'svelte/transition';
   import { isTauri } from '$lib';
+  import screenfull from 'screenfull';
 
   interface MenuItems {
     label: string;
@@ -76,7 +77,11 @@
         { label: 'Zoom Out', shortcut: 'Ctrl+Minus' },
         { label: 'Reset Zoom', shortcut: 'Ctrl+0' },
         { type: 'separator' },
-        { label: 'Full Screen', shortcut: 'F11' },
+        {
+          label: 'Full Screen',
+          shortcut: 'F11',
+          onClick: () => screenfull.toggle()
+        },
         { label: 'Dark Mode', onClick: toggleMode }
       ]
     },

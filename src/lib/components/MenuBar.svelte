@@ -19,6 +19,16 @@
     onClick?: () => void;
   }
 
+  const toggleFullscreen = () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+};
+
   const menuItems: MenuItems[] = [
     {
       label: 'File',
@@ -76,7 +86,8 @@
         { label: 'Zoom Out', shortcut: 'Ctrl+Minus' },
         { label: 'Reset Zoom', shortcut: 'Ctrl+0' },
         { type: 'separator' },
-        { label: 'Full Screen', shortcut: 'F11' },
+        {
+        label: 'Full Screen',shortcut: 'F11', onClick: toggleFullscreen },
         { label: 'Dark Mode', onClick: toggleMode }
       ]
     },

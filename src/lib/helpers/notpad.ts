@@ -6,6 +6,17 @@ export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();
   public static editors: Editors = new Editors();
 
+  static close = () => {
+    try {
+      window.close();
+      toast.info(
+        'Closing the Notpad may not work in web browsers due to security restrictions. Please close the tab manually.'
+      );
+    } catch (err) {
+      this.showError(err);
+    }
+  };
+
   static showError(err: unknown) {
     if (err instanceof Error) {
       let msg = err.message;

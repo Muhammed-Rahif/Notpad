@@ -1,7 +1,7 @@
 <script lang="ts">
   import { isTauri } from '$lib';
   import { Notpad } from '@/helpers/notpad';
-  import { editors } from '@/store/store';
+  import { editors } from '@/store';
   import { shortcut, type ShortcutEventDetail } from '@svelte-put/shortcut';
 
   function dispatch(d: ShortcutEventDetail, cb: () => void) {

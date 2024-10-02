@@ -1,4 +1,4 @@
-import { activeTabId, editors } from '@/store/store';
+import { activeTabId, editors } from '@/store';
 import { get } from 'svelte/store';
 import { findAsyncSequential } from '@/utils';
 import { Notpad } from '@/helpers/notpad';

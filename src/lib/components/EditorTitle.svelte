@@ -3,7 +3,7 @@
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
-  import type { EditorData } from '@/store/store';
+  import type { EditorData } from '@/store';
 
   export let editor: EditorData;
 

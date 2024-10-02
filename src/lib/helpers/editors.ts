@@ -1,4 +1,4 @@
-import { activeTabId, editors, type EditorData } from '@/store/store';
+import { activeTabId, editors, type EditorData } from '@/store';
 import { get } from 'svelte/store';
 import { generate as genId } from 'short-uuid';
 import { toast } from 'svelte-sonner';

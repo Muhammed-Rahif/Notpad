@@ -14,8 +14,10 @@
 </script>
 
 <!-- Actual UI -->
-<MenuBar />
-<Editors />
+<div class="flex h-full flex-col">
+  <MenuBar />
+  <Editors />
+</div>
 
 <!-- Procedually -->
 <SaveDialog />

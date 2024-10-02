@@ -73,7 +73,7 @@
   export let readonly: $$Props['readonly'] = undefined;
 </script>
 
-<div class="textarea-wrapper relative h-full">
+<div class="textarea-wrapper relative h-full" id="textarea">
   <textarea
     class={cn(
       'flex min-h-[60px] w-full rounded-md border border-input bg-transparent p-2 text-sm caret-transparent shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',

@@ -6,7 +6,7 @@
   import { toggleMode } from 'mode-watcher';
   import { fade } from 'svelte/transition';
   import { isTauri } from '$lib';
-
+  import screenfull from 'screenfull';
   interface MenuItems {
     label: string;
     items: Item[];
@@ -20,14 +20,10 @@
   }
 
   const toggleFullscreen = () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
+    if (screenfull.isEnabled) {
+      screenfull.toggle();
     }
-  }
-};
+  };
 
   const menuItems: MenuItems[] = [
     {
@@ -87,7 +83,10 @@
         { label: 'Reset Zoom', shortcut: 'Ctrl+0' },
         { type: 'separator' },
         {
-        label: 'Full Screen',shortcut: 'F11', onClick: toggleFullscreen },
+          label: 'Full Screen',
+          shortcut: 'F11',
+          onClick: toggleFullscreen
+        },
         { label: 'Dark Mode', onClick: toggleMode }
       ]
     },

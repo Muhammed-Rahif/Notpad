@@ -4,15 +4,15 @@
   import { cn } from '@/utils.js';
   import { onMount } from 'svelte';
   import throttle from 'lodash.throttle';
-  import Separator from '@/components/ui/separator/separator.svelte';
+  import StatusBar from '@/components/StatusBar.svelte';
 
   export let textarea: HTMLTextAreaElement | null = null;
 
   let fakeCaret: HTMLDivElement | null = null;
   let caretPosition = { top: 10, left: 8, height: 24 };
   let lineNo = 1;
-  let column = 1;
-  let characterCount = 0; // New variable for character count
+  let columnNo = 1;
+  let characterCount = 0;
 
   // Import the textarea-caret module
   let getCaretCoordinates: any;
@@ -25,7 +25,7 @@
     textarea?.focus();
   });
 
-  function updateLineAndColumn() {
+  function updateTextAreaInfo() {
     if (textarea) {
       const caretPosition = textarea.selectionStart;
       const textBeforeCaret = textarea.value.slice(0, caretPosition);
@@ -34,7 +34,7 @@
       lineNo = textBeforeCaret.split('\n').length;
 
       // Calculate column (length of last line before caret)
-      column = textBeforeCaret.length - textBeforeCaret.lastIndexOf('\n');
+      columnNo = textBeforeCaret.length - textBeforeCaret.lastIndexOf('\n');
 
       // Update character count
       characterCount = textarea.value.length; // Update character count
@@ -57,7 +57,7 @@
           };
 
           // Update line and column numbers
-          updateLineAndColumn();
+          updateTextAreaInfo();
         }
         updateScheduled = false;
       });
@@ -113,19 +113,14 @@
     style="top: calc({caretPosition.top}px - 2px); left: {caretPosition.left}px; height: {caretPosition.height}px;"
   />
 </div>
-<div class="absolute bottom-0 z-10 h-[24px] w-full bg-primary-foreground px-1">
-  <Separator />
-  <p class="flex h-full w-full items-center justify-start text-sm">
-    Line: {lineNo}, Column: {column},
-    {characterCount <= 1 ? 'Character: ' : 'Characters: '}
-    {characterCount}
-  </p>
-</div>
+
+<StatusBar {lineNo} {columnNo} {characterCount} />
 
 <style>
   .fake-caret {
     @apply absolute z-0 w-0.5 rounded-[2px] bg-primary duration-75;
   }
+
   @keyframes blink {
     0% {
       opacity: 1;

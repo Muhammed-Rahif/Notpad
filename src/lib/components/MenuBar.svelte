@@ -119,7 +119,8 @@
   {#if !isXS && !tabsMode}
     <div
       transition:fade
-      class="max-md:!ml-auto md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+      class="max-md:!ml-auto md:absolute md:left-1/2
+      md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
     >
       <EditorTitle editor={singleEditor} />
     </div>

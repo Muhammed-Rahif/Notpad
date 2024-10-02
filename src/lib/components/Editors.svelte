@@ -34,15 +34,18 @@
   }
   $: isXS = innerWidth <= 450;
   $: tabsMode = $editors.length > 1; // compact mode will not available on mobile width (w<=450), also on pc when multiple editors.
-  $: tabsClass = tabsMode ? 'h-[calc(100%-96px)] w-full' : 'h-[calc(100%-60px)] w-full';
+  $: tabsClass = tabsMode ? 'w-full' : 'w-full';
 </script>
 
 <svelte:window bind:innerWidth />
 
-<Tabs.Root bind:value={$activeTabId} class={tabsClass}>
+<Tabs.Root bind:value={$activeTabId} class={tabsClass} asChild>
   {#if tabsMode || isXS}
     <div transition:slide>
-      <Tabs.List class="w-full justify-start overflow-x-scroll rounded-t-none py-0.5 shadow">
+      <Tabs.List
+        class="w-full justify-start overflow-x-scroll 
+        rounded-t-none py-0.5 shadow"
+      >
         {#each $editors as editor}
           <Tabs.Trigger value={editor.id} class={tabsMode ? 'pr-1' : ''}>
             <EditorTitle {editor} />
@@ -64,10 +67,11 @@
   {/if}
 
   <!-- Only render one Textarea, which is focused based on selected tab -->
-  <Tabs.Content value={$activeTabId} class="mt-0 h-full">
+  <Tabs.Content asChild value={$activeTabId} class="mt-0 h-full">
     <Textarea
       bind:textarea
-      class="relative h-full w-full resize-none rounded-none !border-none bg-transparent text-base !outline-none !ring-0"
+      class="relative h-full w-full resize-none rounded-none 
+      !border-none bg-transparent text-base !outline-none !ring-0"
       spellcheck={false}
       value={$editors.find((editor) => editor.id === $activeTabId)?.content}
       on:keyup={onTextareaChange}

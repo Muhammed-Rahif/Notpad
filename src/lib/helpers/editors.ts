@@ -1,4 +1,4 @@
-import { activeTabId, editors, type EditorData } from '@/store';
+import { activeTabId, editors, type EditorType } from '@/store';
 import { get } from 'svelte/store';
 import { generate as genId } from 'short-uuid';
 import { toast } from 'svelte-sonner';
@@ -10,7 +10,7 @@ import { Notpad } from '@/helpers/notpad';
  * a new editor, removing an editor, etc.
  */
 export class Editors {
-  createNew({ content, fileName, fileHandle, filePath }: Partial<EditorData> = {}) {
+  createNew({ content, fileName, fileHandle, filePath }: Partial<EditorType> = {}) {
     const newId = genId();
     editors.update((value) => {
       value.push({
@@ -68,7 +68,7 @@ export class Editors {
     toast.success(`Title updated to "${fileName}"`);
   }
 
-  getActive(): EditorData | undefined {
+  getActive(): EditorType | undefined {
     const activeId = get(activeTabId);
     const editorsList = get(editors);
     return editorsList.find((editor) => editor.id === activeId);
@@ -104,8 +104,8 @@ export class Editors {
     if (!activeEditor) return;
     try {
       print({
-        printable: 'textarea',
-        type: 'html',
+        printable: `<pre>${activeEditor.content}</pre>`,
+        type: 'raw-html',
         style: `@import url('https://fonts.googleapis.com/css2?family=SUSE');
         * {
           font-family: 'SUSE', system-ui;
@@ -115,10 +115,9 @@ export class Editors {
           print-color-adjust: exact;
           color-adjust: exact;
         }
-        textarea {
-          border: none;
-          resize: none;
+        pre {
           padding: 8px;
+          text-wrap: wrap
         }
         h1 {
           font-size: 20px;

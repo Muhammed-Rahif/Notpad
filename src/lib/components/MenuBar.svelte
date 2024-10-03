@@ -2,127 +2,128 @@
   import * as Menubar from '@/components/ui/menubar';
   import EditorTitle from '@/components/EditorTitle.svelte';
   import { Notpad } from '@/helpers/notpad';
-  import { editors } from '@/store';
+  import { editors, settings } from '@/store';
   import { fade } from 'svelte/transition';
   import { isTauri } from '$lib';
   import screenfull from 'screenfull';
   import { toggleMode, mode } from 'mode-watcher';
-
-  interface MenuItems {
-    label: string;
-    items: Item[];
-  }
-
-  interface Item {
-    label?: string;
-    shortcut?: string;
-    type?: string;
-    onClick?: () => void;
-  }
-
-  const menuItems: MenuItems[] = [
-    {
-      label: 'File',
-      items: [
-        {
-          label: 'New',
-          shortcut: isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N',
-          onClick: Notpad.editors.createNew
-        },
-        { label: 'Open...', shortcut: 'Ctrl+O', onClick: Notpad.fileOptions.open },
-        {
-          label: 'Save',
-          shortcut: 'Ctrl+S',
-          onClick: Notpad.fileOptions.save
-        },
-        { label: 'Save as...', onClick: () => Notpad.fileOptions.save({ saveAs: true }) },
-        { type: 'separator' },
-        { label: 'Print', shortcut: 'Ctrl+P', onClick: Notpad.editors.printActive },
-        { type: 'separator' },
-        { label: 'Exit', onClick: Notpad.close }
-      ]
-    },
-    {
-      label: 'Edit',
-      items: [
-        { label: 'Undo', shortcut: 'Ctrl+Z' },
-        { label: 'Redo', shortcut: 'Ctrl+Y' },
-        { type: 'separator' },
-        { label: 'Cut', shortcut: 'Ctrl+X' },
-        { label: 'Copy', shortcut: 'Ctrl+C' },
-        { label: 'Paste', shortcut: 'Ctrl+V' },
-        { type: 'separator' },
-        { label: 'Select All', shortcut: 'Ctrl+A' },
-        { label: 'Time/Date', shortcut: 'F5' },
-        { type: 'separator' },
-        { label: 'Font' }
-      ]
-    },
-    {
-      label: 'Search',
-      items: [
-        { label: 'Find', shortcut: 'Ctrl+F' },
-        { label: 'Find Next', shortcut: 'F3' },
-        { label: 'Find Previous', shortcut: 'Shift+F3' },
-        { label: 'Replace', shortcut: 'Ctrl+H' },
-        { label: 'Go To', shortcut: 'Ctrl+G' }
-      ]
-    },
-    {
-      label: 'View',
-      items: [
-        { label: 'Zoom In', shortcut: 'Ctrl+Plus' },
-        { label: 'Zoom Out', shortcut: 'Ctrl+Minus' },
-        { label: 'Reset Zoom', shortcut: 'Ctrl+0' },
-        { type: 'separator' },
-        {
-          label: 'Full Screen',
-          shortcut: 'F11',
-          onClick: () => screenfull.toggle()
-        },
-        { label: 'mode', onClick: toggleMode }
-      ]
-    },
-    {
-      label: 'Help',
-      items: [{ label: 'About Notpad' }]
-    }
-  ];
+  import { onMount } from 'svelte';
 
   let innerWidth = window.innerWidth;
+  let isFullScreen = screenfull.isFullscreen;
 
   $: isXS = innerWidth <= 450;
   $: tabsMode = $editors.length > 1;
   $: singleEditor = $editors.at(0)!;
   $: modeLabel = $mode == 'dark' ? 'Light Mode' : 'Dark Mode';
+
+  onMount(() => {
+    screenfull.onchange(() => (isFullScreen = screenfull.isFullscreen));
+  });
 </script>
 
 <svelte:window bind:innerWidth />
 
 <Menubar.Root class="relative z-10 rounded-sm">
-  {#each menuItems as { label, items }}
-    <Menubar.Menu>
-      <Menubar.Trigger>{label}</Menubar.Trigger>
-      <Menubar.Content>
-        {#each items as { label, shortcut, type, onClick }}
-          {#if type === 'separator'}
-            <Menubar.Separator />
-          {:else}
-            <Menubar.Item on:click={onClick}>
-              {#if label == 'mode'}
-                {modeLabel}
-              {:else}
-                {label}
-              {/if}
-              {#if shortcut}
-                <Menubar.Shortcut>{shortcut}</Menubar.Shortcut>
-              {/if}
-            </Menubar.Item>
-          {/if}
-        {/each}
-      </Menubar.Content>
-    </Menubar.Menu>
-  {/each}
+  <Menubar.Menu>
+    <Menubar.Trigger>File</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.Item on:click={() => Notpad.editors.createNew()}>
+        New<Menubar.Shortcut>{isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N'}</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item on:click={Notpad.fileOptions.open}>
+        Open...<Menubar.Shortcut>Ctrl+O</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.fileOptions.save()}>
+        Save<Menubar.Shortcut>Ctrl+S</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.fileOptions.save({ saveAs: true })}>
+        Save as...
+      </Menubar.Item>
+      <Menubar.Separator />
+      <Menubar.Item on:click={Notpad.editors.printActive}>
+        Print<Menubar.Shortcut>Ctrl+P</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Separator />
+      <Menubar.Item on:click={Notpad.close}>Exit</Menubar.Item>
+    </Menubar.Content>
+  </Menubar.Menu>
+
+  <Menubar.Menu>
+    <Menubar.Trigger>Edit</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.Item>Undo<Menubar.Shortcut>Ctrl+Z</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item>Redo<Menubar.Shortcut>Ctrl+Y</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Separator />
+      <Menubar.Item>Cut<Menubar.Shortcut>Ctrl+X</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item>Copy<Menubar.Shortcut>Ctrl+C</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item>Paste<Menubar.Shortcut>Ctrl+V</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Separator />
+      <Menubar.Item>Select All<Menubar.Shortcut>Ctrl+A</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item>Time/Date<Menubar.Shortcut>F5</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Separator />
+      <Menubar.Item>Font</Menubar.Item>
+    </Menubar.Content>
+  </Menubar.Menu>
+
+  <Menubar.Menu>
+    <Menubar.Trigger>Search</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.Sub>
+        <Menubar.SubTrigger>Find</Menubar.SubTrigger>
+        <Menubar.SubContent>
+          <Menubar.Item>Search the web</Menubar.Item>
+          <Menubar.Separator />
+          <Menubar.Item>Find<Menubar.Shortcut>Ctrl+F</Menubar.Shortcut></Menubar.Item>
+          <Menubar.Item>Find Next<Menubar.Shortcut>F3</Menubar.Shortcut></Menubar.Item>
+          <Menubar.Item>
+            Find Previous
+            <Menubar.Shortcut class="ml-3">Shift+F3</Menubar.Shortcut>
+          </Menubar.Item>
+        </Menubar.SubContent>
+      </Menubar.Sub>
+      <Menubar.Item>Replace<Menubar.Shortcut>Ctrl+H</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item>Go To<Menubar.Shortcut>Ctrl+G</Menubar.Shortcut></Menubar.Item>
+    </Menubar.Content>
+  </Menubar.Menu>
+
+  <Menubar.Menu>
+    <Menubar.Trigger>View</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.Sub>
+        <Menubar.SubTrigger>Zoom</Menubar.SubTrigger>
+        <Menubar.SubContent>
+          <Menubar.Item>Zoom In<Menubar.Shortcut>Ctrl+Plus</Menubar.Shortcut></Menubar.Item>
+          <Menubar.Item>
+            Zoom Out<Menubar.Shortcut class="ml-3">Ctrl+Minus</Menubar.Shortcut>
+          </Menubar.Item>
+          <Menubar.Item>Reset Zoom<Menubar.Shortcut>Ctrl+0</Menubar.Shortcut></Menubar.Item>
+        </Menubar.SubContent>
+      </Menubar.Sub>
+
+      <Menubar.Separator />
+      <Menubar.CheckboxItem bind:checked={isFullScreen} on:click={() => screenfull.toggle()}>
+        Full Screen
+        <Menubar.Shortcut>F11</Menubar.Shortcut>
+      </Menubar.CheckboxItem>
+      <Menubar.CheckboxItem
+        bind:checked={$settings.statusBar}
+        on:click={Notpad.settings.toggleStatusBar}
+      >
+        Status Bar
+      </Menubar.CheckboxItem>
+      <Menubar.CheckboxItem checked={$mode == 'dark'} on:click={toggleMode}>
+        Dark Mode
+      </Menubar.CheckboxItem>
+    </Menubar.Content>
+  </Menubar.Menu>
+
+  <Menubar.Menu>
+    <Menubar.Trigger>Help</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.Item>About Notpad</Menubar.Item>
+    </Menubar.Content>
+  </Menubar.Menu>
 
   {#if !isXS && !tabsMode}
     <div

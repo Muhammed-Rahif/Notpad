@@ -1,5 +1,5 @@
 import localforage from 'localforage';
-import { activeTabId, editors, settings, type EditorData, type Settings } from '@/store';
+import { activeTabId, editors, settings, type EditorType, type SettingsType } from '@/store';
 
 export const EDITORS_STORAGE_KEY = 'editors';
 export const ACTIVE_TAB_ID_STORAGE_KEY = 'active-tab-id';
@@ -14,7 +14,7 @@ export class NotpadStorage {
   };
 
   private loadStorage = () => {
-    localforage.getItem<EditorData[]>(EDITORS_STORAGE_KEY).then((value) => {
+    localforage.getItem<EditorType[]>(EDITORS_STORAGE_KEY).then((value) => {
       if (value) {
         editors.set(value);
       }
@@ -24,7 +24,7 @@ export class NotpadStorage {
         activeTabId.set(value);
       }
     });
-    localforage.getItem<Settings>(SETTINGS_STORAGE_KEY).then((value) => {
+    localforage.getItem<SettingsType>(SETTINGS_STORAGE_KEY).then((value) => {
       if (value) {
         settings.set(value);
       }

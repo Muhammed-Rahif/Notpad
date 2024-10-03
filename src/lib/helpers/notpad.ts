@@ -2,11 +2,13 @@ import { toast } from 'svelte-sonner';
 import { FileOptions } from '@/helpers/file-options';
 import { Editors } from '@/helpers/editors';
 import { NotpadStorage } from '@/store/storage';
+import { Settings } from './settings';
 
 export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();
   public static editors: Editors = new Editors();
   public static storage: NotpadStorage = new NotpadStorage();
+  public static settings: Settings = new Settings();
 
   static init = () => {
     this.storage.init();

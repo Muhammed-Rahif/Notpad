@@ -4,7 +4,7 @@ import { generate as genId } from 'short-uuid';
 /**
  * Represents the data associated with an editor.
  */
-export interface EditorData {
+export interface EditorType {
   /**
    * Name of the textarea (or the file name, label, etc.).
    */
@@ -32,11 +32,15 @@ export interface EditorData {
 /**
  * Interface representing the settings for the application.
  */
-export interface Settings {
+export interface SettingsType {
   /**
    * The zoom level of the application.
    */
   zoom: 0.5 | 0.75 | 0.9 | 1 | 1.2 | 1.5 | 1.75 | 2;
+  /**
+   * Enable/disable bottom status bar
+   */
+  statusBar: boolean;
 }
 
 /**
@@ -48,7 +52,7 @@ export interface Settings {
  *
  * @see {@link https://svelte.dev/docs#run-time-svelte-store-writable | Svelte Writable Store}
  */
-export const editors = writable<EditorData[]>([
+export const editors = writable<EditorType[]>([
   {
     fileName: 'Untitled.txt',
     content: '',
@@ -64,4 +68,4 @@ export const activeTabId = writable<string>(get(editors).at(0)!.id);
 /**
  * A writable store that holds the settings for the application.
  */
-export const settings = writable<Settings>({ zoom: 1 });
+export const settings = writable<SettingsType>({ zoom: 1, statusBar: true });

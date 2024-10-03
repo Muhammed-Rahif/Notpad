@@ -3,10 +3,10 @@
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
-  import type { EditorData } from '@/store';
+  import type { EditorType } from '@/store';
   import * as Tooltip from '@/components/ui/tooltip';
 
-  export let editor: EditorData;
+  export let editor: EditorType;
 
   let readonly = true;
   let input: HTMLInputElement;

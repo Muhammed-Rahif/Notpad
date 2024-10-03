@@ -3,10 +3,10 @@
   import EditorTitle from '@/components/EditorTitle.svelte';
   import { Notpad } from '@/helpers/notpad';
   import { editors } from '@/store';
-  import { toggleMode } from 'mode-watcher';
   import { fade } from 'svelte/transition';
   import { isTauri } from '$lib';
   import screenfull from 'screenfull';
+  import { toggleMode, mode } from 'mode-watcher';
 
   interface MenuItems {
     label: string;
@@ -29,7 +29,6 @@
           shortcut: isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N',
           onClick: Notpad.editors.createNew
         },
-
         { label: 'Open...', shortcut: 'Ctrl+O', onClick: Notpad.fileOptions.open },
         {
           label: 'Save',
@@ -37,7 +36,6 @@
           onClick: Notpad.fileOptions.save
         },
         { label: 'Save as...', onClick: () => Notpad.fileOptions.save({ saveAs: true }) },
-
         { type: 'separator' },
         { label: 'Print', shortcut: 'Ctrl+P', onClick: Notpad.editors.printActive },
         { type: 'separator' },
@@ -82,7 +80,7 @@
           shortcut: 'F11',
           onClick: () => screenfull.toggle()
         },
-        { label: 'Dark Mode', onClick: toggleMode }
+        { label: 'mode', onClick: toggleMode }
       ]
     },
     {
@@ -94,12 +92,9 @@
   let innerWidth = window.innerWidth;
 
   $: isXS = innerWidth <= 450;
-  /**
-   * Compact mode is disabled on mobile devices (width <= 450px)
-   * and on PCs when multiple editors are open.
-   */
   $: tabsMode = $editors.length > 1;
   $: singleEditor = $editors.at(0)!;
+  $: modeLabel = $mode == 'dark' ? 'Light Mode' : 'Dark Mode';
 </script>
 
 <svelte:window bind:innerWidth />
@@ -114,7 +109,11 @@
             <Menubar.Separator />
           {:else}
             <Menubar.Item on:click={onClick}>
-              {label}
+              {#if label == 'mode'}
+                {modeLabel}
+              {:else}
+                {label}
+              {/if}
               {#if shortcut}
                 <Menubar.Shortcut>{shortcut}</Menubar.Shortcut>
               {/if}

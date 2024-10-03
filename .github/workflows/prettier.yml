@@ -7,6 +7,8 @@ on:
 jobs:
   prettier:
     name: Prettify code
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

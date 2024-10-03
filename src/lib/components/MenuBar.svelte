@@ -3,10 +3,19 @@
   import EditorTitle from '@/components/EditorTitle.svelte';
   import { Notpad } from '@/helpers/notpad';
   import { editors } from '@/store';
-  import { toggleMode } from 'mode-watcher';
   import { fade } from 'svelte/transition';
   import { isTauri } from '$lib';
   import screenfull from 'screenfull';
+
+  let isDarkMode = false; // Track the current theme state
+
+  function toggleMode() {
+    isDarkMode = !isDarkMode;
+    document.body.classList.toggle('dark-theme');
+    
+    // Update the label dynamically
+    menuItems[3].items[5].label = isDarkMode ? 'Light Mode' : 'Dark Mode';
+  }
 
   interface MenuItems {
     label: string;
@@ -29,7 +38,6 @@
           shortcut: isTauri ? 'Ctrl+N' : 'Ctrl+Alt+N',
           onClick: Notpad.editors.createNew
         },
-
         { label: 'Open...', shortcut: 'Ctrl+O', onClick: Notpad.fileOptions.open },
         {
           label: 'Save',
@@ -37,7 +45,6 @@
           onClick: Notpad.fileOptions.save
         },
         { label: 'Save as...', onClick: () => Notpad.fileOptions.save({ saveAs: true }) },
-
         { type: 'separator' },
         { label: 'Print', shortcut: 'Ctrl+P', onClick: Notpad.editors.printActive },
         { type: 'separator' },
@@ -82,7 +89,7 @@
           shortcut: 'F11',
           onClick: () => screenfull.toggle()
         },
-        { label: 'Dark Mode', onClick: toggleMode }
+        { label: 'Dark Mode', onClick: toggleMode } // The label here will change dynamically
       ]
     },
     {
@@ -94,10 +101,6 @@
   let innerWidth = window.innerWidth;
 
   $: isXS = innerWidth <= 450;
-  /**
-   * Compact mode is disabled on mobile devices (width <= 450px)
-   * and on PCs when multiple editors are open.
-   */
   $: tabsMode = $editors.length > 1;
   $: singleEditor = $editors.at(0)!;
 </script>

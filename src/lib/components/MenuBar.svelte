@@ -6,16 +6,7 @@
   import { fade } from 'svelte/transition';
   import { isTauri } from '$lib';
   import screenfull from 'screenfull';
-
-  let isDarkMode = false; // Track the current theme state
-
-  function toggleMode() {
-    isDarkMode = !isDarkMode;
-    document.body.classList.toggle('dark-theme');
-    
-    // Update the label dynamically
-    menuItems[3].items[5].label = isDarkMode ? 'Light Mode' : 'Dark Mode';
-  }
+  import { toggleMode, mode } from 'mode-watcher';
 
   interface MenuItems {
     label: string;
@@ -89,7 +80,7 @@
           shortcut: 'F11',
           onClick: () => screenfull.toggle()
         },
-        { label: 'Dark Mode', onClick: toggleMode } // The label here will change dynamically
+        { label: 'mode', onClick: toggleMode }
       ]
     },
     {
@@ -103,6 +94,7 @@
   $: isXS = innerWidth <= 450;
   $: tabsMode = $editors.length > 1;
   $: singleEditor = $editors.at(0)!;
+  $: modeLabel = $mode == 'dark' ? 'Light Mode' : 'Dark Mode';
 </script>
 
 <svelte:window bind:innerWidth />
@@ -117,7 +109,11 @@
             <Menubar.Separator />
           {:else}
             <Menubar.Item on:click={onClick}>
-              {label}
+              {#if label == 'mode'}
+                {modeLabel}
+              {:else}
+                {label}
+              {/if}
               {#if shortcut}
                 <Menubar.Shortcut>{shortcut}</Menubar.Shortcut>
               {/if}

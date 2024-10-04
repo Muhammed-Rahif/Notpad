@@ -3,7 +3,7 @@
   import * as Tabs from '@/components/ui/tabs';
   import CloseIcon from '@/components/icons/close.svelte';
   import Button from '@/components/ui/button/button.svelte';
-  import { activeTabId, editors } from '@/store/store';
+  import { activeTabId, editors, textareaRef } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import type { ButtonEventHandler } from 'bits-ui';
   import type { FormTextareaEvent } from './ui/textarea';
@@ -23,8 +23,18 @@
     Notpad.editors.updateContent($activeTabId, (e.target as HTMLTextAreaElement).value);
   }
 
+  const selectAll = () => {
+    if (textarea) {
+      textarea.select(); // This will select all the text in the textarea
+    }
+  };
+
   // Focus on the textarea when the active tab changes
   $: txtArea = textarea;
+
+  $: if (textarea) {
+    textareaRef.set(textarea); // Ensure the store is updated with the textarea reference
+  }
   $: if (textarea && $activeTabId && txtArea) {
     setTimeout(() => {
       // console.info('Focusing on textarea:', $activeTabId);

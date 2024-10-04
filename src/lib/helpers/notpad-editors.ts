@@ -54,8 +54,17 @@ export class NotpadEditors {
           editor.redoStack = [];
           editor.saved = false;
         }
+        console.log(editor)
         return editor;
       })
+
+      // return value.map((editor) => {
+      //   if (editor.id === id) {
+      //     editor.content = content;
+
+      //   }
+      //   return editor;
+      // });
     });
   }
 
@@ -120,46 +129,61 @@ export class NotpadEditors {
  selectAllText() {
   textareaRef.update((textarea) => {
     if (textarea) {
-      textarea.select();
+      textarea.select(); // Select all text in the textarea
     }
     return textarea;
   });
 }
 
 cutText() {
-  const textarea = get(textareaRef);
+  const textarea = get(textareaRef); // Get the textarea from the store
   if (textarea) {
     textarea.focus();
-    document.execCommand('cut'); 
+    document.execCommand('cut'); // Cut the selected text
+  } else {
+    console.warn('Textarea is not available');
+  }
+}
+
+copyText() {
+  const textarea = get(textareaRef); // Get the textarea from the store
+  if (textarea) {
+    textarea.focus();
+    document.execCommand('copy'); // Copy the selected text
   } else {
     console.warn('Textarea is not available');
   }
 }
 
 async pasteText() {
-  const textarea = get(textareaRef); 
-  if (textarea) {
-    textarea.focus();
-    if (navigator.clipboard) {
-      // Use modern Clipboard API
-      const text = await navigator.clipboard.readText();
-      const { selectionStart, selectionEnd } = textarea;
-      textarea.setRangeText(text, selectionStart, selectionEnd, 'end');
+    const textarea = get(textareaRef); // Get the textarea from the store
+    if (textarea) {
+      textarea.focus();
+      if (navigator.clipboard) {
+        // Use modern Clipboard API
+        const text = await navigator.clipboard.readText();
+        const { selectionStart, selectionEnd } = textarea;
+        textarea.setRangeText(text, selectionStart, selectionEnd, 'end');
+      } else {
+        // Fallback to document.execCommand
+        document.execCommand('paste');
+      }
     } else {
-      document.execCommand('paste');
+      console.warn('Textarea is not available');
     }
-  } else {
-    console.warn('Textarea is not available');
   }
-}
 
 insertDateTime() {
-  const currentDateTime = new Date().toLocaleString();
+  const currentDateTime = new Date().toLocaleString(); // Get current date and time as a string
+
+  // Get the active tab id
   const activeId = get(activeTabId);
+
+  // Update the content of the active editor
   editors.update((value) => {
     return value.map((editor) => {
       if (editor.id === activeId) {
-        editor.content += `\n${currentDateTime}`;
+        editor.content += `\n${currentDateTime}`; // Append the date and time to the content
         editor.undoStack = [...editor.undoStack, editor.content];
         editor.redoStack = [];
         editor.saved = false;
@@ -167,9 +191,11 @@ insertDateTime() {
       return editor;
     });
   });
+
+  // Update the textareaRef to reflect the changes
   textareaRef.update((textarea) => {
     if (textarea) {
-      textarea.focus();
+      textarea.focus(); // Retain focus on the textarea
     }
     return textarea;
   });

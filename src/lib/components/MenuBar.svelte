@@ -2,7 +2,7 @@
   import * as Menubar from '@/components/ui/menubar';
   import { toggleMode } from 'mode-watcher';
   import EditorTitle from './EditorTitle.svelte';
-  import {  editors } from '@/store/store';
+  import { activeTabId, editors, textareaRef } from '@/store/store';
   import { fade } from 'svelte/transition';
   import { Notpad } from '@/helpers/notpad';
   import { isTauri } from '$lib';
@@ -19,6 +19,27 @@
     type?: string;
     onClick?: () => void;
   }
+ // Undo/Redo stacks for each editor
+ 
+ const selectAll = () => {
+  textareaRef.update((textarea) => {
+    if (textarea) {
+      textarea.select(); // Select all text in the textarea
+    }
+    return textarea;
+  });
+};
+
+const refocusTextarea = () => {
+    setTimeout(() => {
+      textareaRef.update((textarea) => {
+        if (textarea) {
+          textarea.focus(); // Refocus the textarea
+        }
+        return textarea;
+      });
+    }, 0);
+  };
 
   const menuItems: MenuItems[] = [
     {
@@ -52,7 +73,7 @@
         { type: 'separator' },
         { label: 'Cut', shortcut: 'Ctrl+X',   onClick: Notpad.editors.cutText },
 
-        { label: 'Copy', shortcut: 'Ctrl+C' },
+        { label: 'Copy', shortcut: 'Ctrl+C', onClick: Notpad.editors.copyText },
         { label: 'Paste', shortcut: 'Ctrl+V', onClick: Notpad.editors.pasteText },
         { type: 'separator' },
         { label: 'Select All', shortcut: 'Ctrl+A',  onClick: Notpad.editors.selectAllText   },

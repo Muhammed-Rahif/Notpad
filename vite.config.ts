@@ -3,6 +3,14 @@ import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import path from 'path';
 
+function baseUrl() {
+  const baseArgIndex = process.argv.indexOf('--base');
+  if (baseArgIndex !== -1 && baseArgIndex + 1 < process.argv.length) {
+    return process.argv[baseArgIndex + 1];
+  }
+  return null;
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -11,7 +19,7 @@ export default defineConfig({
       '@': path.resolve('./src/lib')
     }
   },
-  base: '/Notpad',
+  base: '/Notpad/',
   build: {
     outDir: 'www'
   },
@@ -22,14 +30,13 @@ export default defineConfig({
   plugins: [
     svelte(),
     VitePWA({
-      registerType: 'prompt',
-      injectRegister: false,
-
+      registerType: 'autoUpdate',
+      injectRegister: 'auto',
+      base: baseUrl() ?? '/Notpad/',
       pwaAssets: {
         disabled: false,
         config: true
       },
-
       manifest: {
         name: 'Notpad',
         short_name: 'Notpad',
@@ -57,13 +64,11 @@ export default defineConfig({
         start_url: '/Notpad',
         scope: '.'
       },
-
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
         cleanupOutdatedCaches: true,
         clientsClaim: true
       },
-
       devOptions: {
         enabled: false,
         navigateFallback: 'index.html',

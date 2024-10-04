@@ -1,4 +1,4 @@
-import { activeTabId, editors, type EditorData } from '@/store/store';
+import { activeTabId, editors, textareaRef, type EditorData } from '@/store/store';
 import { get } from 'svelte/store';
 import { generate as genId } from 'short-uuid';
 import { toast } from 'svelte-sonner';
@@ -15,7 +15,10 @@ export class NotpadEditors {
         fileName: fileName ?? 'Untitled.txt',
         content: content ?? '',
         id: newId,
-        fileHandle
+        fileHandle,
+        undoStack:[''],
+        redoStack:[''],
+        saved: true,
       });
 
       return value;
@@ -44,12 +47,15 @@ export class NotpadEditors {
 
   updateContent(id: string, content: string) {
     editors.update((value) => {
-      return value.map((editor) => {
+      return value.map((editor)=>{
         if (editor.id === id) {
           editor.content = content;
+          editor.undoStack = [...editor.undoStack, editor.content];
+          editor.redoStack = [];
+          editor.saved = false;
         }
         return editor;
-      });
+      })
     });
   }
 
@@ -81,4 +87,91 @@ export class NotpadEditors {
       });
     });
   }
+
+  undo () {
+    editors.update((value) => {
+        return value.map((editor) => {
+            const previousContent = editor.undoStack[editor.undoStack.length - 1];
+            if(editor.saved||editor.undoStack.length===0)
+              return editor;
+            return {
+                ...editor,
+                content: previousContent,
+                undoStack: editor.undoStack.slice(0, -1),
+                redoStack: [editor.content, ...editor.redoStack],
+            };
+        });
+    });
+};
+ redo (){
+  editors.update((value) => {
+    return value.map((editor) => {
+      const nextContent = editor.redoStack[0];
+      return {
+       ...editor,
+        content: nextContent,
+        undoStack: [...editor.undoStack, editor.content],
+        redoStack: editor.redoStack.slice(1),
+      };
+    });
+  });
+ }
+
+ selectAllText() {
+  textareaRef.update((textarea) => {
+    if (textarea) {
+      textarea.select();
+    }
+    return textarea;
+  });
+}
+
+cutText() {
+  const textarea = get(textareaRef);
+  if (textarea) {
+    textarea.focus();
+    document.execCommand('cut'); 
+  } else {
+    console.warn('Textarea is not available');
+  }
+}
+
+async pasteText() {
+  const textarea = get(textareaRef); 
+  if (textarea) {
+    textarea.focus();
+    if (navigator.clipboard) {
+      // Use modern Clipboard API
+      const text = await navigator.clipboard.readText();
+      const { selectionStart, selectionEnd } = textarea;
+      textarea.setRangeText(text, selectionStart, selectionEnd, 'end');
+    } else {
+      document.execCommand('paste');
+    }
+  } else {
+    console.warn('Textarea is not available');
+  }
+}
+
+insertDateTime() {
+  const currentDateTime = new Date().toLocaleString();
+  const activeId = get(activeTabId);
+  editors.update((value) => {
+    return value.map((editor) => {
+      if (editor.id === activeId) {
+        editor.content += `\n${currentDateTime}`;
+        editor.undoStack = [...editor.undoStack, editor.content];
+        editor.redoStack = [];
+        editor.saved = false;
+      }
+      return editor;
+    });
+  });
+  textareaRef.update((textarea) => {
+    if (textarea) {
+      textarea.focus();
+    }
+    return textarea;
+  });
+}
 }

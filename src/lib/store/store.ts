@@ -7,15 +7,23 @@ export type EditorData = {
   content: string; // The content of the textarea
   id: string; // Unique ID for the editor
   fileHandle?: FileSystemFileHandle; // The file system handle that is used to save without a popup; editing already saved file.
+  undoStack: string[];
+  redoStack: string[];
+  saved: boolean;
 };
 
 export const editors = writable<EditorData[]>([
   {
     fileName: 'Untitled.txt',
     content: '',
-    id: genId()
+    id: genId(),
+    undoStack: [],
+    redoStack: [],
+    saved: true,
   }
 ]);
+
+export const textareaRef = writable<HTMLTextAreaElement | null>(null);
 // Store the currently active editor id
 export const activeTabId = writable(get(editors).at(0)!.id);
 

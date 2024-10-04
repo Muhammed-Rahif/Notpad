@@ -2,10 +2,11 @@
   import * as Menubar from '@/components/ui/menubar';
   import { toggleMode } from 'mode-watcher';
   import EditorTitle from './EditorTitle.svelte';
-  import { editors } from '@/store/store';
+  import {  editors } from '@/store/store';
   import { fade } from 'svelte/transition';
   import { Notpad } from '@/helpers/notpad';
   import { isTauri } from '$lib';
+
 
   interface MenuItems {
     label: string;
@@ -46,15 +47,16 @@
     {
       label: 'Edit',
       items: [
-        { label: 'Undo', shortcut: 'Ctrl+Z' },
-        { label: 'Redo', shortcut: 'Ctrl+Y' },
+        { label: 'Undo', shortcut: 'Ctrl+Z',  onClick: Notpad.editors.undo },
+        { label: 'Redo', shortcut: 'Ctrl+Y',  onClick: Notpad.editors.redo},
         { type: 'separator' },
-        { label: 'Cut', shortcut: 'Ctrl+X' },
+        { label: 'Cut', shortcut: 'Ctrl+X',   onClick: Notpad.editors.cutText },
+
         { label: 'Copy', shortcut: 'Ctrl+C' },
-        { label: 'Paste', shortcut: 'Ctrl+V' },
+        { label: 'Paste', shortcut: 'Ctrl+V', onClick: Notpad.editors.pasteText },
         { type: 'separator' },
-        { label: 'Select All', shortcut: 'Ctrl+A' },
-        { label: 'Time/Date', shortcut: 'F5' },
+        { label: 'Select All', shortcut: 'Ctrl+A',  onClick: Notpad.editors.selectAllText   },
+        { label: 'Time/Date', shortcut: 'F5', onClick: Notpad.editors.insertDateTime },
         { type: 'separator' },
         { label: 'Font' }
       ]

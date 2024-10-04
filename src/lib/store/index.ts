@@ -1,5 +1,7 @@
 import { get, writable } from 'svelte/store';
 import { generate as genId } from 'short-uuid';
+import type Quill from 'quill';
+import { Delta } from 'quill/core';
 
 /**
  * Represents the data associated with an editor.
@@ -10,9 +12,9 @@ export interface EditorType {
    */
   fileName: string;
   /**
-   * The content of the textarea.
+   * The content of the textarea as Quill Delta.
    */
-  content: string;
+  content: Delta;
   /**
    * Unique ID for the editor.
    */
@@ -27,6 +29,10 @@ export interface EditorType {
    * Used in tauri app.
    */
   filePath?: string;
+  /**
+   * The quill instance associated to this editor. Will not store in indexedDb.
+   */
+  quill?: Quill;
 }
 
 /**
@@ -55,7 +61,7 @@ export interface SettingsType {
 export const editors = writable<EditorType[]>([
   {
     fileName: 'Untitled.txt',
-    content: '',
+    content: new Delta(),
     id: genId()
   }
 ]);

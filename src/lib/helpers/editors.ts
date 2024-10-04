@@ -4,6 +4,8 @@ import { generate as genId } from 'short-uuid';
 import { toast } from 'svelte-sonner';
 import print from 'print-js';
 import { Notpad } from '@/helpers/notpad';
+import type Quill from 'quill';
+import { Delta } from 'quill/core';
 
 /**
  * A helper class for performing various editor-related tasks such as opening
@@ -15,7 +17,7 @@ export class Editors {
     editors.update((value) => {
       value.push({
         fileName: fileName ?? 'Untitled.txt',
-        content: content ?? '',
+        content: content ?? new Delta(),
         id: newId,
         fileHandle,
         filePath
@@ -45,7 +47,7 @@ export class Editors {
     });
   }
 
-  updateContent(id: string, content: string) {
+  updateContent(id: string, content: Delta) {
     editors.update((value) => {
       return value.map((editor) => {
         if (editor.id === id) {
@@ -68,10 +70,10 @@ export class Editors {
     toast.success(`Title updated to "${fileName}"`);
   }
 
-  getActive(): EditorType | undefined {
+  getActive(): EditorType {
     const activeId = get(activeTabId);
     const editorsList = get(editors);
-    return editorsList.find((editor) => editor.id === activeId);
+    return editorsList.find((editor) => editor.id === activeId)!;
   }
 
   updateFileHandle(editorId: string, fileHandle: FileSystemFileHandle) {
@@ -90,6 +92,21 @@ export class Editors {
       return value.map((e) => {
         if (e.id === editorId) {
           return { ...e, filePath };
+        }
+        return e;
+      });
+    });
+  }
+
+  getContent(editorId: string) {
+    return get(editors).find((e) => e.id == editorId)?.content;
+  }
+
+  setQuill(editorId: string, quill: Quill) {
+    editors.update((value) => {
+      return value.map((e) => {
+        if (e.id === editorId) {
+          return { ...e, quill };
         }
         return e;
       });

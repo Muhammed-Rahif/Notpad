@@ -10,8 +10,8 @@ export class Notpad {
   public static storage: NotpadStorage = new NotpadStorage();
   public static settings: Settings = new Settings();
 
-  static init = () => {
-    this.storage.init();
+  static init = async () => {
+    await this.storage.init();
   };
 
   static close = () => {

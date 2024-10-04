@@ -84,6 +84,7 @@ body,
 #app {
   height: 100%;
   overflow: scroll;
+  scroll-behavior: smooth;
   overflow: hidden;
 }
 
@@ -111,4 +112,9 @@ body,
 }
 ::-moz-selection {
   @apply bg-neutral-500/50;
+}
+
+/* https://github.com/tailwindlabs/tailwindcss/issues/9979 */
+[hidden] {
+  display: none;
 }

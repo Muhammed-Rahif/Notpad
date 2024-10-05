@@ -17,17 +17,6 @@
     Notpad.editors.remove(id);
   }
 
-  $: if ($activeTabId) {
-    setTimeout(() => {
-      // Focus on the textarea when the active tab changes
-      const activeEditor = Notpad.editors.getActive();
-      if (activeEditor.quill) {
-        const length = activeEditor.quill.getLength();
-        activeEditor.quill.setSelection(length - 1, 0);
-        activeEditor.quill.focus();
-      }
-    }, 120);
-  }
   $: isXS = innerWidth <= 450;
   /**
    * Compact mode is disabled on mobile devices (width <= 450px)

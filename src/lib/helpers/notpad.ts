@@ -12,6 +12,7 @@ export class Notpad {
 
   static init = async () => {
     await this.storage.init();
+    this.editors.init();
   };
 
   static close = () => {

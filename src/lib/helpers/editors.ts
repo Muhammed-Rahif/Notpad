@@ -4,14 +4,48 @@ import { generate as genId } from 'short-uuid';
 import { toast } from 'svelte-sonner';
 import print from 'print-js';
 import { Notpad } from '@/helpers/notpad';
-import type Quill from 'quill';
+import Quill from 'quill';
 import { Delta } from 'quill/core';
+import { mode } from 'mode-watcher';
 
 /**
  * A helper class for performing various editor-related tasks such as opening
  * a new editor, removing an editor, etc.
  */
 export class Editors {
+  init = () => {
+    const activeId = get(activeTabId);
+    const editorsList = get(editors);
+
+    if (!editorsList.some((editor) => editor.id === activeId) && editorsList.length > 0) {
+      activeTabId.set(editorsList[0].id);
+    }
+
+    // Focus on the textarea when the active tab changes
+    activeTabId.subscribe(() => {
+      setTimeout(() => {
+        this.focus({ caretToEnd: true });
+      }, 120);
+    });
+  };
+
+  getActive = (): EditorType => {
+    const activeId = get(activeTabId);
+    const editorsList = get(editors);
+    return editorsList.find((editor) => editor.id === activeId)!;
+  };
+
+  private getEditor = (editorId?: string) => {
+    const editorsList = get(editors);
+    if (editorId) {
+      const editor = editorsList.find((editor) => editor.id === editorId);
+      if (editor) {
+        return editor;
+      }
+    }
+    return this.getActive();
+  };
+
   createNew({ content, fileName, fileHandle, filePath }: Partial<EditorType> = {}) {
     const newId = genId();
     editors.update((value) => {
@@ -40,8 +74,12 @@ export class Editors {
     });
 
     activeTabId.update((value) => {
-      if (value === editorId && removeIndex > 0) {
-        return get(editors)[removeIndex - 1]?.id ?? null;
+      if (value === editorId) {
+        if (removeIndex > 0) {
+          return get(editors)[removeIndex - 1]?.id ?? null;
+        } else if (removeIndex === 0 && get(editors).length > 0) {
+          return get(editors)[0]?.id ?? null;
+        }
       }
       return value;
     });
@@ -68,12 +106,6 @@ export class Editors {
       });
     });
     toast.success(`Title updated to "${fileName}"`);
-  }
-
-  getActive(): EditorType {
-    const activeId = get(activeTabId);
-    const editorsList = get(editors);
-    return editorsList.find((editor) => editor.id === activeId)!;
   }
 
   updateFileHandle(editorId: string, fileHandle: FileSystemFileHandle) {
@@ -113,36 +145,164 @@ export class Editors {
     });
   }
 
+  focus = ({
+    caretToEnd,
+    cb,
+    editorId
+  }: { editorId?: string; caretToEnd?: boolean; cb?: () => void } = {}) => {
+    const editor = this.getEditor(editorId);
+    if (editor.quill && caretToEnd) {
+      const length = editor.quill.getLength();
+      editor.quill.setSelection(length - 1, 0);
+    }
+    setTimeout(() => {
+      editor.quill?.focus();
+      if (cb) cb();
+    }, 50);
+  };
+
+  undo = (editorId?: string) => {
+    const editor = this.getEditor(editorId);
+    editor.quill!.history.undo();
+    this.focus({ editorId });
+  };
+
+  redo = (editorId?: string) => {
+    const editor = this.getEditor(editorId);
+    editor.quill!.history.redo();
+    this.focus({ editorId });
+  };
+
+  cut = (editorId?: string) => {
+    const quill = this.getEditor(editorId).quill!;
+    const selection = quill.getSelection()!;
+    const selectedContent = quill.getContents(selection.index, selection.length);
+    const tempCont = document.createElement('div');
+    new Quill(tempCont).setContents(selectedContent);
+    const clipboardData = tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
+    navigator.clipboard
+      .write([
+        new ClipboardItem({
+          'text/html': new Blob([clipboardData], { type: 'text/html' })
+        })
+      ])
+      .catch((err) => {
+        if (err instanceof Error) {
+          err.message = 'Failed to cut to clipboard: ' + err.message;
+        }
+        Notpad.showError(err);
+      });
+    quill.deleteText(selection.index, selection.length);
+    this.focus({ editorId });
+  };
+
+  copy = (editorId?: string) => {
+    const quill = this.getEditor(editorId).quill!;
+    const selection = quill.getSelection()!;
+    const selectedContent = quill.getContents(selection.index, selection.length);
+    const tempCont = document.createElement('div');
+    new Quill(tempCont).setContents(selectedContent);
+    const clipboardData = tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
+    navigator.clipboard
+      .write([
+        new ClipboardItem({
+          'text/html': new Blob([clipboardData], { type: 'text/html' })
+        })
+      ])
+      .catch((err) => {
+        if (err instanceof Error) {
+          err.message = 'Failed to copy to clipboard: ' + err.message;
+        }
+        Notpad.showError(err);
+      });
+    this.focus({ editorId });
+  };
+
+  paste = (editorId?: string) => {
+    const quill = this.getEditor(editorId).quill!;
+    const range = quill.getSelection();
+    if (range) {
+      // Delete the selected text if any
+      if (range.length > 0) {
+        quill.deleteText(range.index, range.length);
+      }
+      navigator.clipboard
+        .read()
+        .then((items) => {
+          for (const item of items) {
+            if (item.types.includes('text/html')) {
+              item.getType('text/html').then((blob) => {
+                blob.text().then((html) => {
+                  quill.clipboard.dangerouslyPasteHTML(range.index, html);
+                  this.focus({ editorId });
+                });
+              });
+            } else if (item.types.includes('text/plain')) {
+              item.getType('text/plain').then((blob) => {
+                blob.text().then((text) => {
+                  quill.clipboard.dangerouslyPasteHTML(range.index, text);
+                  this.focus({ editorId });
+                });
+              });
+            }
+          }
+        })
+        .catch((err) => {
+          if (err instanceof Error) {
+            err.message = 'Failed to read clipboard contents: ' + err.message;
+          }
+          Notpad.showError(err);
+        });
+    }
+  };
+
+  selectAll = (editorId?: string) => {
+    const quill = this.getEditor(editorId).quill!;
+    quill.setSelection(0, quill.getLength());
+    this.focus({ editorId });
+  };
+
+  insertDateAndTime = (editorId?: string) => {
+    const quill = this.getEditor(editorId).quill!;
+    const date = new Date().toLocaleString();
+    const range = quill.getSelection();
+    if (range) {
+      // Delete the selected text if any
+      if (range.length > 0) {
+        quill.deleteText(range.index, range.length);
+      }
+    }
+    quill.insertText(range?.index ?? 0, date);
+    this.focus({ editorId });
+  };
+
   /**
    * Prints active editor.
    */
-  printActive = async () => {
-    const activeEditor = this.getActive();
-    if (!activeEditor) return;
+  print = async (editorId?: string) => {
+    const editor = this.getEditor(editorId);
+    const isDarkMode = get(mode) == 'dark';
+    if (!editor) return;
     try {
       print({
-        printable: `<pre>${activeEditor.content}</pre>`,
+        printable: editor.quill?.root.innerHTML,
         type: 'raw-html',
         style: `@import url('https://fonts.googleapis.com/css2?family=SUSE');
         * {
           font-family: 'SUSE', system-ui;
-          color: white;
-          background-color: black;
+          color: ${isDarkMode ? 'white' : 'black'};
+          background-color: ${isDarkMode ? 'black' : 'white'};
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
           color-adjust: exact;
         }
-        pre {
-          padding: 8px;
-          text-wrap: wrap
-        }
-        h1 {
-          font-size: 20px;
-          padding: 8px;
+        a {
+          color: #3b82f6;
+          text-decoration-line: none;
         }
         `,
         font: 'SUSE',
-        header: `${activeEditor.fileName} - Notpad`
+        header: `${editor.fileName} - Notpad`
       });
     } catch (err) {
       Notpad.showError(err);

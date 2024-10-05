@@ -41,7 +41,7 @@
         Save as...
       </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item on:click={Notpad.editors.printActive}>
+      <Menubar.Item on:click={() => Notpad.editors.print()}>
         Print<Menubar.Shortcut>Ctrl+P</Menubar.Shortcut>
       </Menubar.Item>
       <Menubar.Separator />
@@ -52,15 +52,28 @@
   <Menubar.Menu>
     <Menubar.Trigger>Edit</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Item>Undo<Menubar.Shortcut>Ctrl+Z</Menubar.Shortcut></Menubar.Item>
-      <Menubar.Item>Redo<Menubar.Shortcut>Ctrl+Y</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.editors.undo()}>
+        Undo<Menubar.Shortcut>Ctrl+Z</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.editors.redo()}>
+        Redo<Menubar.Shortcut>Ctrl+Y</Menubar.Shortcut>
+      </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item>Cut<Menubar.Shortcut>Ctrl+X</Menubar.Shortcut></Menubar.Item>
-      <Menubar.Item>Copy<Menubar.Shortcut>Ctrl+C</Menubar.Shortcut></Menubar.Item>
-      <Menubar.Item>Paste<Menubar.Shortcut>Ctrl+V</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.editors.cut()}>
+        Cut<Menubar.Shortcut>Ctrl+X</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.editors.copy()}>
+        Copy<Menubar.Shortcut>Ctrl+C</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.editors.paste()}>
+        Paste<Menubar.Shortcut>Ctrl+V</Menubar.Shortcut>
+      </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item>Select All<Menubar.Shortcut>Ctrl+A</Menubar.Shortcut></Menubar.Item>
-      <Menubar.Item>Time/Date<Menubar.Shortcut>F5</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.editors.selectAll()}>
+        Select All
+        <Menubar.Shortcut>Ctrl+A</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.editors.insertDateAndTime()}>Time/Date</Menubar.Item>
       <Menubar.Separator />
       <Menubar.Item>Font</Menubar.Item>
     </Menubar.Content>

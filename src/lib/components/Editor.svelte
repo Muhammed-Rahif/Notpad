@@ -23,10 +23,13 @@
   let updateScheduled = false;
 
   onMount(async () => {
+    setupQuill();
+  });
+
+  function setupQuill() {
     quill = new Quill(editorContainer!, {
       formats: [
         'bold',
-        'font',
         'code',
         'italic',
         'link',
@@ -41,9 +44,11 @@
         'align',
         'direction',
         'code-block',
-        'formula',
-        'image',
-        'video'
+        'formula'
+        // 'background',
+        // 'font',
+        // 'image',
+        // 'video'
       ]
     });
 
@@ -56,7 +61,7 @@
       Notpad.editors.updateContent(editor.id, quill.getContents());
     });
     setTimeout(updates, 80);
-  });
+  }
 
   function updates() {
     updateCaretPosition();
@@ -105,7 +110,7 @@
     bind:this={editorContainer}
   />
   <div
-    class="fake-caret absolute z-0 w-0.5 rounded-[2px] bg-primary duration-75"
+    class="fake-caret absolute z-0 w-0.5 rounded-[2px] bg-primary"
     bind:this={fakeCaret}
     style="top: calc({caretPosition.top}px); left: {caretPosition.left}px; height: {caretPosition.height}px;"
     spellcheck="false"
@@ -137,6 +142,8 @@
 
   .fake-caret {
     animation: blink 1s infinite;
-    transition: top 0s;
+    transition:
+      top 0s,
+      left 200ms;
   }
 </style>

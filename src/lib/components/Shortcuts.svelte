@@ -36,7 +36,7 @@
     trigger: {
       key: 'p',
       modifier: ['ctrl', 'shift'],
-      callback: (d) => dispatch(d, Notpad.editors.printActive)
+      callback: (d) => dispatch(d, Notpad.editors.print)
     }
   }}
 />

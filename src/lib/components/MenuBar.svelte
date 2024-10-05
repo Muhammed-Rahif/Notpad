@@ -7,7 +7,7 @@
   import { isTauri } from '$lib';
   import screenfull from 'screenfull';
   import { toggleMode, mode } from 'mode-watcher';
-
+// updating 
   interface MenuItems {
     label: string;
     items: Item[];

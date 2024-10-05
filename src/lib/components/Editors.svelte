@@ -72,12 +72,13 @@
   <!-- Only render one Textarea, which is focused based on selected tab -->
   <Tabs.Content asChild value={$activeTabId} class="mt-0 h-full">
     <Textarea
-      bind:textarea
-      class="relative h-full w-full resize-none rounded-none 
-      !border-none bg-transparent text-base !outline-none !ring-0"
-      spellcheck={false}
-      value={$editors.find((editor) => editor.id === $activeTabId)?.content}
-      on:keyup={onTextareaChange}
-    />
+    bind:textarea
+    class="relative h-full w-full resize-none rounded-none 
+    !border-none bg-transparent text-base !outline-none !ring-0"
+    spellcheck={false}
+    value={$editors.find((editor) => editor.id === $activeTabId)?.content}
+    on:keyup={onTextareaChange}
+  />
+  
   </Tabs.Content>
 </Tabs.Root>

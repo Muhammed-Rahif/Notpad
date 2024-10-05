@@ -99,19 +99,8 @@
   // Close the dialog
   function closeSearchDialog() {
     isSearchDialogOpen = false;
-  }
-
-  // Handle find event
-  function handleFind(event) {
-    searchText = event.detail.searchText;
-    performFind();
-  }
-
-  // Handle replace event
-  function handleReplace(event) {
-    searchText = event.detail.searchText;
-    replaceText = event.detail.replaceText;
-    performReplace();
+    searchText = ''; // Clear search text when closing
+    replaceText = ''; // Clear replace text when closing
   }
 
   // Perform find operation
@@ -122,6 +111,7 @@
     } else {
       alert('Text not found');
     }
+    closeSearchDialog(); // Close dialog after the action
   }
 
   // Perform replace operation
@@ -134,6 +124,7 @@
     } else {
       alert('Text not found');
     }
+    closeSearchDialog(); // Close dialog after the action
   }
 
   let innerWidth = window.innerWidth;
@@ -175,6 +166,9 @@
 </Menubar.Root>
 
 {#if isSearchDialogOpen}
+  <!-- Overlay to block editor interaction -->
+  <div class="editor-overlay"></div>
+
   <!-- Simple search dialog -->
   <div class="dialog-overlay" on:click={closeSearchDialog}>
     <div class="dialog-content" on:click|stopPropagation>
@@ -207,11 +201,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000; /* Ensure it sits on top of everything */
   }
 
   .dialog-content {
     background: white;
     padding: 1rem;
     border-radius: 5px;
+    z-index: 1001; /* Ensure it's above the overlay */
+  }
+
+  .editor-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent; /* Invisible overlay to capture events */
+    z-index: 999; /* Below the dialog but above the editor */
   }
 </style>

@@ -8,6 +8,7 @@
   import screenfull from 'screenfull';
   import { toggleMode, mode } from 'mode-watcher';
   import { onMount } from 'svelte';
+  import { openFontDialog } from './font-dialog/FontDialog.svelte';
 
   let innerWidth = window.innerWidth;
   let isFullScreen = screenfull.isFullscreen;
@@ -75,7 +76,7 @@
       </Menubar.Item>
       <Menubar.Item on:click={() => Notpad.editors.insertDateAndTime()}>Time/Date</Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item>Font</Menubar.Item>
+      <Menubar.Item on:click={openFontDialog}>Font</Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
 

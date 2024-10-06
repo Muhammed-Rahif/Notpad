@@ -1,7 +1,7 @@
 <script lang="ts">
   import MenuBar from '@/components/MenuBar.svelte';
   import EditorTabs from '@/components/EditorTabs.svelte';
-  import SaveDialog from '@/components/SaveDialog.svelte';
+  import FontDialog from '@/components/font-dialog/FontDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
   import { Toaster } from '@/components/ui/sonner';
   import favIcon from '@assets/imgs/favicon.png';
@@ -20,7 +20,7 @@
 </div>
 
 <!-- Procedually -->
-<SaveDialog />
+<FontDialog />
 <Shortcuts />
 <Toaster />
 

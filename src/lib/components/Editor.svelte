@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import throttle from 'lodash.throttle';
   import StatusBar from '@/components/StatusBar.svelte';
   import Quill from 'quill';
-  import { position } from 'caret-pos';
+  import { position as getCaretPosition } from 'caret-pos';
   import { Notpad } from '@/helpers/notpad';
   import { type EditorType } from '@/store';
   import 'quill/dist/quill.core.css';
@@ -23,10 +23,10 @@
   let updateScheduled = false;
 
   onMount(async () => {
-    setupQuill();
+    await setupQuill();
   });
 
-  function setupQuill() {
+  async function setupQuill() {
     quill = new Quill(editorContainer!, {
       formats: [
         'bold',
@@ -52,20 +52,23 @@
       ]
     });
 
-    quill.focus();
-    for (let e of ['input', 'scroll', 'click', 'keydown', 'focus', 'resize'])
+    await Notpad.editors.setQuill(editor.id, quill);
+
+    for (let e of ['input', 'scroll', 'click', 'keydown', 'focus', 'resize', 'load'])
       quill.root.addEventListener(e, updates);
-    Notpad.editors.setQuill(editor.id, quill);
+    for (let e of ['scroll', 'resize', 'load']) window.addEventListener(e, updates);
+
     quill.setContents(Notpad.editors.getContent(editor.id)!);
-    quill.on('editor-change', () => {
-      Notpad.editors.updateContent(editor.id, quill.getContents());
-    });
-    setTimeout(updates, 80);
+
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    updates();
   }
 
-  function updates() {
+  async function updates() {
+    await tick();
+    updateTextAreaInfo();
+    await tick();
     updateCaretPosition();
-    setTimeout(updateTextAreaInfo, 50);
   }
 
   /**
@@ -74,7 +77,7 @@
   function updateTextAreaInfo() {
     const selection = quill.getSelection();
     if (selection) {
-      const text = quill.getText(0, selection.index);
+      const text = quill.getText(0, selection.index + selection.length);
       const lines = text.split('\n');
       lineNo = lines.length;
       columnNo = lines[lines.length - 1].length + 1;
@@ -86,9 +89,9 @@
   const updateCaretPosition = throttle(() => {
     if (!updateScheduled) {
       updateScheduled = true;
-      requestAnimationFrame(() => {
+      requestAnimationFrame(async () => {
         if (editorContainer) {
-          const caret = position(quill.root);
+          const caret = getCaretPosition(quill.root);
 
           // Adjust for the scroll position
           caretPosition = {

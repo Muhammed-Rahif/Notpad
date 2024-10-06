@@ -5,7 +5,7 @@ import { toast } from 'svelte-sonner';
 import print from 'print-js';
 import { Notpad } from '@/helpers/notpad';
 import Quill from 'quill';
-import { Delta } from 'quill/core';
+import { Delta, Range } from 'quill/core';
 import { mode } from 'mode-watcher';
 
 /**
@@ -13,7 +13,7 @@ import { mode } from 'mode-watcher';
  * a new editor, removing an editor, etc.
  */
 export class Editors {
-  init = () => {
+  init = async () => {
     const activeId = get(activeTabId);
     const editorsList = get(editors);
 
@@ -22,10 +22,10 @@ export class Editors {
     }
 
     // Focus on the textarea when the active tab changes
-    activeTabId.subscribe(() => {
-      setTimeout(() => {
-        this.focus({ caretToEnd: true });
-      }, 120);
+    activeTabId.subscribe(async (editorId) => {
+      // Adding a small delay, I don't know why, but it won't work without this
+      await new Promise((resolve) => setTimeout(resolve, 120));
+      this.focus(editorId);
     });
   };
 
@@ -134,43 +134,58 @@ export class Editors {
     return get(editors).find((e) => e.id == editorId)?.content;
   }
 
-  setQuill(editorId: string, quill: Quill) {
+  setQuill = async (editorId: string, quill: Quill) => {
+    let editor: EditorType;
     editors.update((value) => {
       return value.map((e) => {
         if (e.id === editorId) {
+          editor = e;
           return { ...e, quill };
+        }
+        return e;
+      });
+    });
+    if (editor!.selection) quill.setSelection(editor!.selection);
+    quill.on(
+      'selection-change',
+      (selection) => selection && this.updateSelection(editorId, selection)
+    );
+    quill.on('editor-change', () => {
+      this.updateContent(editor.id, quill.getContents());
+    });
+  };
+
+  updateSelection(editorId: string, selection: Range) {
+    editors.update((value) => {
+      return value.map((e) => {
+        if (e.id === editorId) {
+          return { ...e, selection };
         }
         return e;
       });
     });
   }
 
-  focus = ({
-    caretToEnd,
-    cb,
-    editorId
-  }: { editorId?: string; caretToEnd?: boolean; cb?: () => void } = {}) => {
+  focus = async (editorId?: string) => {
     const editor = this.getEditor(editorId);
-    if (editor.quill && caretToEnd) {
-      const length = editor.quill.getLength();
-      editor.quill.setSelection(length - 1, 0);
-    }
-    setTimeout(() => {
-      editor.quill?.focus();
-      if (cb) cb();
-    }, 50);
+    if (!editor.quill) return;
+    const selection = editor.selection;
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    editor.quill.focus();
+    if (selection) editor.quill.setSelection(selection);
   };
 
   undo = (editorId?: string) => {
     const editor = this.getEditor(editorId);
     editor.quill!.history.undo();
-    this.focus({ editorId });
+    this.focus(editorId);
   };
 
   redo = (editorId?: string) => {
     const editor = this.getEditor(editorId);
     editor.quill!.history.redo();
-    this.focus({ editorId });
+    this.focus(editorId);
   };
 
   cut = (editorId?: string) => {
@@ -193,7 +208,7 @@ export class Editors {
         Notpad.showError(err);
       });
     quill.deleteText(selection.index, selection.length);
-    this.focus({ editorId });
+    this.focus(editorId);
   };
 
   copy = (editorId?: string) => {
@@ -215,7 +230,7 @@ export class Editors {
         }
         Notpad.showError(err);
       });
-    this.focus({ editorId });
+    this.focus(editorId);
   };
 
   paste = (editorId?: string) => {
@@ -234,14 +249,14 @@ export class Editors {
               item.getType('text/html').then((blob) => {
                 blob.text().then((html) => {
                   quill.clipboard.dangerouslyPasteHTML(range.index, html);
-                  this.focus({ editorId });
+                  this.focus(editorId);
                 });
               });
             } else if (item.types.includes('text/plain')) {
               item.getType('text/plain').then((blob) => {
                 blob.text().then((text) => {
                   quill.clipboard.dangerouslyPasteHTML(range.index, text);
-                  this.focus({ editorId });
+                  this.focus(editorId);
                 });
               });
             }
@@ -259,7 +274,7 @@ export class Editors {
   selectAll = (editorId?: string) => {
     const quill = this.getEditor(editorId).quill!;
     quill.setSelection(0, quill.getLength());
-    this.focus({ editorId });
+    this.focus(editorId);
   };
 
   insertDateAndTime = (editorId?: string) => {
@@ -273,7 +288,7 @@ export class Editors {
       }
     }
     quill.insertText(range?.index ?? 0, date);
-    this.focus({ editorId });
+    this.focus(editorId);
   };
 
   /**

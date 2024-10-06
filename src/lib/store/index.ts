@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store';
 import { generate as genId } from 'short-uuid';
 import type Quill from 'quill';
-import { Delta } from 'quill/core';
+import { Delta, Range } from 'quill/core';
 
 /**
  * Represents the data associated with an editor.
@@ -33,6 +33,10 @@ export interface EditorType {
    * The quill instance associated to this editor. Will not store in indexedDb.
    */
   quill?: Quill;
+  /**
+   * The selection of the editor.
+   */
+  selection?: Range;
 }
 
 /**

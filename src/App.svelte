@@ -4,11 +4,10 @@
   import SaveDialog from '@/components/SaveDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
   import { Toaster } from '@/components/ui/sonner';
-  import favIcon from '@/assets/imgs/favicon.png';
-  import favIconDark from '@/assets/imgs/favicon-dark.png';
+  import favIcon from '@assets/imgs/favicon.png';
+  import favIconDark from '@assets/imgs/favicon-dark.png';
   import { mode, ModeWatcher } from 'mode-watcher';
   import { Notpad } from '@/helpers/notpad';
-  import { onMount } from 'svelte';
 </script>
 
 <!-- Actual UI -->

@@ -7,14 +7,14 @@
   import { Button } from '@/components/ui/button';
   import { Label } from '@/components/ui/label';
   import { cn } from '@/utils';
-  import { FontFamily, settings } from '@/store/store';
+  import { FontSize, settings } from '@/store/store';
   import { get } from 'svelte/store';
 
   let open = false;
 
-  export let value: FontFamily;
+  export let value: FontSize;
 
-  $: selectedValue = Object.values(FontFamily).find((f) => f === value) ?? $settings.fontFamily;
+  $: selectedValue = Object.values(FontSize).find((f) => f === value) ?? $settings.fontSize;
 
   // We want to refocus the trigger button when the user selects
   // an item from the list so users can continue navigating the
@@ -27,25 +27,25 @@
   }
 
   const onSelect = (
-    currentValue: FontFamily,
+    currentValue: FontSize | string,
     ids: {
       content: string;
       trigger: string;
     }
   ) => {
-    value = currentValue;
+    value = currentValue as FontSize;
     closeAndFocusTrigger(ids.trigger);
   };
 
   onMount(() => () => {
-    value = get(settings).fontFamily;
+    value = get(settings).fontSize;
   });
 </script>
 
 <Popover.Root bind:open let:ids>
   <Popover.Trigger asChild let:builder>
     <div>
-      <Label for="font-family-command-button">Font Family</Label>
+      <Label for="font-size-command-button">Font Size</Label>
       <br />
       <Button
         builders={[builder]}
@@ -53,22 +53,23 @@
         role="combobox"
         aria-expanded={open}
         class="w-full justify-between min-[464px]:w-[200px]"
-        id="font-family-command-button"
+        id="font-size-command-button"
       >
-        {selectedValue == FontFamily.SUSE ? `${selectedValue} (Default)` : selectedValue}
+        {selectedValue == FontSize.Size16 ? `${selectedValue} (Default)` : selectedValue}
         <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </div>
   </Popover.Trigger>
   <Popover.Content class="w-[200px] p-0">
     <Command.Root>
-      <Command.Input placeholder="Search font family" />
-      <Command.Empty>No font family found.</Command.Empty>
-      <Command.Group>
-        {#each Object.values(FontFamily) as fontFamily}
-          <Command.Item value={fontFamily} onSelect={() => onSelect(fontFamily, ids)}>
-            <Check class={cn('mr-2 h-4 w-4', value !== fontFamily && 'text-transparent')} />
-            {fontFamily == FontFamily.SUSE ? `${fontFamily} (Default)` : fontFamily}
+      <Command.Input placeholder="Search font size" />
+      <Command.Empty>No font size found.</Command.Empty>
+      <Command.Group class="max-h-56 overflow-y-scroll">
+        {#each Object.values(FontSize).filter((s) => !isNaN(Number(s))) as fontSize}
+          {@const fSize = fontSize.toString()}
+          <Command.Item value={fSize} onSelect={() => onSelect(fontSize, ids)}>
+            <Check class={cn('mr-2 h-4 w-4', value !== fontSize && 'text-transparent')} />
+            {fontSize == FontSize.Size16 ? `${fontSize} (Default)` : fontSize}
           </Command.Item>
         {/each}
       </Command.Group>

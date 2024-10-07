@@ -1,4 +1,4 @@
-import { activeTabId, editors } from '@/store';
+import { activeTabId, editors, settings } from '@/store/store';
 import { get } from 'svelte/store';
 import { findAsyncSequential } from '@/utils';
 import { Notpad } from '@/helpers/notpad';
@@ -7,6 +7,8 @@ import { isMobile, isTauri } from '$lib';
 import { readTextFile, BaseDirectory, exists, writeTextFile } from '@tauri-apps/api/fs';
 import { toast } from 'svelte-sonner';
 import { Delta } from 'quill/core';
+import print from 'print-js';
+import { mode } from 'mode-watcher';
 
 /**
  * A helper class for handling file operations such as opening, saving, and saving as.
@@ -234,6 +236,42 @@ export class FileOptions {
       else await this.saveFileInDesktopBrowser(saveAs);
     } catch (err) {
       Notpad.showError(err);
+    }
+  };
+
+  /**
+   * Prints active editor.
+   */
+  print = async (editorId?: string) => {
+    const editor = Notpad.editors.getEditor(editorId);
+    const isDarkMode = get(mode) == 'dark';
+    const fontFamily = get(settings).fontFamily;
+
+    if (!editor) return;
+    try {
+      print({
+        printable: editor.quill?.root.innerHTML,
+        type: 'raw-html',
+        style: `@import url('https://fonts.googleapis.com/css2?family=${fontFamily}');
+        * {
+          font-family: ${fontFamily}, system-ui;
+          color: ${isDarkMode ? 'white' : 'black'};
+          background-color: ${isDarkMode ? 'black' : 'white'};
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          color-adjust: exact;
+        }
+        a {
+          color: #3b82f6;
+          text-decoration-line: none;
+        }
+        `,
+        font: 'SUSE',
+        header: `${editor.fileName} - Notpad`
+      });
+    } catch (err) {
+      Notpad.showError(err);
+      self.print();
     }
   };
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Separator as SeparatorPrimitive } from 'bits-ui';
-  import { cn } from '@/utils.js';
+  import { cn } from '@/utils';
 
   type $$Props = SeparatorPrimitive.Props;
 

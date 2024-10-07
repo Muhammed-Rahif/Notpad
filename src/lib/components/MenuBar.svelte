@@ -2,7 +2,7 @@
   import * as Menubar from '@/components/ui/menubar';
   import EditorTitle from '@/components/EditorTitle.svelte';
   import { Notpad } from '@/helpers/notpad';
-  import { editors, settings } from '@/store';
+  import { editors, settings } from '@/store/store';
   import { fade } from 'svelte/transition';
   import { isTauri } from '$lib';
   import screenfull from 'screenfull';
@@ -42,7 +42,7 @@
         Save as...
       </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item on:click={() => Notpad.editors.print()}>
+      <Menubar.Item on:click={() => Notpad.fileOptions.print()}>
         Print<Menubar.Shortcut>Ctrl+P</Menubar.Shortcut>
       </Menubar.Item>
       <Menubar.Separator />
@@ -53,28 +53,28 @@
   <Menubar.Menu>
     <Menubar.Trigger>Edit</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Item on:click={() => Notpad.editors.undo()}>
+      <Menubar.Item on:click={() => Notpad.editOptions.undo()}>
         Undo<Menubar.Shortcut>Ctrl+Z</Menubar.Shortcut>
       </Menubar.Item>
-      <Menubar.Item on:click={() => Notpad.editors.redo()}>
+      <Menubar.Item on:click={() => Notpad.editOptions.redo()}>
         Redo<Menubar.Shortcut>Ctrl+Y</Menubar.Shortcut>
       </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item on:click={() => Notpad.editors.cut()}>
+      <Menubar.Item on:click={() => Notpad.editOptions.cut()}>
         Cut<Menubar.Shortcut>Ctrl+X</Menubar.Shortcut>
       </Menubar.Item>
-      <Menubar.Item on:click={() => Notpad.editors.copy()}>
+      <Menubar.Item on:click={() => Notpad.editOptions.copy()}>
         Copy<Menubar.Shortcut>Ctrl+C</Menubar.Shortcut>
       </Menubar.Item>
-      <Menubar.Item on:click={() => Notpad.editors.paste()}>
+      <Menubar.Item on:click={() => Notpad.editOptions.paste()}>
         Paste<Menubar.Shortcut>Ctrl+V</Menubar.Shortcut>
       </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item on:click={() => Notpad.editors.selectAll()}>
+      <Menubar.Item on:click={() => Notpad.editOptions.selectAll()}>
         Select All
         <Menubar.Shortcut>Ctrl+A</Menubar.Shortcut>
       </Menubar.Item>
-      <Menubar.Item on:click={() => Notpad.editors.insertDateAndTime()}>Time/Date</Menubar.Item>
+      <Menubar.Item on:click={() => Notpad.editOptions.insertDateAndTime()}>Time/Date</Menubar.Item>
       <Menubar.Separator />
       <Menubar.Item on:click={openFontDialog}>Font</Menubar.Item>
     </Menubar.Content>

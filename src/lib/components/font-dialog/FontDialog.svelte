@@ -1,5 +1,5 @@
 <script context="module">
-  import { writable } from 'svelte/store';
+  import { get, writable } from 'svelte/store';
   const open = writable(false);
 
   export function openFontDialog() {
@@ -7,28 +7,61 @@
   }
 </script>
 
-<script>
+<script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import FontFamilyCombobox from './FontFamilyCombobox.svelte';
+  import { FontFamily, FontSize, settings } from '@/store/store';
+  import { Notpad } from '@/helpers/notpad';
+  import FontSizeCombobox from './FontSizeCombobox.svelte';
+  import { Label } from '@/components/ui/label';
+  import * as Card from '@/components/ui/card';
 
-  $: console.log(open);
+  const currentSettings = get(settings);
+  let fontFamily: FontFamily = currentSettings.fontFamily;
+  let fontSize: FontSize = currentSettings.fontSize;
+
+  function closeFontDialog({ submit } = { submit: false }) {
+    open.set(false);
+    if (submit) {
+      Notpad.settings.setFontFamily(fontFamily);
+      Notpad.settings.setFontSize(fontSize);
+    }
+  }
+
+  function resetFontDefault() {
+    fontFamily = FontFamily.SUSE;
+    fontSize = FontSize.Size16;
+  }
 </script>
 
 <Dialog.Root open={$open} onOpenChange={open.set}>
-  <Dialog.Content class="sm:max-w-[425px]">
+  <Dialog.Content class="sm:max-w-[600px]">
     <Dialog.Header>
       <Dialog.Title>Font</Dialog.Title>
       <Dialog.Description>
-        Select a font from the list below to change the appearance of your text.
+        Select a font family and size from the list below to change the appearance of your text.
       </Dialog.Description>
     </Dialog.Header>
-    <div class="grid gap-4 py-4">
-      <FontFamilyCombobox />
+
+    <div class="flex gap-3 py-4 max-[464px]:flex-col">
+      <FontFamilyCombobox bind:value={fontFamily} />
+      <FontSizeCombobox bind:value={fontSize} />
     </div>
-    <Dialog.Footer>
-      <Button variant="ghost" type="button">Cancel</Button>
-      <Button type="submit">Okay</Button>
+
+    <Card.Root id="sample-font" class="relative">
+      <Label for="sample-font" class="absolute left-3 top-0 -translate-y-1/2 bg-background px-2">
+        Sample
+      </Label>
+      <Card.Content>
+        <p style={`font-size: ${fontSize}px; font-family: ${fontFamily}`}>Card Content</p>
+      </Card.Content>
+    </Card.Root>
+
+    <Dialog.Footer class="gap-2">
+      <Button variant="ghost" class="mr-auto" on:click={resetFontDefault}>Reset</Button>
+      <Button variant="secondary" on:click={() => closeFontDialog()}>Cancel</Button>
+      <Button on:click={() => closeFontDialog({ submit: true })}>Okay</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

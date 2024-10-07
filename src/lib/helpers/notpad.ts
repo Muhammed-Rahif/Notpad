@@ -3,9 +3,11 @@ import { FileOptions } from '@/helpers/file-options';
 import { Editors } from '@/helpers/editors';
 import { NotpadStorage } from '@/store/storage';
 import { Settings } from './settings';
+import { EditOptions } from './edit-options';
 
 export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();
+  public static editOptions: EditOptions = new EditOptions();
   public static editors: Editors = new Editors();
   public static storage: NotpadStorage = new NotpadStorage();
   public static settings: Settings = new Settings();

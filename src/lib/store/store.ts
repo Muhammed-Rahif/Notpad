@@ -40,6 +40,38 @@ export interface EditorType {
 }
 
 /**
+ * Available font families for the editor.
+ */
+export enum FontFamily {
+  SUSE = 'SUSE',
+  Baloo2 = 'Baloo 2',
+  BricolageGrotesque = 'Bricolage Grotesque',
+  Lora = 'Lora',
+  RobotoSlab = 'Roboto Slab'
+}
+
+export enum FontSize {
+  Size6 = 6,
+  Size7 = 7,
+  Size8 = 8,
+  Size9 = 9,
+  Size10 = 10,
+  Size11 = 11,
+  Size12 = 12,
+  Size14 = 14,
+  Size16 = 16,
+  Size18 = 18,
+  Size20 = 20,
+  Size22 = 22,
+  Size24 = 24,
+  Size26 = 26,
+  Size28 = 28,
+  Size36 = 36,
+  Size48 = 48,
+  Size72 = 72
+}
+
+/**
  * Interface representing the settings for the application.
  */
 export interface SettingsType {
@@ -51,6 +83,14 @@ export interface SettingsType {
    * Enable/disable bottom status bar
    */
   statusBar: boolean;
+  /**
+   * The font family for the editor.
+   */
+  fontFamily: FontFamily;
+  /**
+   * The font size for the editor.
+   */
+  fontSize: FontSize;
 }
 
 /**
@@ -78,4 +118,9 @@ export const activeTabId = writable<string>(get(editors).at(0)!.id);
 /**
  * A writable store that holds the settings for the application.
  */
-export const settings = writable<SettingsType>({ zoom: 1, statusBar: true });
+export const settings = writable<SettingsType>({
+  zoom: 1,
+  statusBar: true,
+  fontFamily: FontFamily.SUSE,
+  fontSize: 16
+});

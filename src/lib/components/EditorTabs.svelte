@@ -3,7 +3,7 @@
   import * as Tabs from '@/components/ui/tabs';
   import CloseIcon from '@/components/icons/close.svelte';
   import Button from '@/components/ui/button/button.svelte';
-  import { activeTabId, editors } from '@/store';
+  import { activeTabId, editors } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import type { ButtonEventHandler } from 'bits-ui';
   import EditorTitle from '@/components/EditorTitle.svelte';

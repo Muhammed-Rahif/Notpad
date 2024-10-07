@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { Dialog as DialogPrimitive } from "bits-ui";
-	import { cn } from "@/utils.js";
+  import { Dialog as DialogPrimitive } from 'bits-ui';
+  import { cn } from '@/utils';
 
-	type $$Props = DialogPrimitive.DescriptionProps;
+  type $$Props = DialogPrimitive.DescriptionProps;
 
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+  let className: $$Props['class'] = undefined;
+  export { className as class };
 </script>
 
 <DialogPrimitive.Description
-	class={cn("text-muted-foreground text-sm", className)}
-	{...$$restProps}
+  class={cn('text-sm text-muted-foreground', className)}
+  {...$$restProps}
 >
-	<slot />
+  <slot />
 </DialogPrimitive.Description>

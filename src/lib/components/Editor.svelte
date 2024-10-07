@@ -5,7 +5,7 @@
   import Quill from 'quill';
   import { position as getCaretPosition } from 'caret-pos';
   import { Notpad } from '@/helpers/notpad';
-  import { type EditorType } from '@/store';
+  import { settings, type EditorType } from '@/store/store';
   import 'quill/dist/quill.core.css';
 
   export let editor: EditorType;
@@ -24,6 +24,11 @@
 
   onMount(async () => {
     await setupQuill();
+
+    // Updates the caret position when the settings (font size or family) changes.
+    settings.subscribe(async () => {
+      Notpad.editors.focus();
+    });
   });
 
   async function setupQuill() {
@@ -60,6 +65,7 @@
 
     quill.setContents(Notpad.editors.getContent(editor.id)!);
 
+    // Adding a small delay, I don't know why, but it won't work without this
     await new Promise((resolve) => setTimeout(resolve, 200));
     updates();
   }
@@ -111,6 +117,8 @@
     class="editor-container rounded-nonebg-transparent h-full
     w-full overflow-hidden text-sm caret-transparent"
     bind:this={editorContainer}
+    style="--editor-font-family: '{$settings.fontFamily}';
+    --editor-font-size: {$settings.fontSize}px;"
   />
   <div
     class="fake-caret absolute z-0 w-0.5 rounded-[2px] bg-primary"
@@ -124,7 +132,12 @@
 
 <style>
   :global(.ql-editor) {
-    @apply h-full w-full overflow-y-scroll border-none !px-3 !py-2.5 text-base outline-none;
+    @apply h-full w-full overflow-y-scroll border-none !px-3 !py-2.5 text-base leading-[130%] outline-none;
+  }
+
+  :global(.ql-editor, .ql-editor *) {
+    font-family: var(--editor-font-family);
+    font-size: var(--editor-font-size);
   }
 
   :global(.ql-editor a) {

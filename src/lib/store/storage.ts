@@ -1,5 +1,5 @@
 import localforage from 'localforage';
-import { activeTabId, editors, settings, type EditorType, type SettingsType } from '@/store';
+import { activeTabId, editors, settings, type EditorType, type SettingsType } from '@/store/store';
 
 export const EDITORS_STORAGE_KEY = 'editors';
 export const ACTIVE_TAB_ID_STORAGE_KEY = 'active-tab-id';

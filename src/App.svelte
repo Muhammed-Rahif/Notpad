@@ -8,6 +8,7 @@
   import favIconDark from '@assets/imgs/favicon-dark.png';
   import { mode, ModeWatcher } from 'mode-watcher';
   import { Notpad } from '@/helpers/notpad';
+  import About from '@/components/About.svelte';
 </script>
 
 <!-- Actual UI -->
@@ -23,7 +24,7 @@
 <FontDialog />
 <Shortcuts />
 <Toaster />
-
+<About/>
 <ModeWatcher />
 
 <svelte:head>

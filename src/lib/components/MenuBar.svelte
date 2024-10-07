@@ -9,6 +9,7 @@
   import { toggleMode, mode } from 'mode-watcher';
   import { onMount } from 'svelte';
   import { openFontDialog } from './font-dialog/FontDialog.svelte';
+  import { openAbout } from '@/components/About.svelte'
 
   let innerWidth = window.innerWidth;
   let isFullScreen = screenfull.isFullscreen;
@@ -135,7 +136,7 @@
   <Menubar.Menu>
     <Menubar.Trigger>Help</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Item>About Notpad</Menubar.Item>
+      <Menubar.Item on:click={openAbout}>About Notpad</Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
 

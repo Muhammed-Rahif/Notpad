@@ -54,7 +54,7 @@
     </div>
   {/if}
 
-  {#each $editors as editor}
+  {#each $editors as editor (editor.id)}
     <Tabs.Content value={editor.id} class="mt-0 h-full">
       <Editor {editor} />
     </Tabs.Content>

@@ -60,25 +60,22 @@ export class Editors {
   }
 
   remove(editorId: string) {
-    let i = 0;
-    let removeIndex = -1;
+    const editorsList = get(editors);
     editors.update((value) => {
-      return value.filter((editor) => {
-        if (editor.id == editorId) removeIndex = i;
-        i++;
-        return editor.id !== editorId;
-      });
+      return value.filter((editor) => editor.id !== editorId);
     });
 
-    activeTabId.update((value) => {
-      if (value === editorId) {
-        if (removeIndex > 0) {
-          return get(editors)[removeIndex - 1]?.id ?? null;
-        } else if (removeIndex === 0 && get(editors).length > 0) {
-          return get(editors)[0]?.id ?? null;
+    activeTabId.update((currentId) => {
+      if (currentId === editorId && editorsList.length > 0) {
+        if (editorsList.length > 0) {
+          const index = editorsList.findIndex((editor) => editor.id === editorId);
+          if (index === editorsList.length - 1) {
+            return editorsList[index - 1].id;
+          }
+          return editorsList[index + 1].id;
         }
       }
-      return value;
+      return currentId;
     });
   }
 

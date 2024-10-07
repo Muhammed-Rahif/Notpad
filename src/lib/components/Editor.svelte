@@ -114,8 +114,8 @@
 
 <div class="relative h-full overflow-hidden">
   <div
-    class="editor-container rounded-nonebg-transparent h-full
-    w-full overflow-hidden text-sm caret-transparent"
+    class="editor-container h-full w-full overflow-hidden
+    rounded-none bg-transparent text-sm caret-transparent"
     bind:this={editorContainer}
     style="--editor-font-family: '{$settings.fontFamily}';
     --editor-font-size: {$settings.fontSize}px;"
@@ -130,9 +130,9 @@
 
 <StatusBar {lineNo} {columnNo} {characterCount} />
 
-<style>
+<style lang="postcss">
   :global(.ql-editor) {
-    @apply h-full w-full overflow-y-scroll border-none !px-3 !py-2.5 text-base leading-[130%] outline-none;
+    @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none;
   }
 
   :global(.ql-editor, .ql-editor *) {

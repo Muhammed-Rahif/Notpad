@@ -31,7 +31,7 @@
   {#if tabsMode || isXS}
     <div transition:slide>
       <Tabs.List
-        class="w-full justify-start overflow-x-scroll
+        class="w-full justify-start overflow-x-auto
         rounded-t-none py-0.5 shadow"
       >
         {#each $editors as editor}

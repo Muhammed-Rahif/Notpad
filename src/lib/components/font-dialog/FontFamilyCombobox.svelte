@@ -64,7 +64,7 @@
     <Command.Root>
       <Command.Input placeholder="Search font family" />
       <Command.Empty>No font family found.</Command.Empty>
-      <Command.Group>
+      <Command.Group class="max-h-56 overflow-y-auto">
         {#each Object.values(FontFamily) as fontFamily}
           <Command.Item value={fontFamily} onSelect={() => onSelect(fontFamily, ids)}>
             <Check class={cn('mr-2 h-4 w-4', value !== fontFamily && 'text-transparent')} />

@@ -80,28 +80,11 @@
 html,
 body,
 #app {
-  height: 100%;
-  overflow: scroll;
-  scroll-behavior: smooth;
-  overflow: hidden;
+  @apply h-full overflow-hidden scroll-smooth;
 }
 
 * {
-  font-family: 'SUSE', system-ui;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* https://stackoverflow.com/a/30680994/14781260 */
-::-webkit-scrollbar {
-  height: 0;
-  width: 0; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
-}
-/* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-  background: #ff0000;
+  @apply scrollbar scrollbar-corner-foreground/5 scrollbar-thumb-rounded-md scrollbar-w-1.5 scrollbar-h-1 scrollbar-track-neutral-100 dark:scrollbar-track-neutral-900 scrollbar-thumb-foreground/20 font-suse font-normal not-italic [font-optical-sizing:auto];
 }
 
 ::selection,

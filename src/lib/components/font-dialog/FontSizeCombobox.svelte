@@ -64,7 +64,7 @@
     <Command.Root>
       <Command.Input placeholder="Search font size" />
       <Command.Empty>No font size found.</Command.Empty>
-      <Command.Group class="max-h-56 overflow-y-scroll">
+      <Command.Group class="max-h-56 overflow-y-auto">
         {#each Object.values(FontSize).filter((s) => !isNaN(Number(s))) as fontSize}
           {@const fSize = fontSize.toString()}
           <Command.Item value={fSize} onSelect={() => onSelect(fontSize, ids)}>

@@ -1,24 +1,24 @@
 @font-face {
   font-family: 'SUSE';
-  src: url('@assets/fonts/SUSE-VariableFont_wght.ttf');
+  src: url('../../assets/fonts/SUSE-VariableFont.ttf');
 }
 
 @font-face {
   font-family: 'Baloo 2';
-  src: url('@assets/fonts/Baloo2-VariableFont_wght.ttf');
+  src: url('../../assets/fonts/Baloo2-VariableFont.ttf');
 }
 
 @font-face {
   font-family: 'Bricolage Grotesque';
-  src: url('@assets/fonts/BricolageGrotesque-VariableFont_opsz\,wdth\,wght.ttf');
+  src: url('../../assets/fonts/BricolageGrotesque-VariableFont.ttf');
 }
 
 @font-face {
   font-family: 'Lora';
-  src: url('@assets/fonts/Lora-VariableFont_wght.ttf');
+  src: url('../../assets/fonts/Lora-VariableFont.ttf');
 }
 
 @font-face {
   font-family: 'Roboto Slab';
-  src: url('@assets/fonts/RobotoSlab-VariableFont_wght.ttf');
+  src: url('../../assets/fonts/RobotoSlab-VariableFont.ttf');
 }

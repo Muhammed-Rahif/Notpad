@@ -25,7 +25,17 @@ export default defineConfig({
   },
   base: '/Notpad/',
   build: {
-    outDir: 'www'
+    outDir: 'www',
+    rollupOptions: {
+      output: {
+        // https://github.com/vitejs/vite/discussions/9440#discussioncomment-5913798
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          }
+        }
+      }
+    }
   },
   server: {
     port: 5173,

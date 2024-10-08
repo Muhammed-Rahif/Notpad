@@ -4,11 +4,12 @@
   import FontDialog from '@/components/font-dialog/FontDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
   import { Toaster } from '@/components/ui/sonner';
-  import favIcon from '@assets/imgs/favicon.png';
-  import favIconDark from '@assets/imgs/favicon-dark.png';
+  import favIcon from '@assets/images/favicon.png';
+  import favIconDark from '@assets/images/favicon-dark.png';
   import { mode, ModeWatcher } from 'mode-watcher';
   import { Notpad } from '@/helpers/notpad';
-  import About from '@/components/About.svelte';
+  import AboutDialog from '@/components/AboutDialog.svelte';
+  import LicenseDialog from '@/components/LicenseDialog.svelte';
 </script>
 
 <!-- Actual UI -->
@@ -22,9 +23,10 @@
 
 <!-- Procedually -->
 <FontDialog />
+<LicenseDialog />
+<AboutDialog />
 <Shortcuts />
 <Toaster />
-<About/>
 <ModeWatcher />
 
 <svelte:head>

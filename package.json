@@ -61,7 +61,6 @@
     "cmdk-sv": "^0.0.18",
     "localforage": "^1.10.0",
     "lodash.throttle": "^4.1.1",
-    "lucide-svelte": "^0.447.0",
     "mode-watcher": "^0.4.1",
     "print-js": "^1.6.0",
     "quill": "^2.0.2",

@@ -20,6 +20,9 @@ export default defineConfig({
       '@assets': path.resolve('./src/assets')
     }
   },
+  define: {
+    APP_VERSION: JSON.stringify(process.env.npm_package_version)
+  },
   base: '/Notpad/',
   build: {
     outDir: 'www'

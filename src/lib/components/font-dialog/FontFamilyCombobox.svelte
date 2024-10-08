@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Check from 'lucide-svelte/icons/check';
-  import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
   import { onMount, tick } from 'svelte';
   import * as Command from '@/components/ui/command';
   import * as Popover from '@/components/ui/popover';
@@ -9,6 +7,8 @@
   import { cn } from '@/utils';
   import { FontFamily, settings } from '@/store/store';
   import { get } from 'svelte/store';
+  import CheckIcon from '@/components/icons/Check.svelte';
+  import ChevronsUpDownIcon from '../icons/ChevronsUpDown.svelte';
 
   let open = false;
 
@@ -56,7 +56,7 @@
         id="font-family-command-button"
       >
         {selectedValue == FontFamily.SUSE ? `${selectedValue} (Default)` : selectedValue}
-        <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        <ChevronsUpDownIcon class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </div>
   </Popover.Trigger>
@@ -67,7 +67,7 @@
       <Command.Group class="max-h-56 overflow-y-auto">
         {#each Object.values(FontFamily) as fontFamily}
           <Command.Item value={fontFamily} onSelect={() => onSelect(fontFamily, ids)}>
-            <Check class={cn('mr-2 h-4 w-4', value !== fontFamily && 'text-transparent')} />
+            <CheckIcon class={cn('mr-2 h-4 w-4', value !== fontFamily && 'text-transparent')} />
             {fontFamily == FontFamily.SUSE ? `${fontFamily} (Default)` : fontFamily}
           </Command.Item>
         {/each}

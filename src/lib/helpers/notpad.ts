@@ -4,6 +4,7 @@ import { Editors } from '@/helpers/editors';
 import { NotpadStorage } from '@/store/storage';
 import { Settings } from './settings';
 import { EditOptions } from './edit-options';
+import { GithubApi } from './github-api';
 
 export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();
@@ -11,6 +12,7 @@ export class Notpad {
   public static editors: Editors = new Editors();
   public static storage: NotpadStorage = new NotpadStorage();
   public static settings: Settings = new Settings();
+  public static github: GithubApi = new GithubApi();
 
   static init = async () => {
     await this.storage.init();

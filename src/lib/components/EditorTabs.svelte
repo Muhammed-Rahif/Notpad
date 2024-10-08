@@ -1,7 +1,7 @@
 <script lang="ts">
   import Editor from '@/components/Editor.svelte';
   import * as Tabs from '@/components/ui/tabs';
-  import CloseIcon from '@/components/icons/close.svelte';
+  import CloseIcon from '@/components/icons/Close.svelte';
   import Button from '@/components/ui/button/button.svelte';
   import { activeTabId, editors } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';

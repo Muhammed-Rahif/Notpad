@@ -24,11 +24,6 @@
 
   onMount(async () => {
     await setupQuill();
-
-    // Updates the caret position when the settings (font size or family) changes.
-    settings.subscribe(async () => {
-      Notpad.editors.focus();
-    });
   });
 
   async function setupQuill() {
@@ -130,6 +125,14 @@
 
 <StatusBar {lineNo} {columnNo} {characterCount} />
 
+{#if updateScheduled}
+  <style lang="postcss">
+    .fake-caret {
+      animation: none !important;
+    }
+  </style>
+{/if}
+
 <style lang="postcss">
   :global(.ql-editor) {
     @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none;
@@ -160,6 +163,6 @@
     animation: blink 1s infinite;
     transition:
       top 0s,
-      left 200ms;
+      left 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 </style>

@@ -140,11 +140,8 @@ export class Editors {
       });
     });
     if (editor!.selection) quill.setSelection(editor!.selection);
-    quill.on(
-      'selection-change',
-      (selection) => selection && this.setSelection(editorId, selection)
-    );
-    quill.on('editor-change', () => {
+    quill.on('editor-change', (type, range) => {
+      if (range instanceof Range) this.setSelection(editorId, range);
       this.updateContent(editor.id, quill.getContents());
     });
   };

@@ -27,6 +27,7 @@
       Notpad.settings.setFontFamily(fontFamily);
       Notpad.settings.setFontSize(fontSize);
     }
+    Notpad.editors.focus();
   }
 
   function resetFontDefault() {
@@ -36,7 +37,7 @@
 </script>
 
 <Dialog.Root open={$open} onOpenChange={open.set}>
-  <Dialog.Content class="sm:max-w-[600px]">
+  <Dialog.Content class="max-h-[80vh] overflow-y-auto sm:max-w-[600px]">
     <Dialog.Header>
       <Dialog.Title>Font</Dialog.Title>
       <Dialog.Description>

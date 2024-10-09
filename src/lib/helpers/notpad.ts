@@ -2,9 +2,10 @@ import { toast } from 'svelte-sonner';
 import { FileOptions } from '@/helpers/file-options';
 import { Editors } from '@/helpers/editors';
 import { NotpadStorage } from '@/store/storage';
-import { Settings } from './settings';
-import { EditOptions } from './edit-options';
-import { GithubApi } from './github-api';
+import { Settings } from '@/helpers/settings';
+import { EditOptions } from '@/helpers/edit-options';
+import { GithubApi } from '@/helpers/github-api';
+import { SearchOptions } from '@/helpers/search-options';
 
 export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();
@@ -13,8 +14,9 @@ export class Notpad {
   public static storage: NotpadStorage = new NotpadStorage();
   public static settings: Settings = new Settings();
   public static github: GithubApi = new GithubApi();
+  public static searchOptions: SearchOptions = new SearchOptions();
 
-  static init = async () => {
+  public static init = async () => {
     await this.storage.init();
     await this.editors.init();
   };

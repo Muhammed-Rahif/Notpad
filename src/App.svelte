@@ -10,6 +10,7 @@
   import { Notpad } from '@/helpers/notpad';
   import AboutDialog from '@/components/AboutDialog.svelte';
   import LicenseDialog from '@/components/LicenseDialog.svelte';
+  import GoToDialog from '@/components/GoToDialog.svelte';
 </script>
 
 <!-- Actual UI -->
@@ -25,6 +26,7 @@
 <FontDialog />
 <LicenseDialog />
 <AboutDialog />
+<GoToDialog />
 <Shortcuts />
 <Toaster />
 <ModeWatcher />

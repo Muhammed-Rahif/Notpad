@@ -10,6 +10,7 @@
   import { onMount } from 'svelte';
   import { openFontDialog } from './font-dialog/FontDialog.svelte';
   import { openAboutDialog } from '@/components/AboutDialog.svelte';
+  import { openGoToDialog } from './GoToDialog.svelte';
 
   let innerWidth = window.innerWidth;
   let isFullScreen = screenfull.isFullscreen;
@@ -87,7 +88,9 @@
       <Menubar.Sub>
         <Menubar.SubTrigger>Find</Menubar.SubTrigger>
         <Menubar.SubContent>
-          <Menubar.Item>Search the web</Menubar.Item>
+          <Menubar.Item on:click={() => Notpad.searchOptions.findOnWeb()}>
+            Search the web
+          </Menubar.Item>
           <Menubar.Separator />
           <Menubar.Item>Find<Menubar.Shortcut>Ctrl+F</Menubar.Shortcut></Menubar.Item>
           <Menubar.Item>Find Next<Menubar.Shortcut>F3</Menubar.Shortcut></Menubar.Item>
@@ -98,7 +101,9 @@
         </Menubar.SubContent>
       </Menubar.Sub>
       <Menubar.Item>Replace<Menubar.Shortcut>Ctrl+H</Menubar.Shortcut></Menubar.Item>
-      <Menubar.Item>Go To<Menubar.Shortcut>Ctrl+G</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item on:click={openGoToDialog}>
+        Go To<Menubar.Shortcut>Ctrl+G</Menubar.Shortcut>
+      </Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
 

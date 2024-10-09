@@ -3,11 +3,7 @@
   import { Notpad } from '@/helpers/notpad';
   import { editors } from '@/store/store';
   import { shortcut, type ShortcutEventDetail } from '@svelte-put/shortcut';
-
-  function dispatch(d: ShortcutEventDetail, cb: () => void) {
-    d.originalEvent.preventDefault();
-    return cb();
-  }
+  import { openGoToDialog } from './GoToDialog.svelte';
 </script>
 
 <svelte:window
@@ -16,12 +12,14 @@
       {
         key: 'n',
         modifier: ['ctrl', 'alt'],
-        callback: (d) => dispatch(d, Notpad.editors.createNew)
+        callback: () => Notpad.editors.createNew(),
+        preventDefault: true
       },
       {
         key: 's',
         modifier: 'ctrl',
-        callback: (d) => dispatch(d, Notpad.fileOptions.save)
+        callback: () => Notpad.fileOptions.save(),
+        preventDefault: true
       }
     ]
   }}
@@ -29,14 +27,24 @@
     trigger: {
       key: 'o',
       modifier: 'ctrl',
-      callback: (d) => dispatch(d, Notpad.fileOptions.open)
+      callback: () => Notpad.fileOptions.open(),
+      preventDefault: true
     }
   }}
   use:shortcut={{
     trigger: {
       key: 'p',
       modifier: ['ctrl', 'shift'],
-      callback: (d) => dispatch(d, Notpad.editors.print)
+      callback: () => Notpad.fileOptions.print(),
+      preventDefault: true
+    }
+  }}
+  use:shortcut={{
+    trigger: {
+      key: 'f',
+      modifier: ['ctrl'],
+      callback: () => openGoToDialog(),
+      preventDefault: true
     }
   }}
 />

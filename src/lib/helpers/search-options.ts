@@ -1,5 +1,6 @@
 import { toast } from 'svelte-sonner';
 import { Notpad } from './notpad';
+import { Range } from 'quill';
 
 export class SearchOptions {
   public findOnWeb = (editorId?: string) => {
@@ -66,7 +67,7 @@ export class SearchOptions {
           targetOffset = lineEndIndex; // Move to the end of the line
         }
 
-        quill.setSelection(targetOffset, 0);
+        Notpad.editors.setSelection(editor.id, new Range(targetOffset - 1, 0), true);
         return;
       }
 

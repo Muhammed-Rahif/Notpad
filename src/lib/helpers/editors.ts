@@ -142,14 +142,14 @@ export class Editors {
     if (editor!.selection) quill.setSelection(editor!.selection);
     quill.on(
       'selection-change',
-      (selection) => selection && this.updateSelection(editorId, selection)
+      (selection) => selection && this.setSelection(editorId, selection)
     );
     quill.on('editor-change', () => {
       this.updateContent(editor.id, quill.getContents());
     });
   };
 
-  updateSelection(editorId: string, selection: Range) {
+  setSelection(editorId: string, selection: Range, focus = false) {
     editors.update((value) => {
       return value.map((e) => {
         if (e.id === editorId) {
@@ -158,6 +158,7 @@ export class Editors {
         return e;
       });
     });
+    if (focus) this.focus(editorId);
   }
 
   focus = async (editorId?: string) => {

@@ -15,9 +15,12 @@ export class EditOptions {
     Notpad.editors.focus(editorId);
   };
 
-  cut = (editorId?: string) => {
-    const quill = Notpad.editors.getEditor(editorId).quill!;
+  cut = async (editorId?: string) => {
+    const editor = Notpad.editors.getEditor(editorId);
+    const quill = editor.quill!;
     const selection = quill.getSelection()!;
+    if (!selection) return;
+
     const selectedContent = quill.getContents(selection.index, selection.length);
     const tempCont = document.createElement('div');
     new Quill(tempCont).setContents(selectedContent);
@@ -35,7 +38,7 @@ export class EditOptions {
         Notpad.showError(err);
       });
     quill.deleteText(selection.index, selection.length);
-    Notpad.editors.focus(editorId);
+    Notpad.editors.setSelection(editor.id, new Range(selection.index, 0), true);
   };
 
   copy = (editorId?: string) => {
@@ -99,9 +102,9 @@ export class EditOptions {
   };
 
   selectAll = (editorId?: string) => {
-    const quill = Notpad.editors.getEditor(editorId).quill!;
-    quill.setSelection(0, quill.getLength());
-    Notpad.editors.focus(editorId);
+    const editor = Notpad.editors.getEditor(editorId);
+    const quill = editor.quill!;
+    Notpad.editors.setSelection(editor.id, new Range(0, quill.getLength()), true);
   };
 
   insertDateAndTime = (editorId?: string) => {
@@ -118,7 +121,6 @@ export class EditOptions {
     const index = range?.index ?? 0;
     quill.insertText(index, date);
     // Move caret to the end of the inserted text
-    Notpad.editors.updateSelection(editor.id, new Range(index + date.length, range?.length));
-    Notpad.editors.focus(editorId);
+    Notpad.editors.setSelection(editor.id, new Range(index + date.length, 0), true);
   };
 }

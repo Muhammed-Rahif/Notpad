@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { isTauri } from '$lib';
   import { Notpad } from '@/helpers/notpad';
-  import { editors } from '@/store/store';
-  import { shortcut, type ShortcutEventDetail } from '@svelte-put/shortcut';
-  import { openGoToDialog } from './GoToDialog.svelte';
+  import { shortcut } from '@svelte-put/shortcut';
+  import { openGoToDialog } from '@/components/GoToDialog.svelte';
+  import { openFindDialog } from '@/components/FindDialog.svelte';
 </script>
 
 <svelte:window
@@ -41,9 +40,17 @@
   }}
   use:shortcut={{
     trigger: {
-      key: 'f',
+      key: 'g',
       modifier: ['ctrl'],
       callback: () => openGoToDialog(),
+      preventDefault: true
+    }
+  }}
+  use:shortcut={{
+    trigger: {
+      key: 'f',
+      modifier: ['ctrl'],
+      callback: () => openFindDialog(),
       preventDefault: true
     }
   }}

@@ -11,23 +11,26 @@
   import AboutDialog from '@/components/AboutDialog.svelte';
   import LicenseDialog from '@/components/LicenseDialog.svelte';
   import GoToDialog from '@/components/GoToDialog.svelte';
+  import FindDialog from '@/components/FindDialog.svelte';
 </script>
 
-<!-- Actual UI -->
-<div class="flex h-full flex-col">
-  <MenuBar />
+{#await Notpad.init() then}
+  <!-- Actual UI -->
+  <div class="flex h-full flex-col">
+    <MenuBar />
 
-  {#await Notpad.init() then}
     <EditorTabs />
-  {/await}
-</div>
+  </div>
 
-<!-- Procedually -->
-<FontDialog />
-<LicenseDialog />
-<AboutDialog />
-<GoToDialog />
-<Shortcuts />
+  <!-- Procedually -->
+  <FontDialog />
+  <LicenseDialog />
+  <AboutDialog />
+  <GoToDialog />
+  <FindDialog />
+  <Shortcuts />
+{/await}
+
 <Toaster />
 <ModeWatcher />
 

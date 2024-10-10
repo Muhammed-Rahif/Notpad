@@ -38,10 +38,11 @@ export class Notpad {
       if (err.name == 'AbortError') return;
       if (err.name == 'NotAllowedError')
         msg = 'Permission denied. Please enable the required permissions to proceed.';
-
       toast.error(msg);
+    } else if (typeof err === 'string') {
+      toast.error(err);
     } else {
-      toast.error('An unknown error occurred');
+      toast.error(`An unknown error occurred: ${err}`);
       console.error(err);
     }
   }

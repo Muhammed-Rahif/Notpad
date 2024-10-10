@@ -11,6 +11,7 @@
   import { openFontDialog } from './font-dialog/FontDialog.svelte';
   import { openAboutDialog } from '@/components/AboutDialog.svelte';
   import { openGoToDialog } from './GoToDialog.svelte';
+  import { openFindDialog } from './FindDialog.svelte';
 
   let innerWidth = window.innerWidth;
   let isFullScreen = screenfull.isFullscreen;
@@ -92,7 +93,9 @@
             Search the web
           </Menubar.Item>
           <Menubar.Separator />
-          <Menubar.Item>Find<Menubar.Shortcut>Ctrl+F</Menubar.Shortcut></Menubar.Item>
+          <Menubar.Item on:click={openFindDialog}>
+            Find<Menubar.Shortcut>Ctrl+F</Menubar.Shortcut>
+          </Menubar.Item>
           <Menubar.Item>Find Next<Menubar.Shortcut>F3</Menubar.Shortcut></Menubar.Item>
           <Menubar.Item>
             Find Previous

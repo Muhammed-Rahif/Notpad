@@ -116,7 +116,7 @@
       </p>
     </Dialog.Description>
 
-    <Dialog.Footer class="max-sm:gap-2">
+    <Dialog.Footer class="gap-y-2">
       <Button variant="secondary" class="relative sm:pr-20" on:click={showLicense}>
         Notpad License
 

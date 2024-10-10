@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=SUSE&display=swap');
+@font-face {
+  font-family: 'SUSE';
+  src: url('/fonts/SUSE/static/SUSE-Bold.ttf') format('truetype'),
+       url('/fonts/SUSE/static/SUSE-Regular.ttf') format('truetype'),
+       url('/fonts/SUSE/static/SUSE-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 @tailwind base;
 @tailwind components;
@@ -76,6 +83,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'SUSE', system-ui;
   }
 }
 
@@ -89,10 +97,8 @@ body,
 
 * {
   font-family: 'SUSE', system-ui;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
 }
+
 
 /* https://stackoverflow.com/a/30680994/14781260 */
 ::-webkit-scrollbar {

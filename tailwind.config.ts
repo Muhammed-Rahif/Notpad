@@ -1,11 +1,15 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
+import tailwindScrollbar from 'tailwind-scrollbar';
 
 const config: Config = {
   darkMode: ['class'],
   content: ['./src/**/*.{html,js,svelte,ts}'],
   safelist: ['dark'],
   theme: {
+    fontFamily: {
+      suse: ['SUSE', 'system-ui']
+    },
     container: {
       center: true,
       padding: '2rem',
@@ -58,7 +62,8 @@ const config: Config = {
         sans: [...fontFamily.sans]
       }
     }
-  }
+  },
+  plugins: [tailwindScrollbar({ nocompatible: true, preferredStrategy: 'pseudoelements' })]
 };
 
 export default config;

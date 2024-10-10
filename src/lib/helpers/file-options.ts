@@ -1,4 +1,4 @@
-import { activeTabId, editors } from '@/store';
+import { activeTabId, editors, settings } from '@/store/store';
 import { get } from 'svelte/store';
 import { findAsyncSequential } from '@/utils';
 import { Notpad } from '@/helpers/notpad';
@@ -6,6 +6,9 @@ import { open, save } from '@tauri-apps/api/dialog';
 import { isMobile, isTauri } from '$lib';
 import { readTextFile, BaseDirectory, exists, writeTextFile } from '@tauri-apps/api/fs';
 import { toast } from 'svelte-sonner';
+import { Delta } from 'quill/core';
+import print from 'print-js';
+import { mode } from 'mode-watcher';
 
 /**
  * A helper class for handling file operations such as opening, saving, and saving as.
@@ -42,7 +45,13 @@ export class FileOptions {
     } else {
       Notpad.editors.createNew({
         fileName: file.name,
-        content,
+        content: new Delta({
+          ops: [
+            {
+              insert: content
+            }
+          ]
+        }),
         fileHandle: fileHandle
       });
     }
@@ -69,7 +78,13 @@ export class FileOptions {
         reader.onload = (e) => {
           const content = e.target?.result as string;
           Notpad.editors.createNew({
-            content,
+            content: new Delta({
+              ops: [
+                {
+                  insert: content
+                }
+              ]
+            }),
             fileName: file.name
           });
           input.remove();
@@ -95,9 +110,15 @@ export class FileOptions {
     if (!(await exists(filePath, { dir: BaseDirectory.AppData })))
       throw new Error('File not found');
 
-    const contents = await readTextFile(filePath, { dir: BaseDirectory.AppConfig });
+    const content = await readTextFile(filePath, { dir: BaseDirectory.AppConfig });
     Notpad.editors.createNew({
-      content: contents,
+      content: new Delta({
+        ops: [
+          {
+            insert: content
+          }
+        ]
+      }),
       fileName: filePath.split('/').pop() as string,
       filePath
     });
@@ -124,7 +145,7 @@ export class FileOptions {
       });
 
     const writable = await fileHandle.createWritable();
-    await writable.write(activeEditor.content);
+    await writable.write(activeEditor.quill!.getText());
     await writable.close();
     Notpad.editors.updateFileHandle(activeEditor.id, fileHandle);
   };
@@ -133,7 +154,7 @@ export class FileOptions {
     const activeEditor = Notpad.editors.getActive();
     if (!activeEditor) return;
 
-    const blob = new Blob([activeEditor.content], { type: 'text/plain' });
+    const blob = new Blob([activeEditor.quill!.getText()], { type: 'text/plain' });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const nav = window.navigator as any;
 
@@ -174,7 +195,7 @@ export class FileOptions {
     }
 
     if (filePath) {
-      await writeTextFile(filePath, activeEditor.content, {
+      await writeTextFile(filePath, activeEditor.quill!.getText(), {
         dir: BaseDirectory.AppConfig
       });
       Notpad.editors.updateFilePath(activeEditor.id, filePath);
@@ -215,6 +236,42 @@ export class FileOptions {
       else await this.saveFileInDesktopBrowser(saveAs);
     } catch (err) {
       Notpad.showError(err);
+    }
+  };
+
+  /**
+   * Prints active editor.
+   */
+  print = async (editorId?: string) => {
+    const editor = Notpad.editors.getEditor(editorId);
+    const isDarkMode = get(mode) == 'dark';
+    const fontFamily = get(settings).fontFamily;
+
+    if (!editor) return;
+    try {
+      print({
+        printable: editor.quill?.root.innerHTML,
+        type: 'raw-html',
+        style: `@import url('https://fonts.googleapis.com/css2?family=${fontFamily}');
+        * {
+          font-family: ${fontFamily}, system-ui;
+          color: ${isDarkMode ? 'white' : 'black'};
+          background-color: ${isDarkMode ? 'black' : 'white'};
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          color-adjust: exact;
+        }
+        a {
+          color: #3b82f6;
+          text-decoration-line: none;
+        }
+        `,
+        font: 'SUSE',
+        header: `${editor.fileName} - Notpad`
+      });
+    } catch (err) {
+      Notpad.showError(err);
+      self.print();
     }
   };
 }

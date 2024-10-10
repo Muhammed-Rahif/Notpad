@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Tabs as TabsPrimitive } from 'bits-ui';
-  import { cn } from '@/utils.js';
+  import { cn } from '@/utils';
 
   type $$Props = TabsPrimitive.ContentProps;
 
@@ -11,7 +11,7 @@
 
 <TabsPrimitive.Content
   class={cn(
-    'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+    'mt-2 flex flex-col overflow-hidden ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
     className
   )}
   {value}

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Separator from '@/components/ui/separator/separator.svelte';
-  import { settings } from '@/store';
+  import { settings } from '@/store/store';
   import { slide } from 'svelte/transition';
 
   export let lineNo = 1;

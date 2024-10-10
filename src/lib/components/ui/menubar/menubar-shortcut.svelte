@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { HTMLAttributes } from 'svelte/elements';
-  import { cn } from '@/utils.js';
+  import { cn } from '@/utils';
 
   type $$Props = HTMLAttributes<HTMLSpanElement>;
   let className: $$Props['class'] = undefined;

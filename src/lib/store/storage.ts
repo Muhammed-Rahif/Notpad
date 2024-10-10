@@ -1,5 +1,5 @@
 import localforage from 'localforage';
-import { activeTabId, editors, settings, type EditorType, type SettingsType } from '@/store';
+import { activeTabId, editors, settings, type EditorType, type SettingsType } from '@/store/store';
 
 export const EDITORS_STORAGE_KEY = 'editors';
 export const ACTIVE_TAB_ID_STORAGE_KEY = 'active-tab-id';
@@ -13,27 +13,26 @@ export class NotpadStorage {
     });
   };
 
-  private loadStorage = () => {
-    localforage.getItem<EditorType[]>(EDITORS_STORAGE_KEY).then((value) => {
-      if (value) {
-        editors.set(value);
-      }
-    });
-    localforage.getItem<string>(ACTIVE_TAB_ID_STORAGE_KEY).then((value) => {
-      if (value) {
-        activeTabId.set(value);
-      }
-    });
-    localforage.getItem<SettingsType>(SETTINGS_STORAGE_KEY).then((value) => {
-      if (value) {
-        settings.set(value);
-      }
-    });
+  private loadStorage = async () => {
+    const editorsValue = await localforage.getItem<EditorType[]>(EDITORS_STORAGE_KEY);
+    if (editorsValue) editors.set(editorsValue);
+
+    const activeTabIdValue = await localforage.getItem<string>(ACTIVE_TAB_ID_STORAGE_KEY);
+    if (activeTabIdValue) activeTabId.set(activeTabIdValue);
+
+    const settingsValue = await localforage.getItem<SettingsType>(SETTINGS_STORAGE_KEY);
+    if (settingsValue) settings.set(settingsValue);
   };
 
   subscribeStoreUpdates = () => {
     editors.subscribe((value) => {
-      localforage.setItem(EDITORS_STORAGE_KEY, value);
+      // Quill instance will not be stored on indexedDb.
+      localforage.setItem(
+        EDITORS_STORAGE_KEY,
+        value.map((edtr) => {
+          return { ...edtr, quill: undefined };
+        })
+      );
     });
     activeTabId.subscribe((value) => {
       localforage.setItem(ACTIVE_TAB_ID_STORAGE_KEY, value);
@@ -43,9 +42,9 @@ export class NotpadStorage {
     });
   };
 
-  init = () => {
+  init = async () => {
     this.config();
-    this.loadStorage();
+    await this.loadStorage();
     this.subscribeStoreUpdates();
   };
 }

@@ -16,12 +16,26 @@ export default defineConfig({
   resolve: {
     alias: {
       $lib: path.resolve('./src/lib'),
-      '@': path.resolve('./src/lib')
+      '@': path.resolve('./src/lib'),
+      '@assets': path.resolve('./src/assets')
     }
+  },
+  define: {
+    APP_VERSION: JSON.stringify(process.env.npm_package_version)
   },
   base: '/Notpad/',
   build: {
-    outDir: 'www'
+    outDir: 'www',
+    rollupOptions: {
+      output: {
+        // https://github.com/vitejs/vite/discussions/9440#discussioncomment-5913798
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          }
+        }
+      }
+    }
   },
   server: {
     port: 5173,

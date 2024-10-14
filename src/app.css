@@ -80,7 +80,7 @@
 html,
 body,
 #app {
-  @apply h-full overflow-hidden scroll-smooth;
+  @apply h-full overflow-hidden scroll-smooth caret-foreground;
 }
 
 * {

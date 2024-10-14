@@ -18,7 +18,6 @@
   import * as Card from '@/components/ui/card';
 
   const currentSettings = get(settings);
-  $: console.log($settings);
 
   let fontFamily: FontFamily = currentSettings.fontFamily;
   let fontSize: FontSize = currentSettings.fontSize;

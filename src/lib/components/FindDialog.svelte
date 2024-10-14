@@ -1,10 +1,10 @@
 <script context="module">
-  import { writable } from 'svelte/store';
+  import { get, writable } from 'svelte/store';
 
-  const open = writable(true);
+  const open = writable(false);
 
-  export function openFindDialog() {
-    open.set(true);
+  export function toggleFindDialog() {
+    open.set(!get(open));
   }
 </script>
 
@@ -13,49 +13,137 @@
   import * as Dialog from '@/components/ui/dialog';
   import { Input } from '@/components/ui/input';
   import { Notpad } from '@/helpers/notpad';
-  import { Toggle } from '@/components/ui/toggle';
   import ChevronDown from '@/components/icons/ChevronDown.svelte';
   import ChevronUp from '@/components/icons/ChevronUp.svelte';
+  import { Checkbox } from '@/components/ui/checkbox';
+  import Label from '@/components/ui/label/label.svelte';
 
   let query: string = '';
-  let replace: string | null = null;
+  let replace: string = '';
   let caseSensitive: boolean = false;
+  let findIndex: number = 0;
 
-  function onOpenChange(op: boolean) {
-    open.set(op);
-    if (!op) Notpad.editors.focus();
+  function setQuery(q: string) {
+    query = q;
+  }
+
+  $: {
+    if ($open) {
+      const editor = Notpad.editors.getEditor();
+
+      const selection = editor.selection;
+      if (selection && editor.quill)
+        setQuery(editor.quill.getText(selection.index, selection.length));
+    }
+    // Focus the editor when the dialog is closed
+    else Notpad.editors.focus();
   }
 </script>
 
-<Dialog.Root open={$open} {onOpenChange} preventScroll={false}>
-  <Dialog.Content overlayClass="hidden" class="top-14 translate-y-0">
+<Dialog.Root open={$open} onOpenChange={open.set} preventScroll={false}>
+  <Dialog.Content
+    overlayClass="bg-transparent backdrop-blur-[.8px]"
+    class="top-14 translate-y-0 bg-neutral-100 dark:bg-neutral-900"
+  >
     <Dialog.Title>Find And Replace</Dialog.Title>
-    <Dialog.Description class="flex gap-3">
-      <div class="flex w-full flex-col gap-1.5">
-        <Input autocomplete="off" bind:value={query} id="query" placeholder="Find" />
-        <Input autocomplete="off" bind:value={replace} id="replace" placeholder="Replace" />
-      </div>
-
-      <div class="grid grid-cols-2 gap-1.5">
-        <Button size="icon" type="button">
-          <ChevronDown />
-        </Button>
-        <Button size="icon" type="button">
+    <Dialog.Description class="flex flex-col gap-3">
+      <div class="flex">
+        <Input
+          autocomplete="off"
+          bind:value={query}
+          id="query"
+          placeholder="Find"
+          class="rounded-r-none border-secondary !ring-0"
+        />
+        <Button
+          on:click={() => {
+            findIndex =
+              Notpad.searchOptions.findMaybeReplace({
+                query,
+                caseSensitive,
+                index: findIndex - 1
+              }) ?? findIndex;
+          }}
+          variant="secondary"
+          class="rounded-none"
+          size="icon"
+          type="button"
+        >
           <ChevronUp />
         </Button>
-        <span></span>
-        <Toggle aria-label="Toggle case sensitive" variant="outline" bind:pressed={caseSensitive}>
-          Aa
-        </Toggle>
+        <Button
+          on:click={() => {
+            findIndex =
+              Notpad.searchOptions.findMaybeReplace({
+                query,
+                caseSensitive,
+                index: findIndex + 1
+              }) ?? findIndex;
+          }}
+          variant="secondary"
+          class="rounded-l-none"
+          size="icon"
+          type="button"
+        >
+          <ChevronDown />
+        </Button>
+      </div>
+      <Input
+        autocomplete="off"
+        bind:value={replace}
+        id="replace"
+        placeholder="Replace"
+        class="border-secondary !ring-0"
+      />
+      <div class="-mb-1.5 -mt-1 flex items-center justify-end gap-2">
+        <Checkbox
+          id="case-sensitive-checkbox"
+          bind:checked={caseSensitive}
+          aria-labelledby="case-sensitive"
+          class="border-secondary"
+        />
+        <Label
+          id="case-sensitive"
+          for="case-sensitive-checkbox"
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >
+          Case sensitive
+        </Label>
       </div>
     </Dialog.Description>
     <Dialog.Footer class="gap-y-2">
-      <Button type="button" variant="secondary">Replace All</Button>
-      <Button type="button" variant="secondary">Replace</Button>
+      <Button
+        type="button"
+        variant="secondary"
+        on:click={() =>
+          Notpad.searchOptions.findAndReplaceAll({
+            query,
+            caseSensitive,
+            replace
+          })}
+      >
+        Replace All
+      </Button>
+      <Button
+        type="button"
+        variant="secondary"
+        on:click={() =>
+          Notpad.searchOptions.findMaybeReplace({
+            query,
+            caseSensitive,
+            replace,
+            index: findIndex
+          })}
+      >
+        Replace
+      </Button>
       <Button
         type="button"
         variant="default"
-        on:click={() => Notpad.searchOptions.find({ query, caseSensitive })}
+        on:click={() => {
+          findIndex = 0;
+          Notpad.searchOptions.findMaybeReplace({ query, caseSensitive });
+        }}
       >
         Find
       </Button>

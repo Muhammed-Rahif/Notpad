@@ -10,8 +10,8 @@
   import { onMount } from 'svelte';
   import { openFontDialog } from './font-dialog/FontDialog.svelte';
   import { openAboutDialog } from '@/components/AboutDialog.svelte';
-  import { openGoToDialog } from './GoToDialog.svelte';
-  import { openFindDialog } from './FindDialog.svelte';
+  import { toggleGoToDialog } from './GoToDialog.svelte';
+  import { toggleFindDialog } from './FindDialog.svelte';
 
   let innerWidth = window.innerWidth;
   let isFullScreen = screenfull.isFullscreen;
@@ -86,25 +86,14 @@
   <Menubar.Menu>
     <Menubar.Trigger>Search</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Sub>
-        <Menubar.SubTrigger>Find</Menubar.SubTrigger>
-        <Menubar.SubContent>
-          <Menubar.Item on:click={() => Notpad.searchOptions.findOnWeb()}>
-            Search the web
-          </Menubar.Item>
-          <Menubar.Separator />
-          <Menubar.Item on:click={openFindDialog}>
-            Find<Menubar.Shortcut>Ctrl+F</Menubar.Shortcut>
-          </Menubar.Item>
-          <Menubar.Item>Find Next<Menubar.Shortcut>F3</Menubar.Shortcut></Menubar.Item>
-          <Menubar.Item>
-            Find Previous
-            <Menubar.Shortcut class="ml-3">Shift+F3</Menubar.Shortcut>
-          </Menubar.Item>
-        </Menubar.SubContent>
-      </Menubar.Sub>
-      <Menubar.Item>Replace<Menubar.Shortcut>Ctrl+H</Menubar.Shortcut></Menubar.Item>
-      <Menubar.Item on:click={openGoToDialog}>
+      <Menubar.Item on:click={() => Notpad.searchOptions.searchOnWeb()}>
+        Search on Google
+      </Menubar.Item>
+      <Menubar.Separator />
+      <Menubar.Item on:click={toggleFindDialog}>
+        Find/Replace<Menubar.Shortcut>Ctrl+F</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item on:click={toggleGoToDialog}>
         Go To<Menubar.Shortcut>Ctrl+G</Menubar.Shortcut>
       </Menubar.Item>
     </Menubar.Content>

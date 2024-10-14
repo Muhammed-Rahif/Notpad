@@ -1,8 +1,9 @@
+import { toast } from 'svelte-sonner';
 import { Notpad } from './notpad';
 import { Range } from 'quill';
 
 export class SearchOptions {
-  public findOnWeb = (editorId?: string) => {
+  public searchOnWeb = (editorId?: string) => {
     const editor = Notpad.editors.getEditor(editorId);
     if (!editor) return;
 
@@ -79,31 +80,107 @@ export class SearchOptions {
     Notpad.editors.focus(editorId);
   };
 
-  public find = ({
+  public findMaybeReplace = ({
     query,
     editorId,
-    caseSensitive
+    caseSensitive = false,
+    index = 0,
+    replace
   }: {
-    editorId?: string;
-    caseSensitive?: boolean;
     query: string;
+    replace?: string;
+    editorId?: string;
+    index?: number;
+    caseSensitive?: boolean;
   }) => {
-    if (query === '')
+    if (!query)
       return Notpad.showError('Search term cannot be empty. Please enter a valid search term.');
 
     const editor = Notpad.editors.getEditor(editorId);
-    const quill = editor.quill;
-    if (!quill) return;
+    const quill = editor?.quill;
+    if (!quill) return Notpad.showError('Editor not found.');
 
     const text = quill.getText();
-    const startIndex = caseSensitive
+    const matches: number[] = [];
+
+    let startIndex = 0;
+    while (true) {
+      startIndex = caseSensitive
+        ? text.indexOf(query, startIndex)
+        : text.toLowerCase().indexOf(query.toLowerCase(), startIndex);
+
+      if (startIndex === -1) break;
+      matches.push(startIndex);
+      startIndex += query.length;
+    }
+
+    if (matches.length === 0)
+      return Notpad.showError(`The term "${query}" was not found in the document.`);
+
+    let validIndex;
+    if (index >= 0 && index < matches.length) {
+      validIndex = index;
+    } else if (index > matches.length) {
+      validIndex = 0;
+    } else if (index < 0) {
+      validIndex = matches.length - 1;
+    } else {
+      validIndex = 0;
+    }
+
+    const matchPosition = matches[validIndex];
+
+    quill.setSelection(matchPosition, query.length);
+
+    if (typeof replace == 'string') {
+      quill.deleteText(matchPosition, query.length);
+      quill.insertText(matchPosition, replace);
+      quill.setSelection(matchPosition, replace.length);
+    } else {
+      quill.setSelection(matchPosition, query.length);
+    }
+
+    return validIndex;
+  };
+
+  public findAndReplaceAll = ({
+    query,
+    editorId,
+    replace,
+    caseSensitive = false
+  }: {
+    query: string;
+    replace: string;
+    editorId?: string;
+    caseSensitive?: boolean;
+  }) => {
+    if (!query)
+      return Notpad.showError('Search term cannot be empty. Please enter a valid search term.');
+
+    const editor = Notpad.editors.getEditor(editorId);
+    const quill = editor?.quill;
+    if (!quill) return Notpad.showError('Editor not found.');
+
+    let text = quill.getText();
+    let startIndex = caseSensitive
       ? text.indexOf(query)
       : text.toLowerCase().indexOf(query.toLowerCase());
 
-    if (startIndex !== -1) {
-      quill.setSelection(startIndex, query.length);
-    } else {
-      Notpad.showError(`The term "${query}" was not found in the document.`);
+    if (startIndex === -1)
+      return Notpad.showError(`The term "${query}" was not found in the document.`);
+
+    let count = 0;
+    while (startIndex !== -1) {
+      quill.deleteText(startIndex, query.length);
+      quill.insertText(startIndex, replace);
+
+      text = quill.getText();
+      startIndex = caseSensitive
+        ? text.indexOf(query)
+        : text.toLowerCase().indexOf(query.toLowerCase());
+      count++;
     }
+
+    return toast.success(`Replaced ${count} occurrences of "${query}" with "${replace}".`);
   };
 }

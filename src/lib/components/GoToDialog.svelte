@@ -1,10 +1,10 @@
 <script context="module">
-  import { writable } from 'svelte/store';
+  import { get, writable } from 'svelte/store';
 
   const open = writable(false);
 
-  export function openGoToDialog() {
-    open.set(true);
+  export function toggleGoToDialog() {
+    open.set(!get(open));
   }
 </script>
 
@@ -17,11 +17,6 @@
 
   let line: string | undefined;
   let column: string | undefined;
-
-  function onOpenChange(op: boolean) {
-    open.set(op);
-    if (!op) Notpad.editors.focus();
-  }
 
   function submitGoTo() {
     open.set(false);
@@ -38,10 +33,15 @@
       (e.target as HTMLInputElement).value = '';
     }
   }
+
+  $: if (!$open) Notpad.editors.focus();
 </script>
 
-<Dialog.Root open={$open} {onOpenChange} preventScroll={false}>
-  <Dialog.Content overlayClass="hidden" class="top-32">
+<Dialog.Root open={$open} onOpenChange={open.set} preventScroll={false}>
+  <Dialog.Content
+    overlayClass="bg-transparent backdrop-blur-[.8px]"
+    class="top-14 translate-y-0 bg-neutral-100 dark:bg-neutral-900"
+  >
     <Dialog.Title>Go To</Dialog.Title>
     <Dialog.Description class="flex gap-3">
       <div class="flex w-full max-w-sm flex-col gap-1.5">

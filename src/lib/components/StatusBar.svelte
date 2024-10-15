@@ -17,6 +17,8 @@
     class="sticky bottom-0 z-10 h-[30px] w-full
     bg-primary-foreground px-2"
     transition:slide
+    on:contextmenu|stopPropagation|preventDefault
+    role="contentinfo"
   >
     <Separator />
     <p

@@ -63,7 +63,7 @@
         value={editor.fileName}
         use:longpress={1000}
         type="text"
-        class="bordeone bg-transparent {!!editor.fileHandle
+        class="rounded bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary {!!editor.fileHandle
           ? 'border-none border-transparent outline-none outline-transparent'
           : ''}"
         maxlength={24}

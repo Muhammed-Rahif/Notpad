@@ -18,7 +18,6 @@
   <!-- Actual UI -->
   <div class="flex h-full flex-col">
     <MenuBar />
-
     <EditorTabs />
   </div>
 

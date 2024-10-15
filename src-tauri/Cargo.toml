@@ -1,6 +1,6 @@
 [package]
 name = "notpad"
-version = "0.0.0"
+version = "1.0.0-1"
 description = "Windows like notpad for cross platform."
 authors = ["Muhammed-Rahif"]
 license = "MIT"

@@ -3,65 +3,57 @@
   "build": {
     "beforeBuildCommand": "npm run build -- --base /",
     "beforeDevCommand": "npm run dev",
-    "devPath": "http://localhost:5173",
-    "distDir": "../www"
+    "frontendDist": "../www",
+    "devUrl": "http://localhost:5173"
   },
-  "package": {
-    "productName": "Notpad",
-    "version": "1.0.0-1"
-  },
-  "tauri": {
-    "allowlist": {
-      "dialog": {
-        "open": true,
-        "save": true
-      },
-      "fs": {
-        "all": true
-      },
-      "window": {
-        "all": true
-      }
+  "bundle": {
+    "active": true,
+    "category": "DeveloperTool",
+    "copyright": "",
+    "targets": [
+      "app",
+      "deb",
+      "dmg",
+      "msi",
+      "rpm",
+      "nsis"
+    ],
+    "externalBin": [],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
     },
-    "bundle": {
-      "active": true,
-      "category": "DeveloperTool",
-      "copyright": "",
+    "longDescription": "",
+    "macOS": {
+      "entitlements": null,
+      "exceptionDomain": "",
+      "frameworks": [],
+      "providerShortName": null,
+      "signingIdentity": null
+    },
+    "resources": [],
+    "shortDescription": "",
+    "linux": {
       "deb": {
         "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "tech.rahif.notpad",
-      "longDescription": "",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "resources": [],
-      "shortDescription": "",
-      "targets": ["app", "deb", "dmg", "msi", "rpm", "nsis", "updater"],
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
       }
     },
-    "security": {
-      "csp": null
-    },
-    "updater": {
-      "active": false
-    },
+    "createUpdaterArtifacts": "v1Compatible"
+  },
+  "productName": "Notpad",
+  "mainBinaryName": "Notpad",
+  "version": "1.0.0-1",
+  "identifier": "tech.rahif.notpad",
+  "plugins": {},
+  "app": {
     "windows": [
       {
         "fullscreen": false,
@@ -70,6 +62,9 @@
         "title": "Notpad",
         "width": 800
       }
-    ]
+    ],
+    "security": {
+      "csp": null
+    }
   }
 }

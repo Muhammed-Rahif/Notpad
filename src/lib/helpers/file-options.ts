@@ -2,9 +2,9 @@ import { activeTabId, editors, settings } from '@/store/store';
 import { get } from 'svelte/store';
 import { findAsyncSequential } from '@/utils';
 import { Notpad } from '@/helpers/notpad';
-import { open, save } from '@tauri-apps/api/dialog';
+import { open, save } from '@tauri-apps/plugin-dialog';
 import { isMobile, isTauri } from '$lib';
-import { readTextFile, BaseDirectory, exists, writeTextFile } from '@tauri-apps/api/fs';
+import { readTextFile, BaseDirectory, exists, writeTextFile } from '@tauri-apps/plugin-fs';
 import { toast } from 'svelte-sonner';
 import { Delta } from 'quill/core';
 import print from 'print-js';
@@ -107,10 +107,10 @@ export class FileOptions {
     });
     if (Array.isArray(filePath) || filePath === null) return;
 
-    if (!(await exists(filePath, { dir: BaseDirectory.AppData })))
+    if (!(await exists(filePath, { baseDir: BaseDirectory.AppData })))
       throw new Error('File not found');
 
-    const content = await readTextFile(filePath, { dir: BaseDirectory.AppConfig });
+    const content = await readTextFile(filePath, { baseDir: BaseDirectory.AppConfig });
     Notpad.editors.createNew({
       content: new Delta({
         ops: [
@@ -196,7 +196,7 @@ export class FileOptions {
 
     if (filePath) {
       await writeTextFile(filePath, activeEditor.quill!.getText(), {
-        dir: BaseDirectory.AppConfig
+        baseDir: BaseDirectory.AppConfig
       });
       Notpad.editors.updateFilePath(activeEditor.id, filePath);
 

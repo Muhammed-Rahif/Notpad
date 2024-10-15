@@ -59,16 +59,16 @@
         organize your thoughts. It is designed to be minimal and distraction-free, so you can focus
         on your ideas. Notpad is an open-source project. You can contribute to the project by fixing
         bugs, improving the codebase, or adding new features. The project is hosted on
-        <a href="https://github.com/Muhammed-Rahif/Notpad/" target="_blank">GitHub.</a>
+        <a href="https://github.com/Muhammed-Rahif/Notpad/" target="_blank">GitHub</a>
         If you have any questions, feedback, or suggestions, feel free to
         <a href="https://github.com/Muhammed-Rahif/Notpad/issues/new/" target="_blank">
-          create an issue on GitHub.
-        </a>
+          create an issue
+        </a>.
       </p>
 
       {#await Notpad.github.getContributors() then contributors}
         {#if contributors}
-          <div class="mb-5" transition:slide|global>
+          <div transition:slide|global>
             <p>Our Valuable Contributors:</p>
             <ul class="mt-1 max-h-36 overflow-y-auto">
               {#each contributors as contributor}
@@ -110,9 +110,11 @@
           </div>
         {/if}
       {/await}
-      <p>
-        This product is licenced under the MIT license to
-        <a href="https://github.com/Muhammed-Rahif" target="_blank">Muhammed-Rahif.</a>
+      <p class="mt-2 text-right">
+        <small>
+          This product is licenced under the MIT license to
+          <a href="https://github.com/Muhammed-Rahif" target="_blank">Muhammed-Rahif.</a>
+        </small>
       </p>
     </Dialog.Description>
 
@@ -129,7 +131,7 @@
         </Button>
       </Button>
 
-      <Button on:click={closeDialog}>Well Done!</Button>
+      <Button on:click={closeDialog}>Okay!</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

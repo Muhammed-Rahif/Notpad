@@ -57,13 +57,13 @@
     for (let e of ['input', 'scroll', 'click', 'keydown', 'focus', 'resize', 'load'])
       quill.root.addEventListener(e, updates);
     for (let e of ['scroll', 'resize', 'load']) window.addEventListener(e, updates);
-    settings.subscribe(updates);
 
     quill.setContents(Notpad.editors.getContent(editor.id)!);
 
     // Adding a small delay, I don't know why, but it won't work without this
     await new Promise((resolve) => setTimeout(resolve, 200));
     updates();
+    settings.subscribe(updates);
   }
 
   async function updates() {

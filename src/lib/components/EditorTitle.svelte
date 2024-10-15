@@ -15,7 +15,7 @@
     readonly = false;
 
     setTimeout(() => {
-      input.focus(); // Focus the input after it becomes editable
+      input.focus();
     }, 0);
   }
 
@@ -27,13 +27,13 @@
       Notpad.editors.updateFileName(editor.id, t);
       readonly = true;
 
-      await tick(); // Ensure the DOM reflects the readonly change
+      await tick();
       input.blur();
     }
   }
 
-  async function onKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
+  async function onKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter') {
       await submit();
     }
   }
@@ -46,7 +46,7 @@
 
 <Tooltip.Root openDelay={0} closeDelay={0}>
   <Tooltip.Trigger>
-    <form class="relative text-center" on:submit|preventDefault={submit}>
+    <form class="relative text-center text-sm" on:submit|preventDefault={submit}>
       <!-- A expected behaviour is that the title will not be available to edit on file that opened from local or saved locally.
       If you want to, you have save as it with new file-name/title. 
       
@@ -56,9 +56,9 @@
       <input
         bind:this={input}
         use:autoWidth
-        on:dblclick|stopPropagation={allowEditing}
+        on:dblclick={allowEditing}
         on:keydown={onKeydown}
-        on:longpress|stopPropagation={allowEditing}
+        on:longpress={allowEditing}
         on:blur={onBlur}
         value={editor.fileName}
         use:longpress={1000}

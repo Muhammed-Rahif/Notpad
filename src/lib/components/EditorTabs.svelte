@@ -31,23 +31,25 @@
   {#if tabsMode || isXS}
     <div transition:slide>
       <Tabs.List
-        class="w-full justify-start overflow-x-auto
-        rounded-t-none py-0.5 shadow"
+        class="w-full justify-start gap-1
+        overflow-x-auto rounded-t-none py-0.5 shadow"
       >
         {#each $editors as editor}
-          <Tabs.Trigger value={editor.id} class={tabsMode ? 'pr-1' : ''}>
-            <EditorTitle {editor} />
+          <Tabs.Trigger asChild value={editor.id} class={tabsMode ? 'pr-1' : ''}>
+            <div class="flex items-center justify-center rounded-md bg-background py-1 pl-2 pr-1">
+              <EditorTitle {editor} />
 
-            {#if tabsMode}
-              <Button
-                on:click={(e) => onEditorClose(e, editor.id)}
-                size="sm"
-                class="ml-1 h-6 w-6 p-0"
-                variant="secondary"
-              >
-                <CloseIcon />
-              </Button>
-            {/if}
+              {#if tabsMode}
+                <Button
+                  on:click={(e) => onEditorClose(e, editor.id)}
+                  size="sm"
+                  class="h-6 w-6 p-0"
+                  variant="secondary"
+                >
+                  <CloseIcon />
+                </Button>
+              {/if}
+            </div>
           </Tabs.Trigger>
         {/each}
       </Tabs.List>

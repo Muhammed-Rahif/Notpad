@@ -3,7 +3,7 @@
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
-  import type { EditorType } from '@/store/store';
+  import { activeTabId, type EditorType } from '@/store/store';
   import * as Tooltip from '@/components/ui/tooltip';
   import type { ButtonEventHandler } from 'bits-ui';
   import CloseIcon from '@/components/icons/Close.svelte';
@@ -84,7 +84,7 @@
         on:click={(e) => onEditorClose(e, editor.id)}
         size="sm"
         class="h-6 w-6 p-0"
-        variant="secondary"
+        variant={$activeTabId === editor.id ? 'secondary' : 'outline'}
       >
         <CloseIcon />
       </Button>

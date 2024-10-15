@@ -22,8 +22,8 @@
       {
         "assets": [
           "Notpad_*_universal.dmg",
-          "notpad_*_amd64.deb",
-          "notpad-*.x86_64.rpm",
+          "Notpad_*_amd64.deb",
+          "Notpad-*.x86_64.rpm",
           "Notpad_*_x64_en-US.msi",
           "Notpad_*_x64-setup.exe"
         ]

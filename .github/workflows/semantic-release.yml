@@ -75,8 +75,8 @@ jobs:
       - name: Move Ubuntu artifacts to outputs
         if: matrix.platform == 'ubuntu-22.04'
         run: |
-          cp src-tauri/target/release/bundle/deb/notpad_*_amd64.deb outputs/
-          cp src-tauri/target/release/bundle/rpm/notpad-*.x86_64.rpm outputs/
+          cp src-tauri/target/release/bundle/deb/Notpad_*_amd64.deb outputs/
+          cp src-tauri/target/release/bundle/rpm/Notpad-*.x86_64.rpm outputs/
 
       - name: Move Windows artifacts to outputs
         if: matrix.platform == 'windows-latest'

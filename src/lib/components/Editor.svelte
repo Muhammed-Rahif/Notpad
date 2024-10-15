@@ -57,6 +57,7 @@
     for (let e of ['input', 'scroll', 'click', 'keydown', 'focus', 'resize', 'load'])
       quill.root.addEventListener(e, updates);
     for (let e of ['scroll', 'resize', 'load']) window.addEventListener(e, updates);
+    settings.subscribe(updates);
 
     quill.setContents(Notpad.editors.getContent(editor.id)!);
 
@@ -113,7 +114,8 @@
     rounded-none bg-transparent text-sm caret-transparent"
     bind:this={editorContainer}
     style="--editor-font-family: '{$settings.fontFamily}';
-    --editor-font-size: {$settings.fontSize}px;"
+    --editor-font-size: {$settings.fontSize}px;
+    --editor-zoom: {$settings.zoom};"
   />
   <div
     class="fake-caret absolute z-0 w-0.5 rounded-[2px] bg-primary"
@@ -141,6 +143,13 @@
   :global(.ql-editor, .ql-editor *) {
     font-family: var(--editor-font-family);
     font-size: var(--editor-font-size);
+  }
+
+  :global(.ql-editor) {
+    scale: var(--editor-zoom);
+    width: calc(100% / var(--editor-zoom));
+    height: calc(100% / var(--editor-zoom));
+    transform-origin: top left;
   }
 
   :global(.ql-editor a) {

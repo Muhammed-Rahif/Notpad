@@ -105,11 +105,15 @@
       <Menubar.Sub>
         <Menubar.SubTrigger>Zoom</Menubar.SubTrigger>
         <Menubar.SubContent>
-          <Menubar.Item>Zoom In<Menubar.Shortcut>Ctrl+Plus</Menubar.Shortcut></Menubar.Item>
-          <Menubar.Item>
+          <Menubar.Item on:click={() => Notpad.viewOptions.zoom('in')}>
+            Zoom In<Menubar.Shortcut>Ctrl+Plus</Menubar.Shortcut>
+          </Menubar.Item>
+          <Menubar.Item on:click={() => Notpad.viewOptions.zoom('out')}>
             Zoom Out<Menubar.Shortcut class="ml-3">Ctrl+Minus</Menubar.Shortcut>
           </Menubar.Item>
-          <Menubar.Item>Reset Zoom<Menubar.Shortcut>Ctrl+0</Menubar.Shortcut></Menubar.Item>
+          <Menubar.Item on:click={() => Notpad.viewOptions.zoom('reset')}>
+            Reset Zoom<Menubar.Shortcut>Ctrl+0</Menubar.Shortcut>
+          </Menubar.Item>
         </Menubar.SubContent>
       </Menubar.Sub>
 
@@ -120,7 +124,7 @@
       </Menubar.CheckboxItem>
       <Menubar.CheckboxItem
         bind:checked={$settings.statusBar}
-        on:click={Notpad.settings.toggleStatusBar}
+        on:click={Notpad.viewOptions.toggleStatusBar}
       >
         Status Bar
       </Menubar.CheckboxItem>

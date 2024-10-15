@@ -6,6 +6,7 @@ import { Settings } from '@/helpers/settings';
 import { EditOptions } from '@/helpers/edit-options';
 import { GithubApi } from '@/helpers/github-api';
 import { SearchOptions } from '@/helpers/search-options';
+import { ViewOptions } from '@/helpers/view-options';
 
 export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();
@@ -15,6 +16,7 @@ export class Notpad {
   public static settings: Settings = new Settings();
   public static github: GithubApi = new GithubApi();
   public static searchOptions: SearchOptions = new SearchOptions();
+  public static viewOptions: ViewOptions = new ViewOptions();
 
   public static init = async () => {
     await this.storage.init();

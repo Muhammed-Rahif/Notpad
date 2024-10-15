@@ -54,4 +54,28 @@
       preventDefault: true
     }
   }}
+  use:shortcut={{
+    trigger: {
+      key: '+',
+      modifier: ['ctrl'],
+      callback: () => Notpad.viewOptions.zoom('in'),
+      preventDefault: true
+    }
+  }}
+  use:shortcut={{
+    trigger: {
+      key: '-',
+      modifier: ['ctrl'],
+      callback: () => Notpad.viewOptions.zoom('out'),
+      preventDefault: true
+    }
+  }}
+  use:shortcut={{
+    trigger: {
+      key: '0',
+      modifier: ['ctrl'],
+      callback: () => Notpad.viewOptions.zoom('reset'),
+      preventDefault: true
+    }
+  }}
 />

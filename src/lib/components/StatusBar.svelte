@@ -47,7 +47,9 @@
         {characterCount <= 1 ? 'Character' : 'Characters'}
       </span>
 
-      <span class="ml-auto">100%</span>
+      <span class="ml-auto">
+        {$settings.zoom * 100}%
+      </span>
     </p>
   </div>
 {/if}

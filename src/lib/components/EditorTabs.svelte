@@ -1,22 +1,13 @@
 <script lang="ts">
   import Editor from '@/components/Editor.svelte';
   import * as Tabs from '@/components/ui/tabs';
-  import CloseIcon from '@/components/icons/Close.svelte';
-  import Button from '@/components/ui/button/button.svelte';
   import * as ContextMenu from '@/components/ui/context-menu';
   import EditorTitle from '@/components/EditorTitle.svelte';
   import { activeTabId, editors } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
-  import type { ButtonEventHandler } from 'bits-ui';
   import { slide } from 'svelte/transition';
 
   let innerWidth = window.innerWidth;
-
-  function onEditorClose(e: ButtonEventHandler<MouseEvent>, id: string) {
-    e.preventDefault();
-    e.stopPropagation();
-    Notpad.editors.remove(id);
-  }
 
   $: isXS = innerWidth <= 450;
   /**
@@ -50,17 +41,6 @@
               }}
             >
               <EditorTitle {editor} />
-
-              {#if tabsMode}
-                <Button
-                  on:click={(e) => onEditorClose(e, editor.id)}
-                  size="sm"
-                  class="h-6 w-6 p-0"
-                  variant="secondary"
-                >
-                  <CloseIcon />
-                </Button>
-              {/if}
             </div>
           </Tabs.Trigger>
         {/each}

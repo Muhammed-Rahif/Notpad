@@ -59,8 +59,14 @@ export class Editors {
     activeTabId.update(() => newId);
   }
 
-  remove(editorId: string) {
+  remove = (editorId?: string) => {
+    editorId = this.getEditor(editorId).id;
     const editorsList = get(editors);
+
+    if (editorsList.length === 1) {
+      this.createNew();
+    }
+
     editors.update((value) => {
       return value.filter((editor) => editor.id !== editorId);
     });
@@ -77,7 +83,7 @@ export class Editors {
       }
       return currentId;
     });
-  }
+  };
 
   updateContent(id: string, content: Delta) {
     editors.update((value) => {

@@ -78,4 +78,12 @@
       preventDefault: true
     }
   }}
+  use:shortcut={{
+    trigger: {
+      key: 'w',
+      modifier: ['ctrl'],
+      callback: () => Notpad.editors.remove(),
+      preventDefault: true
+    }
+  }}
 />

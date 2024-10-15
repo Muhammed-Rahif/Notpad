@@ -1,29 +1,36 @@
 <script lang="ts">
   import MenuBar from '@/components/MenuBar.svelte';
-  import Editors from '@/components/Editors.svelte';
-  import SaveDialog from '@/components/SaveDialog.svelte';
+  import EditorTabs from '@/components/EditorTabs.svelte';
+  import FontDialog from '@/components/font-dialog/FontDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
   import { Toaster } from '@/components/ui/sonner';
-  import favIcon from '@/assets/imgs/favicon.png';
-  import favIconDark from '@/assets/imgs/favicon-dark.png';
+  import favIcon from '@assets/images/favicon.png';
+  import favIconDark from '@assets/images/favicon-dark.png';
   import { mode, ModeWatcher } from 'mode-watcher';
   import { Notpad } from '@/helpers/notpad';
-  import { onMount } from 'svelte';
-
-  onMount(() => Notpad.init());
+  import AboutDialog from '@/components/AboutDialog.svelte';
+  import LicenseDialog from '@/components/LicenseDialog.svelte';
+  import GoToDialog from '@/components/GoToDialog.svelte';
+  import FindDialog from '@/components/FindDialog.svelte';
 </script>
 
-<!-- Actual UI -->
-<div class="flex h-full flex-col">
-  <MenuBar />
-  <Editors />
-</div>
+{#await Notpad.init() then}
+  <!-- Actual UI -->
+  <div class="flex h-full flex-col">
+    <MenuBar />
+    <EditorTabs />
+  </div>
 
-<!-- Procedually -->
-<SaveDialog />
-<Shortcuts />
+  <!-- Procedually -->
+  <FontDialog />
+  <LicenseDialog />
+  <AboutDialog />
+  <GoToDialog />
+  <FindDialog />
+  <Shortcuts />
+{/await}
+
 <Toaster />
-
 <ModeWatcher />
 
 <svelte:head>

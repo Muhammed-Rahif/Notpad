@@ -1,6 +1,6 @@
 <script lang="ts">
   import Separator from '@/components/ui/separator/separator.svelte';
-  import { settings } from '@/store';
+  import { settings } from '@/store/store';
   import { slide } from 'svelte/transition';
 
   export let lineNo = 1;
@@ -17,6 +17,8 @@
     class="sticky bottom-0 z-10 h-[30px] w-full
     bg-primary-foreground px-2"
     transition:slide
+    on:contextmenu|stopPropagation|preventDefault
+    role="contentinfo"
   >
     <Separator />
     <p
@@ -47,7 +49,9 @@
         {characterCount <= 1 ? 'Character' : 'Characters'}
       </span>
 
-      <span class="ml-auto">100%</span>
+      <span class="ml-auto">
+        {$settings.zoom * 100}%
+      </span>
     </p>
   </div>
 {/if}

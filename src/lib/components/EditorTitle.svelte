@@ -3,8 +3,11 @@
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
-  import type { EditorType } from '@/store';
+  import type { EditorType } from '@/store/store';
   import * as Tooltip from '@/components/ui/tooltip';
+  import type { ButtonEventHandler } from 'bits-ui';
+  import CloseIcon from '@/components/icons/Close.svelte';
+  import Button from '@/components/ui/button/button.svelte';
 
   export let editor: EditorType;
 
@@ -15,7 +18,7 @@
     readonly = false;
 
     setTimeout(() => {
-      input.focus(); // Focus the input after it becomes editable
+      input.focus();
     }, 0);
   }
 
@@ -27,13 +30,13 @@
       Notpad.editors.updateFileName(editor.id, t);
       readonly = true;
 
-      await tick(); // Ensure the DOM reflects the readonly change
+      await tick();
       input.blur();
     }
   }
 
-  async function onKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
+  async function onKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter') {
       await submit();
     }
   }
@@ -42,34 +45,50 @@
     input.value = editor.fileName;
     readonly = true;
   }
+
+  function onEditorClose(e: ButtonEventHandler<MouseEvent>, id: string) {
+    e.preventDefault();
+    e.stopPropagation();
+    Notpad.editors.remove(id);
+  }
 </script>
 
 <Tooltip.Root openDelay={0} closeDelay={0}>
   <Tooltip.Trigger>
-    <form class="relative text-center" on:submit|preventDefault={submit}>
-      <!-- A expected behaviour is that the title will not be available to edit on file that opened from local or saved locally.
-      If you want to, you have save as it with new file-name/title. 
-      
-      Meaning only non-saved (saved on user local file system)
-      files can be rename the title by double click. 
-      -->
-      <input
-        bind:this={input}
-        use:autoWidth
-        on:dblclick|stopPropagation={allowEditing}
-        on:keydown={onKeydown}
-        on:longpress|stopPropagation={allowEditing}
-        on:blur={onBlur}
-        value={editor.fileName}
-        use:longpress={1000}
-        type="text"
-        class="bordeone bg-transparent {!!editor.fileHandle
-          ? 'border-none border-transparent outline-none outline-transparent'
-          : ''}"
-        maxlength={24}
-        readonly={!!editor.fileHandle || readonly}
-      />
-    </form>
+    <div class="flex items-center justify-center">
+      <form class="relative text-center text-sm" on:submit|preventDefault={submit}>
+        <!-- A expected behaviour is that the title will not be available to edit on file that opened from local or saved locally.
+        If you want to, you have save as it with new file-name/title. 
+        
+        Meaning only non-saved (saved on user local file system)
+        files can be rename the title by double click. 
+        -->
+        <input
+          bind:this={input}
+          use:autoWidth
+          on:dblclick={allowEditing}
+          on:keydown={onKeydown}
+          on:longpress={allowEditing}
+          on:blur={onBlur}
+          value={editor.fileName}
+          use:longpress={1000}
+          type="text"
+          class="rounded bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary {!!editor.fileHandle
+            ? 'border-none border-transparent outline-none outline-transparent'
+            : ''}"
+          maxlength={24}
+          readonly={!!editor.fileHandle || readonly}
+        />
+      </form>
+      <Button
+        on:click={(e) => onEditorClose(e, editor.id)}
+        size="sm"
+        class="h-6 w-6 p-0"
+        variant="secondary"
+      >
+        <CloseIcon />
+      </Button>
+    </div>
   </Tooltip.Trigger>
   {#if editor.filePath}
     <Tooltip.Content>

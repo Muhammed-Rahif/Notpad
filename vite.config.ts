@@ -2,6 +2,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import path from 'path';
+import fs from 'fs';
 
 function baseUrl() {
   const baseArgIndex = process.argv.indexOf('--base');
@@ -11,13 +12,21 @@ function baseUrl() {
   return null;
 }
 
+(function () {
+  // create a app.json with version using process.env.npm_package_version
+  const appJson = path.resolve('./src/app.json');
+  const content = {
+    version: process.env.npm_package_version
+  };
+  fs.writeFileSync(appJson, JSON.stringify(content, null, 2));
+})();
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      $lib: path.resolve('./src/lib'),
-      '@': path.resolve('./src/lib'),
-      '@assets': path.resolve('./src/assets')
+      '@/src': path.resolve('./src'),
+      '@': path.resolve('./src/lib')
     }
   },
   define: {

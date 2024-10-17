@@ -4,7 +4,7 @@
   import { Notpad } from '@/helpers/notpad';
   import { editors, settings } from '@/store/store';
   import { fade } from 'svelte/transition';
-  import { isTauri } from '$lib';
+  import { isTauri } from '@/src/lib';
   import screenfull from 'screenfull';
   import { toggleMode, mode } from 'mode-watcher';
   import { onMount } from 'svelte';

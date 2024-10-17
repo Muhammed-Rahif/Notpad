@@ -11,8 +11,8 @@
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
-  import appIconLight from '@assets/images/Notpad Logo Light.svg';
-  import appIconDark from '@assets/images/Notpad Logo Dark.svg';
+  import appIconLight from '@/src/assets/images/Notpad Logo Light.svg';
+  import appIconDark from '@/src/assets/images/Notpad Logo Dark.svg';
   import GitHubIcon from '@/components/icons/GItHub.svelte';
   import Separator from '@/components/ui/separator/separator.svelte';
   import { Badge } from '@/components/ui/badge';
@@ -21,6 +21,7 @@
   import type { ButtonEventHandler } from 'bits-ui';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
+  import appJson from '@/src/app.json';
 
   function closeDialog() {
     open.set(false);
@@ -34,7 +35,7 @@
   function openGithubRepo(e: ButtonEventHandler<MouseEvent>) {
     e.stopPropagation();
     e.preventDefault();
-    window.open('https://github.com/Muhammed-Rahif', '_blank');
+    window.open('https://github.com/Muhammed-Rahif/Notpad', '_blank');
   }
 </script>
 
@@ -48,7 +49,7 @@
 
       <div>
         <span class="text-xl font-bold">Notpad</span><br />
-        Version {window.APP_VERSION}<br />
+        Version {appJson.version}<br />
         <a href="https://github.com/Muhammed-Rahif" target="_blank">Muhammed-Rahif</a>
         <span class="text-sm">© 2024. All rights reserved.</span>
       </div>
@@ -59,11 +60,11 @@
         organize your thoughts. It is designed to be minimal and distraction-free, so you can focus
         on your ideas. Notpad is an open-source project. You can contribute to the project by fixing
         bugs, improving the codebase, or adding new features. The project is hosted on
-        <a href="https://github.com/Muhammed-Rahif/Notpad/" target="_blank">GitHub</a>
+        <a href="https://github.com/Muhammed-Rahif/Notpad/" target="_blank">GitHub.</a>
         If you have any questions, feedback, or suggestions, feel free to
         <a href="https://github.com/Muhammed-Rahif/Notpad/issues/new/" target="_blank">
-          create an issue
-        </a>.
+          create an issue.
+        </a>
       </p>
 
       {#await Notpad.github.getContributors() then contributors}

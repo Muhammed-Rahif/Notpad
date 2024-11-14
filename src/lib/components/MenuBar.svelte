@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
   import EditorTitle from '@/components/EditorTitle.svelte';
+  import DownloadButton from './DownloadButton.svelte';
   import { Notpad } from '@/helpers/notpad';
   import { editors, settings } from '@/store/store';
   import { fade } from 'svelte/transition';
@@ -140,6 +141,8 @@
       <Menubar.Item on:click={openAboutDialog}>About Notpad</Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
+
+  <DownloadButton />
 
   {#if !isXS && !tabsMode}
     <div

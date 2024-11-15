@@ -1,6 +1,6 @@
 name: Prettier
 on:
-  pull_request:
+  pull_request_target:
     branches:
       - alpha
   workflow_dispatch:

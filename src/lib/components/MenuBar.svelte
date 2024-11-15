@@ -11,6 +11,8 @@
   import { onMount } from 'svelte';
   import { openFontDialog } from './font-dialog/FontDialog.svelte';
   import { openAboutDialog } from '@/components/AboutDialog.svelte';
+  import { openGithubRepo } from '@/components/Github.svelte';
+
   import { toggleGoToDialog } from './GoToDialog.svelte';
   import { toggleFindDialog } from './FindDialog.svelte';
 
@@ -137,6 +139,7 @@
   <Menubar.Menu>
     <Menubar.Trigger>Help</Menubar.Trigger>
     <Menubar.Content>
+      <Menubar.Item on:click={openGithubRepo}>GitHub</Menubar.Item>
       <Menubar.Item on:click={openAboutDialog}>About Notpad</Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>

@@ -13,7 +13,7 @@
   import * as Dialog from '@/components/ui/dialog';
   import appIconLight from '@/src/assets/images/Notpad Logo Light.svg';
   import appIconDark from '@/src/assets/images/Notpad Logo Dark.svg';
-  import GitHubIcon from '@/components/icons/GItHub.svelte';
+  import GitHubIcon from '@/src/lib/components/icons/GitHub.svelte';
   import Separator from '@/components/ui/separator/separator.svelte';
   import { Badge } from '@/components/ui/badge';
   import { openLicenseDialog } from '@/components/LicenseDialog.svelte';
@@ -128,7 +128,7 @@
           class="absolute right-0 rounded-l-none border-l border-l-foreground/10"
           on:click={openGithubRepo}
         >
-          <GitHubIcon />
+          <GitHubIcon class="text-2xl" />
         </Button>
       </Button>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
   import EditorTitle from '@/components/EditorTitle.svelte';
+  import DownloadButton from './DownloadButton.svelte';
   import { Notpad } from '@/helpers/notpad';
   import { editors, settings } from '@/store/store';
   import { fade } from 'svelte/transition';
@@ -19,7 +20,6 @@
   $: isXS = innerWidth <= 450;
   $: tabsMode = $editors.length > 1;
   $: singleEditor = $editors.at(0)!;
-  $: modeLabel = $mode == 'dark' ? 'Light Mode' : 'Dark Mode';
 
   onMount(() => {
     screenfull.onchange(() => (isFullScreen = screenfull.isFullscreen));
@@ -140,6 +140,10 @@
       <Menubar.Item on:click={openAboutDialog}>About Notpad</Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
+
+  {#if !isTauri}
+    <DownloadButton />
+  {/if}
 
   {#if !isXS && !tabsMode}
     <div

@@ -1,6 +1,11 @@
 name: Prettier
 on:
   pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
     branches:
       - alpha
   workflow_dispatch:
@@ -27,8 +32,16 @@ jobs:
         run: npm install
 
       - name: Run Prettier
-        uses: creyD/prettier_action@v4.3
-        with:
-          prettier_options: --write .
-          commit_message: 'style(prettier): run prettier'
-          prettier_plugins: 'prettier-plugin-svelte prettier-plugin-tailwindcss'
+        run: npx prettier --write .
+
+      - name: Commit changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "style: apply Prettier formatting" || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

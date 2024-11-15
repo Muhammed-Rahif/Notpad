@@ -7,17 +7,17 @@ export interface ContributorType {
 }
 
 export interface ReleasesType {
-  assets:           Asset[];
+  assets: Asset[];
 }
 
 export interface Asset {
-  name:                 string;
-  url:                  string;
-  content_type:         string;
-  size:                 number;
-  download_count:       number;
-  created_at:           Date;
-  updated_at:           Date;
+  name: string;
+  url: string;
+  content_type: string;
+  size: number;
+  download_count: number;
+  created_at: Date;
+  updated_at: Date;
   browser_download_url: string;
 }
 
@@ -51,6 +51,7 @@ export class GithubApi {
   }
 
   public async getReleases(): Promise<ReleasesType[] | undefined> {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     try {
       const res = await fetch('https://api.github.com/repos/Muhammed-Rahif/Notpad/releases');
       if (!res.ok) {

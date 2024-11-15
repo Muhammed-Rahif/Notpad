@@ -1,13 +1,13 @@
 name: Prettier
 on:
-  pull_request_target:
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - edited
-    branches:
-      - alpha
+  # pull_request_target:
+  #   types:
+  #     - opened
+  #     - synchronize
+  #     - reopened
+  #     - edited
+  #   branches:
+  #     - alpha
   workflow_dispatch:
 jobs:
   prettier:
@@ -19,9 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # https://github.com/actions/checkout/issues/455#issuecomment-792228083
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.pull_request.head.ref }}
-          repository: ${{github.event.pull_request.head.repo.full_name}}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -39,7 +37,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "style: apply Prettier formatting" || echo "No changes to commit"
+          git commit -m 'style(prettier): run prettier' || echo "No changes to commit"
 
       - name: Push changes
         run: git push

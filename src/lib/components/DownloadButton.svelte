@@ -5,6 +5,7 @@
   import LinuxIcon from '@/components/icons/Linux.svelte';
   import MacOSIcon from '@/components/icons/MacOS.svelte';
   import DownloadIcon from '@/components/icons/Download.svelte';
+  import { slide } from 'svelte/transition';
 
   function getContentForDownloadUrl(fileUrl: string) {
     const fileName = fileUrl.split('/').pop();
@@ -25,22 +26,22 @@
       .flatMap((release) => release.assets)
       .sort((a, b) => a.name.localeCompare(b.name))}
 
-    <Menubar.Menu>
-      <Menubar.Trigger class="absolute right-1 top-1/2 -translate-y-1/2 transform">
-        Download
-      </Menubar.Trigger>
-      <Menubar.Content>
-        {#each assets as asset}
-          {@const { text, icon: Icon } = getContentForDownloadUrl(asset.name)}
-          <a href={asset.browser_download_url} download={asset.browser_download_url}>
-            <Menubar.Item class="flex items-center justify-between">
-              {text}
+    <div transition:slide|global class="absolute right-1 top-1/2 -translate-y-1/2 transform">
+      <Menubar.Menu>
+        <Menubar.Trigger>Download</Menubar.Trigger>
+        <Menubar.Content>
+          {#each assets as asset}
+            {@const { text, icon: Icon } = getContentForDownloadUrl(asset.name)}
+            <a href={asset.browser_download_url} download={asset.browser_download_url}>
+              <Menubar.Item class="flex items-center justify-between">
+                {text}
 
-              <Icon class="text-xl" />
-            </Menubar.Item>
-          </a>
-        {/each}
-      </Menubar.Content>
-    </Menubar.Menu>
+                <Icon class="text-xl" />
+              </Menubar.Item>
+            </a>
+          {/each}
+        </Menubar.Content>
+      </Menubar.Menu>
+    </div>
   {/if}
 {/await}

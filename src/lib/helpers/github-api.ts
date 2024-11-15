@@ -7,17 +7,17 @@ export interface ContributorType {
 }
 
 export interface ReleasesType {
-  assets:           Asset[];
+  assets: Asset[];
 }
 
 export interface Asset {
-  name:                 string;
-  url:                  string;
-  content_type:         string;
-  size:                 number;
-  download_count:       number;
-  created_at:           Date;
-  updated_at:           Date;
+  name: string;
+  url: string;
+  content_type: string;
+  size: number;
+  download_count: number;
+  created_at: Date;
+  updated_at: Date;
   browser_download_url: string;
 }
 

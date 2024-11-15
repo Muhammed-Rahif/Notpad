@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
   import EditorTitle from '@/components/EditorTitle.svelte';
-  import DownloadButton from './DownloadButton.svelte';
+  import DownloadButton from '@/components/DownloadButton.svelte';
   import { Notpad } from '@/helpers/notpad';
   import { editors, settings } from '@/store/store';
   import { fade } from 'svelte/transition';
@@ -9,10 +9,13 @@
   import screenfull from 'screenfull';
   import { toggleMode, mode } from 'mode-watcher';
   import { onMount } from 'svelte';
-  import { openFontDialog } from './font-dialog/FontDialog.svelte';
+  import { openFontDialog } from '@/components/font-dialog/FontDialog.svelte';
   import { openAboutDialog } from '@/components/AboutDialog.svelte';
-  import { toggleGoToDialog } from './GoToDialog.svelte';
-  import { toggleFindDialog } from './FindDialog.svelte';
+  import { toggleGoToDialog } from '@/components/GoToDialog.svelte';
+  import { toggleFindDialog } from '@/components/FindDialog.svelte';
+  import GitHubIcon from '@/components/icons/GitHub.svelte';
+  import InfoIcon from './icons/Info.svelte';
+  import GithubOultineIcon from './icons/GithubOultine.svelte';
 
   let innerWidth = window.innerWidth;
   let isFullScreen = screenfull.isFullscreen;
@@ -137,7 +140,16 @@
   <Menubar.Menu>
     <Menubar.Trigger>Help</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Item on:click={openAboutDialog}>About Notpad</Menubar.Item>
+      <a href="https://github.com/Muhammed-Rahif/Notpad" target="_blank">
+        <Menubar.Item class="flex items-center gap-2">
+          <GithubOultineIcon class="text-xl" />
+          Github
+        </Menubar.Item>
+      </a>
+      <Menubar.Item class="flex items-center gap-2" on:click={openAboutDialog}>
+        <InfoIcon class="text-xl" />
+        About Notpad
+      </Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
 

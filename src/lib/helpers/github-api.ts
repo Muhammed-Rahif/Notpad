@@ -50,7 +50,7 @@ export class GithubApi {
     }
   }
 
-  public async getReleases(): Promise<ContributorType[] | undefined> {
+  public async getReleases(): Promise<ReleasesType[] | undefined> {
     try {
       const res = await fetch('https://api.github.com/repos/Muhammed-Rahif/Notpad/releases');
       if (!res.ok) {

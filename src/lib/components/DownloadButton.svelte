@@ -1,39 +1,46 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
-  import appJson from '@/src/app.json';
   import { Notpad } from '@/helpers/notpad';
+  import WindowsIcon from '@/components/icons/Windows.svelte';
+  import LinuxIcon from '@/components/icons/Linux.svelte';
+  import MacOSIcon from '@/components/icons/MacOS.svelte';
+  import DownloadIcon from '@/components/icons/Download.svelte';
 
-  const downloadOptions = {
-    'Linux (.deb)':
-      'https://github.com/Muhammed-Rahif/Notpad/releases/download/v1.0.0-alpha.1/notpad_1.0.0-1_amd64.deb',
-    'Linux (.rpm)':
-      'https://github.com/Muhammed-Rahif/Notpad/releases/download/v1.0.0-alpha.1/notpad-1.0.0-1-1.x86_64.rpm',
-    'Windows (.exe)':
-      'https://github.com/Muhammed-Rahif/Notpad/releases/download/v1.0.0-alpha.1/Notpad_1.0.0-1_x64-setup.exe',
-    'Windows (.msi)':
-      'https://github.com/Muhammed-Rahif/Notpad/releases/download/v1.0.0-alpha.1/Notpad_1.0.0.1_x64_en-US.msi',
-    'MacOs (.dmg)':
-      'https://github.com/Muhammed-Rahif/Notpad/releases/download/v1.0.0-alpha.1/Notpad_1.0.0-1_universal.dmg',
-    'Source Code (.zip)':
-      'https://github.com/Muhammed-Rahif/Notpad/archive/refs/tags/v1.0.0-alpha.1.zip',
-    'Surce Code (.tar.gz)':
-      'https://github.com/Muhammed-Rahif/Notpad/archive/refs/tags/v1.0.0-alpha.1.tar.gz'
-  };
+  function getContentForDownloadUrl(fileUrl: string) {
+    const fileName = fileUrl.split('/').pop();
+    if (fileName?.endsWith('.deb')) return { text: 'Linux (.deb)', icon: LinuxIcon };
+    if (fileName?.endsWith('.rpm')) return { text: 'Linux (.rpm)', icon: LinuxIcon };
+    if (fileName?.endsWith('.exe')) return { text: 'Windows (.exe)', icon: WindowsIcon };
+    if (fileName?.endsWith('.msi')) return { text: 'Windows (.msi)', icon: WindowsIcon };
+    if (fileName?.endsWith('.dmg')) return { text: 'MacOS (.dmg)', icon: MacOSIcon };
+    if (fileName?.endsWith('.zip')) return { text: 'Source Code (.zip)', icon: LinuxIcon };
+    if (fileName?.endsWith('.tar.gz')) return { text: 'Source Code (.tar.gz)', icon: LinuxIcon };
+    return { text: 'Download', icon: DownloadIcon };
+  }
 </script>
 
 {#await Notpad.github.getReleases() then releases}
-  <Menubar.Menu>
-    <Menubar.Trigger class="absolute right-1 top-1/2 -translate-y-1/2 transform"
-      >
-      Download
-      </Menubar.Trigger
-    >
-    <Menubar.Content>
-      {#each Object.entries(downloadOptions) as [text, downloadLink]}
-        <Menubar.Item>
-          <a href={downloadLink} download={downloadLink}>{text}</a>
-        </Menubar.Item>
-      {/each}
-    </Menubar.Content>
-  </Menubar.Menu>
+  {#if releases}
+    {@const assets = releases
+      .flatMap((release) => release.assets)
+      .sort((a, b) => a.name.localeCompare(b.name))}
+
+    <Menubar.Menu>
+      <Menubar.Trigger class="absolute right-1 top-1/2 -translate-y-1/2 transform">
+        Download
+      </Menubar.Trigger>
+      <Menubar.Content>
+        {#each assets as asset}
+          {@const { text, icon: Icon } = getContentForDownloadUrl(asset.name)}
+          <a href={asset.browser_download_url} download={asset.browser_download_url}>
+            <Menubar.Item class="flex items-center justify-between">
+              {text}
+
+              <Icon class="text-xl" />
+            </Menubar.Item>
+          </a>
+        {/each}
+      </Menubar.Content>
+    </Menubar.Menu>
+  {/if}
 {/await}

@@ -1,6 +1,6 @@
 <script lang="ts">
   import CheckIcon from '@/components/icons/Check.svelte';
-  import ChevronsUpDownIcon from '../icons/ChevronsUpDown.svelte';
+  import ChevronsUpDownIcon from '@/components/icons/ChevronsUpDown.svelte';
   import { onMount, tick } from 'svelte';
   import * as Command from '@/components/ui/command';
   import * as Popover from '@/components/ui/popover';
@@ -56,7 +56,7 @@
         id="font-size-command-button"
       >
         {selectedValue == FontSize.Size16 ? `${selectedValue} (Default)` : selectedValue}
-        <ChevronsUpDownIcon class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        <ChevronsUpDownIcon class="ml-2 shrink-0 text-base opacity-50" />
       </Button>
     </div>
   </Popover.Trigger>
@@ -68,7 +68,7 @@
         {#each Object.values(FontSize).filter((s) => !isNaN(Number(s))) as fontSize}
           {@const fSize = fontSize.toString()}
           <Command.Item value={fSize} onSelect={() => onSelect(fontSize, ids)}>
-            <CheckIcon class={cn('mr-2 h-4 w-4', value !== fontSize && 'text-transparent')} />
+            <CheckIcon class={cn('mr-2 text-lg', value !== fontSize && 'text-transparent')} />
             {fontSize == FontSize.Size16 ? `${fontSize} (Default)` : fontSize}
           </Command.Item>
         {/each}

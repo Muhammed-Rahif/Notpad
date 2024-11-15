@@ -20,7 +20,6 @@
   $: isXS = innerWidth <= 450;
   $: tabsMode = $editors.length > 1;
   $: singleEditor = $editors.at(0)!;
-  $: modeLabel = $mode == 'dark' ? 'Light Mode' : 'Dark Mode';
 
   onMount(() => {
     screenfull.onchange(() => (isFullScreen = screenfull.isFullscreen));
@@ -142,7 +141,9 @@
     </Menubar.Content>
   </Menubar.Menu>
 
-  <DownloadButton />
+  {#if !isTauri}
+    <DownloadButton />
+  {/if}
 
   {#if !isXS && !tabsMode}
     <div

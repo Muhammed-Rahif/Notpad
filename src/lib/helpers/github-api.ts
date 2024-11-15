@@ -51,7 +51,6 @@ export class GithubApi {
   }
 
   public async getReleases(): Promise<ReleasesType[] | undefined> {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     try {
       const res = await fetch('https://api.github.com/repos/Muhammed-Rahif/Notpad/releases');
       if (!res.ok) {

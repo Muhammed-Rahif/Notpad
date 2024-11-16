@@ -26,7 +26,10 @@
       .flatMap((release) => release.assets)
       .sort((a, b) => a.name.localeCompare(b.name))}
 
-    <div transition:slide|global class="absolute right-1 top-1/2 -translate-y-1/2 transform">
+    <div
+      transition:slide|global
+      class="absolute right-1 top-1/2 -translate-y-1/2 transform max-lg:hidden"
+    >
       <Menubar.Menu>
         <Menubar.Trigger>Download</Menubar.Trigger>
         <Menubar.Content>

@@ -30,3 +30,4 @@ dev-dist
 build/
 www/
 src-tauri/target
+src-tauri/gen

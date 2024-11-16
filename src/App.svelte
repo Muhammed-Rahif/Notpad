@@ -12,16 +12,20 @@
   import LicenseDialog from '@/components/LicenseDialog.svelte';
   import GoToDialog from '@/components/GoToDialog.svelte';
   import FindDialog from '@/components/FindDialog.svelte';
+  import Loading from '@/components/Loading.svelte';
 </script>
 
-{#await Notpad.init() then}
+{#await Notpad.init()}
+  <!-- Loading Animation -->
+  <Loading />
+{:then}
   <!-- Actual UI -->
   <div class="flex h-full flex-col">
     <MenuBar />
     <EditorTabs />
   </div>
 
-  <!-- Procedually -->
+  <!-- Additional Components -->
   <FontDialog />
   <LicenseDialog />
   <AboutDialog />

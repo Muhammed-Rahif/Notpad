@@ -6,6 +6,21 @@ export interface ContributorType {
   contributions: number;
 }
 
+export interface ReleasesType {
+  assets: Asset[];
+}
+
+export interface Asset {
+  name: string;
+  url: string;
+  content_type: string;
+  size: number;
+  download_count: number;
+  created_at: Date;
+  updated_at: Date;
+  browser_download_url: string;
+}
+
 export class GithubApi {
   public async getAppLicense(): Promise<string | undefined> {
     try {
@@ -27,6 +42,19 @@ export class GithubApi {
       const res = await fetch('https://api.github.com/repos/Muhammed-Rahif/Notpad/contributors');
       if (!res.ok) {
         throw new Error('Failed to fetch contributors');
+      }
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  public async getReleases(): Promise<ReleasesType[] | undefined> {
+    try {
+      const res = await fetch('https://api.github.com/repos/Muhammed-Rahif/Notpad/releases');
+      if (!res.ok) {
+        throw new Error('Failed to fetch releases');
       }
       const data = await res.json();
       return data;

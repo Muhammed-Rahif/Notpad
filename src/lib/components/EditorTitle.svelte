@@ -86,7 +86,7 @@
         class="h-6 w-6 p-0"
         variant={$activeTabId === editor.id ? 'secondary' : 'outline'}
       >
-        <CloseIcon />
+        <CloseIcon class="text-base" />
       </Button>
     </div>
   </Tooltip.Trigger>

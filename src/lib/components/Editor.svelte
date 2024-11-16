@@ -172,6 +172,6 @@
     animation: blink 1s infinite;
     transition:
       top 0s,
-      left 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+      left 50ms ease-in-out;
   }
 </style>

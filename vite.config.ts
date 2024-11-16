@@ -18,7 +18,7 @@ function baseUrl() {
   const content = {
     version: process.env.npm_package_version
   };
-  fs.writeFileSync(appJson, JSON.stringify(content, null, 2));
+  fs.writeFileSync(appJson, JSON.stringify(content, null, 2) + '\n');
 })();
 
 // https://vitejs.dev/config/

@@ -24,11 +24,13 @@ export class EditOptions {
     const selectedContent = quill.getContents(selection.index, selection.length);
     const tempCont = document.createElement('div');
     new Quill(tempCont).setContents(selectedContent);
-    const clipboardData = tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
+    const clipboardHtmlData = tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
+    const clipboardTextData = quill.getText(selection.index, selection.length);
     navigator.clipboard
       .write([
         new ClipboardItem({
-          'text/html': new Blob([clipboardData], { type: 'text/html' })
+          'text/plain': new Blob([clipboardTextData], { type: 'text/plain' }),
+          'text/html': new Blob([clipboardHtmlData], { type: 'text/html' })
         })
       ])
       .catch((err) => {
@@ -47,11 +49,13 @@ export class EditOptions {
     const selectedContent = quill.getContents(selection.index, selection.length);
     const tempCont = document.createElement('div');
     new Quill(tempCont).setContents(selectedContent);
-    const clipboardData = tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
+    const clipboardHtmlData = tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
+    const clipboardTextData = quill.getText(selection.index, selection.length);
     navigator.clipboard
       .write([
         new ClipboardItem({
-          'text/html': new Blob([clipboardData], { type: 'text/html' })
+          'text/plain': new Blob([clipboardTextData], { type: 'text/plain' }),
+          'text/html': new Blob([clipboardHtmlData], { type: 'text/html' })
         })
       ])
       .catch((err) => {

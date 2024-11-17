@@ -1,5 +1,5 @@
 .ql-editor {
-  @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none;
+  @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none duration-300;
 }
 
 .ql-editor,
@@ -17,6 +17,10 @@
 
 .ql-editor a {
   @apply text-blue-500;
+}
+
+.ql-editor > * {
+  @apply !pl-0 duration-300;
 }
 
 @keyframes blink {

@@ -1,0 +1,39 @@
+.ql-editor {
+  @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none;
+}
+
+.ql-editor,
+.ql-editor * {
+  font-family: var(--editor-font-family);
+  font-size: var(--editor-font-size);
+}
+
+.ql-editor {
+  scale: var(--editor-zoom);
+  width: calc(100% / var(--editor-zoom));
+  height: calc(100% / var(--editor-zoom));
+  transform-origin: top left;
+}
+
+.ql-editor a {
+  @apply text-blue-500;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fake-caret {
+  animation: blink 1s infinite;
+  transition:
+    top 0s,
+    left 50ms ease-in-out;
+}

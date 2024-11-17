@@ -99,27 +99,3 @@ body,
 [hidden] {
   display: none;
 }
-
-.editor-container {
-  counter-reset: line;
-}
-
-.editor-container p {
-  margin-left: 28px !important;
-  padding-left: 6px !important;
-  border-left: 1px solid #888;
-  position: relative;
-}
-
-.editor-container p::before {
-  counter-increment: line;
-  content: counter(line);
-  width: 28px;
-  padding-right: 6px;
-  font-size: 12px;
-  text-align: right;
-  color: #888;
-  position: absolute;
-  left: 0;
-  transform: translateX(-100%);
-}

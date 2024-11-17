@@ -1,5 +1,5 @@
 import { toast } from 'svelte-sonner';
-import { Notpad } from './notpad';
+import { Notpad } from '../notpad';
 import { Range } from 'quill';
 
 export class SearchOptions {

@@ -3,8 +3,8 @@
   import { settings } from '@/store/store';
   import { slide } from 'svelte/transition';
 
-  export let lineNo = 1;
-  export let columnNo = 1;
+  export let caretLineNo = 1;
+  export let caretColumnNo = 1;
   export let characterCount = 0;
 
   const inAnimation = {
@@ -27,15 +27,15 @@
     >
       <span class="flex items-center justify-center">
         Line:
-        {#key lineNo}
+        {#key caretLineNo}
           <span in:slide={inAnimation} class="ml-1 inline-block">
-            {lineNo}
+            {caretLineNo}
           </span>
         {/key}
         , Column:
-        {#key columnNo}
+        {#key caretColumnNo}
           <span in:slide={inAnimation} class="ml-1 inline-block">
-            {columnNo}
+            {caretColumnNo}
           </span>
         {/key}
       </span>

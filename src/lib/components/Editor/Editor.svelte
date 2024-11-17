@@ -152,7 +152,7 @@
       transform: translateX(-100%);
       width: clamp(20px, calc(2ch * var(--line-no-digits-count)), 10vw) !important;
       padding-right: clamp(10px, calc(0.6ch * var(--line-no-digits-count)), 10vw) !important;
-      @apply absolute left-0 mt-1 text-right text-xs text-primary duration-300;
+      @apply absolute left-0 mt-[3px] text-right text-xs text-primary duration-300;
     }
   </style>
 {/if}

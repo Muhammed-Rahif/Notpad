@@ -19,6 +19,7 @@
   <div class="flex h-full flex-col">
     <MenuBar />
     <EditorTabs />
+    
   </div>
 
   <!-- Procedually -->
@@ -28,6 +29,7 @@
   <GoToDialog />
   <FindDialog />
   <Shortcuts />
+  
 {/await}
 
 <Toaster />

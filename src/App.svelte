@@ -23,6 +23,7 @@
   <div class="flex h-full flex-col">
     <MenuBar />
     <EditorTabs />
+    
   </div>
 
   <!-- Additional Components -->
@@ -32,6 +33,7 @@
   <GoToDialog />
   <FindDialog />
   <Shortcuts />
+  
 {/await}
 
 <Toaster />

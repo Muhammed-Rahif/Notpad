@@ -12,6 +12,43 @@
   import LicenseDialog from '@/components/LicenseDialog.svelte';
   import GoToDialog from '@/components/GoToDialog.svelte';
   import FindDialog from '@/components/FindDialog.svelte';
+  import SaveAndQuitDialog from './lib/components/SaveAndQuitDialog.svelte';
+  import { onMount } from 'svelte';
+
+  let showSaveAndQuitDialog = true;
+  let filename = 'Untitled';
+
+  // Handle the dialog actions
+  function handleSave() {
+    console.log('File saved.');
+    showSaveAndQuitDialog = false;
+    window.removeEventListener('beforeunload', beforeUnloadHandler);
+  }
+
+  function handleDontSave() {
+    console.log('File not saved.');
+    showSaveAndQuitDialog = false;
+    window.removeEventListener('beforeunload', beforeUnloadHandler);
+  }
+
+  function handleCancel() {
+    console.log('Action canceled.');
+    showSaveAndQuitDialog = false;
+  }
+
+  // Handle the beforeunload event
+  function beforeUnloadHandler(event: BeforeUnloadEvent) {
+    event.preventDefault(); 
+    showSaveAndQuitDialog = true;
+    event.returnValue = ''; 
+  }
+
+  onMount(() => {
+    window.addEventListener('beforeunload', beforeUnloadHandler);
+    return () => {
+      window.removeEventListener('beforeunload', beforeUnloadHandler);
+    };
+  });
 </script>
 
 {#await Notpad.init() then}
@@ -22,6 +59,14 @@
   </div>
 
   <!-- Procedually -->
+  <SaveAndQuitDialog
+    isOpen={showSaveAndQuitDialog}
+    {filename}
+    on:save={handleSave}
+    on:dontsave={handleDontSave}
+    on:cancel={handleCancel}
+  />
+
   <FontDialog />
   <LicenseDialog />
   <AboutDialog />

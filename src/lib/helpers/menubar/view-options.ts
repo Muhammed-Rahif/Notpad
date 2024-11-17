@@ -6,6 +6,10 @@ export class ViewOptions {
     settings.update((value) => ({ ...value, statusBar: !get(settings).statusBar }));
   }
 
+  public toggleLineNumbers() {
+    settings.update((value) => ({ ...value, lineNumbers: !get(settings).lineNumbers }));
+  }
+
   public zoom(zoom: 'in' | 'out' | 'reset') {
     const zoomSettings = get(settings).zoom;
     const zoomLevels: SettingsType['zoom'][] = [0.5, 0.75, 0.9, 1, 1.2, 1.5, 1.75, 2];

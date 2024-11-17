@@ -80,15 +80,19 @@ export interface SettingsType {
    */
   zoom: 0.5 | 0.75 | 0.9 | 1 | 1.2 | 1.5 | 1.75 | 2;
   /**
-   * Enable/disable bottom status bar
+   * Is bottom status bar visible.
    */
   statusBar: boolean;
   /**
-   * The font family for the editor.
+   * Is line numbers visible.
+   */
+  lineNumbers: boolean;
+  /**
+   * The font family of the editor.
    */
   fontFamily: FontFamily;
   /**
-   * The font size for the editor.
+   * The font size of the editor.
    */
   fontSize: FontSize;
 }
@@ -122,5 +126,6 @@ export const settings = writable<SettingsType>({
   zoom: 1,
   statusBar: true,
   fontFamily: FontFamily.SUSE,
-  fontSize: 16
+  fontSize: 16,
+  lineNumbers: false
 });

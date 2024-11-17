@@ -1,12 +1,12 @@
 import { toast } from 'svelte-sonner';
-import { FileOptions } from '@/helpers/file-options';
+import { FileOptions } from '@/src/lib/helpers/menubar/file-options';
 import { Editors } from '@/helpers/editors';
 import { NotpadStorage } from '@/store/storage';
 import { Settings } from '@/helpers/settings';
-import { EditOptions } from '@/helpers/edit-options';
+import { EditOptions } from '@/src/lib/helpers/menubar/edit-options';
 import { GithubApi } from '@/helpers/github-api';
-import { SearchOptions } from '@/helpers/search-options';
-import { ViewOptions } from '@/helpers/view-options';
+import { SearchOptions } from '@/src/lib/helpers/menubar/search-options';
+import { ViewOptions } from '@/src/lib/helpers/menubar/view-options';
 
 export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();

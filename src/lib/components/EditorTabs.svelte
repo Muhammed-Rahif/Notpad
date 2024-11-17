@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Editor from '@/components/Editor.svelte';
+  import Editor from '@/src/lib/components/Editor/Editor.svelte';
   import * as Tabs from '@/components/ui/tabs';
   import * as ContextMenu from '@/components/ui/context-menu';
   import EditorTitle from '@/components/EditorTitle.svelte';

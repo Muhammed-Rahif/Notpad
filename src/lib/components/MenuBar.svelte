@@ -121,15 +121,21 @@
       </Menubar.Sub>
 
       <Menubar.Separator />
-      <Menubar.CheckboxItem bind:checked={isFullScreen} on:click={() => screenfull.toggle()}>
+      <Menubar.CheckboxItem checked={isFullScreen} on:click={() => screenfull.toggle()}>
         Full Screen
         <Menubar.Shortcut>F11</Menubar.Shortcut>
       </Menubar.CheckboxItem>
       <Menubar.CheckboxItem
-        bind:checked={$settings.statusBar}
+        checked={$settings.statusBar}
         on:click={Notpad.viewOptions.toggleStatusBar}
       >
         Status Bar
+      </Menubar.CheckboxItem>
+      <Menubar.CheckboxItem
+        checked={$settings.lineNumbers}
+        on:click={Notpad.viewOptions.toggleLineNumbers}
+      >
+        Line Numbers
       </Menubar.CheckboxItem>
       <Menubar.CheckboxItem checked={$mode == 'dark'} on:click={toggleMode}>
         Dark Mode

@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, interactive-widget=resizes-content"
     />
-    
-   
+
     <title>Notpad</title>
     <link rel="icon" href="/Notpad/favicon.png" />
   </head>
@@ -15,16 +14,5 @@
   <body spellcheck="false" oncontextmenu="return false;">
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
-    <script>
-      window.addEventListener("resize", () => {
-        const viewport = document.querySelector("meta[name=viewport]");
-        if (viewport) {
-          viewport.setAttribute(
-            "content",
-            `width=device-width, height=${window.innerHeight}px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content`
-          );
-        }
-      });
-    </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 .ql-editor {
-  @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none duration-300;
+  @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none duration-100;
 }
 
 .ql-editor,
@@ -20,7 +20,7 @@
 }
 
 .ql-editor > * {
-  @apply !pl-0 duration-300;
+  @apply !pl-0 duration-100;
 }
 
 @keyframes blink {
@@ -37,5 +37,7 @@
 
 .fake-caret {
   animation: blink 1s infinite;
-  transition: all 50ms ease-in-out;
+  transition:
+    top 0s,
+    left 50ms ease-in-out;
 }

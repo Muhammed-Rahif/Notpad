@@ -71,19 +71,23 @@
 
   // Using requestAnimationFrame for smooth updates
   const updateCaretPosition = throttle(() => {
-    console.count('updateCaretPosition');
+    console.count('Update caret position');
     if (!updateScheduled) {
       updateScheduled = true;
       requestAnimationFrame(async () => {
         if (editorContainer) {
-          const caret = getCaretPosition(quill.root);
+          try {
+            const caret = getCaretPosition(quill.root);
 
-          // Adjust for the scroll position
-          caretPosition = {
-            top: caret.top - editorContainer.scrollTop,
-            left: caret.left - editorContainer.scrollLeft,
-            height: caret.height
-          };
+            // Adjust for the scroll position
+            caretPosition = {
+              top: caret.top - editorContainer.scrollTop,
+              left: caret.left - editorContainer.scrollLeft,
+              height: caret.height
+            };
+          } catch (error) {
+            console.error(error);
+          }
         }
         updateScheduled = false;
       });
@@ -108,9 +112,10 @@
   $: {
     // If line numbers are enabled or disabled, update the caret position after a delay
     // of 300ms to complete the line numbers animated entry or exit.
-    if ($settings.lineNumbers) {
+    if ($settings.lineNumbers || lineNo) {
       (async function () {
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await tick();
+        await new Promise((resolve) => setTimeout(resolve, 100));
         updateCaretPosition();
       })();
     }
@@ -173,7 +178,7 @@
 
     .ql-editor > * {
       margin-left: clamp(22px, calc(1.6ch * var(--line-no-digits-count)), 10vw) !important;
-      @apply relative border-l-2 border-muted !pl-2 duration-300;
+      @apply relative border-l-2 border-muted !pl-2 duration-100;
     }
 
     .ql-editor > *::before {
@@ -182,7 +187,7 @@
       transform: translateX(-100%);
       width: clamp(20px, calc(2ch * var(--line-no-digits-count)), 10vw) !important;
       padding-right: clamp(10px, calc(0.6ch * var(--line-no-digits-count)), 10vw) !important;
-      @apply absolute left-0 mt-[3px] text-right text-xs text-primary duration-300;
+      @apply absolute left-0 mt-[3px] text-right text-xs text-primary duration-100;
     }
   </style>
 {/if}

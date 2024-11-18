@@ -2,7 +2,9 @@
   "identifier": "migrated",
   "description": "permissions that were migrated from v1",
   "local": true,
-  "windows": ["main"],
+  "windows": [
+    "main"
+  ],
   "permissions": [
     "core:default",
     "fs:allow-read-file",
@@ -50,6 +52,7 @@
     "dialog:allow-open",
     "dialog:allow-save",
     "fs:default",
-    "dialog:default"
+    "dialog:default",
+    "shell:default"
   ]
 }

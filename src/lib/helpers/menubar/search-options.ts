@@ -1,6 +1,8 @@
 import { toast } from 'svelte-sonner';
 import { Notpad } from '../notpad';
 import { Range } from 'quill';
+import { isTauri } from '@/src/lib';
+import { open } from '@tauri-apps/plugin-shell';
 
 export class SearchOptions {
   public searchOnWeb = (editorId?: string) => {
@@ -15,7 +17,8 @@ export class SearchOptions {
     if (!selectedText) return Notpad.showError('Please select some text to search on the web.');
 
     const url = `https://www.google.com/search?q=${encodeURIComponent(selectedText)}`;
-    window.open(url, '_blank');
+
+    isTauri ? open(url) : window.open(url, '_blank');
   };
 
   public goTo = ({

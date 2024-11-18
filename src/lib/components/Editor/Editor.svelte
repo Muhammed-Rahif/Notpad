@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afterUpdate, onMount, tick } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import throttle from 'lodash.throttle';
   import StatusBar from '@/components/StatusBar.svelte';
   import Quill from 'quill';
@@ -23,10 +23,6 @@
    * Flag to track if update is already scheduled
    */
   let updateScheduled = false;
-
-  onMount(async () => {
-    await setupQuill();
-  });
 
   async function setupQuill() {
     quill = new Quill(editorContainer!, {
@@ -55,25 +51,13 @@
     });
 
     await Notpad.editors.setQuill(editor.id, quill);
-
-    for (let e of ['input', 'scroll', 'click', 'keydown', 'focus', 'resize', 'load'])
-      quill.root.addEventListener(e, updateTextAreaInfo);
-    for (let e of ['scroll', 'resize', 'load']) window.addEventListener(e, updateTextAreaInfo);
-
     quill.setContents(Notpad.editors.getContent(editor.id)!);
-
-    updateTextAreaInfo();
-    settings.subscribe(updateTextAreaInfo);
   }
-
-  afterUpdate(() => {
-    updateCaretPosition();
-  });
 
   /**
    * Update line and column numbers.
    */
-  function updateTextAreaInfo() {
+  function updateEditorData() {
     const selection = quill.getSelection();
     if (selection) {
       lineNo = quill.getText().split('\n').length - 1; // quill.getLength() includes a trailing newline character
@@ -87,6 +71,7 @@
 
   // Using requestAnimationFrame for smooth updates
   const updateCaretPosition = throttle(() => {
+    console.count('updateCaretPosition');
     if (!updateScheduled) {
       updateScheduled = true;
       requestAnimationFrame(async () => {
@@ -103,6 +88,51 @@
         updateScheduled = false;
       });
     }
+  });
+
+  $: {
+    if (
+      editorContainer ||
+      quill ||
+      fakeCaret ||
+      lineNo ||
+      caretLineNo ||
+      caretColumnNo ||
+      characterCount ||
+      $settings
+    ) {
+      updateCaretPosition();
+    }
+  }
+
+  $: {
+    // If line numbers are enabled or disabled, update the caret position after a delay
+    // of 300ms to complete the line numbers animated entry or exit.
+    if ($settings.lineNumbers) {
+      (async function () {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        updateCaretPosition();
+      })();
+    }
+  }
+
+  const updateCaretPosAndEditorData = throttle(async () => {
+    updateEditorData();
+    await tick();
+    updateCaretPosition();
+  }, 100);
+
+  onMount(async () => {
+    await setupQuill();
+
+    for (let e of ['input', 'scroll', 'click', 'keydown', 'focus', 'resize', 'load'])
+      quill.root.addEventListener(e, updateCaretPosAndEditorData);
+    for (let e of ['scroll', 'resize', 'load'])
+      window.addEventListener(e, updateCaretPosAndEditorData);
+
+    updateEditorData();
+    settings.subscribe(updateEditorData);
+    quill.on('editor-change', updateEditorData);
   });
 </script>
 

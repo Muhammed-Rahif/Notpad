@@ -1,3 +1,13 @@
+# [1.0.0-alpha.3](https://github.com/Muhammed-Rahif/Notpad/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2024-11-18)
+
+
+### Bug Fixes
+
+* **editor:** fake caret dispositioned when toggling line numbers ([d6c7370](https://github.com/Muhammed-Rahif/Notpad/commit/d6c7370b380bdff7338911da2015722fa16f8d6d))
+* **editor:** inifinite recursion in editor caret position update ([fe9df2b](https://github.com/Muhammed-Rahif/Notpad/commit/fe9df2b53953c487076cc412b5818bb4a4ba9b84)), closes [#234](https://github.com/Muhammed-Rahif/Notpad/issues/234)
+* **logo:** remove app logo white background color ([5568d65](https://github.com/Muhammed-Rahif/Notpad/commit/5568d6512d0e9d8aaacdc18b6d92e55b278de5db)), closes [#236](https://github.com/Muhammed-Rahif/Notpad/issues/236)
+* **tauri:** search on google not wokring on tauri ([db17944](https://github.com/Muhammed-Rahif/Notpad/commit/db17944ac275feb962795f57e980da4081e11347)), closes [#235](https://github.com/Muhammed-Rahif/Notpad/issues/235)
+
 # [1.0.0-alpha.2](https://github.com/Muhammed-Rahif/Notpad/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2024-11-18)
 
 

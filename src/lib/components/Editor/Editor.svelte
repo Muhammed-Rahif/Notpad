@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import throttle from 'lodash.throttle';
+  import debounce from 'lodash.debounce';
   import StatusBar from '@/components/StatusBar.svelte';
   import Quill from 'quill';
   import { position as getCaretPosition } from 'caret-pos';
@@ -20,10 +21,6 @@
   let caretLineNo = 1;
   let caretColumnNo = 1;
   let characterCount = 0;
-  /**
-   * Flag to track if update is already scheduled
-   */
-  let updateScheduled = false;
 
   async function setupQuill() {
     quill = new Quill(editorContainer!, {
@@ -70,36 +67,39 @@
     }
   }
 
+  const resumeFakeCaretBlink = debounce(function () {
+    if (fakeCaret) fakeCaret.style.animationDuration = '1s';
+  }, 700);
+
   // Using requestAnimationFrame for smooth updates
   const updateCaretPosition = throttle(() => {
     console.count('Update caret');
-    if (!updateScheduled) {
-      updateScheduled = true;
-      requestAnimationFrame(async () => {
-        if (editorContainer) {
-          try {
-            const caret = getCaretPosition(quill.root);
+    requestAnimationFrame(async () => {
+      if (fakeCaret) fakeCaret.style.animationDuration = '0s';
 
-            // Adjust for the scroll position
-            caretPosition = {
-              top: caret.top - editorContainer.scrollTop,
-              left: caret.left - editorContainer.scrollLeft,
-              height: caret.height
-            };
-          } catch (error) {
-            console.error(error);
-          }
+      if (editorContainer) {
+        try {
+          const caret = getCaretPosition(quill.root);
+
+          // Adjust for the scroll position
+          caretPosition = {
+            top: caret.top - editorContainer.scrollTop,
+            left: caret.left - editorContainer.scrollLeft,
+            height: caret.height
+          };
+        } catch (error) {
+          console.error(error);
         }
-        updateScheduled = false;
-      });
-    }
+      }
+
+      resumeFakeCaretBlink();
+    });
   });
 
   $: {
     if (
       editorContainer ||
       quill ||
-      fakeCaret ||
       lineNo ||
       caretLineNo ||
       caretColumnNo ||
@@ -126,7 +126,7 @@
     updateEditorData();
     await tick();
     updateCaretPosition();
-  }, 100);
+  });
 
   onMount(async () => {
     await setupQuill();
@@ -153,7 +153,7 @@
     --line-no-digits-count: {lineNo.toString().length}"
   />
   <div
-    class="fake-caret absolute z-0 w-0.5 rounded-[2px] bg-primary"
+    class="fake-caret absolute z-0 w-[.15em] rounded-[.06em] bg-primary"
     bind:this={fakeCaret}
     style="top: calc({caretPosition.top}px); left: {caretPosition.left}px; height: {caretPosition.height}px;"
     spellcheck="false"
@@ -183,12 +183,13 @@
     }
 
     .ql-editor > *::before {
+      font-size: calc(var(--editor-font-size) * 0.7);
       counter-increment: line;
       content: counter(line);
       transform: translateX(-100%);
       width: clamp(20px, calc(2ch * var(--line-no-digits-count)), 10vw) !important;
       padding-right: clamp(10px, calc(0.6ch * var(--line-no-digits-count)), 10vw) !important;
-      @apply absolute left-0 mt-[3px] text-right text-xs text-primary duration-100;
+      @apply absolute left-0 text-right text-primary duration-100;
     }
   </style>
 {/if}

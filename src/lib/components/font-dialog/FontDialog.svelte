@@ -11,11 +11,12 @@
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import FontFamilyCombobox from './FontFamilyCombobox.svelte';
-  import { FontFamily, FontSize, settings } from '@/store/store';
+  import { settings } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import FontSizeCombobox from './FontSizeCombobox.svelte';
   import { Label } from '@/components/ui/label';
   import * as Card from '@/components/ui/card';
+  import { FontFamily, FontSize } from '@/types/SettingsTypes';
 
   const currentSettings = get(settings);
 

@@ -7,8 +7,9 @@
   import { Button } from '@/components/ui/button';
   import { Label } from '@/components/ui/label';
   import { cn } from '@/utils';
-  import { FontSize, settings } from '@/store/store';
+  import { settings } from '@/store/store';
   import { get } from 'svelte/store';
+  import { FontSize } from '@/types/SettingsTypes';
 
   let open = false;
 

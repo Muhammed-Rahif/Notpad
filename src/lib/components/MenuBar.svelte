@@ -13,7 +13,6 @@
   import { openAboutDialog } from '@/components/AboutDialog.svelte';
   import { toggleGoToDialog } from '@/components/GoToDialog.svelte';
   import { toggleFindDialog } from '@/components/FindDialog.svelte';
-  import GitHubIcon from '@/components/icons/GitHub.svelte';
   import InfoIcon from './icons/Info.svelte';
   import GithubOultineIcon from './icons/GithubOultine.svelte';
 

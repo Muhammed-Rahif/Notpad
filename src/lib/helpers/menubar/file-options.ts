@@ -3,7 +3,7 @@ import { get } from 'svelte/store';
 import { findAsyncSequential } from '@/utils';
 import { Notpad } from '@/helpers/notpad';
 import { open, save } from '@tauri-apps/plugin-dialog';
-import { isMobile, isTauri } from '@/src/lib';
+import { isTauri } from '@/src/lib';
 import { readTextFile, BaseDirectory, exists, writeTextFile } from '@tauri-apps/plugin-fs';
 import { toast } from 'svelte-sonner';
 import { Delta } from 'quill/core';

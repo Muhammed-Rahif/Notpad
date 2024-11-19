@@ -30,7 +30,9 @@ jobs:
         run: npm install
 
       - name: Run Prettier
-        run: npx prettier --write .
+        run: |
+          npm run format
+          npm run lint
 
       - name: Commit changes
         run: |

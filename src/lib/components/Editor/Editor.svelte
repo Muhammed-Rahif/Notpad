@@ -5,9 +5,10 @@
   import Quill from 'quill';
   import { position as getCaretPosition } from 'caret-pos';
   import { Notpad } from '@/helpers/notpad';
-  import { settings, type EditorType } from '@/store/store';
+  import { settings } from '@/store/store';
   import 'quill/dist/quill.core.css';
   import './Editor.css';
+  import type { EditorType } from '@/types/EditorTypes';
 
   export let editor: EditorType;
 
@@ -71,7 +72,7 @@
 
   // Using requestAnimationFrame for smooth updates
   const updateCaretPosition = throttle(() => {
-    console.count('Update caret position');
+    console.count('Update caret');
     if (!updateScheduled) {
       updateScheduled = true;
       requestAnimationFrame(async () => {

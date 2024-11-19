@@ -10,7 +10,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d www -m 'chore(gh-pages): updates' -f --nojekyll",
-    "lint": "prettier --check . && eslint .",
+    "lint": "prettier --check . && eslint . && npx tsc --noEmit",
     "format": "prettier --write .",
     "tauri": "tauri"
   },
@@ -45,7 +45,7 @@
     "tailwindcss": "^3.4.14",
     "tslib": "^2.7.0",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.9.0",
+    "typescript-eslint": "^8.15.0",
     "vite": "^5.4.9",
     "vite-plugin-pwa": "^0.20.5",
     "workbox-window": "^7.1.0"

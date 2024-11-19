@@ -50,6 +50,7 @@
     "dialog:allow-open",
     "dialog:allow-save",
     "fs:default",
-    "dialog:default"
+    "dialog:default",
+    "shell:default"
   ]
 }

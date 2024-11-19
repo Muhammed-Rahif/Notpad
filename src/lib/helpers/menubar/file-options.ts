@@ -3,7 +3,7 @@ import { get } from 'svelte/store';
 import { findAsyncSequential } from '@/utils';
 import { Notpad } from '@/helpers/notpad';
 import { open, save } from '@tauri-apps/plugin-dialog';
-import { isMobile, isTauri } from '@/src/lib';
+import { isTauri } from '@/src/lib';
 import { readTextFile, BaseDirectory, exists, writeTextFile } from '@tauri-apps/plugin-fs';
 import { toast } from 'svelte-sonner';
 import { Delta } from 'quill/core';
@@ -58,9 +58,9 @@ export class FileOptions {
   };
 
   /**
-   * Mobile browsers implementation of opening a file.
+   * Opening file implementation that works accross all devices.
    */
-  private openFileInMobile = async () => {
+  private openFileLegacy = async () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.txt';
@@ -150,7 +150,10 @@ export class FileOptions {
     Notpad.editors.updateFileHandle(activeEditor.id, fileHandle);
   };
 
-  private saveFileInMobile = async () => {
+  /**
+   * Saving file implementation that works accross all devices.
+   */
+  private saveFileLegacy = async () => {
     const activeEditor = Notpad.editors.getActive();
     if (!activeEditor) return;
 
@@ -212,11 +215,11 @@ export class FileOptions {
    */
   open = async () => {
     try {
-      if (isMobile) this.openFileInMobile();
-      else if (isTauri) this.openFileInTauri();
-      else this.openFileInDesktopBrowser();
+      if (isTauri) await this.openFileInTauri();
+      else await this.openFileInDesktopBrowser();
     } catch (err) {
-      Notpad.showError(err);
+      console.error(err);
+      await this.openFileLegacy();
     }
   };
 
@@ -231,11 +234,11 @@ export class FileOptions {
    */
   save = async ({ saveAs }: { saveAs?: boolean } = {}) => {
     try {
-      if (isMobile) await this.saveFileInMobile();
-      else if (isTauri) await this.saveFileInTauri(saveAs);
+      if (isTauri) await this.saveFileInTauri(saveAs);
       else await this.saveFileInDesktopBrowser(saveAs);
     } catch (err) {
-      Notpad.showError(err);
+      console.error(err);
+      await this.saveFileLegacy();
     }
   };
 

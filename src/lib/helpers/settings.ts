@@ -1,4 +1,5 @@
-import { FontFamily, FontSize, settings } from '@/store/store';
+import { settings } from '@/store/store';
+import type { FontFamily, FontSize } from '@/types/SettingsTypes';
 
 export class Settings {
   setFontFamily(fontFamily: FontFamily) {

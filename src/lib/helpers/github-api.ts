@@ -1,25 +1,4 @@
-export interface ContributorType {
-  login: string;
-  avatar_url: string;
-  url: string;
-  html_url: string;
-  contributions: number;
-}
-
-export interface ReleasesType {
-  assets: Asset[];
-}
-
-export interface Asset {
-  name: string;
-  url: string;
-  content_type: string;
-  size: number;
-  download_count: number;
-  created_at: Date;
-  updated_at: Date;
-  browser_download_url: string;
-}
+import type { ContributorType, ReleasesType } from '@/types/GithubApiTypes';
 
 export class GithubApi {
   public async getAppLicense(): Promise<string | undefined> {

@@ -13,6 +13,7 @@
   import GoToDialog from '@/components/GoToDialog.svelte';
   import FindDialog from '@/components/FindDialog.svelte';
   import Loading from '@/components/Loading.svelte';
+  import ShortCutDialog from '@/components/ShortCutDialog.svelte';
 </script>
 
 {#await Notpad.init()}
@@ -29,6 +30,7 @@
   <FontDialog />
   <LicenseDialog />
   <AboutDialog />
+  <ShortCutDialog />
   <GoToDialog />
   <FindDialog />
   <Shortcuts />

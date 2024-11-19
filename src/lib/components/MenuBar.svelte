@@ -13,8 +13,10 @@
   import { openAboutDialog } from '@/components/AboutDialog.svelte';
   import { toggleGoToDialog } from '@/components/GoToDialog.svelte';
   import { toggleFindDialog } from '@/components/FindDialog.svelte';
+  import { openShortCutDialog } from '@/components/ShortCutDialog.svelte';
   import GitHubIcon from '@/components/icons/GitHub.svelte';
   import InfoIcon from './icons/Info.svelte';
+  import KeyboardIcon from '@/components/icons/Keyboard.svelte';
   import GithubOultineIcon from './icons/GithubOultine.svelte';
 
   let innerWidth = window.innerWidth;
@@ -146,6 +148,11 @@
   <Menubar.Menu>
     <Menubar.Trigger>Help</Menubar.Trigger>
     <Menubar.Content>
+      <Menubar.Item class="flex items-center gap-2" on:click={openShortCutDialog}>
+        <KeyboardIcon class="text-xl" />
+        Shortcuts
+      </Menubar.Item>
+      <Menubar.Separator />
       <a href="https://github.com/Muhammed-Rahif/Notpad" target="_blank">
         <Menubar.Item class="flex items-center gap-2">
           <GithubOultineIcon class="text-xl" />

@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to Github Pages
 on:
   workflow_dispatch:
   push:
@@ -22,8 +22,10 @@ jobs:
 
       - name: Deploy with gh-pages
         run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm run deploy -- -u "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          npm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

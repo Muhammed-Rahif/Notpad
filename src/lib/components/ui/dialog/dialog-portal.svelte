@@ -2,6 +2,7 @@
   import { Dialog as DialogPrimitive } from 'bits-ui';
   interface Props {
     children?: import('svelte').Snippet;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   }
 

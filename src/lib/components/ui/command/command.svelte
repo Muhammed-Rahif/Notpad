@@ -8,6 +8,7 @@
     value?: $$Props['value'];
     class?: string | undefined | null;
     children?: import('svelte').Snippet;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   }
 

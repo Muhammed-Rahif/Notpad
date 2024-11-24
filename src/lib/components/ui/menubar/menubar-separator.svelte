@@ -5,6 +5,7 @@
   type $$Props = MenubarPrimitive.SeparatorProps;
   interface Props {
     class?: $$Props['class'];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   }
 

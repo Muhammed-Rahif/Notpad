@@ -2,6 +2,7 @@
   import { Toaster as Sonner, type ToasterProps as SonnerProps } from 'svelte-sonner';
   import { mode } from 'mode-watcher';
   interface Props {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   }
 

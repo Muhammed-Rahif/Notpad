@@ -8,6 +8,7 @@
     class?: $$Props['class'];
     orientation?: $$Props['orientation'];
     decorative?: $$Props['decorative'];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   }
 

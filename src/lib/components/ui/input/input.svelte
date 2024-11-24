@@ -16,6 +16,7 @@
     value?: $$Props['value'];
     // Fixed in Svelte 5, but not backported to 4.x.
     readonly?: $$Props['readonly'];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   }
 

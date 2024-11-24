@@ -23,9 +23,10 @@ export class NotpadStorage {
     if (editorsValue) {
       // Adding default values to the editors if they are not present
       // on in any circumstances if new values are introduced in the future.
-      const editorsValueRefined = editorsValue?.map((editor) => {
-        const defaultValue = { ...Editors.defaultEditor, id: undefined };
-        return merge(defaultValue, editor);
+      const editorsValueRefined = editorsValue.map((editor) => {
+        const { id, content, ...rest } = editor;
+        const defaultValue = { ...Editors.defaultEditor, id, content };
+        return merge(defaultValue, rest);
       });
       editors.set(editorsValueRefined);
     }

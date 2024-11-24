@@ -1,41 +1,21 @@
 <script lang="ts">
   import { Tooltip as TooltipPrimitive } from 'bits-ui';
-  import { cn, flyAndScale } from '@/utils';
-
-  type $$Props = TooltipPrimitive.ContentProps;
-
-  interface Props {
-    class?: $$Props['class'];
-    sideOffset?: $$Props['sideOffset'];
-    transition?: $$Props['transition'];
-    transitionConfig?: $$Props['transitionConfig'];
-    children?: import('svelte').Snippet;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  }
+  import { cn } from '@/utils.js';
 
   let {
-    class: className = undefined,
+    ref = $bindable(null),
+    class: className,
     sideOffset = 4,
-    transition = flyAndScale,
-    transitionConfig = {
-      y: 8,
-      duration: 150
-    },
-    children,
-    ...rest
-  }: Props = $props();
+    ...restProps
+  }: TooltipPrimitive.ContentProps = $props();
 </script>
 
 <TooltipPrimitive.Content
-  {transition}
-  {transitionConfig}
+  bind:ref
   {sideOffset}
   class={cn(
-    'z-50 overflow-hidden rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground',
+    'z-50 overflow-hidden rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
     className
   )}
-  {...rest}
->
-  {@render children?.()}
-</TooltipPrimitive.Content>
+  {...restProps}
+/>

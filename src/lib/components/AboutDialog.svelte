@@ -120,19 +120,19 @@
     </Dialog.Description>
 
     <Dialog.Footer class="gap-y-2">
-      <Button variant="secondary" class="relative sm:pr-20" on:click={showLicense}>
+      <Button variant="secondary" class="relative sm:pr-20" onclick={showLicense}>
         Notpad License
 
         <Button
           variant="secondary"
           class="absolute right-0 rounded-l-none border-l border-l-foreground/10"
-          on:click={openGithubRepo}
+          onclick={openGithubRepo}
         >
           <GitHubIcon class="text-2xl" />
         </Button>
       </Button>
 
-      <Button on:click={closeDialog}>Okay!</Button>
+      <Button onclick={closeDialog}>Okay!</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

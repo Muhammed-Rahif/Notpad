@@ -55,28 +55,28 @@
           <Editor {editor} />
         </ContextMenu.Trigger>
         <ContextMenu.Content class="w-48">
-          <ContextMenu.Item on:click={() => Notpad.editOptions.undo()}>
+          <ContextMenu.Item onclick={() => Notpad.editOptions.undo()}>
             Undo<ContextMenu.Shortcut>Ctrl+Z</ContextMenu.Shortcut>
           </ContextMenu.Item>
-          <ContextMenu.Item on:click={() => Notpad.editOptions.redo()}>
+          <ContextMenu.Item onclick={() => Notpad.editOptions.redo()}>
             Redo<ContextMenu.Shortcut>Ctrl+Y</ContextMenu.Shortcut>
           </ContextMenu.Item>
           <ContextMenu.Separator />
-          <ContextMenu.Item on:click={() => Notpad.editOptions.cut()}>
+          <ContextMenu.Item onclick={() => Notpad.editOptions.cut()}>
             Cut<ContextMenu.Shortcut>Ctrl+X</ContextMenu.Shortcut>
           </ContextMenu.Item>
-          <ContextMenu.Item on:click={() => Notpad.editOptions.copy()}>
+          <ContextMenu.Item onclick={() => Notpad.editOptions.copy()}>
             Copy<ContextMenu.Shortcut>Ctrl+C</ContextMenu.Shortcut>
           </ContextMenu.Item>
-          <ContextMenu.Item on:click={() => Notpad.editOptions.paste()}>
+          <ContextMenu.Item onclick={() => Notpad.editOptions.paste()}>
             Paste<ContextMenu.Shortcut>Ctrl+V</ContextMenu.Shortcut>
           </ContextMenu.Item>
           <ContextMenu.Separator />
-          <ContextMenu.Item on:click={() => Notpad.editOptions.selectAll()}>
+          <ContextMenu.Item onclick={() => Notpad.editOptions.selectAll()}>
             Select All
             <ContextMenu.Shortcut>Ctrl+A</ContextMenu.Shortcut>
           </ContextMenu.Item>
-          <ContextMenu.Item on:click={() => Notpad.editOptions.insertDateAndTime()}>
+          <ContextMenu.Item onclick={() => Notpad.editOptions.insertDateAndTime()}>
             Time/Date
           </ContextMenu.Item>
         </ContextMenu.Content>

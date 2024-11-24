@@ -1,25 +1,15 @@
 <script lang="ts">
   import { Tabs as TabsPrimitive } from 'bits-ui';
-  import { cn } from '@/utils';
+  import { cn } from '@/utils.js';
 
-  type $$Props = TabsPrimitive.ListProps;
-
-  interface Props {
-    class?: $$Props['class'];
-    children?: import('svelte').Snippet;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  }
-
-  let { class: className = undefined, children, ...rest }: Props = $props();
+  let { ref = $bindable(null), class: className, ...restProps }: TabsPrimitive.ListProps = $props();
 </script>
 
 <TabsPrimitive.List
+  bind:ref
   class={cn(
-    'inline-flex h-9 items-center justify-center overflow-y-hidden rounded-lg bg-muted p-1 text-muted-foreground',
+    'inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground',
     className
   )}
-  {...rest}
->
-  {@render children?.()}
-</TabsPrimitive.List>
+  {...restProps}
+/>

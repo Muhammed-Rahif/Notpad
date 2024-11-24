@@ -1,41 +1,28 @@
 <script lang="ts">
+  import { cn } from '@/utils.js';
   import { Popover as PopoverPrimitive } from 'bits-ui';
-  import { cn, flyAndScale } from '@/utils';
-
-  type $$Props = PopoverPrimitive.ContentProps;
-
-  interface Props {
-    class?: $$Props['class'];
-    transition?: $$Props['transition'];
-    transitionConfig?: $$Props['transitionConfig'];
-    align?: $$Props['align'];
-    sideOffset?: $$Props['sideOffset'];
-    children?: import('svelte').Snippet;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  }
 
   let {
-    class: className = undefined,
-    transition = flyAndScale,
-    transitionConfig = undefined,
+    ref = $bindable(null),
+    class: className,
     align = 'center',
     sideOffset = 4,
-    children,
-    ...rest
-  }: Props = $props();
+    portalProps,
+    ...restProps
+  }: PopoverPrimitive.ContentProps & {
+    portalProps?: PopoverPrimitive.PortalProps;
+  } = $props();
 </script>
 
-<PopoverPrimitive.Content
-  {transition}
-  {transitionConfig}
-  {align}
-  {sideOffset}
-  {...rest}
-  class={cn(
-    'z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none',
-    className
-  )}
->
-  {@render children?.()}
-</PopoverPrimitive.Content>
+<PopoverPrimitive.Portal {...portalProps}>
+  <PopoverPrimitive.Content
+    bind:ref
+    {align}
+    {sideOffset}
+    class={cn(
+      'z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+      className
+    )}
+    {...restProps}
+  />
+</PopoverPrimitive.Portal>

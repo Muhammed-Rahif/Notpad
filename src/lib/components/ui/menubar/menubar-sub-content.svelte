@@ -1,37 +1,19 @@
 <script lang="ts">
   import { Menubar as MenubarPrimitive } from 'bits-ui';
-  import { cn, flyAndScale } from '@/utils';
-
-  type $$Props = MenubarPrimitive.SubContentProps;
-  interface Props {
-    class?: $$Props['class'];
-    transition?: $$Props['transition'];
-    transitionConfig?: $$Props['transitionConfig'];
-    children?: import('svelte').Snippet;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  }
+  import { cn } from '@/utils.js';
 
   let {
-    class: className = undefined,
-    transition = flyAndScale,
-    transitionConfig = {
-      x: -10,
-      y: 0
-    },
-    children,
-    ...rest
-  }: Props = $props();
+    ref = $bindable(null),
+    class: className,
+    ...restProps
+  }: MenubarPrimitive.SubContentProps = $props();
 </script>
 
 <MenubarPrimitive.SubContent
-  {transition}
-  {transitionConfig}
+  bind:ref
   class={cn(
     'z-50 min-w-max rounded-md border bg-popover p-1 text-popover-foreground shadow-lg focus:outline-none',
     className
   )}
-  {...rest}
->
-  {@render children?.()}
-</MenubarPrimitive.SubContent>
+  {...restProps}
+/>

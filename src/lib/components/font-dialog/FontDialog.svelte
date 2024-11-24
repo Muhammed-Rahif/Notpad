@@ -62,11 +62,11 @@
     </Card.Root>
 
     <Dialog.Footer class="gap-2">
-      <Button variant="ghost" class="mr-auto max-sm:w-full" on:click={resetFontDefault}>
+      <Button variant="ghost" class="mr-auto max-sm:w-full" onclick={resetFontDefault}>
         Reset
       </Button>
-      <Button variant="secondary" on:click={() => closeFontDialog()}>Cancel</Button>
-      <Button on:click={() => closeFontDialog({ submit: true })}>Okay</Button>
+      <Button variant="secondary" onclick={() => closeFontDialog()}>Cancel</Button>
+      <Button onclick={() => closeFontDialog({ submit: true })}>Okay</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

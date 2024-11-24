@@ -58,7 +58,7 @@ SOFTWARE.`);
       {/each}
     </Dialog.Description>
     <Dialog.Footer>
-      <Button type="button" on:click={() => open.set(false)}>Understood!</Button>
+      <Button type="button" onclick={() => open.set(false)}>Understood!</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

@@ -1,18 +1,12 @@
 <script lang="ts">
-  import { Command as CommandPrimitive } from 'cmdk-sv';
-  import { cn } from '@/utils';
+  import { Command as CommandPrimitive } from 'bits-ui';
+  import { cn } from '@/utils.js';
 
-  type $$Props = CommandPrimitive.EmptyProps;
-  interface Props {
-    class?: string | undefined | null;
-    children?: import('svelte').Snippet;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  }
-
-  let { class: className = undefined, children, ...rest }: Props = $props();
+  let {
+    ref = $bindable(null),
+    class: className,
+    ...restProps
+  }: CommandPrimitive.EmptyProps = $props();
 </script>
 
-<CommandPrimitive.Empty class={cn('py-6 text-center text-sm', className)} {...rest}>
-  {@render children?.()}
-</CommandPrimitive.Empty>
+<CommandPrimitive.Empty bind:ref class={cn('py-6 text-center text-sm', className)} {...restProps} />

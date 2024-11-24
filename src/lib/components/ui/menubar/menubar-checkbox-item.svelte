@@ -1,48 +1,40 @@
 <script lang="ts">
-  import { Menubar as MenubarPrimitive } from 'bits-ui';
-  import Check from 'svelte-radix/Check.svelte';
-  import { cn } from '@/utils';
-
-  type $$Props = MenubarPrimitive.CheckboxItemProps;
-
-  interface Props {
-    class?: $$Props['class'];
-    checked?: $$Props['checked'];
-    children?: import('svelte').Snippet;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  }
+  import { Menubar as MenubarPrimitive, type WithoutChildrenOrChild } from 'bits-ui';
+  import Check from 'lucide-svelte/icons/check';
+  import Minus from 'lucide-svelte/icons/minus';
+  import { cn } from '@/utils.js';
+  import type { Snippet } from 'svelte';
 
   let {
-    class: className = undefined,
-    checked = $bindable(undefined),
-    children,
-    ...rest
-  }: Props = $props();
+    ref = $bindable(null),
+    checked = $bindable(false),
+    indeterminate = $bindable(false),
+    class: className,
+    children: childrenProp,
+    ...restProps
+  }: WithoutChildrenOrChild<MenubarPrimitive.CheckboxItemProps> & {
+    children?: Snippet;
+  } = $props();
 </script>
 
 <MenubarPrimitive.CheckboxItem
+  bind:ref
   bind:checked
+  bind:indeterminate
   class={cn(
     'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50',
     className
   )}
-  {...rest}
-  on:click
-  on:keydown
-  on:focusin
-  on:focusout
-  on:pointerleave
-  on:pointermove
-  on:pointerdown
+  {...restProps}
 >
-  <span
-    class="absolute left-2 flex h-3.5 w-3.5
-    items-center justify-center"
-  >
-    <MenubarPrimitive.CheckboxIndicator>
-      <Check class="h-4 w-4" />
-    </MenubarPrimitive.CheckboxIndicator>
-  </span>
-  {@render children?.()}
+  {#snippet children({ checked, indeterminate })}
+    <span class="absolute left-2 flex size-3.5 items-center justify-center">
+      {#if indeterminate}
+        <Minus class="size-4" />
+      {:else}
+        <Check class={cn('size-4', !checked && 'text-transparent')} />
+      {/if}
+    </span>
+    {@render childrenProp?.()}
+  {/snippet}
 </MenubarPrimitive.CheckboxItem>

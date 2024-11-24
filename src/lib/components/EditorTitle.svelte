@@ -11,6 +11,7 @@
   import CloseIcon from '@/components/icons/Close.svelte';
   import Button from '@/components/ui/button/button.svelte';
   import type { EditorType } from '@/src/lib/types/EditorTypes';
+  import { cn } from '@/utils';
 
   interface Props {
     editor: EditorType;
@@ -53,53 +54,58 @@
     readonly = true;
   }
 
-  function onEditorClose(e: ButtonEventHandler<MouseEvent>, id: string) {
-    e.preventDefault();
-    e.stopPropagation();
-    Notpad.editors.remove(id);
+  function onEditorClose(id: string) {
+    return (e: ButtonEventHandler<MouseEvent>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      Notpad.editors.remove(id);
+    };
   }
 </script>
 
-<Tooltip.Root openDelay={0} closeDelay={0}>
-  <Tooltip.Trigger>
-    <div class="flex items-center justify-center">
-      <form class="relative text-center text-sm" onsubmit={preventDefault(submit)}>
-        <!-- A expected behaviour is that the title will not be available to edit on file that opened from local or saved locally.
+<Tooltip.Provider>
+  <Tooltip.Root openDelay={0} closeDelay={0}>
+    <Tooltip.Trigger>
+      <div class="flex items-center justify-center">
+        <form class="relative text-center text-sm" onsubmit={preventDefault(submit)}>
+          <!-- A expected behaviour is that the title will not be available to edit on file that opened from local or saved locally.
         If you want to, you have save as it with new file-name/title. 
         
         Meaning only non-saved (saved on user local file system)
         files can be rename the title by double click. 
         -->
-        <input
-          bind:this={input}
-          use:autoWidth
-          ondblclick={allowEditing}
-          onkeydown={onKeydown}
-          use:longpress={1000}
-          onlongpress={allowEditing}
-          onblur={onBlur}
-          value={editor.fileName}
-          type="text"
-          class="rounded bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary {editor.fileHandle
-            ? 'border-none border-transparent outline-none outline-transparent'
-            : ''}"
-          maxlength={24}
-          readonly={!!editor.fileHandle || readonly}
-        />
-      </form>
-      <Button
-        on:click={(e) => onEditorClose(e, editor.id)}
-        size="sm"
-        class="h-6 w-6 p-0"
-        variant={$activeTabId === editor.id ? 'secondary' : 'outline'}
-      >
-        <CloseIcon class="text-base" />
-      </Button>
-    </div>
-  </Tooltip.Trigger>
-  {#if editor.filePath}
-    <Tooltip.Content>
-      {editor.filePath}
-    </Tooltip.Content>
-  {/if}
-</Tooltip.Root>
+          <input
+            bind:this={input}
+            use:autoWidth
+            ondblclick={allowEditing}
+            onkeydown={onKeydown}
+            use:longpress={1000}
+            onlongpress={allowEditing}
+            onblur={onBlur}
+            value={editor.fileName}
+            type="text"
+            class={cn(
+              'rounded bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary',
+              editor.fileHandle && 'border-none border-transparent outline-none outline-transparent'
+            )}
+            maxlength={24}
+            readonly={!!editor.fileHandle || readonly}
+          />
+        </form>
+        <Button
+          onclick={onEditorClose(editor.id)}
+          size="sm"
+          class="h-6 w-6 p-0"
+          variant={$activeTabId === editor.id ? 'secondary' : 'outline'}
+        >
+          <CloseIcon class="text-base" />
+        </Button>
+      </div>
+    </Tooltip.Trigger>
+    {#if editor.filePath}
+      <Tooltip.Content>
+        {editor.filePath}
+      </Tooltip.Content>
+    {/if}
+  </Tooltip.Root>
+</Tooltip.Provider>

@@ -1,43 +1,32 @@
 <script lang="ts">
   import { Menubar as MenubarPrimitive } from 'bits-ui';
-  import { cn, flyAndScale } from '@/utils';
-
-  type $$Props = MenubarPrimitive.ContentProps;
-  interface Props {
-    class?: $$Props['class'];
-    align?: $$Props['align'];
-    alignOffset?: $$Props['alignOffset'];
-    sideOffset?: $$Props['sideOffset'];
-    transition?: $$Props['transition'];
-    transitionConfig?: $$Props['transitionConfig'];
-    children?: import('svelte').Snippet;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  }
+  import { cn } from '@/utils.js';
 
   let {
-    class: className = undefined,
-    align = 'start',
-    alignOffset = -4,
+    ref = $bindable(null),
+    class: className,
     sideOffset = 8,
-    transition = flyAndScale,
-    transitionConfig = undefined,
-    children,
-    ...rest
-  }: Props = $props();
+    alignOffset = -4,
+    align = 'start',
+    side = 'bottom',
+    portalProps,
+    ...restProps
+  }: MenubarPrimitive.ContentProps & {
+    portalProps?: MenubarPrimitive.PortalProps;
+  } = $props();
 </script>
 
-<MenubarPrimitive.Content
-  {transition}
-  {transitionConfig}
-  {sideOffset}
-  {align}
-  {alignOffset}
-  class={cn(
-    'z-50 min-w-[12rem] rounded-md border bg-popover p-1 text-popover-foreground shadow-md focus:outline-none',
-    className
-  )}
-  {...rest}
->
-  {@render children?.()}
-</MenubarPrimitive.Content>
+<MenubarPrimitive.Portal {...portalProps}>
+  <MenubarPrimitive.Content
+    bind:ref
+    {sideOffset}
+    {align}
+    {alignOffset}
+    {side}
+    class={cn(
+      'z-50 min-w-[12rem] rounded-md border bg-popover p-1 text-popover-foreground shadow-md focus:outline-none',
+      className
+    )}
+    {...restProps}
+  />
+</MenubarPrimitive.Portal>

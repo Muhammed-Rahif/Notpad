@@ -72,7 +72,7 @@
         />
       </div>
 
-      <Button type="button" class="mt-auto" on:click={submitGoTo}>Go</Button>
+      <Button type="button" class="mt-auto" onclick={submitGoTo}>Go</Button>
     </Dialog.Description>
   </Dialog.Content>
 </Dialog.Root>

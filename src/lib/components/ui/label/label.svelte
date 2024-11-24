@@ -1,25 +1,19 @@
 <script lang="ts">
   import { Label as LabelPrimitive } from 'bits-ui';
-  import { cn } from '@/utils';
+  import { cn } from '@/utils.js';
 
-  type $$Props = LabelPrimitive.Props;
-
-  interface Props {
-    class?: $$Props['class'];
-    children?: import('svelte').Snippet;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  }
-
-  let { class: className = undefined, children, ...rest }: Props = $props();
+  let {
+    ref = $bindable(null),
+    class: className,
+    ...restProps
+  }: LabelPrimitive.RootProps = $props();
 </script>
 
 <LabelPrimitive.Root
+  bind:ref
   class={cn(
     'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
     className
   )}
-  {...rest}
->
-  {@render children?.()}
-</LabelPrimitive.Root>
+  {...restProps}
+/>

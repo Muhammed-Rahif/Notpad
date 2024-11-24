@@ -56,7 +56,7 @@
           class="rounded-r-none border-secondary !ring-0"
         />
         <Button
-          on:click={() => {
+          onclick={() => {
             findIndex =
               Notpad.searchOptions.findMaybeReplace({
                 query,
@@ -72,7 +72,7 @@
           <ChevronUp class="text-xl" />
         </Button>
         <Button
-          on:click={() => {
+          onclick={() => {
             findIndex =
               Notpad.searchOptions.findMaybeReplace({
                 query,
@@ -115,7 +115,7 @@
       <Button
         type="button"
         variant="secondary"
-        on:click={() =>
+        onclick={() =>
           Notpad.searchOptions.findAndReplaceAll({
             query,
             caseSensitive,
@@ -127,7 +127,7 @@
       <Button
         type="button"
         variant="secondary"
-        on:click={() =>
+        onclick={() =>
           Notpad.searchOptions.findMaybeReplace({
             query,
             caseSensitive,
@@ -140,7 +140,7 @@
       <Button
         type="button"
         variant="default"
-        on:click={() => {
+        onclick={() => {
           findIndex = 0;
           Notpad.searchOptions.findMaybeReplace({ query, caseSensitive });
         }}

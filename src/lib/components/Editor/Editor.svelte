@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
-  import { onMount, tick } from 'svelte';
+  import { onMount, tick, untrack } from 'svelte';
   import throttle from 'lodash.throttle';
   import debounce from 'lodash.debounce';
   import StatusBar from '@/components/StatusBar.svelte';
@@ -102,31 +100,37 @@
     });
   });
 
-  run(() => {
-    if (
-      editorContainer ||
-      quill ||
-      lineNo ||
-      caretLineNo ||
-      caretColumnNo ||
-      characterCount ||
-      $settings
-    ) {
-      updateCaretPosition();
-    }
-  });
+  /**
+   * https://github.com/sveltejs/svelte/issues/9248#issuecomment-1732246774
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const explicitEffect = (fn: any, depsFn: () => void) => {
+    $effect(() => {
+      depsFn();
+      untrack(fn);
+    });
+  };
 
-  run(() => {
-    // If line numbers are enabled or disabled, update the caret position after a delay
-    // of 300ms to complete the line numbers animated entry or exit.
-    if ($settings.lineNumbers || lineNo) {
-      (async function () {
-        await tick();
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        updateCaretPosition();
-      })();
-    }
-  });
+  explicitEffect(updateCaretPosition, () => [
+    editorContainer,
+    quill,
+    lineNo,
+    caretLineNo,
+    caretColumnNo,
+    characterCount,
+    $settings
+  ]);
+
+  explicitEffect(
+    async () => {
+      await tick();
+      // If line numbers are enabled or disabled, update the caret position after a delay
+      // of 300ms to complete the line numbers animated entry or exit.
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      updateCaretPosition();
+    },
+    () => [$settings.lineNumbers, lineNo]
+  );
 
   const updateCaretPosAndEditorData = throttle(async () => {
     updateEditorData();

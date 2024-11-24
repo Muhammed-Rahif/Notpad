@@ -9,8 +9,6 @@
 </script>
 
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import { Input, type FormInputEvent } from '@/components/ui/input';
@@ -36,7 +34,7 @@
     }
   }
 
-  run(() => {
+  $effect(() => {
     if (!$open) Notpad.editors.focus();
   });
 </script>

@@ -9,8 +9,6 @@
 </script>
 
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import { Input } from '@/components/ui/input';
@@ -29,7 +27,7 @@
     query = q;
   }
 
-  run(() => {
+  $effect(() => {
     if ($open) {
       const editor = Notpad.editors.getEditor();
 

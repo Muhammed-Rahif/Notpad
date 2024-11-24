@@ -11,11 +11,17 @@
   import ChevronsUpDownIcon from '@/components/icons/ChevronsUpDown.svelte';
   import { FontFamily } from '@/types/SettingsTypes';
 
-  let open = false;
+  let open = $state(false);
 
-  export let value: FontFamily;
+  interface Props {
+    value: FontFamily;
+  }
 
-  $: selectedValue = Object.values(FontFamily).find((f) => f === value) ?? $settings.fontFamily;
+  let { value = $bindable() }: Props = $props();
+
+  let selectedValue = $derived(
+    Object.values(FontFamily).find((f) => f === value) ?? $settings.fontFamily
+  );
 
   // We want to refocus the trigger button when the user selects
   // an item from the list so users can continue navigating the
@@ -43,36 +49,40 @@
   });
 </script>
 
-<Popover.Root bind:open let:ids>
-  <Popover.Trigger asChild let:builder>
-    <div>
-      <Label for="font-family-command-button">Font Family</Label>
-      <br />
-      <Button
-        builders={[builder]}
-        variant="outline"
-        role="combobox"
-        aria-expanded={open}
-        class="w-full justify-between min-[464px]:w-[200px]"
-        id="font-family-command-button"
-      >
-        {selectedValue == FontFamily.SUSE ? `${selectedValue} (Default)` : selectedValue}
-        <ChevronsUpDownIcon class="ml-2 shrink-0 text-base opacity-50" />
-      </Button>
-    </div>
-  </Popover.Trigger>
-  <Popover.Content class="w-[200px] p-0">
-    <Command.Root>
-      <Command.Input placeholder="Search font family" />
-      <Command.Empty>No font family found.</Command.Empty>
-      <Command.Group class="max-h-56 overflow-y-auto">
-        {#each Object.values(FontFamily) as fontFamily}
-          <Command.Item value={fontFamily} onSelect={() => onSelect(fontFamily, ids)}>
-            <CheckIcon class={cn('mr-2 text-lg', value !== fontFamily && 'text-transparent')} />
-            {fontFamily == FontFamily.SUSE ? `${fontFamily} (Default)` : fontFamily}
-          </Command.Item>
-        {/each}
-      </Command.Group>
-    </Command.Root>
-  </Popover.Content>
+<Popover.Root bind:open>
+  {#snippet children({ ids })}
+    <Popover.Trigger asChild>
+      {#snippet children({ builder })}
+        <div>
+          <Label for="font-family-command-button">Font Family</Label>
+          <br />
+          <Button
+            builders={[builder]}
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            class="w-full justify-between min-[464px]:w-[200px]"
+            id="font-family-command-button"
+          >
+            {selectedValue == FontFamily.SUSE ? `${selectedValue} (Default)` : selectedValue}
+            <ChevronsUpDownIcon class="ml-2 shrink-0 text-base opacity-50" />
+          </Button>
+        </div>
+      {/snippet}
+    </Popover.Trigger>
+    <Popover.Content class="w-[200px] p-0">
+      <Command.Root>
+        <Command.Input placeholder="Search font family" />
+        <Command.Empty>No font family found.</Command.Empty>
+        <Command.Group class="max-h-56 overflow-y-auto">
+          {#each Object.values(FontFamily) as fontFamily}
+            <Command.Item value={fontFamily} onSelect={() => onSelect(fontFamily, ids)}>
+              <CheckIcon class={cn('mr-2 text-lg', value !== fontFamily && 'text-transparent')} />
+              {fontFamily == FontFamily.SUSE ? `${fontFamily} (Default)` : fontFamily}
+            </Command.Item>
+          {/each}
+        </Command.Group>
+      </Command.Root>
+    </Popover.Content>
+  {/snippet}
 </Popover.Root>

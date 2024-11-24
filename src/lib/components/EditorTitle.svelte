@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { preventDefault } from 'svelte/legacy';
+
   import { Notpad } from '@/helpers/notpad';
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
@@ -10,10 +12,14 @@
   import Button from '@/components/ui/button/button.svelte';
   import type { EditorType } from '@/src/lib/types/EditorTypes';
 
-  export let editor: EditorType;
+  interface Props {
+    editor: EditorType;
+  }
 
-  let readonly = true;
-  let input: HTMLInputElement;
+  let { editor }: Props = $props();
+
+  let readonly = $state(true);
+  let input: HTMLInputElement = $state({} as HTMLInputElement);
 
   function allowEditing() {
     readonly = false;
@@ -57,7 +63,7 @@
 <Tooltip.Root openDelay={0} closeDelay={0}>
   <Tooltip.Trigger>
     <div class="flex items-center justify-center">
-      <form class="relative text-center text-sm" on:submit|preventDefault={submit}>
+      <form class="relative text-center text-sm" onsubmit={preventDefault(submit)}>
         <!-- A expected behaviour is that the title will not be available to edit on file that opened from local or saved locally.
         If you want to, you have save as it with new file-name/title. 
         
@@ -67,12 +73,12 @@
         <input
           bind:this={input}
           use:autoWidth
-          on:dblclick={allowEditing}
-          on:keydown={onKeydown}
-          on:longpress={allowEditing}
-          on:blur={onBlur}
-          value={editor.fileName}
+          ondblclick={allowEditing}
+          onkeydown={onKeydown}
           use:longpress={1000}
+          onlongpress={allowEditing}
+          onblur={onBlur}
+          value={editor.fileName}
           type="text"
           class="rounded bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary {editor.fileHandle
             ? 'border-none border-transparent outline-none outline-transparent'

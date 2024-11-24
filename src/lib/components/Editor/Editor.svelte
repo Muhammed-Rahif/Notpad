@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { onMount, tick } from 'svelte';
   import throttle from 'lodash.throttle';
   import debounce from 'lodash.debounce';
@@ -11,16 +13,20 @@
   import './Editor.css';
   import type { EditorType } from '@/types/EditorTypes';
 
-  export let editor: EditorType;
+  interface Props {
+    editor: EditorType;
+  }
 
-  let editorContainer: HTMLDivElement;
-  let quill: Quill;
-  let fakeCaret: HTMLSpanElement | null = null;
-  let caretPosition = { top: 10, left: 8, height: 24 };
-  let lineNo = 0;
-  let caretLineNo = 1;
-  let caretColumnNo = 1;
-  let characterCount = 0;
+  let { editor }: Props = $props();
+
+  let editorContainer: HTMLDivElement = $state({} as HTMLDivElement);
+  let quill: Quill = $state({} as Quill);
+  let fakeCaret: HTMLSpanElement | null = $state(null);
+  let caretPosition = $state({ top: 10, left: 8, height: 24 });
+  let lineNo = $state(0);
+  let caretLineNo = $state(1);
+  let caretColumnNo = $state(1);
+  let characterCount = $state(0);
 
   async function setupQuill() {
     quill = new Quill(editorContainer!, {
@@ -96,7 +102,7 @@
     });
   });
 
-  $: {
+  run(() => {
     if (
       editorContainer ||
       quill ||
@@ -108,9 +114,9 @@
     ) {
       updateCaretPosition();
     }
-  }
+  });
 
-  $: {
+  run(() => {
     // If line numbers are enabled or disabled, update the caret position after a delay
     // of 300ms to complete the line numbers animated entry or exit.
     if ($settings.lineNumbers || lineNo) {
@@ -120,7 +126,7 @@
         updateCaretPosition();
       })();
     }
-  }
+  });
 
   const updateCaretPosAndEditorData = throttle(async () => {
     updateEditorData();
@@ -151,7 +157,7 @@
     --editor-font-size: {$settings.fontSize}px;
     --editor-zoom: {$settings.zoom};
     --line-no-digits-count: {lineNo.toString().length}"
-  />
+  ></div>
   <span
     class="fake-caret absolute z-0 w-0.5 rounded-[.06em] bg-primary"
     bind:this={fakeCaret}
@@ -160,7 +166,7 @@
     height: {caretPosition.height}px;
     width: {$settings.zoom * 2}px"
     spellcheck="false"
-  />
+  ></span>
 </div>
 
 <StatusBar {caretLineNo} {caretColumnNo} {characterCount} />

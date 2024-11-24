@@ -4,9 +4,20 @@
   import { cn } from '@/utils';
 
   type $$Props = MenubarPrimitive.CheckboxItemProps;
-  let className: $$Props['class'] = undefined;
-  export { className as class };
-  export let checked: $$Props['checked'] = undefined;
+
+  interface Props {
+    class?: $$Props['class'];
+    checked?: $$Props['checked'];
+    children?: import('svelte').Snippet;
+    [key: string]: any;
+  }
+
+  let {
+    class: className = undefined,
+    checked = $bindable(undefined),
+    children,
+    ...rest
+  }: Props = $props();
 </script>
 
 <MenubarPrimitive.CheckboxItem
@@ -15,7 +26,7 @@
     'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50',
     className
   )}
-  {...$$restProps}
+  {...rest}
   on:click
   on:keydown
   on:focusin
@@ -32,5 +43,5 @@
       <Check class="h-4 w-4" />
     </MenubarPrimitive.CheckboxIndicator>
   </span>
-  <slot />
+  {@render children?.()}
 </MenubarPrimitive.CheckboxItem>

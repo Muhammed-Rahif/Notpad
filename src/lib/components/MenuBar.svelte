@@ -16,12 +16,12 @@
   import InfoIcon from './icons/Info.svelte';
   import GithubOultineIcon from './icons/GithubOultine.svelte';
 
-  let innerWidth = window.innerWidth;
-  let isFullScreen = screenfull.isFullscreen;
+  let innerWidth = $state(window.innerWidth);
+  let isFullScreen = $state(screenfull.isFullscreen);
 
-  $: isXS = innerWidth <= 450;
-  $: tabsMode = $editors.length > 1;
-  $: singleEditor = $editors.at(0)!;
+  let isXS = $derived(innerWidth <= 450);
+  let tabsMode = $derived($editors.length > 1);
+  let singleEditor = $derived($editors.at(0)!);
 
   onMount(() => {
     screenfull.onchange(() => (isFullScreen = screenfull.isFullscreen));

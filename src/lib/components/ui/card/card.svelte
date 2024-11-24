@@ -1,22 +1,31 @@
 <script lang="ts">
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import type { HTMLAttributes } from 'svelte/elements';
   import { cn } from '@/utils.js';
 
   type $$Props = HTMLAttributes<HTMLDivElement>;
 
-  let className: $$Props['class'] = undefined;
-  export { className as class };
+  interface Props {
+    class?: $$Props['class'];
+    children?: import('svelte').Snippet;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
+  }
+
+  let { class: className = undefined, children, ...rest }: Props = $props();
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class={cn('rounded-xl border bg-card text-card-foreground shadow', className)}
-  {...$$restProps}
-  on:click
-  on:focusin
-  on:focusout
-  on:mouseenter
-  on:mouseleave
+  {...rest}
+  onclick={bubble('click')}
+  onfocusin={bubble('focusin')}
+  onfocusout={bubble('focusout')}
+  onmouseenter={bubble('mouseenter')}
+  onmouseleave={bubble('mouseleave')}
 >
-  <slot />
+  {@render children?.()}
 </div>

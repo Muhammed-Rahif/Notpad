@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   import { writable } from 'svelte/store';
 
   const open = writable(false);

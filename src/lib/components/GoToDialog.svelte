@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   import { get, writable } from 'svelte/store';
 
   const open = writable(false);
@@ -9,14 +9,16 @@
 </script>
 
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import { Input, type FormInputEvent } from '@/components/ui/input';
   import Label from '@/components/ui/label/label.svelte';
   import { Notpad } from '@/helpers/notpad';
 
-  let line: string | undefined;
-  let column: string | undefined;
+  let line: string | undefined = $state();
+  let column: string | undefined = $state();
 
   function submitGoTo() {
     open.set(false);
@@ -34,7 +36,9 @@
     }
   }
 
-  $: if (!$open) Notpad.editors.focus();
+  run(() => {
+    if (!$open) Notpad.editors.focus();
+  });
 </script>
 
 <Dialog.Root open={$open} onOpenChange={open.set} preventScroll={false}>

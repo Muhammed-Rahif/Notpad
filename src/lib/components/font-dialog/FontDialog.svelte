@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   import { get, writable } from 'svelte/store';
   const open = writable(false);
 
@@ -20,8 +20,8 @@
 
   const currentSettings = get(settings);
 
-  let fontFamily: FontFamily = currentSettings.fontFamily;
-  let fontSize: FontSize = currentSettings.fontSize;
+  let fontFamily: FontFamily = $state(currentSettings.fontFamily);
+  let fontSize: FontSize = $state(currentSettings.fontSize);
 
   function closeFontDialog({ submit } = { submit: false }) {
     open.set(false);

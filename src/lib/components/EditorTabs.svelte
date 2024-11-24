@@ -7,14 +7,14 @@
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
 
-  let innerWidth = window.innerWidth;
+  let innerWidth = $state(window.innerWidth);
 
-  $: isXS = innerWidth <= 450;
+  let isXS = $derived(innerWidth <= 450);
   /**
    * Compact mode is disabled on mobile devices (width <= 450px)
    * and on PCs when multiple editors are open.
    */
-  $: tabsMode = $editors.length > 1;
+  let tabsMode = $derived($editors.length > 1);
 </script>
 
 <svelte:window bind:innerWidth />
@@ -33,8 +33,8 @@
               tabindex="0"
               class="flex items-center justify-center rounded-md py-1 pl-2 pr-1
                 {$activeTabId === editor.id ? 'bg-background' : 'bg-secondary'}"
-              on:click={() => ($activeTabId = editor.id)}
-              on:keydown={(e) => {
+              onclick={() => ($activeTabId = editor.id)}
+              onkeydown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   $activeTabId = editor.id;
                 }

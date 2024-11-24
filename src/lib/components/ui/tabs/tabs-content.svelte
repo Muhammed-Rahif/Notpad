@@ -4,9 +4,14 @@
 
   type $$Props = TabsPrimitive.ContentProps;
 
-  let className: $$Props['class'] = undefined;
-  export let value: $$Props['value'];
-  export { className as class };
+  interface Props {
+    class?: $$Props['class'];
+    value: $$Props['value'];
+    children?: import('svelte').Snippet;
+    [key: string]: any;
+  }
+
+  let { class: className = undefined, value, children, ...rest }: Props = $props();
 </script>
 
 <TabsPrimitive.Content
@@ -15,7 +20,7 @@
     className
   )}
   {value}
-  {...$$restProps}
+  {...rest}
 >
-  <slot />
+  {@render children?.()}
 </TabsPrimitive.Content>

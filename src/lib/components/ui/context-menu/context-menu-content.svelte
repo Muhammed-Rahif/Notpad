@@ -4,10 +4,21 @@
 
   type $$Props = ContextMenuPrimitive.ContentProps;
 
-  let className: $$Props['class'] = undefined;
-  export let transition: $$Props['transition'] = flyAndScale;
-  export let transitionConfig: $$Props['transitionConfig'] = undefined;
-  export { className as class };
+  interface Props {
+    class?: $$Props['class'];
+    transition?: $$Props['transition'];
+    transitionConfig?: $$Props['transitionConfig'];
+    children?: import('svelte').Snippet;
+    [key: string]: any;
+  }
+
+  let {
+    class: className = undefined,
+    transition = flyAndScale,
+    transitionConfig = undefined,
+    children,
+    ...rest
+  }: Props = $props();
 </script>
 
 <ContextMenuPrimitive.Content
@@ -17,8 +28,8 @@
     'z-50 min-w-[8rem] rounded-md border bg-popover p-1 text-popover-foreground shadow-md focus:outline-none',
     className
   )}
-  {...$$restProps}
+  {...rest}
   on:keydown
 >
-  <slot />
+  {@render children?.()}
 </ContextMenuPrimitive.Content>

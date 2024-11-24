@@ -3,9 +3,15 @@
 
   type $$Props = ContextMenuPrimitive.RadioGroupProps;
 
-  export let value: $$Props['value'] = undefined;
+  interface Props {
+    value?: $$Props['value'];
+    children?: import('svelte').Snippet;
+    [key: string]: any;
+  }
+
+  let { value = $bindable(undefined), children, ...rest }: Props = $props();
 </script>
 
-<ContextMenuPrimitive.RadioGroup {...$$restProps} bind:value>
-  <slot />
+<ContextMenuPrimitive.RadioGroup {...rest} bind:value>
+  {@render children?.()}
 </ContextMenuPrimitive.RadioGroup>

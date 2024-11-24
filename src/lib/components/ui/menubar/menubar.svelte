@@ -4,8 +4,12 @@
 
   type $$Props = MenubarPrimitive.Props;
 
-  let className: $$Props['class'] = undefined;
-  export { className as class };
+  interface Props {
+    class?: $$Props['class'];
+    children?: import('svelte').Snippet;
+  }
+
+  let { class: className = undefined, children }: Props = $props();
 </script>
 
 <MenubarPrimitive.Root
@@ -14,5 +18,5 @@
     className
   )}
 >
-  <slot />
+  {@render children?.()}
 </MenubarPrimitive.Root>

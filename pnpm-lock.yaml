@@ -26,9 +26,6 @@ importers:
       caret-pos:
         specifier: ^2.0.0
         version: 2.0.0
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
@@ -56,24 +53,12 @@ importers:
       short-uuid:
         specifier: ^5.2.0
         version: 5.2.0
-      svelte-input-auto-width:
-        specifier: ^2.1.0
-        version: 2.1.0
       svelte-sonner:
         specifier: ^0.3.28
         version: 0.3.28(svelte@5.2.7)
-      tailwind-merge:
-        specifier: ^2.5.4
-        version: 2.5.4
       tailwind-scrollbar:
         specifier: ^3.1.0
         version: 3.1.0(tailwindcss@3.4.15)
-      tailwind-variants:
-        specifier: ^0.2.1
-        version: 0.2.1(tailwindcss@3.4.15)
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.15)
     devDependencies:
       '@semantic-release/changelog':
         specifier: ^6.0.3
@@ -123,6 +108,9 @@ importers:
       bits-ui:
         specifier: 1.0.0-next.64
         version: 1.0.0-next.64(svelte@5.2.7)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       eslint:
         specifier: ^9.12.0
         version: 9.15.0(jiti@1.21.6)
@@ -162,9 +150,18 @@ importers:
       svelte-radix:
         specifier: ^1.1.1
         version: 1.1.1(svelte@5.2.7)
+      tailwind-merge:
+        specifier: ^2.5.4
+        version: 2.5.4
+      tailwind-variants:
+        specifier: ^0.2.1
+        version: 0.2.1(tailwindcss@3.4.15)
       tailwindcss:
         specifier: ^3.4.14
         version: 3.4.15
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.15)
       tslib:
         specifier: ^2.7.0
         version: 2.8.1
@@ -3728,9 +3725,6 @@ packages:
     peerDependenciesMeta:
       svelte:
         optional: true
-
-  svelte-input-auto-width@2.1.0:
-    resolution: {integrity: sha512-QwgxIeCY7SEixoCUkVT8HRzWDWwFjEisQslJMNOGJO+EmNSkTQj4yqxabh9W+7ueCY2WvaE0JthofRl3gxZs9g==}
 
   svelte-radix@1.1.1:
     resolution: {integrity: sha512-TCbV7fzlJ2aEUB0nu2EodVA+r1eYj526IYpmGUTV32Z0bIrCUvx3K8xX3tcxR5dDFA5ZBU1Hxr4RYC4TDFEQ4A==}
@@ -7852,8 +7846,6 @@ snapshots:
       postcss-scss: 4.0.9(postcss@8.4.49)
     optionalDependencies:
       svelte: 5.2.7
-
-  svelte-input-auto-width@2.1.0: {}
 
   svelte-radix@1.1.1(svelte@5.2.7):
     dependencies:

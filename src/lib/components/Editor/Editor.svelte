@@ -17,8 +17,8 @@
 
   let { editor }: Props = $props();
 
-  let editorContainer: HTMLDivElement = $state({} as HTMLDivElement);
-  let quill: Quill = $state({} as Quill);
+  let editorContainer: HTMLDivElement = $state(null!);
+  let quill: Quill = $state(null!);
   let fakeCaret: HTMLSpanElement | null = $state(null);
   let caretPosition = $state({ top: 10, left: 8, height: 24 });
   let lineNo = $state(0);

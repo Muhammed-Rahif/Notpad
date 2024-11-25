@@ -54,6 +54,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Check linting and errors
+        run: |
+          npm run lint
+          npm run check
+
       - name: Update version declarations
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

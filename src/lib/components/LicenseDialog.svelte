@@ -38,7 +38,7 @@ SOFTWARE.`);
 
   let licenseParagraphs = $derived(
     licenseText.split(/\n\n/g).map((line) => {
-      return { text: line, br: '<br><br>' };
+      return { text: line, br: true };
     })
   );
 
@@ -54,7 +54,11 @@ SOFTWARE.`);
     <Dialog.Description class="max-h-96 overflow-y-auto pr-2">
       {#each licenseParagraphs as { text, br }}
         {text}
-        {br}
+
+        {#if br}
+          <br />
+          <br />
+        {/if}
       {/each}
     </Dialog.Description>
     <Dialog.Footer>

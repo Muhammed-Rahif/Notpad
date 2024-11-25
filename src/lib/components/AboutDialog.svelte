@@ -18,21 +18,22 @@
   import { Badge } from '@/components/ui/badge';
   import { openLicenseDialog } from '@/components/LicenseDialog.svelte';
   import { mode } from 'mode-watcher';
-  import type { ButtonEventHandler } from 'bits-ui';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
   import appJson from '@/src/app.json';
+  import { tick } from 'svelte';
 
   function closeDialog() {
     open.set(false);
   }
 
-  function showLicense() {
+  async function showLicense() {
     closeDialog();
+    await tick();
     openLicenseDialog();
   }
 
-  function openGithubRepo(e: ButtonEventHandler<MouseEvent>) {
+  function openGithubRepo(e: MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
     window.open('https://github.com/Muhammed-Rahif/Notpad', '_blank');
@@ -54,6 +55,7 @@
         <span class="text-sm">© 2024. All rights reserved.</span>
       </div>
     </Dialog.Header>
+
     <Dialog.Description class="text-base">
       <p class="mb-3">
         Notpad is a simple, open source, beautiful note-taking app that helps you to take notes and
@@ -69,7 +71,7 @@
 
       {#await Notpad.github.getContributors() then contributors}
         {#if contributors}
-          <div transition:slide|global>
+          <div in:slide|global>
             <p>Our Valuable Contributors:</p>
             <ul class="mt-1 max-h-36 overflow-y-auto">
               {#each contributors as contributor}

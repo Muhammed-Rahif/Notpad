@@ -6,6 +6,7 @@
   import { activeTabId, editors } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
+  import { cn } from '@/utils';
 
   let innerWidth = $state(window.innerWidth);
 
@@ -23,16 +24,18 @@
   {#if tabsMode || isXS}
     <div transition:slide>
       <Tabs.List
-        class="w-full justify-start gap-1
-        overflow-x-auto rounded-t-none py-0.5 shadow"
+        class="w-full justify-start gap-1 overflow-x-auto
+        overflow-y-clip rounded-t-none shadow"
       >
         {#each $editors as editor}
-          <Tabs.Trigger asChild value={editor.id} class={tabsMode ? 'pr-1' : ''}>
+          <Tabs.Trigger value={editor.id} class="h-8 pl-2 pr-0">
             <div
               role="button"
               tabindex="0"
-              class="flex items-center justify-center rounded-md py-1 pl-2 pr-1
-                {$activeTabId === editor.id ? 'bg-background' : 'bg-secondary'}"
+              class={cn(
+                'flex items-center justify-center',
+                $activeTabId === editor.id ? 'bg-background' : 'bg-secondary'
+              )}
               onclick={() => ($activeTabId = editor.id)}
               onkeydown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {

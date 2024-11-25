@@ -31,6 +31,7 @@
     "@vite-pwa/assets-generator": "^0.2.6",
     "autoprefixer": "^10.4.20",
     "bits-ui": "1.0.0-next.64",
+    "clsx": "^2.1.1",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.45.1",
@@ -44,7 +45,10 @@
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.5",
     "svelte-radix": "^1.1.1",
+    "tailwind-merge": "^2.5.4",
+    "tailwind-variants": "^0.2.1",
     "tailwindcss": "^3.4.14",
+    "tailwindcss-animate": "^1.0.7",
     "tslib": "^2.7.0",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.15.0",
@@ -63,7 +67,6 @@
     "@tauri-apps/plugin-fs": "^2.0.0",
     "@tauri-apps/plugin-shell": "^2.0.1",
     "caret-pos": "^2.0.0",
-    "clsx": "^2.1.1",
     "localforage": "^1.10.0",
     "lodash.debounce": "^4.0.8",
     "lodash.merge": "^4.6.2",
@@ -73,11 +76,7 @@
     "quill": "^2.0.2",
     "screenfull": "^6.0.2",
     "short-uuid": "^5.2.0",
-    "svelte-input-auto-width": "^2.1.0",
     "svelte-sonner": "^0.3.28",
-    "tailwind-merge": "^2.5.4",
-    "tailwind-scrollbar": "^3.1.0",
-    "tailwind-variants": "^0.2.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwind-scrollbar": "^3.1.0"
   }
 }

@@ -6,6 +6,7 @@
   export let caretLineNo = 1;
   export let caretColumnNo = 1;
   export let characterCount = 0;
+  export let wordCount = 0;
 
   const inAnimation = {
     duration: 80
@@ -47,6 +48,15 @@
           </span>
         {/key}
         {characterCount <= 1 ? 'Character' : 'Characters'}
+      </span>
+
+      <span class="flex items-center justify-center">
+        {#key wordCount}
+          <span in:slide={inAnimation} class="mr-1 inline-block">
+            {wordCount}
+          </span>
+        {/key}
+        {wordCount <= 1 ? 'Word' : 'Words'}
       </span>
 
       <span class="ml-auto">

@@ -37,7 +37,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`;
 
   $: licenseParagraphs = licenseText.split(/\n\n/g).map((line) => {
-    return { text: line, br: '<br><br>' };
+    return { text: line, br: true };
   });
 
   onMount(async () => {
@@ -47,12 +47,18 @@ SOFTWARE.`;
 
 <Dialog.Root open={$open} onOpenChange={open.set}>
   <Dialog.Content class="[&_a]:text-blue-500">
-    <Dialog.Title>Notpad License</Dialog.Title>
-    <hr />
+    <Dialog.Header>
+      <Dialog.Title>Notpad License</Dialog.Title>
+    </Dialog.Header>
+
     <Dialog.Description class="max-h-96 overflow-y-auto pr-2">
       {#each licenseParagraphs as { text, br }}
         {text}
-        {br}
+
+        {#if br}
+          <br />
+          <br />
+        {/if}
       {/each}
     </Dialog.Description>
     <Dialog.Footer>

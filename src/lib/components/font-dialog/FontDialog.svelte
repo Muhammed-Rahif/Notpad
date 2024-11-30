@@ -39,7 +39,7 @@
 </script>
 
 <Dialog.Root open={$open} onOpenChange={open.set}>
-  <Dialog.Content class="max-h-[80vh] overflow-y-auto sm:max-w-[600px]">
+  <Dialog.Content>
     <Dialog.Header>
       <Dialog.Title>Font</Dialog.Title>
       <Dialog.Description>
@@ -47,7 +47,7 @@
       </Dialog.Description>
     </Dialog.Header>
 
-    <div class="flex gap-3 py-4 max-[464px]:flex-col">
+    <div class="flex gap-3 max-[464px]:flex-col">
       <FontFamilyCombobox bind:value={fontFamily} />
       <FontSizeCombobox bind:value={fontSize} />
     </div>

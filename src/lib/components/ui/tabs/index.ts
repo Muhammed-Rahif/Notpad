@@ -6,7 +6,6 @@ import Trigger from './tabs-trigger.svelte';
 const Root = TabsPrimitive.Root;
 
 export {
-  
   Root,
   Content,
   List,

@@ -13,7 +13,7 @@
   import { openAboutDialog } from '@/components/AboutDialog.svelte';
   import { toggleGoToDialog } from '@/components/GoToDialog.svelte';
   import { toggleFindDialog } from '@/components/FindDialog.svelte';
-  import { openShortCutDialog } from '@/components/ShortCutDialog.svelte';
+  import { openShortcutsDialog } from '@/src/lib/components/ShortcutsDialog.svelte';
   import InfoIcon from './icons/Info.svelte';
   import KeyboardIcon from '@/components/icons/Keyboard.svelte';
   import GithubOultineIcon from './icons/GithubOultine.svelte';
@@ -147,7 +147,7 @@
   <Menubar.Menu>
     <Menubar.Trigger>Help</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Item class="flex items-center gap-2" on:click={openShortCutDialog}>
+      <Menubar.Item class="flex items-center gap-2" on:click={openShortcutsDialog}>
         <KeyboardIcon class="text-xl" />
         Shortcuts
       </Menubar.Item>

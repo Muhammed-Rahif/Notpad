@@ -1,32 +1,26 @@
 <script lang="ts">
-  import { afterUpdate, onMount, tick } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import throttle from 'lodash.throttle';
+  import debounce from 'lodash.debounce';
   import StatusBar from '@/components/StatusBar.svelte';
   import Quill from 'quill';
   import { position as getCaretPosition } from 'caret-pos';
   import { Notpad } from '@/helpers/notpad';
-  import { settings, type EditorType } from '@/store/store';
+  import { settings } from '@/store/store';
   import 'quill/dist/quill.core.css';
   import './Editor.css';
+  import type { EditorType } from '@/types/EditorTypes';
 
   export let editor: EditorType;
 
   let editorContainer: HTMLDivElement;
   let quill: Quill;
-  let fakeCaret: HTMLDivElement | null = null;
+  let fakeCaret: HTMLSpanElement | null = null;
   let caretPosition = { top: 10, left: 8, height: 24 };
   let lineNo = 0;
   let caretLineNo = 1;
   let caretColumnNo = 1;
   let characterCount = 0;
-  /**
-   * Flag to track if update is already scheduled
-   */
-  let updateScheduled = false;
-
-  onMount(async () => {
-    await setupQuill();
-  });
 
   async function setupQuill() {
     quill = new Quill(editorContainer!, {
@@ -55,25 +49,13 @@
     });
 
     await Notpad.editors.setQuill(editor.id, quill);
-
-    for (let e of ['input', 'scroll', 'click', 'keydown', 'focus', 'resize', 'load'])
-      quill.root.addEventListener(e, updateTextAreaInfo);
-    for (let e of ['scroll', 'resize', 'load']) window.addEventListener(e, updateTextAreaInfo);
-
     quill.setContents(Notpad.editors.getContent(editor.id)!);
-
-    updateTextAreaInfo();
-    settings.subscribe(updateTextAreaInfo);
   }
-
-  afterUpdate(() => {
-    updateCaretPosition();
-  });
 
   /**
    * Update line and column numbers.
    */
-  function updateTextAreaInfo() {
+  function updateEditorData() {
     const selection = quill.getSelection();
     if (selection) {
       lineNo = quill.getText().split('\n').length - 1; // quill.getLength() includes a trailing newline character
@@ -85,12 +67,18 @@
     }
   }
 
+  const resumeFakeCaretBlink = debounce(function () {
+    if (fakeCaret) fakeCaret.style.animationDuration = '1s';
+  }, 700);
+
   // Using requestAnimationFrame for smooth updates
   const updateCaretPosition = throttle(() => {
-    if (!updateScheduled) {
-      updateScheduled = true;
-      requestAnimationFrame(async () => {
-        if (editorContainer) {
+    console.count('Update caret');
+    requestAnimationFrame(async () => {
+      if (fakeCaret) fakeCaret.style.animationDuration = '0s';
+
+      if (editorContainer) {
+        try {
           const caret = getCaretPosition(quill.root);
 
           // Adjust for the scroll position
@@ -99,10 +87,58 @@
             left: caret.left - editorContainer.scrollLeft,
             height: caret.height
           };
+        } catch (error) {
+          console.error(error);
         }
-        updateScheduled = false;
-      });
+      }
+
+      resumeFakeCaretBlink();
+    });
+  });
+
+  $: {
+    if (
+      editorContainer ||
+      quill ||
+      lineNo ||
+      caretLineNo ||
+      caretColumnNo ||
+      characterCount ||
+      $settings
+    ) {
+      updateCaretPosition();
     }
+  }
+
+  $: {
+    // If line numbers are enabled or disabled, update the caret position after a delay
+    // of 300ms to complete the line numbers animated entry or exit.
+    if ($settings.lineNumbers || lineNo) {
+      (async function () {
+        await tick();
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        updateCaretPosition();
+      })();
+    }
+  }
+
+  const updateCaretPosAndEditorData = throttle(async () => {
+    updateEditorData();
+    await tick();
+    updateCaretPosition();
+  });
+
+  onMount(async () => {
+    await setupQuill();
+
+    for (let e of ['input', 'scroll', 'click', 'keydown', 'focus', 'resize', 'load'])
+      quill.root.addEventListener(e, updateCaretPosAndEditorData);
+    for (let e of ['scroll', 'resize', 'load'])
+      window.addEventListener(e, updateCaretPosAndEditorData);
+
+    updateEditorData();
+    settings.subscribe(updateEditorData);
+    quill.on('editor-change', updateEditorData);
   });
 </script>
 
@@ -116,10 +152,13 @@
     --editor-zoom: {$settings.zoom};
     --line-no-digits-count: {lineNo.toString().length}"
   />
-  <div
-    class="fake-caret absolute z-0 w-0.5 rounded-[2px] bg-primary"
+  <span
+    class="fake-caret absolute z-0 w-0.5 rounded-[.06em] bg-primary"
     bind:this={fakeCaret}
-    style="top: calc({caretPosition.top}px); left: {caretPosition.left}px; height: {caretPosition.height}px;"
+    style="top: calc({caretPosition.top}px);
+    left: {caretPosition.left}px;
+    height: {caretPosition.height}px;
+    width: {$settings.zoom * 2}px"
     spellcheck="false"
   />
 </div>
@@ -143,16 +182,17 @@
 
     .ql-editor > * {
       margin-left: clamp(22px, calc(1.6ch * var(--line-no-digits-count)), 10vw) !important;
-      @apply relative border-l-2 border-muted !pl-2 duration-300;
+      @apply relative border-l-2 border-muted !pl-2 duration-100;
     }
 
     .ql-editor > *::before {
+      font-size: calc(var(--editor-font-size) * 0.7);
       counter-increment: line;
       content: counter(line);
       transform: translateX(-100%);
       width: clamp(20px, calc(2ch * var(--line-no-digits-count)), 10vw) !important;
       padding-right: clamp(10px, calc(0.6ch * var(--line-no-digits-count)), 10vw) !important;
-      @apply absolute left-0 mt-1 text-right text-xs text-primary duration-300;
+      @apply absolute left-0 text-right text-primary duration-100;
     }
   </style>
 {/if}

@@ -36,7 +36,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`;
 
-  $: licenseParagraphs = licenseText.split(/\n\n/g).map((line, i) => {
+  $: licenseParagraphs = licenseText.split(/\n\n/g).map((line) => {
     return { text: line, br: '<br><br>' };
   });
 
@@ -52,7 +52,7 @@ SOFTWARE.`;
     <Dialog.Description class="max-h-96 overflow-y-auto pr-2">
       {#each licenseParagraphs as { text, br }}
         {text}
-        {@html br}
+        {br}
       {/each}
     </Dialog.Description>
     <Dialog.Footer>

@@ -5,10 +5,11 @@
   import { Button } from '@/components/ui/button';
   import { Label } from '@/components/ui/label';
   import { cn } from '@/utils';
-  import { FontFamily, settings } from '@/store/store';
+  import { settings } from '@/store/store';
   import { get } from 'svelte/store';
   import CheckIcon from '@/components/icons/Check.svelte';
   import ChevronsUpDownIcon from '@/components/icons/ChevronsUpDown.svelte';
+  import { FontFamily } from '@/types/SettingsTypes';
 
   let open = false;
 

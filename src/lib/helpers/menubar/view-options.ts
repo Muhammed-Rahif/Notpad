@@ -1,5 +1,7 @@
 import { get } from 'svelte/store';
-import { settings, type SettingsType } from '@/store/store';
+import { settings } from '@/store/store';
+import { Notpad } from '@/helpers/notpad';
+import type { SettingsType } from '@/types/SettingsTypes';
 
 export class ViewOptions {
   public toggleStatusBar() {
@@ -7,6 +9,7 @@ export class ViewOptions {
   }
 
   public toggleLineNumbers() {
+    Notpad.editors.focus();
     settings.update((value) => ({ ...value, lineNumbers: !get(settings).lineNumbers }));
   }
 

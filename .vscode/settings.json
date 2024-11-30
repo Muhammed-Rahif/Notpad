@@ -2,5 +2,6 @@
   "files.associations": {
     "iostream": "cpp"
   },
-  "css.customData": [".vscode/tailwind.json"]
+  "css.customData": [".vscode/tailwind.json"],
+  "eslint.validate": ["javascript", "svelte"]
 }

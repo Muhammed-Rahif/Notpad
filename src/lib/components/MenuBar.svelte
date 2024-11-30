@@ -14,7 +14,6 @@
   import { toggleGoToDialog } from '@/components/GoToDialog.svelte';
   import { toggleFindDialog } from '@/components/FindDialog.svelte';
   import { openShortCutDialog } from '@/components/ShortCutDialog.svelte';
-  import GitHubIcon from '@/components/icons/GitHub.svelte';
   import InfoIcon from './icons/Info.svelte';
   import KeyboardIcon from '@/components/icons/Keyboard.svelte';
   import GithubOultineIcon from './icons/GithubOultine.svelte';

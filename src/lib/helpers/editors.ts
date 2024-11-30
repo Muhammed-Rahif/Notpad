@@ -1,15 +1,22 @@
-import { activeTabId, editors, type EditorType } from '@/store/store';
+import { activeTabId, editors } from '@/store/store';
 import { get } from 'svelte/store';
 import { generate as genId } from 'short-uuid';
 import { toast } from 'svelte-sonner';
 import Quill from 'quill';
 import { Delta, Range } from 'quill/core';
+import type { EditorType } from '@/types/EditorTypes';
 
 /**
  * A helper class for performing various editor-related tasks such as opening
  * a new editor, removing an editor, etc.
  */
 export class Editors {
+  static defaultEditor: EditorType = {
+    fileName: 'Untitled.txt',
+    content: new Delta(),
+    id: genId()
+  };
+
   init = async () => {
     const activeId = get(activeTabId);
     const editorsList = get(editors);

@@ -1,5 +1,10 @@
 import localforage from 'localforage';
-import { activeTabId, editors, settings, type EditorType, type SettingsType } from '@/store/store';
+import { activeTabId, editors, settings } from '@/store/store';
+import type { EditorType } from '@/types/EditorTypes';
+import type { SettingsType } from '@/types/SettingsTypes';
+import { Editors } from '@/helpers/editors';
+import { Settings } from '@/helpers/settings';
+import merge from 'lodash.merge';
 
 export const EDITORS_STORAGE_KEY = 'editors';
 export const ACTIVE_TAB_ID_STORAGE_KEY = 'active-tab-id';
@@ -15,13 +20,29 @@ export class NotpadStorage {
 
   private loadStorage = async () => {
     const editorsValue = await localforage.getItem<EditorType[]>(EDITORS_STORAGE_KEY);
-    if (editorsValue) editors.set(editorsValue);
+    if (editorsValue) {
+      // Adding default values to the editors if they are not present
+      // on in any circumstances if new values are introduced in the future.
+      const editorsValueRefined = editorsValue.map((editor) => {
+        const { id, content, ...rest } = editor;
+        const defaultValue = { ...Editors.defaultEditor, id, content };
+        return merge(defaultValue, rest);
+      });
+      editors.set(editorsValueRefined);
+    }
 
     const activeTabIdValue = await localforage.getItem<string>(ACTIVE_TAB_ID_STORAGE_KEY);
-    if (activeTabIdValue) activeTabId.set(activeTabIdValue);
+    if (activeTabIdValue) {
+      activeTabId.set(activeTabIdValue);
+    }
 
     const settingsValue = await localforage.getItem<SettingsType>(SETTINGS_STORAGE_KEY);
-    if (settingsValue) settings.set(settingsValue);
+    // Adding default values to the settings if they are not present
+    // on in any circumstances if new values are introduced in the future.
+    if (settingsValue) {
+      const settingsValueRefined = merge(Settings.defaultSettings, settingsValue);
+      settings.set(settingsValueRefined);
+    }
   };
 
   subscribeStoreUpdates = () => {

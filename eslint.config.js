@@ -28,6 +28,12 @@ export default [
     }
   },
   {
-    ignores: ['build/', '.svelte-kit/', 'dist/']
+    ignores: ['build/', '.svelte-kit/', 'dist/', 'www/', 'src-tauri/']
+  },
+  {
+    files: ['src/lib/components/ui/**/*.{svelte,ts}'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off'
+    }
   }
 ];

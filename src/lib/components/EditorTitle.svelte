@@ -3,11 +3,12 @@
   import { autoWidth } from 'svelte-input-auto-width';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
-  import { activeTabId, type EditorType } from '@/store/store';
+  import { activeTabId } from '@/store/store';
   import * as Tooltip from '@/components/ui/tooltip';
   import type { ButtonEventHandler } from 'bits-ui';
   import CloseIcon from '@/components/icons/Close.svelte';
   import Button from '@/components/ui/button/button.svelte';
+  import type { EditorType } from '@/src/lib/types/EditorTypes';
 
   export let editor: EditorType;
 
@@ -73,7 +74,7 @@
           value={editor.fileName}
           use:longpress={1000}
           type="text"
-          class="rounded bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary {!!editor.fileHandle
+          class="rounded bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary {editor.fileHandle
             ? 'border-none border-transparent outline-none outline-transparent'
             : ''}"
           maxlength={24}

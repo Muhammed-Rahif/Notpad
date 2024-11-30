@@ -3,7 +3,7 @@ import { get } from 'svelte/store';
 import { findAsyncSequential } from '@/utils';
 import { Notpad } from '@/helpers/notpad';
 import { open, save } from '@tauri-apps/plugin-dialog';
-import { isMobile, isTauri } from '@/src/lib';
+import { isTauri } from '@/src/lib';
 import { readTextFile, BaseDirectory, exists, writeTextFile } from '@tauri-apps/plugin-fs';
 import { toast } from 'svelte-sonner';
 import { Delta } from 'quill/core';
@@ -219,7 +219,7 @@ export class FileOptions {
       else await this.openFileInDesktopBrowser();
     } catch (err) {
       console.error(err);
-      await this.openFileLegacy();
+      if (err instanceof Error && err.name != 'AbortError') await this.openFileLegacy();
     }
   };
 
@@ -238,7 +238,7 @@ export class FileOptions {
       else await this.saveFileInDesktopBrowser(saveAs);
     } catch (err) {
       console.error(err);
-      await this.saveFileLegacy();
+      if (err instanceof Error && err.name != 'AbortError') await this.saveFileLegacy();
     }
   };
 

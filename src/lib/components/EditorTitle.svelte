@@ -77,7 +77,7 @@
           class="rounded bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary {editor.fileHandle
             ? 'border-none border-transparent outline-none outline-transparent'
             : ''}"
-          maxlength={24}
+          maxlength={54}
           readonly={!!editor.fileHandle || readonly}
         />
       </form>

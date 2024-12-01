@@ -38,12 +38,12 @@
 </script>
 
 <Dialog.Root open={$open} onOpenChange={open.set} preventScroll={false}>
-  <Dialog.Content
-    overlayClass="bg-transparent backdrop-blur-[.8px]"
-    class="top-14 translate-y-0 bg-neutral-100 dark:bg-neutral-900"
-  >
-    <Dialog.Title>Go To</Dialog.Title>
-    <Dialog.Description class="flex gap-3">
+  <Dialog.Content class="top-14 translate-y-0">
+    <Dialog.Header>
+      <Dialog.Title>Go To</Dialog.Title>
+    </Dialog.Header>
+
+    <div class="flex gap-3">
       <div class="flex w-full max-w-sm flex-col gap-1.5">
         <Label for="line">Line</Label>
         <Input
@@ -71,6 +71,6 @@
       </div>
 
       <Button type="button" class="mt-auto" on:click={submitGoTo}>Go</Button>
-    </Dialog.Description>
+    </div>
   </Dialog.Content>
 </Dialog.Root>

@@ -15,12 +15,13 @@
 
   let editorContainer: HTMLDivElement;
   let quill: Quill;
-  let fakeCaret: HTMLDivElement | null = null;
+  let fakeCaret: HTMLSpanElement | null = null;
   let caretPosition = { top: 10, left: 8, height: 24 };
   let lineNo = 0;
   let caretLineNo = 1;
   let caretColumnNo = 1;
   let characterCount = 0;
+  let wordCount = 0;
 
   async function setupQuill() {
     quill = new Quill(editorContainer!, {
@@ -64,6 +65,11 @@
       caretLineNo = lines.length;
       caretColumnNo = lines[lines.length - 1].length + 1;
       characterCount = quill.getLength() - 1; // quill.getLength() includes a trailing newline character
+      wordCount = quill
+        .getText()
+        .trim()
+        .split(/\s+/)
+        .filter((word) => word).length; // \s+ is RegEx for whitespace characters.
     }
   }
 
@@ -104,6 +110,7 @@
       caretLineNo ||
       caretColumnNo ||
       characterCount ||
+      wordCount ||
       $settings
     ) {
       updateCaretPosition();
@@ -152,15 +159,18 @@
     --editor-zoom: {$settings.zoom};
     --line-no-digits-count: {lineNo.toString().length}"
   />
-  <div
-    class="fake-caret absolute z-0 w-[.15em] rounded-[.06em] bg-primary"
+  <span
+    class="fake-caret absolute z-0 w-0.5 rounded-[.06em] bg-primary"
     bind:this={fakeCaret}
-    style="top: calc({caretPosition.top}px); left: {caretPosition.left}px; height: {caretPosition.height}px;"
+    style="top: calc({caretPosition.top}px);
+    left: {caretPosition.left}px;
+    height: {caretPosition.height}px;
+    width: {$settings.zoom * 2}px"
     spellcheck="false"
   />
 </div>
 
-<StatusBar {caretLineNo} {caretColumnNo} {characterCount} />
+<StatusBar {caretLineNo} {caretColumnNo} {characterCount} {wordCount} />
 
 <!-- {#if updateScheduled}
   <style>

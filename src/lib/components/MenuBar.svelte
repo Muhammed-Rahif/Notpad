@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
   import EditorTitle from '@/components/EditorTitle.svelte';
-  import DownloadButton from '@/components/DownloadButton.svelte';
+  import DownloadButtonMenu from '@/src/lib/components/DownloadButtonMenu.svelte';
   import { Notpad } from '@/helpers/notpad';
   import { editors, settings } from '@/store/store';
   import { fade } from 'svelte/transition';
@@ -21,7 +21,7 @@
   let innerWidth = $state(window.innerWidth);
   let isFullScreen = $state(screenfull.isFullscreen);
 
-  let isXS = $derived(innerWidth <= 450);
+  let isMD = $derived(innerWidth <= 768);
   let tabsMode = $derived($editors.length > 1);
   let singleEditor = $derived($editors.at(0)!);
 
@@ -165,17 +165,17 @@
     </Menubar.Content>
   </Menubar.Menu>
 
-  {#if !isTauri}
-    <DownloadButton />
-  {/if}
-
-  {#if !isXS && !tabsMode}
+  {#if !isMD && !tabsMode}
     <div
       transition:fade
-      class="max-md:!ml-auto md:absolute md:left-1/2
-      md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+      class="!mx-auto lg:absolute lg:left-1/2 lg:top-1/2
+      lg:-translate-x-1/2 lg:-translate-y-1/2"
     >
       <EditorTitle editor={singleEditor} />
     </div>
+  {/if}
+
+  {#if !isTauri}
+    <DownloadButtonMenu />
   {/if}
 </Menubar.Root>

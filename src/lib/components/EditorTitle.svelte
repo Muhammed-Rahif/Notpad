@@ -14,8 +14,8 @@
     editor: EditorType;
   }
 
+  const maxlength = 54;
   let { editor }: Props = $props();
-
   let readonly = $state(true);
   let input: HTMLInputElement = $state(null!);
 
@@ -30,7 +30,7 @@
   async function submit(e?: SubmitEvent) {
     e?.preventDefault();
     const t = input.value.trim();
-    const isValidFileName = t !== '' && t.length > 0 && t.length <= 24;
+    const isValidFileName = t !== '' && t.length > 0 && t.length <= maxlength;
 
     if (isValidFileName) {
       Notpad.editors.updateFileName(editor.id, t);
@@ -81,7 +81,7 @@
               'rounded bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary',
               editor.fileHandle && 'border-none border-transparent outline-none outline-transparent'
             )}
-            maxlength={24}
+            {maxlength}
             {readonly}
           />
         </form>

@@ -10,7 +10,7 @@
 
   let innerWidth = $state(window.innerWidth);
 
-  let isXS = $derived(innerWidth <= 450);
+  let isMD = $derived(innerWidth <= 768);
   /**
    * Compact mode is disabled on mobile devices (width <= 450px)
    * and on PCs when multiple editors are open.
@@ -21,7 +21,7 @@
 <svelte:window bind:innerWidth />
 
 <Tabs.Root bind:value={$activeTabId} class="flex h-full w-full flex-col overflow-hidden">
-  {#if tabsMode || isXS}
+  {#if tabsMode || isMD}
     <div transition:slide>
       <Tabs.List
         class="w-full justify-start gap-1 overflow-x-auto

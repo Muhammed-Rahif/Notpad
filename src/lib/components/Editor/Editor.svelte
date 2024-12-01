@@ -65,7 +65,11 @@
       caretLineNo = lines.length;
       caretColumnNo = lines[lines.length - 1].length + 1;
       characterCount = quill.getLength() - 1; // quill.getLength() includes a trailing newline character
-      wordCount = quill.getText().trim().split(/\s+/).filter(word => word).length; // \s+ is RegEx for whitespace characters.
+      wordCount = quill
+        .getText()
+        .trim()
+        .split(/\s+/)
+        .filter((word) => word).length; // \s+ is RegEx for whitespace characters.
     }
   }
 

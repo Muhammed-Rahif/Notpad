@@ -21,6 +21,7 @@
   let caretLineNo = 1;
   let caretColumnNo = 1;
   let characterCount = 0;
+  let wordCount = 0;
 
   async function setupQuill() {
     quill = new Quill(editorContainer!, {
@@ -64,6 +65,7 @@
       caretLineNo = lines.length;
       caretColumnNo = lines[lines.length - 1].length + 1;
       characterCount = quill.getLength() - 1; // quill.getLength() includes a trailing newline character
+      wordCount = quill.getText().trim().split(/\s+/).filter(word => word).length; // \s+ is RegEx for whitespace characters.
     }
   }
 
@@ -104,6 +106,7 @@
       caretLineNo ||
       caretColumnNo ||
       characterCount ||
+      wordCount ||
       $settings
     ) {
       updateCaretPosition();
@@ -163,7 +166,7 @@
   />
 </div>
 
-<StatusBar {caretLineNo} {caretColumnNo} {characterCount} />
+<StatusBar {caretLineNo} {caretColumnNo} {characterCount} {wordCount} />
 
 <!-- {#if updateScheduled}
   <style>

@@ -47,7 +47,7 @@
       </Dialog.Description>
     </Dialog.Header>
 
-    <div class="flex max-h-[50vh] w-full flex-col gap-6 overflow-y-auto pb-1 pr-3">
+    <div class="flex max-h-[50vh] w-full flex-col gap-6 overflow-y-auto pb-1 pr-2">
       <div class="flex gap-3 max-[464px]:flex-col">
         <FontFamilyCombobox bind:value={fontFamily} />
         <FontSizeCombobox bind:value={fontSize} />

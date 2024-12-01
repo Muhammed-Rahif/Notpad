@@ -46,7 +46,7 @@
       <Dialog.Title>About Notpad</Dialog.Title>
     </Dialog.Header>
 
-    <div class="max-h-[60vh] overflow-y-auto pr-3 text-base">
+    <div class="max-h-[60vh] overflow-y-auto pr-2 text-base">
       <div class="mb-3 flex flex-row items-center justify-start gap-4 text-left">
         <img class="w-20" alt="icon" src={$mode == 'dark' ? appIconDark : appIconLight} />
 

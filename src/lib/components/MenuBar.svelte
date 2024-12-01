@@ -147,7 +147,7 @@
   <Menubar.Menu>
     <Menubar.Trigger>Help</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Item class="flex items-center gap-2" on:click={openShortcutsDialog}>
+      <Menubar.Item class="flex items-center gap-2" onclick={openShortcutsDialog}>
         <KeyboardIcon class="text-xl" />
         Shortcuts
       </Menubar.Item>

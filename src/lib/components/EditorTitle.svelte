@@ -91,7 +91,7 @@
           class={cn('h-6 w-6 p-0', {
             'pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100':
               $activeTabId !== editor.id,
-            'ml-1.5 mr-1': $activeTabId === editor.id
+            'ml-1 mr-1': $activeTabId === editor.id
           })}
           variant={$activeTabId === editor.id ? 'secondary' : 'link'}
         >

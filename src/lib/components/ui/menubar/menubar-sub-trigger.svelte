@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Menubar as MenubarPrimitive } from 'bits-ui';
-  import ChevronRight from 'lucide-svelte/icons/chevron-right';
   import { cn } from '@/utils.js';
+  import ChevronRight from '@/components/icons/ChevronRight.svelte';
 
   let {
     ref = $bindable(null),

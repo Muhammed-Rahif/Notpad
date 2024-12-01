@@ -40,7 +40,7 @@
   });
 </script>
 
-<Dialog.Root open={$open} onOpenChange={open.set} preventScroll={false}>
+<Dialog.Root open={$open} onOpenChange={open.set}>
   <Dialog.Content class="top-14 translate-y-0">
     <Dialog.Header>
       <Dialog.Title>Find And Replace</Dialog.Title>

@@ -3,6 +3,7 @@
   import { Dialog as DialogPrimitive } from 'bits-ui';
   import { cn } from '@/utils.js';
   import Cross2 from 'svelte-radix/Cross2.svelte';
+  import Separator from '@/components/ui/separator/separator.svelte';
 
   type $$Props = HTMLAttributes<HTMLDivElement>;
 
@@ -24,5 +25,5 @@
     </DialogPrimitive.Close>
   </div>
 
-  <hr class="mt-3" />
+  <Separator class="mt-3" />
 </div>

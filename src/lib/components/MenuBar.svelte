@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
   import EditorTitle from '@/components/EditorTitle.svelte';
-  import DownloadButtonMenu from '@/src/lib/components/DownloadButtonMenu.svelte';
+  import DownloadButtonMenu from '@/src/lib/components/DownloadMenuButton.svelte';
   import { Notpad } from '@/helpers/notpad';
   import { editors, settings } from '@/store/store';
   import { fade } from 'svelte/transition';

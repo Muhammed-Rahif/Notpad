@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "predeploy": "npm run build",
+    "predeploy": "pnpm run build",
     "deploy": "gh-pages -d www -m 'chore(gh-pages): updates' -f --nojekyll",
     "lint": "prettier --check . && eslint . && npx tsc --noEmit --project tsconfig.check.json",
     "format": "prettier --write .",

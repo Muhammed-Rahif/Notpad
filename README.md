@@ -112,7 +112,8 @@ To get a local copy up and running follow these steps.
 
 ### Prerequisites
 
-- [Node.js with npm](https://nodejs.org/en/download/)
+- [Node.js](https://nodejs.org/en/download/)
+- [Pnpm](https://pnpm.io/installation)
 
 ### Installation
 
@@ -126,9 +127,9 @@ _Below is how to install and set up the app._
    ```sh
    cd Notpad
    ```
-1. Install npm packages
+1. Install packages
    ```sh
-   npm install
+   pnpm install
    ```
 
 ### Running the project
@@ -137,14 +138,14 @@ _Below is how to install and set up the app._
 
 - Svelte:
   ```sh
-  npm run dev
+  pnpm run dev
   ```
 
 #### Preview:
 
 ```sh
-npm run build
-npm run preview
+pnpm run build
+pnpm run preview
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

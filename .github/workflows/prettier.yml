@@ -21,22 +21,28 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.14
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'pnpm'
 
-      - name: Install npm dependencies
-        run: npm install
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Run Prettier
         run: |
-          npm run format
+          pnpm run format
 
       - name: Check linting and errors
         run: |
-          npm run lint
-          npm run check
+          pnpm run lint
+          pnpm run check
 
       - name: Commit changes
         run: |

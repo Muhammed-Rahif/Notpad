@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   import { writable } from 'svelte/store';
 
   const open = writable(false);
@@ -14,7 +14,7 @@
   import { onMount } from 'svelte';
   import { Notpad } from '@/helpers/notpad';
 
-  let licenseText = `MIT License
+  let licenseText = $state(`MIT License
 
 Copyright (c) 2024 Muhammed Rahif
 
@@ -34,11 +34,13 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.`;
+SOFTWARE.`);
 
-  $: licenseParagraphs = licenseText.split(/\n\n/g).map((line) => {
-    return { text: line, br: true };
-  });
+  let licenseParagraphs = $derived(
+    licenseText.split(/\n\n/g).map((line) => {
+      return { text: line, br: true };
+    })
+  );
 
   onMount(async () => {
     licenseText = (await Notpad.github.getAppLicense()) ?? licenseText;
@@ -62,7 +64,7 @@ SOFTWARE.`;
       {/each}
     </Dialog.Description>
     <Dialog.Footer>
-      <Button type="button" on:click={() => open.set(false)}>Understood!</Button>
+      <Button type="button" onclick={() => open.set(false)}>Understood!</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

@@ -7,6 +7,8 @@ import { EditOptions } from '@/src/lib/helpers/menubar/edit-options';
 import { GithubApi } from '@/helpers/github-api';
 import { SearchOptions } from '@/src/lib/helpers/menubar/search-options';
 import { ViewOptions } from '@/src/lib/helpers/menubar/view-options';
+import { exit } from '@tauri-apps/plugin-process';
+import { isTauri } from '@/src/lib';
 
 export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();
@@ -25,10 +27,14 @@ export class Notpad {
 
   static close = () => {
     try {
-      window.close();
-      toast.info(
-        'Closing the Notpad may not work in web browsers due to security restrictions. Please close the tab manually.'
-      );
+      if (isTauri) {
+        exit();
+      } else {
+        window.close();
+        toast.info(
+          'Closing the Notpad may not work in web browsers due to security restrictions. Please close the tab manually.'
+        );
+      }
     } catch (err) {
       this.showError(err);
     }

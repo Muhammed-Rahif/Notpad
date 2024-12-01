@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   import { writable } from 'svelte/store';
 
   const open = writable(false);
@@ -18,21 +18,22 @@
   import { Badge } from '@/components/ui/badge';
   import { openLicenseDialog } from '@/components/LicenseDialog.svelte';
   import { mode } from 'mode-watcher';
-  import type { ButtonEventHandler } from 'bits-ui';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
   import appJson from '@/src/app.json';
+  import { tick } from 'svelte';
 
   function closeDialog() {
     open.set(false);
   }
 
-  function showLicense() {
+  async function showLicense() {
     closeDialog();
+    await tick();
     openLicenseDialog();
   }
 
-  function openGithubRepo(e: ButtonEventHandler<MouseEvent>) {
+  function openGithubRepo(e: MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
     window.open('https://github.com/Muhammed-Rahif/Notpad', '_blank');
@@ -45,7 +46,7 @@
       <Dialog.Title>About Notpad</Dialog.Title>
     </Dialog.Header>
 
-    <div class="max-h-[60vh] overflow-y-auto pr-3 text-base">
+    <div class="max-h-[60vh] overflow-y-auto pr-2 text-base">
       <div class="mb-3 flex flex-row items-center justify-start gap-4 text-left">
         <img class="w-20" alt="icon" src={$mode == 'dark' ? appIconDark : appIconLight} />
 
@@ -68,21 +69,10 @@
           create an issue.
         </a>
       </p>
-      <p class="mb-3">
-        Notpad is a simple, open source, beautiful note-taking app that helps you to take notes and
-        organize your thoughts. It is designed to be minimal and distraction-free, so you can focus
-        on your ideas. Notpad is an open-source project. You can contribute to the project by fixing
-        bugs, improving the codebase, or adding new features. The project is hosted on
-        <a href="https://github.com/Muhammed-Rahif/Notpad/" target="_blank">GitHub.</a>
-        If you have any questions, feedback, or suggestions, feel free to
-        <a href="https://github.com/Muhammed-Rahif/Notpad/issues/new/" target="_blank">
-          create an issue.
-        </a>
-      </p>
 
       {#await Notpad.github.getContributors() then contributors}
         {#if contributors}
-          <div transition:slide|global>
+          <div in:slide|global>
             <p>Our Valuable Contributors:</p>
             <ul class="mt-1">
               {#each contributors as contributor}
@@ -133,19 +123,19 @@
     </div>
 
     <Dialog.Footer class="gap-y-2">
-      <Button variant="secondary" class="relative sm:pr-20" on:click={showLicense}>
+      <Button variant="secondary" class="relative sm:pr-20" onclick={showLicense}>
         Notpad License
 
         <Button
           variant="secondary"
           class="absolute right-0 rounded-l-none border-l border-l-foreground/10"
-          on:click={openGithubRepo}
+          onclick={openGithubRepo}
         >
           <GitHubIcon class="text-2xl" />
         </Button>
       </Button>
 
-      <Button on:click={closeDialog}>Okay!</Button>
+      <Button onclick={closeDialog}>Okay!</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

@@ -1,15 +1,13 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
 import tailwindScrollbar from 'tailwind-scrollbar';
+import tailwindcssAnimate from 'tailwindcss-animate';
 
 const config: Config = {
   darkMode: ['class'],
   content: ['./src/**/*.{html,js,svelte,ts}'],
   safelist: ['dark'],
   theme: {
-    fontFamily: {
-      suse: ['SUSE', 'system-ui']
-    },
     container: {
       center: true,
       padding: '2rem',
@@ -51,19 +49,53 @@ const config: Config = {
         card: {
           DEFAULT: 'hsl(var(--card) / <alpha-value>)',
           foreground: 'hsl(var(--card-foreground) / <alpha-value>)'
+        },
+        sidebar: {
+          DEFAULT: 'hsl(var(--sidebar-background))',
+          foreground: 'hsl(var(--sidebar-foreground))',
+          primary: 'hsl(var(--sidebar-primary))',
+          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+          accent: 'hsl(var(--sidebar-accent))',
+          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+          border: 'hsl(var(--sidebar-border))',
+          ring: 'hsl(var(--sidebar-ring))'
         }
       },
       borderRadius: {
+        xl: 'calc(var(--radius) + 4px)',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
       },
       fontFamily: {
+        suse: ['SUSE', 'system-ui'],
         sans: [...fontFamily.sans]
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--bits-accordion-content-height)' }
+        },
+        'accordion-up': {
+          from: { height: 'var(--bits-accordion-content-height)' },
+          to: { height: '0' }
+        },
+        'caret-blink': {
+          '0%,70%,100%': { opacity: '1' },
+          '20%,50%': { opacity: '0' }
+        }
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'caret-blink': 'caret-blink 1.25s ease-out infinite'
       }
     }
   },
-  plugins: [tailwindScrollbar({ nocompatible: true, preferredStrategy: 'pseudoelements' })]
+  plugins: [
+    tailwindcssAnimate,
+    tailwindScrollbar({ nocompatible: true, preferredStrategy: 'pseudoelements' })
+  ]
 };
 
 export default config;

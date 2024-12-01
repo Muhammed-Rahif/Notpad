@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+
+  // https://github.com/sveltejs/svelte/issues/5817
+  // https://github.com/sveltejs/svelte/issues/7304
+  "exclude": ["src/lib/components/ui/**/index.ts"]
+}

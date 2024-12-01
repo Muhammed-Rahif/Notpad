@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   import { get, writable } from 'svelte/store';
   const open = writable(false);
 
@@ -20,8 +20,8 @@
 
   const currentSettings = get(settings);
 
-  let fontFamily: FontFamily = currentSettings.fontFamily;
-  let fontSize: FontSize = currentSettings.fontSize;
+  let fontFamily: FontFamily = $state(currentSettings.fontFamily);
+  let fontSize: FontSize = $state(currentSettings.fontSize);
 
   function closeFontDialog({ submit } = { submit: false }) {
     open.set(false);
@@ -47,7 +47,7 @@
       </Dialog.Description>
     </Dialog.Header>
 
-    <div class="flex max-h-[50vh] w-full flex-col gap-6 overflow-y-auto pb-1 pr-3">
+    <div class="flex max-h-[50vh] w-full flex-col gap-6 overflow-y-auto pb-1 pr-2">
       <div class="flex gap-3 max-[464px]:flex-col">
         <FontFamilyCombobox bind:value={fontFamily} />
         <FontSizeCombobox bind:value={fontSize} />
@@ -64,11 +64,11 @@
     </div>
 
     <Dialog.Footer class="gap-2">
-      <Button variant="ghost" class="mr-auto max-sm:w-full" on:click={resetFontDefault}>
+      <Button variant="ghost" class="mr-auto max-sm:w-full" onclick={resetFontDefault}>
         Reset
       </Button>
-      <Button variant="secondary" on:click={() => closeFontDialog()}>Cancel</Button>
-      <Button on:click={() => closeFontDialog({ submit: true })}>Okay</Button>
+      <Button variant="secondary" onclick={() => closeFontDialog()}>Cancel</Button>
+      <Button onclick={() => closeFontDialog({ submit: true })}>Okay</Button>
     </Dialog.Footer>
   </Dialog.Content>
 </Dialog.Root>

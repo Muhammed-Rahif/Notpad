@@ -108,6 +108,7 @@ export class Editors {
       return value.map((editor) => {
         if (editor.id === editorId) {
           editor.fileName = fileName;
+          editor.fileHandle = undefined;
         }
         return editor;
       });

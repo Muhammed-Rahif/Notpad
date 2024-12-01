@@ -3,7 +3,7 @@ import type { Action } from 'svelte/action';
 export const longpress: Action<
   HTMLDivElement,
   number | undefined,
-  { 'on:longpress': (e: CustomEvent<string>) => void }
+  { onlongpress: (e: CustomEvent<string>) => void }
 > = (node, threshold = 500) => {
   const handle_mousedown = () => {
     // let start = Date.now();

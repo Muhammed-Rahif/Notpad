@@ -50,9 +50,11 @@
       {
         "fullscreen": false,
         "height": 600,
+        "width": 800,
+        "minHeight": 450,
+        "minWidth": 350,
         "resizable": true,
-        "title": "Notpad",
-        "width": 800
+        "title": "Notpad"
       }
     ],
     "security": {

@@ -32,7 +32,7 @@
 
 <svelte:window bind:innerWidth />
 
-<Menubar.Root class="relative z-10 rounded-sm">
+<Menubar.Root class="relative z-10 rounded-none">
   <Menubar.Menu>
     <Menubar.Trigger>File</Menubar.Trigger>
     <Menubar.Content>

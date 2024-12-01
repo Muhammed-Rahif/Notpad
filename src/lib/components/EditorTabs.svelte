@@ -25,7 +25,7 @@
     <div transition:slide>
       <Tabs.List
         class="w-full justify-start gap-1 overflow-x-auto
-        overflow-y-clip rounded-t-none shadow"
+        overflow-y-clip rounded-none shadow"
       >
         {#each $editors as editor}
           <Tabs.Trigger value={editor.id} class="h-8 pl-2 pr-0">

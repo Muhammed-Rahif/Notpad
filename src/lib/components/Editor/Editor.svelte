@@ -16,7 +16,6 @@
   }
 
   let { editor }: Props = $props();
-
   let editorContainer: HTMLDivElement = $state(null!);
   let quill: Quill = $state(null!);
   let fakeCaret: HTMLSpanElement | null = $state(null);
@@ -25,6 +24,7 @@
   let caretLineNo = $state(1);
   let caretColumnNo = $state(1);
   let characterCount = $state(0);
+  let wordCount = $state(0);
 
   async function setupQuill() {
     quill = new Quill(editorContainer!, {
@@ -68,6 +68,11 @@
       caretLineNo = lines.length;
       caretColumnNo = lines[lines.length - 1].length + 1;
       characterCount = quill.getLength() - 1; // quill.getLength() includes a trailing newline character
+      wordCount = quill
+        .getText()
+        .trim()
+        .split(/\s+/)
+        .filter((word) => word).length; // \s+ is RegEx for whitespace characters.
     }
   }
 
@@ -117,6 +122,7 @@
     lineNo,
     caretLineNo,
     caretColumnNo,
+    wordCount,
     characterCount,
     $settings
   ]);
@@ -173,7 +179,7 @@
   ></span>
 </div>
 
-<StatusBar {caretLineNo} {caretColumnNo} {characterCount} />
+<StatusBar {caretLineNo} {caretColumnNo} {characterCount} {wordCount} />
 
 <!-- {#if updateScheduled}
   <style>

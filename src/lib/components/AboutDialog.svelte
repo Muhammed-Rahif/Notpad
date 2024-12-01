@@ -41,22 +41,23 @@
 </script>
 
 <Dialog.Root open={$open} onOpenChange={open.set}>
-  <Dialog.Content class="max-h-[80vh] max-w-2xl overflow-y-auto [&_a]:text-blue-500">
-    <Dialog.Title>About Notpad</Dialog.Title>
-    <hr />
-
-    <Dialog.Header class="flex flex-row items-center justify-start gap-4 text-left">
-      <img class="w-20" alt="icon" src={$mode == 'dark' ? appIconDark : appIconLight} />
-
-      <div>
-        <span class="text-xl font-bold">Notpad</span><br />
-        Version {appJson.version}<br />
-        <a href="https://github.com/Muhammed-Rahif" target="_blank">Muhammed-Rahif</a>
-        <span class="text-sm">© 2024. All rights reserved.</span>
-      </div>
+  <Dialog.Content class="max-w-2xl overflow-y-auto [&_a]:text-blue-500">
+    <Dialog.Header>
+      <Dialog.Title>About Notpad</Dialog.Title>
     </Dialog.Header>
 
-    <Dialog.Description class="text-base">
+    <div class="max-h-[60vh] overflow-y-auto pr-3 text-base">
+      <div class="mb-3 flex flex-row items-center justify-start gap-4 text-left">
+        <img class="w-20" alt="icon" src={$mode == 'dark' ? appIconDark : appIconLight} />
+
+        <div>
+          <span class="text-xl font-bold">Notpad</span><br />
+          Version {appJson.version}<br />
+          <a href="https://github.com/Muhammed-Rahif" target="_blank">Muhammed-Rahif</a>
+          <span class="text-sm">© 2024. All rights reserved.</span>
+        </div>
+      </div>
+
       <p class="mb-3">
         Notpad is a simple, open source, beautiful note-taking app that helps you to take notes and
         organize your thoughts. It is designed to be minimal and distraction-free, so you can focus
@@ -73,7 +74,7 @@
         {#if contributors}
           <div in:slide|global>
             <p>Our Valuable Contributors:</p>
-            <ul class="mt-1 max-h-36 overflow-y-auto">
+            <ul class="mt-1">
               {#each contributors as contributor}
                 {@const isAuthor = contributor.login == 'Muhammed-Rahif'}
                 <a href={contributor.html_url} target="_blank">
@@ -119,7 +120,7 @@
           <a href="https://github.com/Muhammed-Rahif" target="_blank">Muhammed-Rahif.</a>
         </small>
       </p>
-    </Dialog.Description>
+    </div>
 
     <Dialog.Footer class="gap-y-2">
       <Button variant="secondary" class="relative sm:pr-20" onclick={showLicense}>

@@ -49,8 +49,10 @@ SOFTWARE.`);
 
 <Dialog.Root open={$open} onOpenChange={open.set}>
   <Dialog.Content class="[&_a]:text-blue-500">
-    <Dialog.Title>Notpad License</Dialog.Title>
-    <hr />
+    <Dialog.Header>
+      <Dialog.Title>Notpad License</Dialog.Title>
+    </Dialog.Header>
+
     <Dialog.Description class="max-h-96 overflow-y-auto pr-2">
       {#each licenseParagraphs as { text, br }}
         {text}

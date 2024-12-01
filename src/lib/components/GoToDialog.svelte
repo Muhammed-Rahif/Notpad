@@ -11,7 +11,7 @@
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
-  import { Input, type FormInputEvent } from '@/components/ui/input';
+  import { Input } from '@/components/ui/input';
   import Label from '@/components/ui/label/label.svelte';
   import { Notpad } from '@/helpers/notpad';
 
@@ -26,7 +26,7 @@
     });
   }
 
-  function validateInput(e: FormInputEvent<InputEvent>) {
+  function validateInput(e: Event) {
     // If the input is invalid, reset the value to an empty string
 
     if (!(e.target as HTMLInputElement).validity.valid) {
@@ -39,13 +39,13 @@
   });
 </script>
 
-<Dialog.Root open={$open} onOpenChange={open.set} preventScroll={false}>
-  <Dialog.Content
-    overlayClass="bg-transparent backdrop-blur-[.8px]"
-    class="top-14 translate-y-0 bg-neutral-100 dark:bg-neutral-900"
-  >
-    <Dialog.Title>Go To</Dialog.Title>
-    <Dialog.Description class="flex gap-3">
+<Dialog.Root open={$open} onOpenChange={open.set}>
+  <Dialog.Content class="top-14 translate-y-0">
+    <Dialog.Header>
+      <Dialog.Title>Go To</Dialog.Title>
+    </Dialog.Header>
+
+    <div class="flex gap-3">
       <div class="flex w-full max-w-sm flex-col gap-1.5">
         <Label for="line">Line</Label>
         <Input
@@ -53,7 +53,7 @@
           type="number"
           id="line"
           placeholder="Line"
-          on:input={validateInput}
+          oninput={validateInput}
           step={1}
           min={1}
         />
@@ -66,13 +66,13 @@
           type="number"
           id="column"
           placeholder="Column"
-          on:input={validateInput}
+          oninput={validateInput}
           step={1}
           min={0}
         />
       </div>
 
       <Button type="button" class="mt-auto" onclick={submitGoTo}>Go</Button>
-    </Dialog.Description>
+    </div>
   </Dialog.Content>
 </Dialog.Root>

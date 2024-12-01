@@ -41,12 +41,12 @@
 </script>
 
 <Dialog.Root open={$open} onOpenChange={open.set} preventScroll={false}>
-  <Dialog.Content
-    overlayClass="bg-transparent backdrop-blur-[.8px]"
-    class="top-14 translate-y-0 bg-neutral-100 dark:bg-neutral-900"
-  >
-    <Dialog.Title>Find And Replace</Dialog.Title>
-    <Dialog.Description class="flex flex-col gap-3">
+  <Dialog.Content class="top-14 translate-y-0">
+    <Dialog.Header>
+      <Dialog.Title>Find And Replace</Dialog.Title>
+    </Dialog.Header>
+
+    <div class="flex flex-col gap-3">
       <div class="flex">
         <Input
           autocomplete="off"
@@ -110,7 +110,7 @@
           Case sensitive
         </Label>
       </div>
-    </Dialog.Description>
+    </div>
     <Dialog.Footer class="gap-y-2">
       <Button
         type="button"

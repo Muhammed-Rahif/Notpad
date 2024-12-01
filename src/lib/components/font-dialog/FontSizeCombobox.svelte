@@ -11,31 +11,30 @@
   import { get } from 'svelte/store';
   import { FontSize } from '@/types/SettingsTypes';
 
-  let open = false;
+  interface Props {
+    value: FontSize;
+  }
 
-  export let value: FontSize;
-
-  $: selectedValue = Object.values(FontSize).find((f) => f === value) ?? $settings.fontSize;
+  let triggerRef = $state<HTMLButtonElement>(null!);
+  let open = $state(false);
+  let { value = $bindable() }: Props = $props();
+  let selectedValue = $derived(
+    Object.values(FontSize).find((f) => f === value) ?? $settings.fontSize
+  );
 
   // We want to refocus the trigger button when the user selects
   // an item from the list so users can continue navigating the
   // rest of the form with the keyboard.
-  function closeAndFocusTrigger(triggerId: string) {
+  function closeAndFocusTrigger() {
     open = false;
     tick().then(() => {
-      document.getElementById(triggerId)?.focus();
+      triggerRef.focus();
     });
   }
 
-  const onSelect = (
-    currentValue: FontSize | string,
-    ids: {
-      content: string;
-      trigger: string;
-    }
-  ) => {
+  const onSelect = (currentValue: FontSize | string) => {
     value = currentValue as FontSize;
-    closeAndFocusTrigger(ids.trigger);
+    closeAndFocusTrigger();
   };
 
   onMount(() => () => {
@@ -43,23 +42,25 @@
   });
 </script>
 
-<Popover.Root bind:open let:ids>
-  <Popover.Trigger asChild let:builder>
-    <div>
-      <Label for="font-size-command-button">Font Size</Label>
-      <br />
-      <Button
-        builders={[builder]}
-        variant="outline"
-        role="combobox"
-        aria-expanded={open}
-        class="w-full justify-between min-[464px]:w-[200px]"
-        id="font-size-command-button"
-      >
-        {selectedValue == FontSize.Size16 ? `${selectedValue} (Default)` : selectedValue}
-        <ChevronsUpDownIcon class="ml-2 shrink-0 text-base opacity-50" />
-      </Button>
-    </div>
+<Popover.Root bind:open>
+  <Popover.Trigger bind:ref={triggerRef}>
+    {#snippet child({ props })}
+      <div>
+        <Label for="font-size-command-button">Font Size</Label>
+        <br />
+        <Button
+          variant="outline"
+          class="w-full justify-between min-[464px]:w-[200px]"
+          id="font-size-command-button"
+          {...props}
+          role="combobox"
+          aria-expanded={open}
+        >
+          {selectedValue == FontSize.Size16 ? `${selectedValue} (Default)` : selectedValue}
+          <ChevronsUpDownIcon class="ml-2 shrink-0 text-base opacity-50" />
+        </Button>
+      </div>
+    {/snippet}
   </Popover.Trigger>
   <Popover.Content class="w-[200px] p-0">
     <Command.Root>
@@ -68,7 +69,7 @@
       <Command.Group class="max-h-56 overflow-y-auto">
         {#each Object.values(FontSize).filter((s) => !isNaN(Number(s))) as fontSize}
           {@const fSize = fontSize.toString()}
-          <Command.Item value={fSize} onSelect={() => onSelect(fontSize, ids)}>
+          <Command.Item value={fSize} onSelect={() => onSelect(fontSize)}>
             <CheckIcon class={cn('mr-2 text-lg', value !== fontSize && 'text-transparent')} />
             {fontSize == FontSize.Size16 ? `${fontSize} (Default)` : fontSize}
           </Command.Item>

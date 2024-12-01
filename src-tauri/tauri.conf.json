@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "npm run build -- --base /",
-    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "pnpm run build -- --base /",
+    "beforeDevCommand": "pnpm run dev",
     "frontendDist": "../www",
     "devUrl": "http://localhost:5173"
   },
@@ -50,9 +50,11 @@
       {
         "fullscreen": false,
         "height": 600,
+        "width": 800,
+        "minHeight": 450,
+        "minWidth": 350,
         "resizable": true,
-        "title": "Notpad",
-        "width": 800
+        "title": "Notpad"
       }
     ],
     "security": {

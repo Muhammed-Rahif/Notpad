@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "npm run dev",
+      "command": "pnpm run dev",
       "name": "Run run dev",
       "request": "launch",
       "type": "node-terminal"

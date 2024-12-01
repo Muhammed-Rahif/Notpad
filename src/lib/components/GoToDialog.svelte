@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   import { get, writable } from 'svelte/store';
 
   const open = writable(false);
@@ -11,12 +11,12 @@
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
-  import { Input, type FormInputEvent } from '@/components/ui/input';
+  import { Input } from '@/components/ui/input';
   import Label from '@/components/ui/label/label.svelte';
   import { Notpad } from '@/helpers/notpad';
 
-  let line: string | undefined;
-  let column: string | undefined;
+  let line: string | undefined = $state();
+  let column: string | undefined = $state();
 
   function submitGoTo() {
     open.set(false);
@@ -26,7 +26,7 @@
     });
   }
 
-  function validateInput(e: FormInputEvent<InputEvent>) {
+  function validateInput(e: Event) {
     // If the input is invalid, reset the value to an empty string
 
     if (!(e.target as HTMLInputElement).validity.valid) {
@@ -34,10 +34,12 @@
     }
   }
 
-  $: if (!$open) Notpad.editors.focus();
+  $effect(() => {
+    if (!$open) Notpad.editors.focus();
+  });
 </script>
 
-<Dialog.Root open={$open} onOpenChange={open.set} preventScroll={false}>
+<Dialog.Root open={$open} onOpenChange={open.set}>
   <Dialog.Content class="top-14 translate-y-0">
     <Dialog.Header>
       <Dialog.Title>Go To</Dialog.Title>
@@ -51,7 +53,7 @@
           type="number"
           id="line"
           placeholder="Line"
-          on:input={validateInput}
+          oninput={validateInput}
           step={1}
           min={1}
         />
@@ -64,13 +66,13 @@
           type="number"
           id="column"
           placeholder="Column"
-          on:input={validateInput}
+          oninput={validateInput}
           step={1}
           min={0}
         />
       </div>
 
-      <Button type="button" class="mt-auto" on:click={submitGoTo}>Go</Button>
+      <Button type="button" class="mt-auto" onclick={submitGoTo}>Go</Button>
     </div>
   </Dialog.Content>
 </Dialog.Root>

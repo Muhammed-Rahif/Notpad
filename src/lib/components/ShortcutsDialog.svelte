@@ -33,8 +33,6 @@
 </script>
 
 <Dialog.Root open={$open} onOpenChange={open.set}>
-  <Dialog.Trigger />
-
   <Dialog.Content>
     <Dialog.Header>
       <Dialog.Title>Shortcuts</Dialog.Title>

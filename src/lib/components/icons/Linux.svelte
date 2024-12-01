@@ -1,4 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 128 128" {...$$props}
+<script lang="ts">
+  interface Props {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
+  }
+
+  let { ...props }: Props = $props();
+</script>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 128 128" {...props}
   ><path
     fill="currentColor"
     fill-rule="evenodd"

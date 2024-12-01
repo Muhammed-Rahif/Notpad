@@ -1,11 +1,18 @@
 <script lang="ts">
+  import { createBubbler, preventDefault, stopPropagation } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import { settings } from '@/store/store';
   import { slide } from 'svelte/transition';
 
-  export let caretLineNo = 1;
-  export let caretColumnNo = 1;
-  export let characterCount = 0;
-  export let wordCount = 0;
+  interface Props {
+    caretLineNo?: number;
+    caretColumnNo?: number;
+    characterCount?: number;
+    wordCount?: number;
+  }
+
+  let { caretLineNo = 1, caretColumnNo = 1, characterCount = 0, wordCount = 0 }: Props = $props();
 
   const inAnimation = {
     duration: 80
@@ -16,7 +23,7 @@
   <div
     class="sticky bottom-0 z-10 h-[30px] w-screen bg-primary-foreground"
     transition:slide
-    on:contextmenu|stopPropagation|preventDefault
+    oncontextmenu={stopPropagation(preventDefault(bubble('contextmenu')))}
     role="contentinfo"
   >
     <p

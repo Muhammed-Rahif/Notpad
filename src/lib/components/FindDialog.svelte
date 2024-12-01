@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   import { get, writable } from 'svelte/store';
 
   const open = writable(false);
@@ -18,16 +18,16 @@
   import { Checkbox } from '@/components/ui/checkbox';
   import Label from '@/components/ui/label/label.svelte';
 
-  let query: string = '';
-  let replace: string = '';
-  let caseSensitive: boolean = false;
-  let findIndex: number = 0;
+  let query: string = $state('');
+  let replace: string = $state('');
+  let caseSensitive: boolean = $state(false);
+  let findIndex: number = $state(0);
 
   function setQuery(q: string) {
     query = q;
   }
 
-  $: {
+  $effect(() => {
     if ($open) {
       const editor = Notpad.editors.getEditor();
 
@@ -37,10 +37,10 @@
     }
     // Focus the editor when the dialog is closed
     else Notpad.editors.focus();
-  }
+  });
 </script>
 
-<Dialog.Root open={$open} onOpenChange={open.set} preventScroll={false}>
+<Dialog.Root open={$open} onOpenChange={open.set}>
   <Dialog.Content class="top-14 translate-y-0">
     <Dialog.Header>
       <Dialog.Title>Find And Replace</Dialog.Title>
@@ -56,7 +56,7 @@
           class="rounded-r-none border-secondary !ring-0"
         />
         <Button
-          on:click={() => {
+          onclick={() => {
             findIndex =
               Notpad.searchOptions.findMaybeReplace({
                 query,
@@ -72,7 +72,7 @@
           <ChevronUp class="text-xl" />
         </Button>
         <Button
-          on:click={() => {
+          onclick={() => {
             findIndex =
               Notpad.searchOptions.findMaybeReplace({
                 query,
@@ -115,7 +115,7 @@
       <Button
         type="button"
         variant="secondary"
-        on:click={() =>
+        onclick={() =>
           Notpad.searchOptions.findAndReplaceAll({
             query,
             caseSensitive,
@@ -127,7 +127,7 @@
       <Button
         type="button"
         variant="secondary"
-        on:click={() =>
+        onclick={() =>
           Notpad.searchOptions.findMaybeReplace({
             query,
             caseSensitive,
@@ -140,7 +140,7 @@
       <Button
         type="button"
         variant="default"
-        on:click={() => {
+        onclick={() => {
           findIndex = 0;
           Notpad.searchOptions.findMaybeReplace({ query, caseSensitive });
         }}

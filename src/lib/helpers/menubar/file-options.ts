@@ -219,7 +219,7 @@ export class FileOptions {
       else await this.openFileInDesktopBrowser();
     } catch (err) {
       console.error(err);
-      await this.openFileLegacy();
+      if (err instanceof Error && err.name != 'AbortError') await this.openFileLegacy();
     }
   };
 
@@ -238,7 +238,7 @@ export class FileOptions {
       else await this.saveFileInDesktopBrowser(saveAs);
     } catch (err) {
       console.error(err);
-      await this.saveFileLegacy();
+      if (err instanceof Error && err.name != 'AbortError') await this.saveFileLegacy();
     }
   };
 

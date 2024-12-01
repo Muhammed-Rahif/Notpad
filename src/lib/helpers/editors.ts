@@ -11,6 +11,12 @@ import type { EditorType } from '@/types/EditorTypes';
  * a new editor, removing an editor, etc.
  */
 export class Editors {
+  static defaultEditor: EditorType = {
+    fileName: 'Untitled.txt',
+    content: new Delta(),
+    id: genId()
+  };
+
   init = async () => {
     const activeId = get(activeTabId);
     const editorsList = get(editors);

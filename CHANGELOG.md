@@ -1,3 +1,28 @@
+# [1.0.0-alpha.4](https://github.com/Muhammed-Rahif/Notpad/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2024-12-02)
+
+
+### Bug Fixes
+
+* **dialog:** made content scrollable, header & footer sticky ([1a2b443](https://github.com/Muhammed-Rahif/Notpad/commit/1a2b4431694071bc62eeb31249db065928c4b500))
+* **editor:** fake caret animation improvements ([b6d83b1](https://github.com/Muhammed-Rahif/Notpad/commit/b6d83b101b5bae5ed7bb03a708b8e21ad58f5394))
+* **files:** file dialogs reappear after cancellation (open/save/save As) ([dc7c4a7](https://github.com/Muhammed-Rahif/Notpad/commit/dc7c4a768106ff0cd163a263ff8e493bf5af41e5)), closes [#243](https://github.com/Muhammed-Rahif/Notpad/issues/243)
+* **menubar:** only show latest release downloads ([0ad3b44](https://github.com/Muhammed-Rahif/Notpad/commit/0ad3b44a76cc27e1b0a829e58961cab73bf350cd))
+* **mobile:** status bar content are misaligned ([576e5b7](https://github.com/Muhammed-Rahif/Notpad/commit/576e5b7de308e7a2bb6790979b1450821ca8a02a))
+* **responsiveness:** editor title overlapping if maxlength are met ([e526055](https://github.com/Muhammed-Rahif/Notpad/commit/e5260551e6d785d0cdaed0b7cc8d73ce72c9c636))
+* **shortcuts:** remove unwanted trigger button from shortcuts dialog that caused scroll issues ([ed6f9a7](https://github.com/Muhammed-Rahif/Notpad/commit/ed6f9a72669357d6093865313371c8993472dcaf))
+* **storage:** refining data from inavailable values of editor caused content merge ([35fa06b](https://github.com/Muhammed-Rahif/Notpad/commit/35fa06b5092e7853d30b38f482305602d115e5bf))
+* **storage:** when new values introduced they take default values in case of old users ([aa6c0cd](https://github.com/Muhammed-Rahif/Notpad/commit/aa6c0cdaaa199d1a1f5cc6f618f3207a6bfe801e)), closes [#242](https://github.com/Muhammed-Rahif/Notpad/issues/242)
+* **svelte:** svelte 5 `run` replaced using `effect` ([0eab892](https://github.com/Muhammed-Rahif/Notpad/commit/0eab892362a0f84234a8fb47fdf9ddd469abb451))
+* **tauri:** minimum width & height are added; exit not working on tauri ([5cc5847](https://github.com/Muhammed-Rahif/Notpad/commit/5cc58472b6dd5a023fe7eb58cb46fcee709304c5))
+* temp ([92def1d](https://github.com/Muhammed-Rahif/Notpad/commit/92def1d2a4930f968faa07893f6fdea7dd29c6c4))
+* **vite:** `manualChunks` incorrect config with pnpm ([733a8c9](https://github.com/Muhammed-Rahif/Notpad/commit/733a8c93c2a163f1f2461d4d6fae7c31706ecfae))
+
+
+### Features
+
+* editing filename limit update ([81f95b0](https://github.com/Muhammed-Rahif/Notpad/commit/81f95b0c3224be5465093db1759a574e2ba4c832))
+* **menubar:** add a new button Display All Shortcuts ([d2d8374](https://github.com/Muhammed-Rahif/Notpad/commit/d2d837456070e7f9b924236df802402bc5ec35d6))
+
 # [1.0.0-alpha.3](https://github.com/Muhammed-Rahif/Notpad/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2024-11-18)
 
 ### Bug Fixes

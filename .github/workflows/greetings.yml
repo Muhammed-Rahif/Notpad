@@ -1,0 +1,104 @@
+name: Greet, Celebrate, and Encourage
+
+on:
+  issues:
+    types:
+      - opened
+  pull_request:
+    types:
+      - opened
+  pull_request_target:
+    types:
+      - closed
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check User Contributions
+        id: check_contributions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const user = context.payload.sender.login;
+
+            // Get all previous issues and PRs by the user
+            const [issues, pulls] = await Promise.all([
+              github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                creator: user,
+                state: 'all'
+              }),
+              github.rest.pulls.list({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'all',
+                creator: user
+              })
+            ]);
+
+            const totalContributions = issues.data.length + pulls.data.length;
+            core.setOutput('isFirstTime', totalContributions === 1);
+            core.setOutput('totalContributions', totalContributions);
+
+      - name: Post Personalized Greeting
+        if: steps.check_contributions.outputs.isFirstTime == 'true' || steps.check_contributions.outputs.totalContributions == '5'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const user = context.payload.sender.login;
+            const issueOrPr = context.payload.issue || context.payload.pull_request;
+            const isIssue = !!context.payload.issue;
+            const isPR = !!context.payload.pull_request;
+            const isFirstTime = ${steps.check_contributions.outputs.isFirstTime} === 'true';
+            const totalContributions = parseInt(${steps.check_contributions.outputs.totalContributions});
+
+            let message = `👋 Hi @${user}, welcome to the **Notpad** project!`;
+
+            if (isFirstTime) {
+              message += `  
+              We're thrilled to have your first contribution here! 🎉 Be sure to check out our [CONTRIBUTING.md](https://github.com/<owner>/<repo>/blob/main/CONTRIBUTING.md) if you need guidance.`;
+            }
+
+            if (isIssue) {
+              message += `  
+              Thank you for opening an issue. We’ll review it soon. If you enjoy working with **Notpad**, consider [starring the repo](https://github.com/<owner>/<repo>/stargazers) ⭐ to show your support!`;
+            }
+
+            if (isPR) {
+              message += `  
+              Awesome! Pull requests like yours keep the project thriving. Don’t forget to check our [CONTRIBUTING.md](https://github.com/<owner>/<repo>/blob/main/CONTRIBUTING.md).`;
+            }
+
+            if (totalContributions === 5) {
+              message += `  
+              🎉 Wow! This is your **5th contribution** to Notpad. Thank you for your consistent support. We deeply value contributors like you!`;
+            }
+
+            message += `  
+            Stay updated by following the repo and feel free to join the discussion in the community! 💬`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueOrPr.number,
+              body: message
+            });
+
+      - name: Thank Contributor When PR is Merged
+        if: github.event.action == 'closed' && github.event.pull_request.merged == true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const message = `🎉 Your pull request has been successfully merged, @${pr.user.login}!  
+            Thank you for making **Notpad** better. We hope to see more of your awesome contributions! 😊`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              body: message
+            });

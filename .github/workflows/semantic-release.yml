@@ -18,7 +18,7 @@ jobs:
           # - platform: 'macos-latest' # for Intel based macs.
           #   args: '-- --target x86_64-apple-darwin'
           - platform: 'macos-latest' # for Universal mac.
-            args: '-- --target universal-apple-darwin'
+            args: '--target universal-apple-darwin'
           - platform: 'ubuntu-22.04' # for Tauri v1 you could replace this with ubuntu-20.04.
             args: ''
           - platform: 'windows-latest'
@@ -67,9 +67,10 @@ jobs:
 
       - name: Update version declarations
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          # GH_TOKEN: ${{ secrets.AUTHOR_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx semantic-release --dry-run
+          pnpx semantic-release --dry-run
 
       - name: Build Tauri
         run: pnpm run tauri build ${{ matrix.args }}
@@ -139,5 +140,6 @@ jobs:
 
       - name: Run Semantic Release
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: npx semantic-release
+          # GH_TOKEN: ${{ secrets.AUTHOR_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpx semantic-release

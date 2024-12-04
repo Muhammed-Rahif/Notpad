@@ -37,10 +37,18 @@ export default defineConfig({
     outDir: 'www',
     rollupOptions: {
       output: {
-        // https://github.com/vitejs/vite/discussions/9440#discussioncomment-5913798
+        // https://github.com/vitejs/vite/discussions/9440#discussioncomment-8358001
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+            const modulePath = id.split('node_modules/')[1];
+            const topLevelFolder = modulePath.split('/')[0];
+            if (topLevelFolder !== '.pnpm') {
+              return topLevelFolder;
+            }
+            const scopedPackageName = modulePath.split('/')[1];
+            const chunkName =
+              scopedPackageName.split('@')[scopedPackageName.startsWith('@') ? 1 : 0];
+            return chunkName;
           }
         }
       }

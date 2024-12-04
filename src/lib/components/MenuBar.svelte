@@ -168,7 +168,7 @@
   {#if !isMD && !tabsMode}
     <div
       transition:fade
-      class="!mx-auto lg:absolute lg:left-1/2 lg:top-1/2
+      class="!ml-auto lg:absolute lg:left-1/2 lg:top-1/2
       lg:-translate-x-1/2 lg:-translate-y-1/2"
     >
       <EditorTitle editor={singleEditor} />

@@ -14,8 +14,8 @@ on:
 
 jobs:
   greet:
+    name: Greet, Celebrate, and Encourage
     runs-on: ubuntu-latest
-
     steps:
       - name: Check User Contributions
         id: check_contributions
@@ -42,16 +42,15 @@ jobs:
             core.setOutput('totalContributions', totalContributions);
 
       - name: Post Personalized Greeting
-        if: ${{ steps.check_contributions.outputs.isFirstTime == 'true' || steps.check_contributions.outputs.totalContributions == '5' || github.event_name == 'issues' || github.event_name == 'pull_request' }}
+        if: ${{ github.event.action == 'opened' && (steps.check_contributions.outputs.isFirstTime == 'true' || steps.check_contributions.outputs.totalContributions == '5') }}
         uses: actions/github-script@v7
         with:
           script: |
             const user = context.payload.sender.login;
-            const issueOrPr = context.payload.issue || context.payload.pull_request;
             const isIssue = !!context.payload.issue;
             const isPR = !!context.payload.pull_request;
-            const isFirstTime = ${steps.check_contributions.outputs.isFirstTime} === 'true';
-            const totalContributions = parseInt(${steps.check_contributions.outputs.totalContributions});
+            const isFirstTime = '${{ steps.check_contributions.outputs.isFirstTime }}' === 'true';
+            const totalContributions = parseInt('${{ steps.check_contributions.outputs.totalContributions }}');
             let message = '';
 
             if (isFirstTime) {
@@ -92,7 +91,60 @@ jobs:
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: issueOrPr.number,
+              issue_number: context.payload.issue?.number || context.payload.pull_request?.number,
+              body: message
+            });
+
+      - name: Assign User Guidance
+        if: ${{ github.event.action == 'assigned' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const assignee = context.payload.assignee.login;
+            const issueNumber = context.payload.issue.number;
+
+            // Fetch issues and pull requests created by the assignee
+            const [issues, pulls] = await Promise.all([
+              github.paginate(github.rest.issues.listForRepo, {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'all',
+              }),
+              github.paginate(github.rest.pulls.list, {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'all',
+              }),
+            ]);
+
+            // Filter to count only issues and pull requests created by the assignee
+            const assigneeIssues = issues.filter(issue => issue.user.login === assignee);
+            const assigneePulls = pulls.filter(pr => pr.user.login === assignee);
+
+            const totalContributions = assigneeIssues.length + assigneePulls.length;
+
+            // Log total contributions for debugging
+
+            // Compose the message based on contribution count
+            let message = '';
+            if (totalContributions < 3) {
+              message = `🛠️ **Heads up, @${assignee}!**  
+              You've been assigned an issue in **Notpad** – ready to make your mark? 🚀  
+              Since you're relatively new here, we highly recommend checking out our [CONTRIBUTING.md](https://github.com/Muhammed-Rahif/Notpad/blob/main/CONTRIBUTING.md).  
+              It’s packed with helpful tips, guidelines, and best practices to ensure a smooth contribution experience.  
+              We’re excited to see what you’ll bring to the table – happy coding! 💻✨`;
+            } else {
+              message = `🎉 Hi @${assignee}! You've been assigned an issue in **Notpad**.  
+              Your contributions so far have been awesome, and we can't wait to see what you'll do next! 🚀  
+              Remember to check out our [CONTRIBUTING.md](https://github.com/Muhammed-Rahif/Notpad/blob/main/CONTRIBUTING.md) for any guidelines or tips.  
+              Let's build something great together! 💡`;
+            }
+
+            // Post the comment
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
               body: message
             });
 
@@ -117,7 +169,7 @@ jobs:
             });
 
       - name: Thank Contributor When PR is Merged
-        if: github.event.action == 'closed' && github.event.pull_request.merged == true
+        if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true }}
         uses: actions/github-script@v7
         with:
           script: |

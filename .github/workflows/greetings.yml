@@ -23,7 +23,7 @@ jobs:
         with:
           script: |
             const user = context.payload.sender.login;
-            const [issues, pulls] = await Promise.all([
+            const [userIssues, userPulls] = await Promise.all([
               github.rest.issues.listForRepo({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -37,12 +37,15 @@ jobs:
                 creator: user
               })
             ]);
-            const totalContributions = issues.data.length + pulls.data.length;
+
+            const totalContributions = userIssues.data.length + userPulls.data.length;
+
+            console.log(`User: ${user}, Issues: ${userIssues.length}, PRs: ${userPulls.length}, Total: ${totalContributions}`);
             core.setOutput('isFirstTime', totalContributions === 1);
             core.setOutput('totalContributions', totalContributions);
 
       - name: Post Personalized Greeting
-        if: ${{ github.event.action == 'opened' && (steps.check_contributions.outputs.isFirstTime == 'true' || steps.check_contributions.outputs.totalContributions == '5') }}
+        if: ${{ github.event.action == 'opened' }}
         uses: actions/github-script@v7
         with:
           script: |

@@ -14,7 +14,8 @@ export class Editors {
   static defaultEditor: EditorType = {
     fileName: 'Untitled.txt',
     content: new Delta(),
-    id: genId()
+    id: genId(),
+    isSaved:true
   };
 
   init = async () => {

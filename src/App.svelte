@@ -14,19 +14,17 @@
   import FindDialog from '@/components/FindDialog.svelte';
   import Loading from '@/components/Loading.svelte';
   import ShortcutsDialog from '@/components/ShortcutsDialog.svelte';
+  import SaveAndQuitDialog from '@/src/lib/components/SaveAndQuitDialog.svelte';
+ 
 </script>
-
 {#await Notpad.init()}
-  <!-- Loading Animation -->
   <Loading />
 {:then}
-  <!-- Actual UI -->
   <div class="flex h-full flex-col">
     <MenuBar />
     <EditorTabs />
   </div>
-
-  <!-- Additional Components -->
+  <SaveAndQuitDialog/>
   <FontDialog />
   <LicenseDialog />
   <AboutDialog />
@@ -35,10 +33,8 @@
   <FindDialog />
   <Shortcuts />
 {/await}
-
 <Toaster />
 <ModeWatcher />
-
 <svelte:head>
   {#if $mode == 'dark'}
     <link rel="icon" href={favIconDark} />

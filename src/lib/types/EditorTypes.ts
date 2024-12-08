@@ -35,4 +35,6 @@ export interface EditorType {
    * The selection of the editor.
    */
   selection?: Range;
+
+  isSaved?:boolean;
 }

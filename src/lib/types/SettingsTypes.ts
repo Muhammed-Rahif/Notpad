@@ -6,7 +6,9 @@ export enum FontFamily {
   Baloo2 = 'Baloo 2',
   BricolageGrotesque = 'Bricolage Grotesque',
   Lora = 'Lora',
-  RobotoSlab = 'Roboto Slab'
+  RobotoSlab = 'Roboto Slab',
+  Inconsolata = 'Inconsolata',
+  Parkinsans = 'Parkinsans'
 }
 
 export enum FontSize {

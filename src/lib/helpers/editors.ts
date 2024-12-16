@@ -5,6 +5,8 @@ import { toast } from 'svelte-sonner';
 import Quill from 'quill';
 import { Delta, Range } from 'quill/core';
 import type { EditorType } from '@/types/EditorTypes';
+import { openEditorCloseConfirmationDialog } from '@/components/EditorCloseConfirmationDialog.svelte';
+import { Notpad } from './notpad';
 
 /**
  * A helper class for performing various editor-related tasks such as opening
@@ -14,7 +16,8 @@ export class Editors {
   static defaultEditor: EditorType = {
     fileName: 'Untitled.txt',
     content: new Delta(),
-    id: genId()
+    id: genId(),
+    isSaved: false
   };
 
   init = async () => {
@@ -50,7 +53,7 @@ export class Editors {
     return this.getActive();
   };
 
-  createNew({ content, fileName, fileHandle, filePath }: Partial<EditorType> = {}) {
+  createNew({ content, fileName, fileHandle, filePath, isSaved }: Partial<EditorType> = {}) {
     const newId = genId();
     editors.update((value) => {
       value.push({
@@ -58,7 +61,8 @@ export class Editors {
         content: content ?? new Delta(),
         id: newId,
         fileHandle,
-        filePath
+        filePath,
+        isSaved
       });
 
       return value;
@@ -66,22 +70,33 @@ export class Editors {
     activeTabId.update(() => newId);
   }
 
-  remove = (editorId?: string) => {
-    editorId = this.getEditor(editorId).id;
+  remove = async (editorId?: string) => {
+    const editor = this.getEditor(editorId);
     const editorsList = get(editors);
+
+    if (!editor.isSaved) {
+      const status = await openEditorCloseConfirmationDialog({
+        fileName: editor.fileName
+      });
+
+      if (status == 'cancel') return;
+      if (status == 'save') {
+        await Notpad.fileOptions.save({ saveAs: true });
+      }
+    }
 
     if (editorsList.length === 1) {
       this.createNew();
     }
 
     editors.update((value) => {
-      return value.filter((editor) => editor.id !== editorId);
+      return value.filter((e) => e.id !== editor.id);
     });
 
     activeTabId.update((currentId) => {
-      if (currentId === editorId && editorsList.length > 0) {
+      if (currentId === editor.id && editorsList.length > 0) {
         if (editorsList.length > 0) {
-          const index = editorsList.findIndex((editor) => editor.id === editorId);
+          const index = editorsList.findIndex((editor) => editor.id === editor.id);
           if (index === editorsList.length - 1) {
             return editorsList[index - 1].id;
           }
@@ -170,6 +185,17 @@ export class Editors {
       });
     });
     if (focus) this.focus(editorId);
+  }
+
+  setIsSaved(editorId: string, isSaved: boolean) {
+    editors.update((value) => {
+      return value.map((e) => {
+        if (e.id === editorId) {
+          return { ...e, isSaved };
+        }
+        return e;
+      });
+    });
   }
 
   focus = async (editorId?: string) => {

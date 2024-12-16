@@ -35,4 +35,8 @@ export interface EditorType {
    * The selection of the editor.
    */
   selection?: Range;
+  /**
+   * Whether the file is saved or not, after the last change.
+   */
+  isSaved?: boolean;
 }

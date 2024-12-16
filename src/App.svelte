@@ -14,19 +14,20 @@
   import FindDialog from '@/components/FindDialog.svelte';
   import Loading from '@/components/Loading.svelte';
   import ShortcutsDialog from '@/components/ShortcutsDialog.svelte';
+  import EditorCloseConfirmationDialog from '@/components/EditorCloseConfirmationDialog.svelte';
 </script>
 
 {#await Notpad.init()}
-  <!-- Loading Animation -->
   <Loading />
 {:then}
-  <!-- Actual UI -->
+  <!-- What user see on initially -->
   <div class="flex h-full flex-col">
     <MenuBar />
     <EditorTabs />
   </div>
 
-  <!-- Additional Components -->
+  <!-- Components that aren't appear on initial roll -->
+  <EditorCloseConfirmationDialog />
   <FontDialog />
   <LicenseDialog />
   <AboutDialog />
@@ -35,10 +36,8 @@
   <FindDialog />
   <Shortcuts />
 {/await}
-
 <Toaster />
 <ModeWatcher />
-
 <svelte:head>
   {#if $mode == 'dark'}
     <link rel="icon" href={favIconDark} />

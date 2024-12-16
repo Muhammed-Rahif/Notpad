@@ -5,7 +5,7 @@ import { toast } from 'svelte-sonner';
 import Quill from 'quill';
 import { Delta, Range } from 'quill/core';
 import type { EditorType } from '@/types/EditorTypes';
-import { openSaveAndQuitDialog } from '../components/SaveAndQuitDialog.svelte';
+import { openEditorCloseConfirmationDialog } from '@/components/EditorCloseConfirmationDialog.svelte';
 import { Notpad } from './notpad';
 
 /**
@@ -75,7 +75,7 @@ export class Editors {
     const editorsList = get(editors);
 
     if (!editor.isSaved) {
-      const status = await openSaveAndQuitDialog({
+      const status = await openEditorCloseConfirmationDialog({
         fileName: editor.fileName
       });
 

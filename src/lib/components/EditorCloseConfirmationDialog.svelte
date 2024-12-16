@@ -7,7 +7,7 @@
   const resolve = writable<(value: Status) => void>(() => {});
   const fileName = writable('');
 
-  export function openSaveAndQuitDialog({ fileName: fl }: { fileName: string }): Promise<Status> {
+  export function openEditorCloseConfirmationDialog({ fileName: fl }: { fileName: string }): Promise<Status> {
     fileName.set(fl);
     open.set(true);
 

@@ -14,7 +14,7 @@
   import FindDialog from '@/components/FindDialog.svelte';
   import Loading from '@/components/Loading.svelte';
   import ShortcutsDialog from '@/components/ShortcutsDialog.svelte';
-  import SaveAndQuitDialog from '@/src/lib/components/SaveAndQuitDialog.svelte';
+  import EditorCloseConfirmationDialog from '@/src/lib/components/EditorCloseConfirmationDialog.svelte';
 </script>
 
 {#await Notpad.init()}
@@ -27,7 +27,7 @@
   </div>
 
   <!-- Components that aren't appear on initial roll -->
-  <SaveAndQuitDialog />
+  <EditorCloseConfirmationDialog />
   <FontDialog />
   <LicenseDialog />
   <AboutDialog />

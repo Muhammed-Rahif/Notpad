@@ -14,7 +14,7 @@
   import FindDialog from '@/components/FindDialog.svelte';
   import Loading from '@/components/Loading.svelte';
   import ShortcutsDialog from '@/components/ShortcutsDialog.svelte';
-  import EditorCloseConfirmationDialog from '@/src/lib/components/EditorCloseConfirmationDialog.svelte';
+  import EditorCloseConfirmationDialog from '@/components/EditorCloseConfirmationDialog.svelte';
 </script>
 
 {#await Notpad.init()}

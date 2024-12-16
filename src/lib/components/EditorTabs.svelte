@@ -52,7 +52,7 @@
   {/if}
 
   {#each $editors as editor (editor.id)}
-    <Tabs.Content value={editor.id} class="mt-0 h-full w-full">
+    <Tabs.Content value={editor.id} class="mt-0 h-[calc(100%_-_2.25rem)] w-full">
       <ContextMenu.Root>
         <ContextMenu.Trigger class="flex h-full w-full flex-col overflow-hidden">
           <Editor {editor} />

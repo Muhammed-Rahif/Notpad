@@ -155,6 +155,9 @@
     updateEditorData();
     settings.subscribe(updateEditorData);
     quill.on('editor-change', updateEditorData);
+
+    // Marks editor as not saved when text content changes.
+    quill.on('text-change', () => Notpad.editors.setIsSaved(editor.id, false));
   });
 </script>
 

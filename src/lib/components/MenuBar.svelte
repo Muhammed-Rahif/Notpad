@@ -18,7 +18,6 @@
   import KeyboardIcon from '@/components/icons/Keyboard.svelte';
   import GithubOultineIcon from './icons/GithubOultine.svelte';
 
-
   let innerWidth = $state(window.innerWidth);
   let isFullScreen = $state(screenfull.isFullscreen);
 

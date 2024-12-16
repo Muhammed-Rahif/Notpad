@@ -9,6 +9,7 @@
     open.set(true);
   }
 </script>
+
 <script lang="ts">
   import * as Table from '@/components/ui/table';
   import * as Dialog from '@/components/ui/dialog';

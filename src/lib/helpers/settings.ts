@@ -7,7 +7,7 @@ export class Settings {
     statusBar: true,
     fontFamily: FontFamily.SUSE,
     fontSize: FontSize.Size16,
-    lineNumbers: false,
+    lineNumbers: false
   };
 
   setFontFamily(fontFamily: FontFamily) {

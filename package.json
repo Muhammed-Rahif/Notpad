@@ -30,7 +30,7 @@
     "@types/wicg-file-system-access": "^2023.10.5",
     "@vite-pwa/assets-generator": "^0.2.6",
     "autoprefixer": "^10.4.20",
-    "bits-ui": "1.0.0-next.64",
+    "bits-ui": "1.0.0-next.72",
     "clsx": "^2.1.1",
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",

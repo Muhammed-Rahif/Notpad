@@ -15,16 +15,19 @@
   import Loading from '@/components/Loading.svelte';
   import ShortcutsDialog from '@/components/ShortcutsDialog.svelte';
   import SaveAndQuitDialog from '@/src/lib/components/SaveAndQuitDialog.svelte';
- 
 </script>
+
 {#await Notpad.init()}
   <Loading />
 {:then}
+  <!-- What user see on initially -->
   <div class="flex h-full flex-col">
     <MenuBar />
     <EditorTabs />
   </div>
-  <SaveAndQuitDialog/>
+
+  <!-- Components that aren't appear on initial roll -->
+  <SaveAndQuitDialog />
   <FontDialog />
   <LicenseDialog />
   <AboutDialog />

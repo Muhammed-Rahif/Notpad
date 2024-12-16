@@ -44,6 +44,7 @@ export class FileOptions {
       activeTabId.set(alreadyOpened.id);
     } else {
       Notpad.editors.createNew({
+        isSaved: true,
         fileName: file.name,
         content: new Delta({
           ops: [
@@ -78,6 +79,7 @@ export class FileOptions {
         reader.onload = (e) => {
           const content = e.target?.result as string;
           Notpad.editors.createNew({
+            isSaved: true,
             content: new Delta({
               ops: [
                 {
@@ -112,6 +114,7 @@ export class FileOptions {
 
     const content = await readTextFile(filePath, { baseDir: BaseDirectory.AppConfig });
     Notpad.editors.createNew({
+      isSaved: true,
       content: new Delta({
         ops: [
           {
@@ -129,7 +132,7 @@ export class FileOptions {
     if (!activeEditor) return;
 
     let fileHandle: FileSystemFileHandle | undefined = activeEditor.fileHandle;
-    if (saveAs || !fileHandle)
+    if (saveAs || !fileHandle) {
       fileHandle = await showSaveFilePicker({
         id: activeEditor.id,
         suggestedName: activeEditor.fileName,
@@ -143,6 +146,7 @@ export class FileOptions {
           }
         ]
       });
+    }
 
     const writable = await fileHandle.createWritable();
     await writable.write(activeEditor.quill!.getText());
@@ -164,12 +168,12 @@ export class FileOptions {
     if (nav.msSaveOrOpenBlob) {
       nav.msSaveBlob(blob, activeEditor.fileName);
     } else {
-      const elem = window.document.createElement('a');
-      elem.href = window.URL.createObjectURL(blob);
-      elem.download = activeEditor.fileName;
-      document.body.appendChild(elem);
-      elem.click();
-      document.body.removeChild(elem);
+      const anchorElem = window.document.createElement('a');
+      anchorElem.href = window.URL.createObjectURL(blob);
+      anchorElem.download = activeEditor.fileName;
+      document.body.appendChild(anchorElem);
+      anchorElem.click();
+      document.body.removeChild(anchorElem);
     }
   };
 
@@ -216,10 +220,11 @@ export class FileOptions {
   open = async () => {
     try {
       if (isTauri) await this.openFileInTauri();
-      else await this.openFileInDesktopBrowser();
+      else if (typeof showOpenFilePicker != 'undefined') {
+        await this.openFileInDesktopBrowser();
+      } else await this.openFileLegacy();
     } catch (err) {
       console.error(err);
-      if (err instanceof Error && err.name != 'AbortError') await this.openFileLegacy();
     }
   };
 
@@ -235,10 +240,13 @@ export class FileOptions {
   save = async ({ saveAs }: { saveAs?: boolean } = {}) => {
     try {
       if (isTauri) await this.saveFileInTauri(saveAs);
-      else await this.saveFileInDesktopBrowser(saveAs);
+      else if (typeof showSaveFilePicker != 'undefined') {
+        await this.saveFileInDesktopBrowser(saveAs);
+      } else await this.saveFileLegacy();
+
+      Notpad.editors.setIsSaved(Notpad.editors.getActive().id, true);
     } catch (err) {
       console.error(err);
-      if (err instanceof Error && err.name != 'AbortError') await this.saveFileLegacy();
     }
   };
 

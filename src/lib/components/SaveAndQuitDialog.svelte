@@ -1,35 +1,64 @@
 <script module>
-  import {writable} from 'svelte/store';
-  const open = writable(false);
-  export function openSaveAndQuitDialog() {
-    open.set(true)
-  }
-</script>
-<script lang="ts">
-    import * as AlertDialog from "@/components/ui/alert-dialog";
-    function handleSave() {
-    console.log('File saved');
-  }
-  function handleDontSave() {
-    console.log('File not saved');
-  }
-  function handleCancel() {
-    console.log('Action canceled');
-  }
-</script>
-  <AlertDialog.Root open={$open} onOpenChange={open.set}>
-    <AlertDialog.Content>
-      <AlertDialog.Header>
-        <AlertDialog.Title>Notpad</AlertDialog.Title>
-        <AlertDialog.Description>
-          Do you want to save changes to Untitled?
-        </AlertDialog.Description>
-      </AlertDialog.Header>
-      <AlertDialog.Footer>
-        <AlertDialog.Action onclick={handleSave}>Save</AlertDialog.Action>
-        <AlertDialog.Action onclick={handleDontSave}>Don't Save</AlertDialog.Action>
-        <AlertDialog.Cancel onclick={handleCancel}>Cancel</AlertDialog.Cancel>
-      </AlertDialog.Footer>
-    </AlertDialog.Content>
-  </AlertDialog.Root>
+  import { writable } from 'svelte/store';
 
+  export type Status = 'save' | 'dont-save' | 'cancel';
+
+  const open = writable(false);
+  const resolve = writable<(value: Status) => void>(() => {});
+  const fileName = writable('');
+
+  export function openSaveAndQuitDialog({ fileName: fl }: { fileName: string }): Promise<Status> {
+    fileName.set(fl);
+    open.set(true);
+
+    return new Promise((res) => {
+      resolve.set(res);
+    });
+  }
+</script>
+
+<script lang="ts">
+  import * as AlertDialog from '@/components/ui/alert-dialog';
+  import Button from '@/components/ui/button/button.svelte';
+
+  function onSave() {
+    $resolve('save');
+    open.set(false);
+  }
+
+  function onDontSave(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
+    $resolve('dont-save');
+    open.set(false);
+  }
+
+  function onCancel() {
+    $resolve('cancel');
+    open.set(false);
+  }
+
+  function onOpenChange(op: boolean) {
+    open.set(op);
+    if (op == false) {
+      $resolve('cancel');
+    }
+  }
+</script>
+
+<AlertDialog.Root open={$open} {onOpenChange}>
+  <AlertDialog.Content>
+    <AlertDialog.Header>
+      <AlertDialog.Title>Unsaved Changes</AlertDialog.Title>
+      <AlertDialog.Description>
+        The contents from "{$fileName}" are not saved to local file. Do you want to save it to a
+        file before closing this editor? If you don't save, your changes will be lost.
+      </AlertDialog.Description>
+    </AlertDialog.Header>
+    <AlertDialog.Footer>
+      <AlertDialog.Cancel onclick={onCancel}>Cancel</AlertDialog.Cancel>
+      <Button variant="outline" onclick={onDontSave}>Don't Save</Button>
+      <AlertDialog.Action onclick={onSave}>Save</AlertDialog.Action>
+    </AlertDialog.Footer>
+  </AlertDialog.Content>
+</AlertDialog.Root>

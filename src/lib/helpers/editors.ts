@@ -5,8 +5,14 @@ import { toast } from 'svelte-sonner';
 import Quill from 'quill';
 import { Delta, Range } from 'quill/core';
 import type { EditorType } from '@/types/EditorTypes';
+import { Notpad } from '@/helpers/notpad';
+
+/**
+ * https://github.com/sveltejs/svelte/issues/5817
+ * https://github.com/sveltejs/svelte/issues/7304
+ */
+/* @ts-expect-error: error TS2614: Module '"*.svelte"' has no exported member 'openEditorCloseConfirmationDialog'. */
 import { openEditorCloseConfirmationDialog } from '@/components/EditorCloseConfirmationDialog.svelte';
-import { Notpad } from './notpad';
 
 /**
  * A helper class for performing various editor-related tasks such as opening
@@ -96,7 +102,7 @@ export class Editors {
     activeTabId.update((currentId) => {
       if (currentId === editor.id && editorsList.length > 0) {
         if (editorsList.length > 0) {
-          const index = editorsList.findIndex((editor) => editor.id === editor.id);
+          const index = editorsList.findIndex((editor) => editor.id === editorId);
           if (index === editorsList.length - 1) {
             return editorsList[index - 1].id;
           }

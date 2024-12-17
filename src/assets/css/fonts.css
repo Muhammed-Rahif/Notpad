@@ -22,3 +22,13 @@
   font-family: 'Roboto Slab';
   src: url('../../assets/fonts/RobotoSlab-VariableFont.ttf');
 }
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('../../assets/fonts/Inconsolata-VariableFont.ttf');
+}
+
+@font-face {
+  font-family: 'Parkinsans';
+  src: url('../../assets/fonts/Parkinsans-VariableFont.ttf');
+}

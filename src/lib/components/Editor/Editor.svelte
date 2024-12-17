@@ -155,13 +155,16 @@
     updateEditorData();
     settings.subscribe(updateEditorData);
     quill.on('editor-change', updateEditorData);
+
+    // Marks editor as not saved when text content changes.
+    quill.on('text-change', () => Notpad.editors.setIsSaved(editor.id, false));
   });
 </script>
 
 <div class="relative h-full overflow-hidden">
   <div
-    class="editor-container h-full w-full overflow-hidden
-    rounded-none bg-transparent text-sm caret-transparent"
+    class="editor-container overflow-hidden rounded-none
+    bg-transparent text-sm caret-transparent"
     bind:this={editorContainer}
     style="--editor-font-family: '{$settings.fontFamily}';
     --editor-font-size: {$settings.fontSize}px;
@@ -181,14 +184,6 @@
 
 <StatusBar {caretLineNo} {caretColumnNo} {characterCount} {wordCount} />
 
-<!-- {#if updateScheduled}
-  <style>
-    .fake-caret {
-      animation: none !important;
-    }
-  </style>
-{/if} -->
-
 {#if $settings.lineNumbers}
   <style>
     .ql-editor {
@@ -196,19 +191,26 @@
       @apply !pl-0;
     }
 
+    .ql-editor {
+      --line-no-font-size-factor: 0.8;
+    }
+
     .ql-editor > * {
-      margin-left: clamp(22px, calc(1.6ch * var(--line-no-digits-count)), 10vw) !important;
-      @apply relative border-l-2 border-muted !pl-2 duration-100;
+      margin-left: calc(
+        max(var(--line-no-digits-count), 3) * 1em * var(--line-no-font-size-factor)
+      ) !important;
+      padding-left: calc(var(--editor-font-size) * 0.5) !important;
+      @apply relative border-l-2 border-muted duration-100;
     }
 
     .ql-editor > *::before {
-      font-size: calc(var(--editor-font-size) * 0.7);
+      font-size: calc(var(--editor-font-size) * var(--line-no-font-size-factor));
       counter-increment: line;
       content: counter(line);
       transform: translateX(-100%);
-      width: clamp(20px, calc(2ch * var(--line-no-digits-count)), 10vw) !important;
-      padding-right: clamp(10px, calc(0.6ch * var(--line-no-digits-count)), 10vw) !important;
-      @apply absolute left-0 text-right text-primary duration-100;
+      width: calc(max(var(--line-no-digits-count), 3) * 1em) !important;
+      /* padding: 0 1em; */
+      @apply absolute left-0 text-center text-primary duration-100;
     }
   </style>
 {/if}

@@ -52,11 +52,12 @@
   {/if}
 
   {#each $editors as editor (editor.id)}
-    <Tabs.Content value={editor.id} class="mt-0 h-full w-full">
+    <Tabs.Content value={editor.id} class="mt-0 h-full overflow-hidden">
       <ContextMenu.Root>
-        <ContextMenu.Trigger class="flex h-full w-full flex-col overflow-hidden">
+        <ContextMenu.Trigger class="flex h-full flex-col">
           <Editor {editor} />
         </ContextMenu.Trigger>
+
         <ContextMenu.Content class="w-48">
           <ContextMenu.Item onclick={() => Notpad.editOptions.undo()}>
             Undo<ContextMenu.Shortcut>Ctrl+Z</ContextMenu.Shortcut>

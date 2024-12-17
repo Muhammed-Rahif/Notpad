@@ -85,6 +85,11 @@
             {readonly}
           />
         </form>
+
+        {#if !editor.isSaved}
+          <span>^</span>
+        {/if}
+
         <Button
           onclick={onEditorClose(editor.id)}
           size="sm"
@@ -99,6 +104,7 @@
         </Button>
       </div>
     </Tooltip.Trigger>
+
     {#if editor.filePath}
       <Tooltip.Content>
         {editor.filePath}

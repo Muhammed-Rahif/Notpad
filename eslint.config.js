@@ -33,7 +33,7 @@ export default [
   {
     files: ['src/lib/components/ui/**/*.{svelte,ts}'],
     rules: {
-      '@typescript-eslint/no-unused-vars': 'off'
+      '@typescript-eslint/no-unused-vars': 'warn'
     }
   }
 ];

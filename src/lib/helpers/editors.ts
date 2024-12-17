@@ -11,7 +11,8 @@ import { Notpad } from '@/helpers/notpad';
  * https://github.com/sveltejs/svelte/issues/5817
  * https://github.com/sveltejs/svelte/issues/7304
  */
-/* @ts-expect-error: error TS2614: Module '"*.svelte"' has no exported member 'openEditorCloseConfirmationDialog'. */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+/* @ts-ignore: error TS2614: Module '"*.svelte"' has no exported member 'openEditorCloseConfirmationDialog'. */
 import { openEditorCloseConfirmationDialog } from '@/components/EditorCloseConfirmationDialog.svelte';
 
 /**

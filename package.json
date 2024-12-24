@@ -1,8 +1,25 @@
 {
   "name": "notpad",
-  "private": true,
   "version": "1.0.0-4",
   "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "author": {
+    "name": "Muhammed Rahif",
+    "email": "rahifpalliyalil@gmail.com",
+    "url": "https://muhammed-rahif.github.io"
+  },
+  "homepage": "https://github.com/Muhammed-Rahif/Notpad",
+  "bugs": {
+    "url": "https://github.com/Muhammed-Rahif/Notpad/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Muhammed-Rahif/Notpad.git"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Muhammed-Rahif"
+  },
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",

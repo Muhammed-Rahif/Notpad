@@ -6,7 +6,6 @@
   import { activeTabId, editors } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
-  import { cn } from '@/utils';
 
   let innerWidth = $state(window.innerWidth);
 
@@ -32,10 +31,7 @@
             <div
               role="button"
               tabindex="0"
-              class={cn(
-                'flex items-center justify-center',
-                $activeTabId === editor.id ? 'bg-background' : 'bg-secondary'
-              )}
+              class="flex items-center justify-center"
               onclick={() => ($activeTabId = editor.id)}
               onkeydown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {

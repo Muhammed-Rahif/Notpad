@@ -56,4 +56,8 @@ export interface SettingsType {
    * The font size of the editor.
    */
   fontSize: FontSize;
+  /**
+   * Should wrap long lines.
+   */
+  wrapLongLines: boolean;
 }

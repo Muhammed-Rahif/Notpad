@@ -8,8 +8,9 @@
   import { Notpad } from '@/helpers/notpad';
   import { settings } from '@/store/store';
   import 'quill/dist/quill.core.css';
-  import './Editor.css';
   import type { EditorType } from '@/types/EditorTypes';
+  import { RichTextEditor } from '@/helpers/rich-text-editor';
+  import './Editor.css';
 
   interface Props {
     editor: EditorType;
@@ -27,30 +28,10 @@
   let wordCount = $state(0);
 
   async function setupQuill() {
-    quill = new Quill(editorContainer!, {
-      formats: [
-        'bold',
-        'code',
-        'italic',
-        'link',
-        'size',
-        'strike',
-        'script',
-        'underline',
-        'blockquote',
-        'header',
-        'indent',
-        'list',
-        'align',
-        'direction',
-        'code-block',
-        'formula'
-        // 'background',
-        // 'font',
-        // 'image',
-        // 'video'
-      ]
+    const richTextEditor = new RichTextEditor({
+      editorContainer
     });
+    quill = richTextEditor.quill;
 
     await Notpad.editors.setQuill(editor.id, quill);
     quill.setContents(Notpad.editors.getContent(editor.id)!);
@@ -82,7 +63,7 @@
 
   // Using requestAnimationFrame for smooth updates
   const updateCaretPosition = throttle(() => {
-    console.count('Update caret');
+    // console.count('Update caret');
     requestAnimationFrame(async () => {
       if (fakeCaret) fakeCaret.style.animationDuration = '0s';
 
@@ -132,7 +113,7 @@
       await tick();
       // If line numbers are enabled or disabled, update the caret position after a delay
       // of 300ms to complete the line numbers animated entry or exit.
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 300));
       updateCaretPosition();
     },
     () => [$settings.lineNumbers, lineNo]
@@ -163,18 +144,22 @@
 
 <div class="relative h-full overflow-hidden">
   <div
-    class="editor-container overflow-hidden rounded-none
-    bg-transparent text-sm caret-transparent"
-    bind:this={editorContainer}
+    class="editor-container relative flex overflow-hidden
+    rounded-none bg-transparent text-sm caret-transparent"
     style="--editor-font-family: '{$settings.fontFamily}';
     --editor-font-size: {$settings.fontSize}px;
     --editor-zoom: {$settings.zoom};
     --line-no-digits-count: {lineNo.toString().length}"
+    data-line-numbers={$settings.lineNumbers}
+    data-wrap-long-lines={$settings.wrapLongLines}
+    bind:this={editorContainer}
   ></div>
+
   <span
-    class="fake-caret absolute z-0 w-0.5 rounded-[.06em] bg-primary"
+    class="fake-caret absolute z-0 w-0.5 rounded-[.06em]
+    bg-primary"
     bind:this={fakeCaret}
-    style="top: calc({caretPosition.top}px);
+    style="top: {caretPosition.top}px;
     left: {caretPosition.left}px;
     height: {caretPosition.height}px;
     width: {$settings.zoom * 2}px"
@@ -183,34 +168,3 @@
 </div>
 
 <StatusBar {caretLineNo} {caretColumnNo} {characterCount} {wordCount} />
-
-{#if $settings.lineNumbers}
-  <style>
-    .ql-editor {
-      counter-reset: line;
-      @apply !pl-0;
-    }
-
-    .ql-editor {
-      --line-no-font-size-factor: 0.8;
-    }
-
-    .ql-editor > * {
-      margin-left: calc(
-        max(var(--line-no-digits-count), 3) * 1em * var(--line-no-font-size-factor)
-      ) !important;
-      padding-left: calc(var(--editor-font-size) * 0.5) !important;
-      @apply relative border-l-2 border-muted duration-100;
-    }
-
-    .ql-editor > *::before {
-      font-size: calc(var(--editor-font-size) * var(--line-no-font-size-factor));
-      counter-increment: line;
-      content: counter(line);
-      transform: translateX(-100%);
-      width: calc(max(var(--line-no-digits-count), 3) * 1em) !important;
-      /* padding: 0 1em; */
-      @apply absolute left-0 text-center text-primary duration-100;
-    }
-  </style>
-{/if}

@@ -1,5 +1,5 @@
 .ql-editor {
-  @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none duration-100;
+  @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none duration-300;
 }
 
 .ql-editor,
@@ -8,11 +8,12 @@
   font-size: var(--editor-font-size);
 }
 
-.ql-editor {
+.editor-container {
   scale: var(--editor-zoom);
   width: calc(100% / var(--editor-zoom));
   height: calc(100% / var(--editor-zoom));
   transform-origin: top left;
+  position: relative;
 }
 
 .ql-editor a {
@@ -20,7 +21,35 @@
 }
 
 .ql-editor > * {
-  @apply !pl-0 duration-100;
+  @apply !pl-0 duration-300;
+}
+
+.editor-container[data-line-numbers='true'] .ql-editor {
+  counter-reset: line;
+  --line-no-font-size-factor: 0.8;
+  @apply !pl-0;
+}
+
+.editor-container[data-line-numbers='true'] .ql-editor > * {
+  margin-left: calc(
+    max(var(--line-no-digits-count), 3) * 1em * var(--line-no-font-size-factor)
+  ) !important;
+  padding-left: calc(var(--editor-font-size) * 0.5) !important;
+  @apply relative border-l-2 border-muted duration-300;
+}
+
+.editor-container[data-line-numbers='true'] .ql-editor > *::before {
+  font-size: calc(var(--editor-font-size) * var(--line-no-font-size-factor));
+  counter-increment: line;
+  content: counter(line);
+  width: calc(max(var(--line-no-digits-count), 3) * 1em) !important;
+  transform: translateX(0);
+  /* padding: 0 1em; */
+  @apply absolute left-0 top-0 -translate-x-full text-center text-primary duration-300;
+}
+
+.editor-container[data-wrap-long-lines='true'] .ql-editor > * {
+  @apply w-max;
 }
 
 @keyframes blink {

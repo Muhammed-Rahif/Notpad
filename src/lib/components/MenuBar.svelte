@@ -32,7 +32,7 @@
 
 <svelte:window bind:innerWidth />
 
-<Menubar.Root class="relative z-10 rounded-none">
+<Menubar.Root class="relative z-10">
   <Menubar.Menu>
     <Menubar.Trigger>File</Menubar.Trigger>
     <Menubar.Content>
@@ -137,6 +137,12 @@
         onclick={Notpad.viewOptions.toggleLineNumbers}
       >
         Line Numbers
+      </Menubar.CheckboxItem>
+      <Menubar.CheckboxItem
+        checked={$settings.wrapLongLines}
+        onclick={Notpad.viewOptions.toggleWrapLongLines}
+      >
+        Wrap Long Lines
       </Menubar.CheckboxItem>
       <Menubar.CheckboxItem checked={$mode == 'dark'} onclick={toggleMode}>
         Dark Mode

@@ -79,5 +79,17 @@
     "short-uuid": "^5.2.0",
     "svelte-sonner": "^0.3.28",
     "tailwind-scrollbar": "^3.1.0"
+  },"browserslist": {
+    "production":[
+      ">0.2",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      ">0.01%",
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

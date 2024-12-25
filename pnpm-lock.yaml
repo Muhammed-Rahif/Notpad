@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@neodrag/svelte':
+        specifier: ^2.2.0
+        version: 2.2.0
       '@svelte-put/shortcut':
         specifier: ^4.0.0
         version: 4.0.0(svelte@5.3.0)
@@ -937,6 +940,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@neodrag/svelte@2.2.0':
+    resolution: {integrity: sha512-ZUgf9hFMJPN2fG9jFeECv6XebVYjGQ845vORSWwSmpkhmFM9tslWNZ/DfsSXcybBxhulkN9GC0A+bgXRQsDhdA==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -5051,6 +5057,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@neodrag/svelte@2.2.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

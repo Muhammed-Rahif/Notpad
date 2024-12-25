@@ -78,6 +78,7 @@
     "sharp-ico": "0.1.5"
   },
   "dependencies": {
+    "@neodrag/svelte": "^2.2.0",
     "@svelte-put/shortcut": "^4.0.0",
     "@tauri-apps/api": "^2.1.1",
     "@tauri-apps/plugin-dialog": "^2.0.1",

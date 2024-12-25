@@ -8,7 +8,7 @@
   import Button from '@/components/ui/button/button.svelte';
   import type { EditorType } from '@/src/lib/types/EditorTypes';
   import { cn } from '@/utils';
-  import { resizeInputOnDynamicContent } from '../actions/input-auto-width';
+  import { resizeInputOnDynamicContent } from '@/actions/input-auto-width';
 
   interface Props {
     editor: EditorType;

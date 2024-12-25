@@ -105,6 +105,18 @@ export class EditOptions {
     }
   };
 
+  delete = (editorId?: string) => {
+    const quill = Notpad.editors.getEditor(editorId).quill!;
+    const range = quill.getSelection();
+    if (range) {
+      // Delete the selected text if any
+      if (range.length > 0) {
+        quill.deleteText(range.index, range.length);
+      }
+    }
+    Notpad.editors.focus(editorId);
+  };
+
   selectAll = (editorId?: string) => {
     const editor = Notpad.editors.getEditor(editorId);
     const quill = editor.quill!;

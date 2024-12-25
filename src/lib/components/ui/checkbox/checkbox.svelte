@@ -2,7 +2,7 @@
   import { Checkbox as CheckboxPrimitive, type WithoutChildrenOrChild } from 'bits-ui';
   import { cn } from '@/utils.js';
   import Check from '@/components/icons/Check.svelte';
-  import Minus from '../../icons/Minus.svelte';
+  import Minus from '@/components/icons/Minus.svelte';
 
   let {
     ref = $bindable(null),

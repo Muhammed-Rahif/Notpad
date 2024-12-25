@@ -18,11 +18,11 @@
   import KeyboardIcon from '@/components/icons/Keyboard.svelte';
   import GithubOultineIcon from '@/components/icons/GithubOultine.svelte';
   import CalendarClockIcon from '@/components/icons/CalendarClock.svelte';
-  import GoogleLineIcon from './icons/GoogleLine.svelte';
-  import StatusBarIcon from './icons/StatusBar.svelte';
-  import ListOrderedIcon from './icons/ListOrdered.svelte';
-  import WrapTextIcon from './icons/WrapText.svelte';
-  import ALargeSmallIcon from './icons/ALargeSmall.svelte';
+  import GoogleLineIcon from '@/components/icons/GoogleLine.svelte';
+  import StatusBarIcon from '@/components/icons/StatusBar.svelte';
+  import ListOrderedIcon from '@/components/icons/ListOrdered.svelte';
+  import WrapTextIcon from '@/components/icons/WrapText.svelte';
+  import ALargeSmallIcon from '@/components/icons/ALargeSmall.svelte';
 
   let innerWidth = $state(window.innerWidth);
   let isFullScreen = $state(screenfull.isFullscreen);
@@ -81,7 +81,7 @@
       <Menubar.Item onclick={() => Notpad.editOptions.paste()}>
         Paste<Menubar.Shortcut>Ctrl+V</Menubar.Shortcut>
       </Menubar.Item>
-      <Menubar.Item onclick={() => Notpad.editOptions.paste()}>
+      <Menubar.Item onclick={() => Notpad.editOptions.delete()}>
         Delete<Menubar.Shortcut>Delete</Menubar.Shortcut>
       </Menubar.Item>
       <Menubar.Separator />

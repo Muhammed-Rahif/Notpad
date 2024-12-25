@@ -22,7 +22,7 @@
       },
       {
         key: 'S',
-        modifier: ['ctrl', 'shift'],
+        modifier: 'ctrl',
         callback: () => Notpad.fileOptions.save({ saveAs: true }),
         preventDefault: true
       },

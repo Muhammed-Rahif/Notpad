@@ -6,6 +6,7 @@
   import { activeTabId, editors } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
+  import CalendarClockIcon from '@/components/icons/CalendarClock.svelte';
 
   let innerWidth = $state(window.innerWidth);
 
@@ -71,6 +72,9 @@
           <ContextMenu.Item onclick={() => Notpad.editOptions.paste()}>
             Paste<ContextMenu.Shortcut>Ctrl+V</ContextMenu.Shortcut>
           </ContextMenu.Item>
+          <ContextMenu.Item onclick={() => Notpad.editOptions.delete()}>
+            Delete<ContextMenu.Shortcut>Delete</ContextMenu.Shortcut>
+          </ContextMenu.Item>
           <ContextMenu.Separator />
           <ContextMenu.Item onclick={() => Notpad.editOptions.selectAll()}>
             Select All
@@ -78,6 +82,7 @@
           </ContextMenu.Item>
           <ContextMenu.Item onclick={() => Notpad.editOptions.insertDateAndTime()}>
             Time/Date
+            <CalendarClockIcon class="ml-auto text-xl text-muted-foreground" />
           </ContextMenu.Item>
         </ContextMenu.Content>
       </ContextMenu.Root>

@@ -70,38 +70,50 @@ export class EditOptions {
   paste = (editorId?: string) => {
     const quill = Notpad.editors.getEditor(editorId).quill!;
     const range = quill.getSelection();
-    if (range) {
+
+    const handleRangeDeletion = (range: Range) => {
       // Delete the selected text if any
       if (range.length > 0) {
         quill.deleteText(range.index, range.length);
       }
+    };
+
+    const handleClipboardItem = (item: ClipboardItem, index: number) => {
+      if (item.types.includes('text/html')) {
+        item.getType('text/html').then((blob: Blob) => {
+          blob.text().then((html: string) => {
+            insertContent(index, html);
+          });
+        });
+      } else if (item.types.includes('text/plain')) {
+        item.getType('text/plain').then((blob: Blob) => {
+          blob.text().then((text: string) => {
+            insertContent(index, text);
+          });
+        });
+      }
+    };
+
+    const insertContent = (index: number, content: string) => {
+      quill.clipboard.dangerouslyPasteHTML(index, content);
+      Notpad.editors.focus(editorId);
+    };
+
+    const handleClipboardError = (err: unknown) => {
+      if (err instanceof Error) {
+        err.message = 'Failed to read clipboard contents: ' + err.message;
+      }
+      Notpad.showError(err);
+    };
+
+    if (range) {
+      handleRangeDeletion(range);
       navigator.clipboard
         .read()
-        .then((items) => {
-          for (const item of items) {
-            if (item.types.includes('text/html')) {
-              item.getType('text/html').then((blob) => {
-                blob.text().then((html) => {
-                  quill.clipboard.dangerouslyPasteHTML(range.index, html);
-                  Notpad.editors.focus(editorId);
-                });
-              });
-            } else if (item.types.includes('text/plain')) {
-              item.getType('text/plain').then((blob) => {
-                blob.text().then((text) => {
-                  quill.clipboard.dangerouslyPasteHTML(range.index, text);
-                  Notpad.editors.focus(editorId);
-                });
-              });
-            }
-          }
+        .then((items: ClipboardItems) => {
+          items.forEach((item) => handleClipboardItem(item, range.index));
         })
-        .catch((err) => {
-          if (err instanceof Error) {
-            err.message = 'Failed to read clipboard contents: ' + err.message;
-          }
-          Notpad.showError(err);
-        });
+        .catch(handleClipboardError);
     }
   };
 

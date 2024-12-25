@@ -59,5 +59,5 @@ export interface SettingsType {
   /**
    * Should wrap long lines.
    */
-  wrapLongLines: boolean;
+  wrapLines: boolean;
 }

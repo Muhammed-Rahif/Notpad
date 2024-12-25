@@ -48,7 +48,7 @@
   @apply absolute left-0 top-0 -translate-x-full text-center text-primary duration-300;
 }
 
-.editor-container[data-wrap-long-lines='true'] .ql-editor > * {
+.editor-container[data-wrap-lines='true'] .ql-editor > * {
   @apply w-max;
 }
 

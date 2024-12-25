@@ -13,9 +13,9 @@ export class ViewOptions {
     settings.update((value) => ({ ...value, lineNumbers: !get(settings).lineNumbers }));
   }
 
-  public toggleWrapLongLines() {
+  public toggleWrapLines() {
     Notpad.editors.focus();
-    settings.update((value) => ({ ...value, wrapLongLines: !get(settings).wrapLongLines }));
+    settings.update((value) => ({ ...value, wrapLines: !get(settings).wrapLines }));
   }
 
   public zoom(zoom: 'in' | 'out' | 'reset') {

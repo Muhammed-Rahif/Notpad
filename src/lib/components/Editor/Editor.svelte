@@ -151,7 +151,7 @@
     --editor-zoom: {$settings.zoom};
     --line-no-digits-count: {lineNo.toString().length}"
     data-line-numbers={$settings.lineNumbers}
-    data-wrap-long-lines={$settings.wrapLongLines}
+    data-wrap-lines={$settings.wrapLines}
     bind:this={editorContainer}
   ></div>
 

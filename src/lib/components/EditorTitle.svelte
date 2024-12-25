@@ -6,7 +6,7 @@
   import * as Tooltip from '@/components/ui/tooltip';
   import CloseIcon from '@/components/icons/Close.svelte';
   import Button from '@/components/ui/button/button.svelte';
-  import type { EditorType } from '@/src/lib/types/EditorTypes';
+  import type { EditorType } from '@/types/EditorTypes';
   import { cn } from '@/utils';
   import { resizeInputOnDynamicContent } from '@/actions/input-auto-width';
 
@@ -100,7 +100,7 @@
           })}
           variant={$activeTabId === editor.id ? 'secondary' : 'link'}
         >
-          <CloseIcon class="text-base" />
+          <CloseIcon />
         </Button>
       </div>
     </Tooltip.Trigger>

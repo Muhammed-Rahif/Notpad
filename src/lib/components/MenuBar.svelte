@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
   import EditorTitle from '@/components/EditorTitle.svelte';
-  import DownloadButtonMenu from '@/src/lib/components/DownloadMenuButton.svelte';
+  import DownloadButtonMenu from '@/components/DownloadMenuButton.svelte';
   import { Notpad } from '@/helpers/notpad';
   import { editors, settings } from '@/store/store';
   import { fade } from 'svelte/transition';
@@ -13,7 +13,7 @@
   import { openAboutDialog } from '@/components/AboutDialog.svelte';
   import { toggleGoToDialog } from '@/components/GoToDialog.svelte';
   import { toggleFindDialog } from '@/components/FindDialog.svelte';
-  import { openShortcutsDialog } from '@/src/lib/components/ShortcutsDialog.svelte';
+  import { openShortcutsDialog } from '@/components/ShortcutsDialog.svelte';
   import InfoIcon from '@/components/icons/Info.svelte';
   import KeyboardIcon from '@/components/icons/Keyboard.svelte';
   import GithubOultineIcon from '@/components/icons/GithubOultine.svelte';
@@ -23,6 +23,7 @@
   import ListOrderedIcon from '@/components/icons/ListOrdered.svelte';
   import WrapTextIcon from '@/components/icons/WrapText.svelte';
   import ALargeSmallIcon from '@/components/icons/ALargeSmall.svelte';
+  import LogoutIcon from '@/components/icons/Logout.svelte';
 
   let innerWidth = $state(window.innerWidth);
   let isFullScreen = $state(screenfull.isFullscreen);
@@ -58,7 +59,10 @@
         Print<Menubar.Shortcut>Ctrl+P</Menubar.Shortcut>
       </Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item onclick={Notpad.close}>Exit</Menubar.Item>
+      <Menubar.Item onclick={Notpad.close}>
+        Exit
+        <LogoutIcon class="ml-auto text-muted-foreground" />
+      </Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
 
@@ -91,7 +95,7 @@
       </Menubar.Item>
       <Menubar.Item onclick={() => Notpad.editOptions.insertDateAndTime()}>
         Time/Date
-        <CalendarClockIcon class="ml-auto text-xl text-muted-foreground" />
+        <CalendarClockIcon class="ml-auto text-muted-foreground" />
       </Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
@@ -108,7 +112,7 @@
       <Menubar.Separator />
       <Menubar.Item onclick={() => Notpad.searchOptions.searchOnWeb()}>
         Search on Google
-        <GoogleLineIcon class="ml-auto text-xl text-muted-foreground" />
+        <GoogleLineIcon class="ml-auto text-muted-foreground" />
       </Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
@@ -141,21 +145,21 @@
         onclick={Notpad.viewOptions.toggleStatusBar}
       >
         Status Bar
-        <StatusBarIcon class="ml-auto text-xl text-muted-foreground" />
+        <StatusBarIcon class="ml-auto text-muted-foreground" />
       </Menubar.CheckboxItem>
       <Menubar.CheckboxItem
         checked={$settings.lineNumbers}
         onclick={Notpad.viewOptions.toggleLineNumbers}
       >
         Line Numbers
-        <ListOrderedIcon class="ml-auto text-xl text-muted-foreground" />
+        <ListOrderedIcon class="ml-auto text-muted-foreground" />
       </Menubar.CheckboxItem>
       <Menubar.CheckboxItem
         checked={$settings.wrapLines}
         onclick={Notpad.viewOptions.toggleWrapLines}
       >
         Wrap Lines
-        <WrapTextIcon class="ml-auto text-xl text-muted-foreground" />
+        <WrapTextIcon class="ml-auto text-muted-foreground" />
       </Menubar.CheckboxItem>
     </Menubar.Content>
   </Menubar.Menu>
@@ -165,7 +169,7 @@
     <Menubar.Content>
       <Menubar.Item onclick={openFontDialog}>
         Font
-        <ALargeSmallIcon class="ml-auto text-xl text-muted-foreground" />
+        <ALargeSmallIcon class="ml-auto text-muted-foreground" />
       </Menubar.Item>
 
       <Menubar.Separator />
@@ -203,17 +207,17 @@
       <Menubar.Separator />
       <Menubar.Item class="flex items-center gap-2" onclick={openShortcutsDialog}>
         Shortcuts
-        <KeyboardIcon class="ml-auto text-xl text-muted-foreground" />
+        <KeyboardIcon class="ml-auto text-muted-foreground" />
       </Menubar.Item>
       <a href="https://github.com/Muhammed-Rahif/Notpad" target="_blank">
         <Menubar.Item class="flex items-center gap-2">
           Github
-          <GithubOultineIcon class="ml-auto text-xl text-muted-foreground" />
+          <GithubOultineIcon class="ml-auto text-muted-foreground" />
         </Menubar.Item>
       </a>
       <Menubar.Item class="flex items-center gap-2" onclick={openAboutDialog}>
         About Notpad
-        <InfoIcon class="ml-auto text-xl text-muted-foreground" />
+        <InfoIcon class="ml-auto text-muted-foreground" />
       </Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>

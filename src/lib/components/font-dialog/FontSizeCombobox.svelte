@@ -57,7 +57,7 @@
           aria-expanded={open}
         >
           {selectedValue == FontSize.Size16 ? `${selectedValue} (Default)` : selectedValue}
-          <ChevronsUpDownIcon class="ml-2 shrink-0 text-base opacity-50" />
+          <ChevronsUpDownIcon class="ml-2 shrink-0 opacity-50" />
         </Button>
       </div>
     {/snippet}
@@ -70,7 +70,7 @@
         {#each Object.values(FontSize).filter((s) => !isNaN(Number(s))) as fontSize}
           {@const fSize = fontSize.toString()}
           <Command.Item value={fSize} onSelect={() => onSelect(fontSize)}>
-            <CheckIcon class={cn('mr-2 text-lg', value !== fontSize && 'text-transparent')} />
+            <CheckIcon class={cn('mr-2', value !== fontSize && 'text-transparent')} />
             {fontSize == FontSize.Size16 ? `${fontSize} (Default)` : fontSize}
           </Command.Item>
         {/each}

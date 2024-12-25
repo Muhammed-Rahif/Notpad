@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Editor from '@/src/lib/components/Editor/Editor.svelte';
+  import Editor from '@/components/editor/Editor.svelte';
   import * as Tabs from '@/components/ui/tabs';
   import * as ContextMenu from '@/components/ui/context-menu';
   import EditorTitle from '@/components/EditorTitle.svelte';
@@ -82,7 +82,7 @@
           </ContextMenu.Item>
           <ContextMenu.Item onclick={() => Notpad.editOptions.insertDateAndTime()}>
             Time/Date
-            <CalendarClockIcon class="ml-auto text-xl text-muted-foreground" />
+            <CalendarClockIcon class="ml-auto text-muted-foreground" />
           </ContextMenu.Item>
         </ContextMenu.Content>
       </ContextMenu.Root>

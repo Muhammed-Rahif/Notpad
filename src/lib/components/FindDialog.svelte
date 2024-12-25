@@ -69,7 +69,7 @@
           size="icon"
           type="button"
         >
-          <ChevronUp class="text-xl" />
+          <ChevronUp />
         </Button>
         <Button
           onclick={() => {
@@ -85,7 +85,7 @@
           size="icon"
           type="button"
         >
-          <ChevronDown class="text-xl" />
+          <ChevronDown />
         </Button>
       </div>
       <Input

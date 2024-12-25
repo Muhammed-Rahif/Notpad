@@ -77,11 +77,16 @@
 html,
 body,
 #app {
-  @apply h-full overflow-hidden scroll-smooth caret-foreground;
+  @apply h-full overflow-hidden scroll-smooth font-suse font-normal not-italic caret-foreground;
 }
 
 * {
-  @apply font-suse font-normal not-italic scrollbar scrollbar-track-neutral-100 scrollbar-thumb-foreground/20 scrollbar-corner-foreground/5 scrollbar-thumb-rounded-md scrollbar-w-1.5 scrollbar-h-1 [font-optical-sizing:auto] dark:scrollbar-track-neutral-900;
+  @apply scrollbar scrollbar-track-neutral-100 scrollbar-thumb-foreground/20 scrollbar-corner-foreground/5 scrollbar-thumb-rounded-md scrollbar-w-1.5 scrollbar-h-1 [font-optical-sizing:auto] dark:scrollbar-track-neutral-900;
+}
+
+/* For icons default values */
+svg {
+  @apply size-4;
 }
 
 ::selection,

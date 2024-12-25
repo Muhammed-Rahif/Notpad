@@ -57,7 +57,7 @@
           aria-expanded={open}
         >
           {selectedValue == FontFamily.SUSE ? `${selectedValue} (Default)` : selectedValue}
-          <ChevronsUpDownIcon class="ml-2 shrink-0 text-base opacity-50" />
+          <ChevronsUpDownIcon class="ml-2 shrink-0 opacity-50" />
         </Button>
       </div>
     {/snippet}
@@ -69,7 +69,7 @@
       <Command.Group class="max-h-56 overflow-y-auto">
         {#each Object.values(FontFamily) as fontFamily}
           <Command.Item value={fontFamily} onSelect={() => onSelect(fontFamily)}>
-            <CheckIcon class={cn('mr-2 text-lg', value !== fontFamily && 'text-transparent')} />
+            <CheckIcon class={cn('mr-2', value !== fontFamily && 'text-transparent')} />
             {fontFamily == FontFamily.SUSE ? `${fontFamily} (Default)` : fontFamily}
           </Command.Item>
         {/each}

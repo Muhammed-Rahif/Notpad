@@ -86,6 +86,7 @@
     "@tauri-apps/plugin-process": "^2.0.0",
     "@tauri-apps/plugin-shell": "^2.0.1",
     "caret-pos": "^2.0.0",
+    "dayjs": "^1.11.13",
     "localforage": "^1.10.0",
     "lodash.debounce": "^4.0.8",
     "lodash.merge": "^4.6.2",

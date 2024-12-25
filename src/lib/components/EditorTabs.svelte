@@ -4,9 +4,8 @@
   import * as ContextMenu from '@/components/ui/context-menu';
   import EditorTitle from '@/components/EditorTitle.svelte';
   import { activeTabId, editors } from '@/store/store';
-  import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
-  import CalendarClockIcon from '@/components/icons/CalendarClock.svelte';
+  import EditMenuItems from '@/components/EditMenuItems.svelte';
 
   let innerWidth = $state(window.innerWidth);
 
@@ -56,34 +55,7 @@
         </ContextMenu.Trigger>
 
         <ContextMenu.Content class="w-48">
-          <ContextMenu.Item onclick={() => Notpad.editOptions.undo()}>
-            Undo<ContextMenu.Shortcut>Ctrl+Z</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Item onclick={() => Notpad.editOptions.redo()}>
-            Redo<ContextMenu.Shortcut>Ctrl+Y</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Separator />
-          <ContextMenu.Item onclick={() => Notpad.editOptions.cut()}>
-            Cut<ContextMenu.Shortcut>Ctrl+X</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Item onclick={() => Notpad.editOptions.copy()}>
-            Copy<ContextMenu.Shortcut>Ctrl+C</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Item onclick={() => Notpad.editOptions.paste()}>
-            Paste<ContextMenu.Shortcut>Ctrl+V</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Item onclick={() => Notpad.editOptions.delete()}>
-            Delete<ContextMenu.Shortcut>Delete</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Separator />
-          <ContextMenu.Item onclick={() => Notpad.editOptions.selectAll()}>
-            Select All
-            <ContextMenu.Shortcut>Ctrl+A</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Item onclick={() => Notpad.editOptions.insertDateAndTime()}>
-            Time/Date
-            <CalendarClockIcon class="ml-auto text-muted-foreground" />
-          </ContextMenu.Item>
+          <EditMenuItems type="contextmenu" />
         </ContextMenu.Content>
       </ContextMenu.Root>
     </Tabs.Content>

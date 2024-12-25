@@ -19,8 +19,8 @@ export class EditOptions {
     const editor = Notpad.editors.getEditor(editorId);
     const quill = editor.quill!;
     const selection = quill.getSelection()!;
-    if (!selection) return;
 
+    if (!selection) return;
     const selectedContent = quill.getContents(selection.index, selection.length);
     const tempCont = document.createElement('div');
     new Quill(tempCont).setContents(selectedContent);
@@ -120,6 +120,7 @@ export class EditOptions {
   delete = (editorId?: string) => {
     const quill = Notpad.editors.getEditor(editorId).quill!;
     const range = quill.getSelection();
+
     if (range) {
       // Delete the selected text if any
       if (range.length > 0) {
@@ -135,20 +136,21 @@ export class EditOptions {
     Notpad.editors.setSelection(editor.id, new Range(0, quill.getLength()), true);
   };
 
-  insertDateAndTime = (editorId?: string) => {
+  insertOrReplace = ({ editorId, content }: { editorId?: string; content: string }) => {
     const editor = Notpad.editors.getEditor(editorId);
     const quill = editor.quill!;
-    const date = new Date().toLocaleString();
     const range = quill.getSelection();
+
     if (range) {
       // Delete the selected text if any
       if (range.length > 0) {
         quill.deleteText(range.index, range.length);
       }
     }
+
     const index = range?.index ?? 0;
-    quill.insertText(index, date);
+    quill.insertText(index, content);
     // Move caret to the end of the inserted text
-    Notpad.editors.setSelection(editor.id, new Range(index + date.length, 0), true);
+    Notpad.editors.setSelection(editor.id, new Range(index + content.length, 0), true);
   };
 }

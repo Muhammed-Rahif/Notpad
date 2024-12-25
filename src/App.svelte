@@ -1,5 +1,5 @@
 <script lang="ts">
-  import MenuBar from '@/components/MenuBar.svelte';
+  import MenuBar from '@/src/lib/components/menubar/MenuBar.svelte';
   import EditorTabs from '@/components/EditorTabs.svelte';
   import FontDialog from '@/components/font-dialog/FontDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';

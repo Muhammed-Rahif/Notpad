@@ -3,7 +3,7 @@
   import { type Snippet } from 'svelte';
   import * as Dialog from './index.js';
   import { cn } from '@/utils.js';
-  import Close from '@/components/icons/Close.svelte';
+  import CloseIcon from '@/components/icons/Close.svelte';
   import { draggable } from '@neodrag/svelte';
 
   let {
@@ -44,7 +44,7 @@
     <DialogPrimitive.Close
       class="absolute right-5 top-5 rounded-sm opacity-70 ring-offset-background transition-opacity data-[state=open]:bg-accent data-[state=open]:text-muted-foreground hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
     >
-      <Close class="size-4" />
+      <CloseIcon class="size-4" />
       <span class="sr-only">Close</span>
     </DialogPrimitive.Close>
   </DialogPrimitive.Content>

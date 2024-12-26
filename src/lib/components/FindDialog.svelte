@@ -3,8 +3,8 @@
   import * as Dialog from '@/components/ui/dialog';
   import { Input } from '@/components/ui/input';
   import { Notpad } from '@/helpers/notpad';
-  import ChevronDown from '@/components/icons/ChevronDown.svelte';
-  import ChevronUp from '@/components/icons/ChevronUp.svelte';
+  import ChevronDownIcon from '@/components/icons/ChevronDown.svelte';
+  import ChevronUpIcon from '@/components/icons/ChevronUp.svelte';
   import { Checkbox } from '@/components/ui/checkbox';
   import Label from '@/components/ui/label/label.svelte';
 
@@ -61,7 +61,7 @@
           size="icon"
           type="button"
         >
-          <ChevronUp />
+          <ChevronUpIcon />
         </Button>
         <Button
           onclick={() => {
@@ -77,7 +77,7 @@
           size="icon"
           type="button"
         >
-          <ChevronDown />
+          <ChevronDownIcon />
         </Button>
       </div>
       <Input

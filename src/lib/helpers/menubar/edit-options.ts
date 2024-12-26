@@ -117,6 +117,24 @@ export class EditOptions {
     }
   };
 
+  insertOrReplace = ({ editorId, content }: { editorId?: string; content: string }) => {
+    const editor = Notpad.editors.getEditor(editorId);
+    const quill = editor.quill!;
+    const range = quill.getSelection();
+
+    if (range) {
+      // Delete the selected text if any
+      if (range.length > 0) {
+        quill.deleteText(range.index, range.length);
+      }
+    }
+
+    const index = range?.index ?? 0;
+    quill.insertText(index, content);
+    // Move caret to the end of the inserted text
+    Notpad.editors.setSelection(editor.id, new Range(index + content.length, 0), true);
+  };
+
   delete = (editorId?: string) => {
     const quill = Notpad.editors.getEditor(editorId).quill!;
     const range = quill.getSelection();
@@ -134,23 +152,5 @@ export class EditOptions {
     const editor = Notpad.editors.getEditor(editorId);
     const quill = editor.quill!;
     Notpad.editors.setSelection(editor.id, new Range(0, quill.getLength()), true);
-  };
-
-  insertOrReplace = ({ editorId, content }: { editorId?: string; content: string }) => {
-    const editor = Notpad.editors.getEditor(editorId);
-    const quill = editor.quill!;
-    const range = quill.getSelection();
-
-    if (range) {
-      // Delete the selected text if any
-      if (range.length > 0) {
-        quill.deleteText(range.index, range.length);
-      }
-    }
-
-    const index = range?.index ?? 0;
-    quill.insertText(index, content);
-    // Move caret to the end of the inserted text
-    Notpad.editors.setSelection(editor.id, new Range(index + content.length, 0), true);
   };
 }

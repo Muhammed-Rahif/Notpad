@@ -1,20 +1,10 @@
-<script context="module">
-  import { writable } from 'svelte/store';
-
-  // Store to control the dialog's open state
-  const open = writable(false);
-
-  // Function to open the dialog
-  export function openShortcutsDialog() {
-    open.set(true);
-  }
-</script>
-
 <script lang="ts">
   import * as Table from '@/components/ui/table';
   import * as Dialog from '@/components/ui/dialog';
   import * as Menubar from '@/components/ui/menubar';
+  import { Notpad } from '@/helpers/notpad';
 
+  const open = Notpad.dialogs.shortcuts;
   const shortcuts = {
     New: 'Ctrl + Alt + N',
     Open: 'Ctrl + O',

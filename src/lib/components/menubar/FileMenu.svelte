@@ -24,7 +24,7 @@
       Print<Menubar.Shortcut>Ctrl+P</Menubar.Shortcut>
     </Menubar.Item>
     <Menubar.Separator />
-    <Menubar.Item onclick={Notpad.close}>
+    <Menubar.Item onclick={Notpad.exit}>
       Exit
       <LogoutIcon class="ml-auto text-muted-foreground" />
     </Menubar.Item>

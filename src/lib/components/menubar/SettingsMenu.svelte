@@ -1,19 +1,17 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
   // import { toggleMode, mode } from 'mode-watcher';
-  import { openFontDialog } from '@/components/font-dialog/FontDialog.svelte';
-  import { openAboutDialog } from '@/components/AboutDialog.svelte';
-  import { openShortcutsDialog } from '@/components/ShortcutsDialog.svelte';
   import InfoIcon from '@/components/icons/Info.svelte';
   import KeyboardIcon from '@/components/icons/Keyboard.svelte';
   import GithubOultineIcon from '@/components/icons/GithubOultine.svelte';
   import ALargeSmallIcon from '@/components/icons/ALargeSmall.svelte';
+  import { Notpad } from '@/helpers/notpad';
 </script>
 
 <Menubar.Menu>
   <Menubar.Trigger>Settings</Menubar.Trigger>
   <Menubar.Content>
-    <Menubar.Item onclick={openFontDialog}>
+    <Menubar.Item onclick={() => Notpad.dialogs.font.set(true)}>
       Font
       <ALargeSmallIcon class="ml-auto text-muted-foreground" />
     </Menubar.Item>
@@ -51,7 +49,10 @@
     </Menubar.Sub>
 
     <Menubar.Separator />
-    <Menubar.Item class="flex items-center gap-2" onclick={openShortcutsDialog}>
+    <Menubar.Item
+      class="flex items-center gap-2"
+      onclick={() => Notpad.dialogs.shortcuts.set(true)}
+    >
       Shortcuts
       <KeyboardIcon class="ml-auto text-muted-foreground" />
     </Menubar.Item>
@@ -61,7 +62,7 @@
         <GithubOultineIcon class="ml-auto text-muted-foreground" />
       </Menubar.Item>
     </a>
-    <Menubar.Item class="flex items-center gap-2" onclick={openAboutDialog}>
+    <Menubar.Item class="flex items-center gap-2" onclick={() => Notpad.dialogs.about.set(true)}>
       About Notpad
       <InfoIcon class="ml-auto text-muted-foreground" />
     </Menubar.Item>

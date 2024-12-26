@@ -8,7 +8,7 @@ export class Settings {
     fontFamily: FontFamily.SUSE,
     fontSize: FontSize.Size16,
     lineNumbers: false,
-    wrapLines: false
+    wrapLines: true
   };
 
   setFontFamily(fontFamily: FontFamily) {

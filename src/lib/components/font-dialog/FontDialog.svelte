@@ -1,12 +1,3 @@
-<script module>
-  import { get, writable } from 'svelte/store';
-  const open = writable(false);
-
-  export function openFontDialog() {
-    open.set(true);
-  }
-</script>
-
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
@@ -17,8 +8,10 @@
   import { Label } from '@/components/ui/label';
   import * as Card from '@/components/ui/card';
   import { FontFamily, FontSize } from '@/types/SettingsTypes';
+  import { get } from 'svelte/store';
 
   const currentSettings = get(settings);
+  const open = Notpad.dialogs.font;
 
   let fontFamily: FontFamily = $state(currentSettings.fontFamily);
   let fontSize: FontSize = $state(currentSettings.fontSize);

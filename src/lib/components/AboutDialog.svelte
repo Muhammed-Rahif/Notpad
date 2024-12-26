@@ -1,13 +1,3 @@
-<script module>
-  import { writable } from 'svelte/store';
-
-  const open = writable(false);
-
-  export function openAboutDialog() {
-    open.set(true);
-  }
-</script>
-
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
@@ -16,12 +6,13 @@
   import GitHubIcon from '@/components/icons/GitHub.svelte';
   import Separator from '@/components/ui/separator/separator.svelte';
   import { Badge } from '@/components/ui/badge';
-  import { openLicenseDialog } from '@/components/LicenseDialog.svelte';
   import { mode } from 'mode-watcher';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
   import appJson from '@/src/app.json';
   import { tick } from 'svelte';
+
+  const open = Notpad.dialogs.about;
 
   function closeDialog() {
     open.set(false);
@@ -30,7 +21,7 @@
   async function showLicense() {
     closeDialog();
     await tick();
-    openLicenseDialog();
+    Notpad.dialogs.license.set(true);
   }
 
   function openGithubRepo(e: MouseEvent) {

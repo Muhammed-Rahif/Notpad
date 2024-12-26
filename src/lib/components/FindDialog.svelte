@@ -1,13 +1,3 @@
-<script module>
-  import { get, writable } from 'svelte/store';
-
-  const open = writable(false);
-
-  export function toggleFindDialog() {
-    open.set(!get(open));
-  }
-</script>
-
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
@@ -17,6 +7,8 @@
   import ChevronUp from '@/components/icons/ChevronUp.svelte';
   import { Checkbox } from '@/components/ui/checkbox';
   import Label from '@/components/ui/label/label.svelte';
+
+  const open = Notpad.dialogs.find;
 
   let query: string = $state('');
   let replace: string = $state('');

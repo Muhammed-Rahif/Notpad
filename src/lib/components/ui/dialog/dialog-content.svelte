@@ -22,7 +22,7 @@
       draggable(ref, {
         handle: '.drag-handle',
         bounds: 'body',
-        defaultClassDragging: 'duration-0',
+        defaultClassDragging: '!duration-0',
         applyUserSelectHack: true
       });
   });

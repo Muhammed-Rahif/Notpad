@@ -5,15 +5,6 @@ import { toast } from 'svelte-sonner';
 import Quill from 'quill';
 import { Delta, Range } from 'quill/core';
 import type { EditorType } from '@/types/EditorTypes';
-import { Notpad } from '@/helpers/notpad';
-
-/**
- * https://github.com/sveltejs/svelte/issues/5817
- * https://github.com/sveltejs/svelte/issues/7304
- */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-/* @ts-ignore: error TS2614: Module '"*.svelte"' has no exported member 'openEditorCloseConfirmationDialog'. */
-import { openEditorCloseConfirmationDialog } from '@/components/EditorCloseConfirmationDialog.svelte';
 
 /**
  * A helper class for performing various editor-related tasks such as opening
@@ -80,17 +71,6 @@ export class Editors {
   remove = async (editorId?: string) => {
     const editor = this.getEditor(editorId);
     const editorsList = get(editors);
-
-    if (!editor.isSaved) {
-      const status = await openEditorCloseConfirmationDialog({
-        fileName: editor.fileName
-      });
-
-      if (status == 'cancel') return;
-      if (status == 'save') {
-        await Notpad.fileOptions.save({ saveAs: true });
-      }
-    }
 
     if (editorsList.length === 1) {
       this.createNew();

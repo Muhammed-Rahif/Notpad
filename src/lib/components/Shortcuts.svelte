@@ -1,8 +1,6 @@
 <script lang="ts">
   import { Notpad } from '@/helpers/notpad';
   import { shortcut } from '@svelte-put/shortcut';
-  import { toggleGoToDialog } from '@/components/GoToDialog.svelte';
-  import { toggleFindDialog } from '@/components/FindDialog.svelte';
 </script>
 
 <svelte:window
@@ -41,13 +39,13 @@
       {
         key: 'g',
         modifier: ['ctrl'],
-        callback: () => toggleGoToDialog(),
+        callback: () => Notpad.dialogs.goTo.update((open) => !open),
         preventDefault: true
       },
       {
         key: 'f',
         modifier: ['ctrl'],
-        callback: () => toggleFindDialog(),
+        callback: () => Notpad.dialogs.find.update((open) => !open),
         preventDefault: true
       },
       {

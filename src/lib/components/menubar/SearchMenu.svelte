@@ -1,18 +1,16 @@
 <script lang="ts">
+  import GoogleLineIcon from '@/components/icons/GoogleLine.svelte';
   import * as Menubar from '@/components/ui/menubar';
   import { Notpad } from '@/helpers/notpad';
-  import { toggleGoToDialog } from '@/components/GoToDialog.svelte';
-  import { toggleFindDialog } from '@/components/FindDialog.svelte';
-  import GoogleLineIcon from '@/components/icons/GoogleLine.svelte';
 </script>
 
 <Menubar.Menu>
   <Menubar.Trigger>Search</Menubar.Trigger>
   <Menubar.Content>
-    <Menubar.Item onclick={toggleFindDialog}>
+    <Menubar.Item onclick={() => Notpad.dialogs.find.set(true)}>
       Find/Replace<Menubar.Shortcut>Ctrl+F</Menubar.Shortcut>
     </Menubar.Item>
-    <Menubar.Item onclick={toggleGoToDialog}>
+    <Menubar.Item onclick={() => Notpad.dialogs.goTo.set(true)}>
       Go To<Menubar.Shortcut>Ctrl+G</Menubar.Shortcut>
     </Menubar.Item>
     <Menubar.Separator />

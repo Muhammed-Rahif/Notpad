@@ -1,14 +1,15 @@
 import { toast } from 'svelte-sonner';
-import { FileOptions } from '@/src/lib/helpers/menubar/file-options';
+import { FileOptions } from '@/helpers/menubar/file-options';
 import { Editors } from '@/helpers/editors';
 import { NotpadStorage } from '@/store/storage';
 import { Settings } from '@/helpers/settings';
-import { EditOptions } from '@/src/lib/helpers/menubar/edit-options';
+import { EditOptions } from '@/helpers/menubar/edit-options';
 import { GithubApi } from '@/helpers/github-api';
-import { SearchOptions } from '@/src/lib/helpers/menubar/search-options';
-import { ViewOptions } from '@/src/lib/helpers/menubar/view-options';
+import { SearchOptions } from '@/helpers/menubar/search-options';
+import { ViewOptions } from '@/helpers/menubar/view-options';
 import { exit } from '@tauri-apps/plugin-process';
 import { isTauri } from '@/src/lib';
+import { Dialogs } from '@/helpers/dialogs';
 
 export class Notpad {
   public static fileOptions: FileOptions = new FileOptions();
@@ -19,13 +20,14 @@ export class Notpad {
   public static github: GithubApi = new GithubApi();
   public static searchOptions: SearchOptions = new SearchOptions();
   public static viewOptions: ViewOptions = new ViewOptions();
+  public static dialogs: Dialogs = new Dialogs();
 
   public static init = async () => {
     await this.storage.init();
     await this.editors.init();
   };
 
-  static close = () => {
+  static exit = () => {
     try {
       if (isTauri) {
         exit();

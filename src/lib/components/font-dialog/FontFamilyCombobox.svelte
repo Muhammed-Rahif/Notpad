@@ -9,7 +9,7 @@
   import { get } from 'svelte/store';
   import CheckIcon from '@/components/icons/Check.svelte';
   import ChevronsUpDownIcon from '@/components/icons/ChevronsUpDown.svelte';
-  import { FontFamily } from '@/types/SettingsTypes';
+  import { FontFamily } from '@/src/lib/types/SettingsType';
 
   interface Props {
     value: FontFamily;

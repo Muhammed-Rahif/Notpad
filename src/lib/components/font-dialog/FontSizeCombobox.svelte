@@ -9,7 +9,7 @@
   import { cn } from '@/utils';
   import { settings } from '@/store/store';
   import { get } from 'svelte/store';
-  import { FontSize } from '@/types/SettingsTypes';
+  import { FontSize } from '@/src/lib/types/SettingsType';
 
   interface Props {
     value: FontSize;

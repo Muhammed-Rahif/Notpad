@@ -32,6 +32,20 @@ export enum FontSize {
   Size72 = 72
 }
 
+export enum CaretAnimation {
+  Slow = 'Slow',
+  Medium = 'Medium',
+  Fast = 'Fast',
+  Off = 'Off'
+}
+
+export enum CaretStyle {
+  VerticalBar = 'Vertical Bar ( | )',
+  Block = 'Block ( ▮ )',
+  HollowBlock = 'Hollow Block ( ▯ )',
+  Underline = 'Underline ( _ )'
+}
+
 /**
  * Interface representing the settings for the application.
  */
@@ -60,4 +74,11 @@ export interface SettingsType {
    * Should wrap long lines.
    */
   wrapLines: boolean;
+  /**
+   * Caret's specific configs. Style and Animation.
+   */
+  caret: {
+    style: CaretStyle;
+    animation: CaretAnimation;
+  };
 }

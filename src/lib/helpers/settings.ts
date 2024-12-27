@@ -1,5 +1,11 @@
 import { settings } from '@/store/store';
-import { FontFamily, FontSize, type SettingsType } from '@/types/SettingsTypes';
+import {
+  CaretAnimation,
+  CaretStyle,
+  FontFamily,
+  FontSize,
+  type SettingsType
+} from '@/types/SettingsType';
 
 export class Settings {
   static defaultSettings: SettingsType = {
@@ -8,7 +14,11 @@ export class Settings {
     fontFamily: FontFamily.SUSE,
     fontSize: FontSize.Size16,
     lineNumbers: false,
-    wrapLines: true
+    wrapLines: true,
+    caret: {
+      animation: CaretAnimation.Medium,
+      style: CaretStyle.VerticalBar
+    }
   };
 
   setFontFamily(fontFamily: FontFamily) {
@@ -17,5 +27,12 @@ export class Settings {
 
   setFontSize(fontSize: FontSize) {
     settings.update((value) => ({ ...value, fontSize }));
+  }
+
+  updateCaret(caret: Partial<SettingsType['caret']>) {
+    settings.update((value) => ({
+      ...value,
+      caret: { ...value.caret, ...caret }
+    }));
   }
 }

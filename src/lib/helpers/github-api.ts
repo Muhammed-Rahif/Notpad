@@ -1,4 +1,4 @@
-import type { ContributorType, ReleasesType } from '@/types/GithubApiTypes';
+import type { ContributorType, ReleasesType } from '@/src/lib/types/GithubApiType';
 
 export class GithubApi {
   public async getAppLicense(): Promise<string | undefined> {

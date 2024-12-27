@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { settings } from '@/store/store';
 import { Notpad } from '@/helpers/notpad';
-import type { SettingsType } from '@/types/SettingsTypes';
+import type { SettingsType } from '@/src/lib/types/SettingsType';
 
 export class ViewOptions {
   public toggleStatusBar() {

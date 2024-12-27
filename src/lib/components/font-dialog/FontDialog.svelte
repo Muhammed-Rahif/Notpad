@@ -7,7 +7,7 @@
   import FontSizeCombobox from './FontSizeCombobox.svelte';
   import { Label } from '@/components/ui/label';
   import * as Card from '@/components/ui/card';
-  import { FontFamily, FontSize } from '@/types/SettingsTypes';
+  import { FontFamily, FontSize } from '@/src/lib/types/SettingsType';
   import { get } from 'svelte/store';
 
   const currentSettings = get(settings);

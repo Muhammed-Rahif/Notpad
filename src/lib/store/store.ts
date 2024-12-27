@@ -1,6 +1,6 @@
 import { get, writable } from 'svelte/store';
 import type { EditorType } from '@/types/EditorTypes';
-import { type SettingsType } from '@/types/SettingsTypes';
+import { type SettingsType } from '@/src/lib/types/SettingsType';
 import { Settings } from '@/helpers/settings';
 import { Editors } from '@/helpers/editors';
 

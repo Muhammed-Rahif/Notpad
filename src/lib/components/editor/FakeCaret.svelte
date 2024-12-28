@@ -4,6 +4,8 @@
   import { position as getCaretPosition } from 'caret-pos';
   import { settings } from '@/store/store';
   import type Quill from 'quill';
+  import { cn } from '@/utils';
+  import { CaretAnimation, CaretStyle } from '@/types/SettingsType';
 
   interface Props {
     quill: Quill;
@@ -46,13 +48,29 @@
   });
 </script>
 
-<span
-  class="fake-caret absolute z-0 w-0.5 animate-caret-blink
-    rounded-[.06em] bg-primary"
-  bind:this={fakeCaretElement}
-  style="top: {caret.top}px;
-    left: {caret.left}px;
-    height: {caret.height}px;
-    width: {$settings.zoom * 2}px"
-  spellcheck="false"
-></span>
+{#if $settings.caret.enable}
+  <span
+    class={cn('fake-caret absolute z-0 w-0.5 animate-caret-blink rounded-[.06em]', {
+      '[transition:left_600ms,top_600ms]': $settings.caret.animation == CaretAnimation.Slow,
+      '[transition:left_100ms,top_100ms]': $settings.caret.animation == CaretAnimation.Fast,
+      '[transition:left_300ms,top_300ms]': $settings.caret.animation == CaretAnimation.Medium,
+      '[transition:left_0s,top_0s]': $settings.caret.animation == CaretAnimation.Off,
+      'bg-primary': $settings.caret.style != CaretStyle.HollowBlock,
+      'border border-primary': $settings.caret.style == CaretStyle.HollowBlock
+    })}
+    style:width="calc({$settings.caret.style == CaretStyle.VerticalBar ? '2px' : '1ch'} * var(--editor-zoom))"
+    style:height={$settings.caret.style == CaretStyle.Underline ? '2px' : `${caret.height}px`}
+    style:margin-top={$settings.caret.style == CaretStyle.Underline
+      ? `${caret.height + 2}px`
+      : undefined}
+    style:top="{caret.top}px"
+    style:left="{caret.left}px"
+    bind:this={fakeCaretElement}
+  ></span>
+{/if}
+
+<style>
+  .fake-caret {
+    transition-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+</style>

@@ -51,7 +51,3 @@
 .editor-container[data-wrap-lines='false'] .ql-editor > * {
   @apply w-max;
 }
-
-.fake-caret {
-  transition: all 250ms cubic-bezier(0, 0.55, 0.45, 1);
-}

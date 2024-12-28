@@ -19,6 +19,14 @@
     </Menubar.Item>
 
     <Menubar.Separator />
+    <Menubar.CheckboxItem
+      checked={$settings.caret.enable}
+      onclick={Notpad.settings.toggleCustomCaret}
+    >
+      Custom Caret
+    </Menubar.CheckboxItem>
+
+    <Menubar.Separator />
     <Menubar.Sub>
       <Menubar.SubTrigger>Theme</Menubar.SubTrigger>
       <Menubar.SubContent>
@@ -65,38 +73,40 @@
       </Menubar.SubContent>
     </Menubar.Sub>
 
-    <Menubar.Sub>
-      <Menubar.SubTrigger>Caret</Menubar.SubTrigger>
-      <Menubar.SubContent>
-        <Menubar.Sub>
-          <Menubar.SubTrigger class="gap-2">Style</Menubar.SubTrigger>
-          <Menubar.SubContent>
-            {#each Object.values(CaretStyle) as caretStyle}
-              <Menubar.CheckboxItem
-                checked={$settings.caret.style == caretStyle}
-                onclick={() => Notpad.settings.updateCaret({ style: caretStyle })}
-              >
-                {caretStyle}
-              </Menubar.CheckboxItem>
-            {/each}
-          </Menubar.SubContent>
-        </Menubar.Sub>
+    {#if $settings.caret.enable}
+      <Menubar.Sub>
+        <Menubar.SubTrigger>Caret</Menubar.SubTrigger>
+        <Menubar.SubContent>
+          <Menubar.Sub>
+            <Menubar.SubTrigger class="gap-2">Style</Menubar.SubTrigger>
+            <Menubar.SubContent>
+              {#each Object.values(CaretStyle) as caretStyle}
+                <Menubar.CheckboxItem
+                  checked={$settings.caret.style == caretStyle}
+                  onclick={() => Notpad.settings.updateCaret({ style: caretStyle })}
+                >
+                  {caretStyle}
+                </Menubar.CheckboxItem>
+              {/each}
+            </Menubar.SubContent>
+          </Menubar.Sub>
 
-        <Menubar.Sub>
-          <Menubar.SubTrigger class="gap-2">Animation</Menubar.SubTrigger>
-          <Menubar.SubContent>
-            {#each Object.values(CaretAnimation) as caretAnimation}
-              <Menubar.CheckboxItem
-                checked={$settings.caret.animation == caretAnimation}
-                onclick={() => Notpad.settings.updateCaret({ animation: caretAnimation })}
-              >
-                {caretAnimation}
-              </Menubar.CheckboxItem>
-            {/each}
-          </Menubar.SubContent>
-        </Menubar.Sub>
-      </Menubar.SubContent>
-    </Menubar.Sub>
+          <Menubar.Sub>
+            <Menubar.SubTrigger class="gap-2">Animation</Menubar.SubTrigger>
+            <Menubar.SubContent>
+              {#each Object.values(CaretAnimation) as caretAnimation}
+                <Menubar.CheckboxItem
+                  checked={$settings.caret.animation == caretAnimation}
+                  onclick={() => Notpad.settings.updateCaret({ animation: caretAnimation })}
+                >
+                  {caretAnimation}
+                </Menubar.CheckboxItem>
+              {/each}
+            </Menubar.SubContent>
+          </Menubar.Sub>
+        </Menubar.SubContent>
+      </Menubar.Sub>
+    {/if}
 
     <Menubar.Separator />
     <Menubar.Item

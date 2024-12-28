@@ -75,10 +75,11 @@ export interface SettingsType {
    */
   wrapLines: boolean;
   /**
-   * Caret's specific configs. Style and Animation.
+   * Caret's specific configs. Style and Animation. Enable or disable.
    */
   caret: {
     style: CaretStyle;
     animation: CaretAnimation;
+    enable: boolean;
   };
 }

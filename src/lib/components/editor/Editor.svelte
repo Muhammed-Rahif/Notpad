@@ -113,15 +113,17 @@
   });
 </script>
 
-<div class="relative h-full overflow-hidden">
+<div
+  class="relative h-full overflow-hidden"
+  style:--editor-zoom={$settings.zoom}
+  style:--editor-font-size="{$settings.fontSize}px"
+  style:--editor-font-family={$settings.fontFamily}
+  style:--line-no-digits-count={lineNo.toString().length}
+>
   <div
     class="editor-container relative flex overflow-hidden
-    rounded-none bg-transparent text-sm caret-transparent
-    duration-300"
-    style="--editor-font-family: '{$settings.fontFamily}';
-    --editor-font-size: {$settings.fontSize}px;
-    --editor-zoom: {$settings.zoom};
-    --line-no-digits-count: {lineNo.toString().length}"
+    rounded-none bg-transparent text-sm duration-300"
+    class:caret-transparent={$settings.caret.enable}
     data-line-numbers={$settings.lineNumbers}
     data-wrap-lines={$settings.wrapLines}
     bind:this={editorContainer}

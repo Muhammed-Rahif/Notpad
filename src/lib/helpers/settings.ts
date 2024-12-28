@@ -17,7 +17,8 @@ export class Settings {
     wrapLines: true,
     caret: {
       animation: CaretAnimation.Medium,
-      style: CaretStyle.VerticalBar
+      style: CaretStyle.VerticalBar,
+      enable: true
     }
   };
 
@@ -33,6 +34,13 @@ export class Settings {
     settings.update((value) => ({
       ...value,
       caret: { ...value.caret, ...caret }
+    }));
+  }
+
+  toggleCustomCaret() {
+    settings.update((value) => ({
+      ...value,
+      caret: { ...value.caret, enable: !value.caret.enable }
     }));
   }
 }

@@ -32,7 +32,7 @@ export default defineConfig({
   define: {
     APP_VERSION: JSON.stringify(process.env.npm_package_version)
   },
-  base: '/Notpad/',
+  base: baseUrl() ?? '/Notpad/',
   build: {
     outDir: 'www',
     rollupOptions: {
@@ -92,7 +92,7 @@ export default defineConfig({
         display: 'standalone',
         dir: 'ltr',
         lang: 'en-IN',
-        start_url: '/Notpad',
+        start_url: baseUrl() ?? '/Notpad',
         scope: '.'
       },
       workbox: {

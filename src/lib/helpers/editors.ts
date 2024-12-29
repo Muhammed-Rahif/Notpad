@@ -4,7 +4,7 @@ import { generate as genId } from 'short-uuid';
 import { toast } from 'svelte-sonner';
 import Quill from 'quill';
 import { Delta, Range } from 'quill/core';
-import type { EditorType } from '@/types/EditorTypes';
+import type { EditorType } from '@/types/EditorType';
 
 /**
  * A helper class for performing various editor-related tasks such as opening

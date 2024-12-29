@@ -1,50 +1,74 @@
+import clickSound from '@/src/assets/sounds/click.wav';
+
 /**
  * Available font families for the editor.
  */
-export enum FontFamily {
-  SUSE = 'SUSE',
-  Baloo2 = 'Baloo 2',
-  BricolageGrotesque = 'Bricolage Grotesque',
-  Lora = 'Lora',
-  RobotoSlab = 'Roboto Slab',
-  Inconsolata = 'Inconsolata',
-  Parkinsans = 'Parkinsans'
-}
+export const FontFamily = {
+  SUSE: 'SUSE',
+  Baloo2: 'Baloo 2',
+  BricolageGrotesque: 'Bricolage Grotesque',
+  Lora: 'Lora',
+  RobotoSlab: 'Roboto Slab',
+  Inconsolata: 'Inconsolata',
+  Parkinsans: 'Parkinsans'
+};
 
-export enum FontSize {
-  Size6 = 6,
-  Size7 = 7,
-  Size8 = 8,
-  Size9 = 9,
-  Size10 = 10,
-  Size11 = 11,
-  Size12 = 12,
-  Size14 = 14,
-  Size16 = 16,
-  Size18 = 18,
-  Size20 = 20,
-  Size22 = 22,
-  Size24 = 24,
-  Size26 = 26,
-  Size28 = 28,
-  Size36 = 36,
-  Size48 = 48,
-  Size72 = 72
-}
+export const FontSize = {
+  '6': 6,
+  '7': 7,
+  '8': 8,
+  '9': 9,
+  '10': 10,
+  '11': 11,
+  '12': 12,
+  '14': 14,
+  '16': 16,
+  '18': 18,
+  '20': 20,
+  '22': 22,
+  '24': 24,
+  '26': 26,
+  '28': 28,
+  '36': 36,
+  '48': 48,
+  '72': 72
+};
 
-export enum CaretAnimation {
-  Slow = 'Slow',
-  Medium = 'Medium',
-  Fast = 'Fast',
-  Off = 'Off'
-}
+export const CaretAnimation = {
+  Slow: '600ms',
+  Medium: '300ms',
+  Fast: '100ms',
+  Off: '0ms'
+};
 
-export enum CaretStyle {
-  VerticalBar = 'Vertical Bar ( | )',
-  Block = 'Block ( ▮ )',
-  HollowBlock = 'Hollow Block ( ▯ )',
-  Underline = 'Underline ( _ )'
-}
+export const CaretStyle = {
+  VerticalBar: '|',
+  Block: '▮',
+  HollowBlock: '▯',
+  Underline: '_'
+};
+
+export const TypeEffectSound = {
+  Click: clickSound,
+  Pop: clickSound,
+  None: null
+};
+
+export const TypeEffectVolume = {
+  None: 0,
+  OneQuarter: 0.25,
+  Half: 0.5,
+  ThreeQuarter: 0.75,
+  Full: 1
+};
+
+export const TypeEffectVibration = {
+  Strong: 1,
+  High: 0.75,
+  Medium: 0.5,
+  Low: 0.25,
+  None: 0
+};
 
 /**
  * Interface representing the settings for the application.
@@ -65,11 +89,11 @@ export interface SettingsType {
   /**
    * The font family of the editor.
    */
-  fontFamily: FontFamily;
+  fontFamily: keyof typeof FontFamily;
   /**
    * The font size of the editor.
    */
-  fontSize: FontSize;
+  fontSize: keyof typeof FontSize;
   /**
    * Should wrap long lines.
    */
@@ -78,8 +102,16 @@ export interface SettingsType {
    * Caret's specific configs. Style and Animation. Enable or disable.
    */
   caret: {
-    style: CaretStyle;
-    animation: CaretAnimation;
+    style: keyof typeof CaretStyle;
+    animation: keyof typeof CaretAnimation;
     enable: boolean;
+  };
+  /**
+   * Typing effect configurations.
+   */
+  typeEffect: {
+    sound: keyof typeof TypeEffectSound;
+    volume: keyof typeof TypeEffectVolume;
+    vibration: keyof typeof TypeEffectVibration;
   };
 }

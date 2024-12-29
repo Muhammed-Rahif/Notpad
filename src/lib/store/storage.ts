@@ -1,6 +1,6 @@
 import localforage from 'localforage';
 import { activeTabId, editors, settings } from '@/store/store';
-import type { EditorType } from '@/types/EditorTypes';
+import type { EditorType } from '@/types/EditorType';
 import type { SettingsType } from '@/src/lib/types/SettingsType';
 import { Editors } from '@/helpers/editors';
 import { Settings } from '@/helpers/settings';

@@ -6,7 +6,7 @@
   import { Notpad } from '@/helpers/notpad';
   import { settings } from '@/store/store';
   import FakeCaret from './FakeCaret.svelte';
-  import type { EditorType } from '@/src/lib/types/EditorType';
+  import type { EditorType } from '@/types/EditorType';
   import 'quill/dist/quill.core.css';
   import './Editor.css';
 
@@ -109,7 +109,18 @@
 
     quill.on('editor-change', updateCaretPosAndEditorData);
     // Marks editor as not saved when text content changes.
-    quill.on('text-change', () => Notpad.editors.setIsSaved(editor.id, false));
+    quill.on('text-change', (delta) => {
+      let pressedKey: undefined | string;
+
+      delta.ops.forEach((op) => {
+        if (op.insert && typeof op.insert === 'string' && op.insert.length == 1) {
+          pressedKey = op.insert;
+        }
+      });
+      Notpad.typeEffectPlayer.play(pressedKey);
+
+      Notpad.editors.setIsSaved(editor.id, false);
+    });
   });
 </script>
 
@@ -124,6 +135,7 @@
     class="editor-container relative flex overflow-hidden
     rounded-none bg-transparent text-sm duration-300"
     class:caret-transparent={$settings.caret.enable}
+    class:caret-primary={!$settings.caret.enable}
     data-line-numbers={$settings.lineNumbers}
     data-wrap-lines={$settings.wrapLines}
     bind:this={editorContainer}

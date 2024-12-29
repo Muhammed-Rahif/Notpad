@@ -12,7 +12,7 @@
   import { FontFamily } from '@/src/lib/types/SettingsType';
 
   interface Props {
-    value: FontFamily;
+    value: keyof typeof FontFamily;
   }
 
   let triggerRef = $state<HTMLButtonElement>(null!);
@@ -32,7 +32,7 @@
     });
   }
 
-  const onSelect = (currentValue: FontFamily) => {
+  const onSelect = (currentValue: keyof typeof FontFamily) => {
     value = currentValue;
     closeAndFocusTrigger();
   };
@@ -68,7 +68,12 @@
       <Command.Empty>No font family found.</Command.Empty>
       <Command.Group class="max-h-56 overflow-y-auto">
         {#each Object.values(FontFamily) as fontFamily}
-          <Command.Item value={fontFamily} onSelect={() => onSelect(fontFamily)}>
+          <Command.Item
+            value={fontFamily}
+            onSelect={() => {
+              onSelect(fontFamily as keyof typeof FontFamily);
+            }}
+          >
             <CheckIcon class={cn('mr-2', value !== fontFamily && 'text-transparent')} />
             {fontFamily == FontFamily.SUSE ? `${fontFamily} (Default)` : fontFamily}
           </Command.Item>

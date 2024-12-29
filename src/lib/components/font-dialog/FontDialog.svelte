@@ -13,8 +13,8 @@
   const currentSettings = get(settings);
   const open = Notpad.dialogs.font;
 
-  let fontFamily: FontFamily = $state(currentSettings.fontFamily);
-  let fontSize: FontSize = $state(currentSettings.fontSize);
+  let fontFamily: keyof typeof FontFamily = $state(currentSettings.fontFamily);
+  let fontSize: keyof typeof FontSize = $state(currentSettings.fontSize);
 
   function closeFontDialog({ submit } = { submit: false }) {
     open.set(false);
@@ -26,8 +26,8 @@
   }
 
   function resetFontDefault() {
-    fontFamily = FontFamily.SUSE;
-    fontSize = FontSize.Size16;
+    fontFamily = 'SUSE';
+    fontSize = '16';
   }
 </script>
 

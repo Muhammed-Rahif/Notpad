@@ -10,8 +10,16 @@ import { ViewOptions } from '@/helpers/menubar/view-options';
 import { exit } from '@tauri-apps/plugin-process';
 import { isTauri } from '@/src/lib';
 import { Dialogs } from '@/helpers/dialogs';
+import { TypeEffectPlayer } from '@/helpers/type-effect-player';
+import { editors, activeTabId, settings } from '@/store/store';
 
 export class Notpad {
+  public static init = async () => {
+    this.typeEffectPlayer.init();
+    await this.storage.init();
+    await this.editors.init();
+  };
+
   public static fileOptions: FileOptions = new FileOptions();
   public static editOptions: EditOptions = new EditOptions();
   public static editors: Editors = new Editors();
@@ -21,10 +29,11 @@ export class Notpad {
   public static searchOptions: SearchOptions = new SearchOptions();
   public static viewOptions: ViewOptions = new ViewOptions();
   public static dialogs: Dialogs = new Dialogs();
-
-  public static init = async () => {
-    await this.storage.init();
-    await this.editors.init();
+  public static typeEffectPlayer: TypeEffectPlayer = new TypeEffectPlayer();
+  public static stores = {
+    editors,
+    activeTabId,
+    settings
   };
 
   static exit = () => {

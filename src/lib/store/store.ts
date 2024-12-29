@@ -1,5 +1,5 @@
 import { get, writable } from 'svelte/store';
-import type { EditorType } from '@/types/EditorTypes';
+import type { EditorType } from '@/types/EditorType';
 import { type SettingsType } from '@/src/lib/types/SettingsType';
 import { Settings } from '@/helpers/settings';
 import { Editors } from '@/helpers/editors';
@@ -24,3 +24,5 @@ export const activeTabId = writable<string>(get(editors).at(0)!.id);
  * A writable store that holds the settings for the application.
  */
 export const settings = writable<SettingsType>(Settings.defaultSettings);
+
+// TODO: make this as class

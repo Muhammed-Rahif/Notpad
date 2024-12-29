@@ -50,14 +50,14 @@
 
 {#if $settings.caret.enable}
   <span
-    class={cn('fake-caret absolute z-0 w-0.5 animate-caret-blink rounded-[.06em]', {
-      '[transition:left_600ms,top_600ms]': $settings.caret.animation == CaretAnimation.Slow,
-      '[transition:left_100ms,top_100ms]': $settings.caret.animation == CaretAnimation.Fast,
-      '[transition:left_300ms,top_300ms]': $settings.caret.animation == CaretAnimation.Medium,
-      '[transition:left_0s,top_0s]': $settings.caret.animation == CaretAnimation.Off,
-      'bg-primary': $settings.caret.style != CaretStyle.HollowBlock,
-      'border border-primary': $settings.caret.style == CaretStyle.HollowBlock
-    })}
+    class={cn(
+      'fake-caret absolute z-0 w-0.5 animate-caret-blink rounded-[.06em]',
+      '[transition:left_var(--caret-animation-duration),top_var(--caret-animation-duration)]',
+      {
+        'bg-primary': $settings.caret.style != CaretStyle.HollowBlock,
+        'border border-primary': $settings.caret.style == CaretStyle.HollowBlock
+      }
+    )}
     style:width="calc({$settings.caret.style == CaretStyle.VerticalBar ? '2px' : '1ch'} * var(--editor-zoom))"
     style:height={$settings.caret.style == CaretStyle.Underline ? '2px' : `${caret.height}px`}
     style:margin-top={$settings.caret.style == CaretStyle.Underline
@@ -65,6 +65,7 @@
       : undefined}
     style:top="{caret.top}px"
     style:left="{caret.left}px"
+    style:--caret-animation-duration={CaretAnimation[$settings.caret.animation]}
     bind:this={fakeCaretElement}
   ></span>
 {/if}

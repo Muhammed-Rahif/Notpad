@@ -12,14 +12,14 @@
   import { FontSize } from '@/src/lib/types/SettingsType';
 
   interface Props {
-    value: FontSize;
+    value: keyof typeof FontSize;
   }
 
   let triggerRef = $state<HTMLButtonElement>(null!);
   let open = $state(false);
-  let { value = $bindable() }: Props = $props();
+  let { value: key = $bindable() }: Props = $props();
   let selectedValue = $derived(
-    Object.values(FontSize).find((f) => f === value) ?? $settings.fontSize
+    Object.values(FontSize).find((f) => f === FontSize[key]) ?? $settings.fontSize
   );
 
   // We want to refocus the trigger button when the user selects
@@ -32,13 +32,13 @@
     });
   }
 
-  const onSelect = (currentValue: FontSize | string) => {
-    value = currentValue as FontSize;
+  const onSelect = (currentValue: number | string) => {
+    key = currentValue as keyof typeof FontSize;
     closeAndFocusTrigger();
   };
 
   onMount(() => () => {
-    value = get(settings).fontSize;
+    key = get(settings).fontSize;
   });
 </script>
 
@@ -56,7 +56,7 @@
           role="combobox"
           aria-expanded={open}
         >
-          {selectedValue == FontSize.Size16 ? `${selectedValue} (Default)` : selectedValue}
+          {selectedValue == '16' ? `${selectedValue} (Default)` : selectedValue}
           <ChevronsUpDownIcon class="ml-2 shrink-0 opacity-50" />
         </Button>
       </div>
@@ -70,8 +70,8 @@
         {#each Object.values(FontSize).filter((s) => !isNaN(Number(s))) as fontSize}
           {@const fSize = fontSize.toString()}
           <Command.Item value={fSize} onSelect={() => onSelect(fontSize)}>
-            <CheckIcon class={cn('mr-2', value !== fontSize && 'text-transparent')} />
-            {fontSize == FontSize.Size16 ? `${fontSize} (Default)` : fontSize}
+            <CheckIcon class={cn('mr-2', FontSize[key] !== fontSize && 'text-transparent')} />
+            {fontSize == 16 ? `${fontSize} (Default)` : fontSize}
           </Command.Item>
         {/each}
       </Command.Group>

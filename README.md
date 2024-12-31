@@ -83,7 +83,7 @@
 
 ## Screenshot
 
-[![Product Name Screen Shot][product-screenshot]](https://muhammed-rahif.github.io/Notpad/)
+![image](https://github.com/user-attachments/assets/f441ea22-6262-4aa8-afc3-8e913b541965)
 
 ## Built With
 

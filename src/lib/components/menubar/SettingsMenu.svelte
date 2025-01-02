@@ -49,7 +49,7 @@
         <Menubar.Sub>
           <Menubar.SubTrigger class="gap-2">Sound</Menubar.SubTrigger>
           <Menubar.SubContent>
-            {#each Object.values(TypeEffectSound) as key}
+            {#each Object.keys(TypeEffectSound) as key}
               <Menubar.CheckboxItem
                 checked={$settings.typeEffect.sound == key}
                 onclick={() => {
@@ -66,7 +66,6 @@
           <Menubar.SubTrigger class="gap-2">Volume</Menubar.SubTrigger>
           <Menubar.SubContent>
             {#each Object.keys(TypeEffectVolume) as key}
-              {console.log($settings.typeEffect.volume, key)}
               <Menubar.CheckboxItem
                 checked={$settings.typeEffect.volume == key}
                 onclick={() => {
@@ -81,23 +80,25 @@
           </Menubar.SubContent>
         </Menubar.Sub>
 
-        <Menubar.Sub>
-          <Menubar.SubTrigger class="gap-2">Vibration</Menubar.SubTrigger>
-          <Menubar.SubContent>
-            {#each Object.keys(TypeEffectVibration) as key}
-              <Menubar.CheckboxItem
-                checked={$settings.typeEffect.vibration == key}
-                onclick={() => {
-                  Notpad.settings.updateTypeEffect({
-                    vibration: key as keyof typeof TypeEffectVibration
-                  });
-                }}
-              >
-                {key}
-              </Menubar.CheckboxItem>
-            {/each}
-          </Menubar.SubContent>
-        </Menubar.Sub>
+        {#if 'vibrate' in navigator}
+          <Menubar.Sub>
+            <Menubar.SubTrigger class="gap-2">Vibration</Menubar.SubTrigger>
+            <Menubar.SubContent>
+              {#each Object.keys(TypeEffectVibration) as key}
+                <Menubar.CheckboxItem
+                  checked={$settings.typeEffect.vibration == key}
+                  onclick={() => {
+                    Notpad.settings.updateTypeEffect({
+                      vibration: key as keyof typeof TypeEffectVibration
+                    });
+                  }}
+                >
+                  {key}
+                </Menubar.CheckboxItem>
+              {/each}
+            </Menubar.SubContent>
+          </Menubar.Sub>
+        {/if}
       </Menubar.SubContent>
     </Menubar.Sub>
 
@@ -108,7 +109,7 @@
           <Menubar.Sub>
             <Menubar.SubTrigger class="gap-2">Style</Menubar.SubTrigger>
             <Menubar.SubContent>
-              {#each Object.values(CaretStyle) as key}
+              {#each Object.keys(CaretStyle) as key}
                 <Menubar.CheckboxItem
                   checked={$settings.caret.style == key}
                   onclick={() => {
@@ -124,7 +125,7 @@
           <Menubar.Sub>
             <Menubar.SubTrigger class="gap-2">Animation</Menubar.SubTrigger>
             <Menubar.SubContent>
-              {#each Object.values(CaretAnimation) as key}
+              {#each Object.keys(CaretAnimation) as key}
                 <Menubar.CheckboxItem
                   checked={$settings.caret.animation == key}
                   onclick={() => {

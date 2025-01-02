@@ -94,7 +94,7 @@
   const updateCaretPosAndEditorData = async () => {
     updateEditorData();
     await tick();
-    fakeCaret.updateCaretPosition();
+    fakeCaret?.updateCaretPosition();
   };
 
   onMount(async () => {
@@ -110,15 +110,15 @@
     quill.on('editor-change', updateCaretPosAndEditorData);
     // Marks editor as not saved when text content changes.
     quill.on('text-change', (delta) => {
-      let pressedKey: undefined | string;
+      let insertedText: undefined | string;
 
       delta.ops.forEach((op) => {
         if (op.insert && typeof op.insert === 'string' && op.insert.length == 1) {
-          pressedKey = op.insert;
+          insertedText = op.insert;
         }
       });
-      Notpad.typeEffectPlayer.play(pressedKey);
 
+      Notpad.typeEffectPlayer.play(insertedText);
       Notpad.editors.setIsSaved(editor.id, false);
     });
   });

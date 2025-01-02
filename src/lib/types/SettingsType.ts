@@ -1,4 +1,16 @@
 import clickSound from '@/src/assets/sounds/click.wav';
+import beepSound from '@/src/assets/sounds/beep.wav';
+import damageSound from '@/src/assets/sounds/damage.wav';
+import fistFightSound from '@/src/assets/sounds/fist-fight.wav';
+import hitmarkerSound from '@/src/assets/sounds/hitmarker.wav';
+import missedPunchSound from '@/src/assets/sounds/missed-punch.wav';
+import nkCreamsSound from '@/src/assets/sounds/nk-creams.wav';
+import osuSound from '@/src/assets/sounds/osu.wav';
+import popSound from '@/src/assets/sounds/pop.wav';
+import rubberKeysSound from '@/src/assets/sounds/rubber-keys.wav';
+import squareSound from '@/src/assets/sounds/square.wav';
+import triangleSound from '@/src/assets/sounds/triangle.wav';
+import typewriterSound from '@/src/assets/sounds/typewriter.wav';
 
 /**
  * Available font families for the editor.
@@ -50,7 +62,18 @@ export const CaretStyle = {
 
 export const TypeEffectSound = {
   Click: clickSound,
-  Pop: clickSound,
+  Beep: beepSound,
+  Damage: damageSound,
+  'Fist Fight': fistFightSound,
+  Hitmarker: hitmarkerSound,
+  'Missed Punch': missedPunchSound,
+  'Nk Creams': nkCreamsSound,
+  Osu: osuSound,
+  Pop: popSound,
+  'Rubber Keys': rubberKeysSound,
+  Square: squareSound,
+  Triangle: triangleSound,
+  Typewriter: typewriterSound,
   None: null
 };
 

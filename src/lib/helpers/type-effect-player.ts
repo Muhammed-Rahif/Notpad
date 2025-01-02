@@ -57,22 +57,22 @@ export class TypeEffectPlayer {
     key = key.toLowerCase(); // Normalize key to lowercase for comparison
 
     if (farLeftKeys.includes(key)) {
-      return -1; // Far-left
+      return -0.5; // Far-left
     } else if (leftKeys.includes(key)) {
-      return -0.5; // Left
+      return -0.3; // Left
     } else if (centerKeys.includes(key)) {
       return 0; // Center
     } else if (rightKeys.includes(key)) {
-      return 0.5; // Right
+      return 0.3; // Right
     } else if (farRightKeys.includes(key)) {
-      return 1; // Far-right
+      return 0.5; // Far-right
     } else {
       return 0; // Default to center if key is not found in any section
     }
   }
 
   private triggerVibration(strength: number): void {
-    if (navigator.vibrate) {
+    if ('vibrate' in navigator) {
       const duration = Math.max(1, Math.min(100, Math.round(strength * 100)));
       navigator.vibrate(duration);
     } else {
@@ -103,9 +103,7 @@ export class TypeEffectPlayer {
     source.start(0);
 
     const vibration = TypeEffectVibration[this.settings.vibration];
-    if (vibration > 0) {
-      this.triggerVibration(vibration);
-    }
+    if (vibration > 0) this.triggerVibration(vibration);
   }
 
   public resumeAudioContext(): void {

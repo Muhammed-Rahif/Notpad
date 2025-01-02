@@ -15,9 +15,9 @@ export class Settings {
       enable: true
     },
     typeEffect: {
-      sound: 'Click',
+      sound: 'Nk Creams',
       vibration: 'Medium',
-      volume: 'ThreeQuarter'
+      volume: 'Full'
     }
   };
 

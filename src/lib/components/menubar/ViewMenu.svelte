@@ -1,13 +1,14 @@
 <script lang="ts">
   import * as Menubar from '@/components/ui/menubar';
   import { Notpad } from '@/helpers/notpad';
-  import { settings } from '@/store/store';
   import screenfull from 'screenfull';
   import { onMount } from 'svelte';
   import StatusBarIcon from '@/components/icons/StatusBar.svelte';
   import ListOrderedIcon from '@/components/icons/ListOrdered.svelte';
   import WrapTextIcon from '@/components/icons/WrapText.svelte';
+
   let isFullScreen = $state(screenfull.isFullscreen);
+  const settings = Notpad.stores.settings;
 
   onMount(() => {
     screenfull.onchange(() => (isFullScreen = screenfull.isFullscreen));

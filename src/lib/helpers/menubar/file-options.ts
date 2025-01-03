@@ -8,7 +8,6 @@ import { readTextFile, BaseDirectory, exists, writeTextFile } from '@tauri-apps/
 import { toast } from 'svelte-sonner';
 import { Delta } from 'quill/core';
 import print from 'print-js';
-import { mode } from 'mode-watcher';
 
 /**
  * A helper class for handling file operations such as opening, saving, and saving as.
@@ -255,8 +254,9 @@ export class FileOptions {
    */
   print = async (editorId?: string) => {
     const editor = Notpad.editors.getEditor(editorId);
-    const isDarkMode = get(mode) == 'dark';
-    const fontFamily = get(settings).fontFamily;
+    const _settings = get(settings);
+    const isDarkMode = _settings.theme == 'dark';
+    const fontFamily = _settings.font.family;
 
     if (!editor) return;
     try {

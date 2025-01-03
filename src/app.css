@@ -34,7 +34,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
+  [data-theme='dark'] {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
@@ -81,7 +81,7 @@ body,
 }
 
 * {
-  @apply scrollbar scrollbar-track-neutral-100 scrollbar-thumb-foreground/20 scrollbar-corner-foreground/5 scrollbar-thumb-rounded-md scrollbar-w-1.5 scrollbar-h-1 [font-optical-sizing:auto] dark:scrollbar-track-neutral-900;
+  @apply scrollbar scrollbar-track-muted scrollbar-thumb-foreground/20 scrollbar-corner-foreground/5 scrollbar-thumb-rounded-md scrollbar-w-1.5 scrollbar-h-1 [font-optical-sizing:auto];
 }
 
 /* For icons default values */

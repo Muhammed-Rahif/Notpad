@@ -1,12 +1,11 @@
 <script lang="ts">
-  import MenuBar from '@/src/lib/components/menubar/MenuBar.svelte';
+  import MenuBar from '@/components/menubar/MenuBar.svelte';
   import EditorTabs from '@/components/EditorTabs.svelte';
   import FontDialog from '@/components/font-dialog/FontDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
   import { Toaster } from '@/components/ui/sonner';
-  import favIcon from '@/src/assets/images/favicon.png';
+  import favIcon from '@/src/assets/images/favicon-light.png';
   import favIconDark from '@/src/assets/images/favicon-dark.png';
-  import { mode, ModeWatcher } from 'mode-watcher';
   import { Notpad } from '@/helpers/notpad';
   import AboutDialog from '@/components/AboutDialog.svelte';
   import LicenseDialog from '@/components/LicenseDialog.svelte';
@@ -15,6 +14,10 @@
   import Loading from '@/components/Loading.svelte';
   import ShortcutsDialog from '@/components/ShortcutsDialog.svelte';
   import EditorCloseConfirmationDialog from '@/components/EditorCloseConfirmationDialog.svelte';
+  import { get } from 'svelte/store';
+
+  const settings = Notpad.stores.settings;
+  document.documentElement.setAttribute('data-theme', get(settings).theme);
 </script>
 
 {#await Notpad.init()}
@@ -37,9 +40,9 @@
   <Shortcuts />
 {/await}
 <Toaster />
-<ModeWatcher />
+
 <svelte:head>
-  {#if $mode == 'dark'}
+  {#if $settings.theme == 'dark'}
     <link rel="icon" href={favIconDark} />
   {:else}
     <link rel="icon" href={favIcon} />

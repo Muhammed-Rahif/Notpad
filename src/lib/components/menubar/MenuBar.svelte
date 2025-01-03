@@ -2,7 +2,6 @@
   import * as Menubar from '@/components/ui/menubar';
   import EditorTitle from '@/components/EditorTitle.svelte';
   import DownloadButtonMenu from '@/components/DownloadMenuButton.svelte';
-  import { editors } from '@/store/store';
   import { fade } from 'svelte/transition';
   import { isTauri } from '@/src/lib';
   import FileMenu from './FileMenu.svelte';
@@ -10,9 +9,11 @@
   import SearchMenu from './SearchMenu.svelte';
   import ViewMenu from './ViewMenu.svelte';
   import SettingsMenu from './SettingsMenu.svelte';
+  import { Notpad } from '@/helpers/notpad';
+
+  const editors = Notpad.stores.editors;
 
   let innerWidth = $state(window.innerWidth);
-
   let isMD = $derived(innerWidth <= 768);
   let tabsMode = $derived($editors.length > 1);
   let singleEditor = $derived($editors.at(0)!);

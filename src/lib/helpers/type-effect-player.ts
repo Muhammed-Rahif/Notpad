@@ -1,11 +1,7 @@
 import { Notpad } from '@/helpers/notpad';
 import { get } from 'svelte/store';
-import {
-  TypeEffectSound,
-  TypeEffectVibration,
-  TypeEffectVolume,
-  type SettingsType
-} from '@/types/SettingsType';
+import { type SettingsType } from '@/types/SettingsType';
+import { Settings } from '@/helpers/settings';
 
 export class TypeEffectPlayer {
   private audioContext: AudioContext;
@@ -41,7 +37,7 @@ export class TypeEffectPlayer {
       this.settings.vibration = typeEffect.vibration;
       this.settings.sound = typeEffect.sound;
 
-      const audioUrl = TypeEffectSound[typeEffect.sound];
+      const audioUrl = Settings.typeEffect.sounds[typeEffect.sound];
       if (audioUrl) this.audioReady = this.loadAudio(audioUrl);
     });
   }
@@ -95,14 +91,14 @@ export class TypeEffectPlayer {
     const panner = this.audioContext.createStereoPanner();
     panner.pan.value = key ? this.calculatePan(key) : 0;
 
-    const volume = TypeEffectVolume[this.settings.volume];
+    const volume = Settings.typeEffect.volumes[this.settings.volume];
     const gainNode = this.audioContext.createGain();
     gainNode.gain.value = volume;
 
     source.connect(panner).connect(gainNode).connect(this.audioContext.destination);
     source.start(0);
 
-    const vibration = TypeEffectVibration[this.settings.vibration];
+    const vibration = Settings.typeEffect.vibrations[this.settings.vibration];
     if (vibration > 0) this.triggerVibration(vibration);
   }
 

@@ -3,12 +3,14 @@
   import * as Tabs from '@/components/ui/tabs';
   import * as ContextMenu from '@/components/ui/context-menu';
   import EditorTitle from '@/components/EditorTitle.svelte';
-  import { activeTabId, editors } from '@/store/store';
   import { slide } from 'svelte/transition';
   import EditMenuItems from '@/components/EditMenuItems.svelte';
+  import { Notpad } from '@/helpers/notpad';
+
+  const activeTabId = Notpad.stores.activeTabId;
+  const editors = Notpad.stores.editors;
 
   let innerWidth = $state(window.innerWidth);
-
   let isMD = $derived(innerWidth <= 768);
   /**
    * Compact mode is disabled on mobile devices (width <= 450px)

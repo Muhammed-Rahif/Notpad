@@ -6,13 +6,13 @@
   import GitHubIcon from '@/components/icons/GitHub.svelte';
   import Separator from '@/components/ui/separator/separator.svelte';
   import { Badge } from '@/components/ui/badge';
-  import { mode } from 'mode-watcher';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
   import appJson from '@/src/app.json';
   import { tick } from 'svelte';
 
   const open = Notpad.dialogs.about;
+  const settings = Notpad.stores.settings;
 
   function closeDialog() {
     open.set(false);
@@ -39,7 +39,7 @@
 
     <div class="max-h-[60vh] overflow-y-auto pr-2 text-base">
       <div class="mb-3 flex flex-row items-center justify-start gap-4 text-left">
-        <img class="w-20" alt="icon" src={$mode == 'dark' ? appIconDark : appIconLight} />
+        <img class="w-20" alt="icon" src={$settings.theme == 'dark' ? appIconDark : appIconLight} />
 
         <div>
           <span class="text-xl font-bold">Notpad</span><br />

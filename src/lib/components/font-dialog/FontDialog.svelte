@@ -2,19 +2,19 @@
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import FontFamilyCombobox from './FontFamilyCombobox.svelte';
-  import { settings } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import FontSizeCombobox from './FontSizeCombobox.svelte';
   import { Label } from '@/components/ui/label';
   import * as Card from '@/components/ui/card';
-  import { FontFamily, FontSize } from '@/src/lib/types/SettingsType';
   import { get } from 'svelte/store';
+  import type { SettingsType } from '@/types/SettingsType';
 
+  const settings = Notpad.stores.settings;
   const currentSettings = get(settings);
   const open = Notpad.dialogs.font;
 
-  let fontFamily: keyof typeof FontFamily = $state(currentSettings.fontFamily);
-  let fontSize: keyof typeof FontSize = $state(currentSettings.fontSize);
+  let fontFamily: SettingsType['font']['family'] = $state(currentSettings.font.family);
+  let fontSize: SettingsType['font']['size'] = $state(currentSettings.font.size);
 
   function closeFontDialog({ submit } = { submit: false }) {
     open.set(false);
@@ -27,7 +27,7 @@
 
   function resetFontDefault() {
     fontFamily = 'SUSE';
-    fontSize = '16';
+    fontSize = 16;
   }
 </script>
 

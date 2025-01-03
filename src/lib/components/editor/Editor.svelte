@@ -4,7 +4,6 @@
   import StatusBar from '@/components/StatusBar.svelte';
   import Quill from 'quill';
   import { Notpad } from '@/helpers/notpad';
-  import { settings } from '@/store/store';
   import FakeCaret from './FakeCaret.svelte';
   import type { EditorType } from '@/types/EditorType';
   import 'quill/dist/quill.core.css';
@@ -14,6 +13,7 @@
     editor: EditorType;
   }
 
+  const settings = Notpad.stores.settings;
   let { editor }: Props = $props();
   let editorContainer: HTMLDivElement = $state(null!);
   let lineNo = $state(0);
@@ -127,15 +127,14 @@
 <div
   class="relative h-full overflow-hidden"
   style:--editor-zoom={$settings.zoom}
-  style:--editor-font-size="{$settings.fontSize}px"
-  style:--editor-font-family={$settings.fontFamily}
+  style:--editor-font-size="{$settings.font.size}px"
+  style:--editor-font-family={$settings.font.family}
   style:--line-no-digits-count={lineNo.toString().length}
 >
   <div
     class="editor-container relative flex overflow-hidden
-    rounded-none bg-transparent text-sm duration-300"
-    class:caret-transparent={$settings.caret.enable}
-    class:caret-primary={!$settings.caret.enable}
+    rounded-none bg-transparent text-sm caret-transparent
+    duration-300"
     data-line-numbers={$settings.lineNumbers}
     data-wrap-lines={$settings.wrapLines}
     bind:this={editorContainer}

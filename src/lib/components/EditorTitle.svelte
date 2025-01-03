@@ -2,7 +2,6 @@
   import { Notpad } from '@/helpers/notpad';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
-  import { activeTabId } from '@/store/store';
   import * as Tooltip from '@/components/ui/tooltip';
   import CloseIcon from '@/components/icons/Close.svelte';
   import Button from '@/components/ui/button/button.svelte';
@@ -15,6 +14,8 @@
   }
 
   const maxlength = 54;
+  const activeTabId = Notpad.stores.activeTabId;
+
   let { editor }: Props = $props();
   let readonly = $state(true);
   let input: HTMLInputElement = $state(null!);

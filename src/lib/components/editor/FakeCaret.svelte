@@ -2,10 +2,10 @@
   import throttle from 'lodash.throttle';
   import debounce from 'lodash.debounce';
   import { position as getCaretPosition } from 'caret-pos';
-  import { settings } from '@/store/store';
   import type Quill from 'quill';
   import { cn } from '@/utils';
-  import { CaretAnimation } from '@/types/SettingsType';
+  import { Notpad } from '@/helpers/notpad';
+  import { Settings } from '@/helpers/settings';
 
   interface Props {
     quill: Quill;
@@ -15,6 +15,8 @@
   let { quill, editorContainer }: Props = $props();
   let caret = $state({ top: 10, left: 8, height: 24 });
   let fakeCaretElement: HTMLSpanElement = $state(null!);
+
+  const settings = Notpad.stores.settings;
   const caretStyle = $derived($settings.caret.style);
 
   const resumeFakeCaretBlink = debounce(function () {
@@ -49,25 +51,23 @@
   });
 </script>
 
-{#if $settings.caret.enable}
-  <span
-    class={cn(
-      'fake-caret absolute z-0 w-0.5 animate-caret-blink rounded-[.06em]',
-      '[transition:left_var(--caret-animation-duration),top_var(--caret-animation-duration)]',
-      {
-        'bg-primary': caretStyle != 'HollowBlock',
-        'border border-primary': caretStyle == 'HollowBlock'
-      }
-    )}
-    style:width="calc({caretStyle == 'VerticalBar' ? '2px' : '1ch'} * var(--editor-zoom))"
-    style:height={caretStyle == 'Underline' ? '2px' : `${caret.height}px`}
-    style:margin-top={caretStyle == 'Underline' ? `${caret.height + 2}px` : undefined}
-    style:top="{caret.top}px"
-    style:left="{caret.left}px"
-    style:--caret-animation-duration={CaretAnimation[$settings.caret.animation]}
-    bind:this={fakeCaretElement}
-  ></span>
-{/if}
+<span
+  class={cn(
+    'fake-caret absolute z-0 w-0.5 animate-caret-blink rounded-[.06em]',
+    '[transition:left_var(--caret-animation-duration),top_var(--caret-animation-duration)]',
+    {
+      'bg-primary': caretStyle != 'Hollow Block',
+      'border border-primary': caretStyle == 'Hollow Block'
+    }
+  )}
+  style:width="calc({caretStyle == 'Vertical Bar' ? '2px' : '1ch'} * var(--editor-zoom))"
+  style:height={caretStyle == 'Underline' ? '2px' : `${caret.height}px`}
+  style:margin-top={caretStyle == 'Underline' ? `${caret.height + 2}px` : undefined}
+  style:top="{caret.top}px"
+  style:left="{caret.left}px"
+  style:--caret-animation-duration={Settings.caret.animations[$settings.caret.animation]}
+  bind:this={fakeCaretElement}
+></span>
 
 <style>
   .fake-caret {

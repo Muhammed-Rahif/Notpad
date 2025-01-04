@@ -11,7 +11,7 @@ import { exit } from '@tauri-apps/plugin-process';
 import { isTauri } from '@/src/lib';
 import { Dialogs } from '@/helpers/dialogs';
 import { TypeEffectPlayer } from '@/helpers/type-effect-player';
-import { editors, activeTabId, settings } from '@/store/store';
+import { Stores } from '@/store/store';
 
 export class Notpad {
   public static init = async () => {
@@ -31,11 +31,7 @@ export class Notpad {
   public static viewOptions: ViewOptions = new ViewOptions();
   public static dialogs: Dialogs = new Dialogs();
   public static typeEffectPlayer: TypeEffectPlayer = new TypeEffectPlayer();
-  public static stores = {
-    editors,
-    activeTabId,
-    settings
-  };
+  public static stores = new Stores();
 
   static exit = () => {
     try {

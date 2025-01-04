@@ -4,7 +4,7 @@
   import FontDialog from '@/components/font-dialog/FontDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
   import { Toaster } from '@/components/ui/sonner';
-  import favIcon from '@/src/assets/images/favicon-light.png';
+  import favIconLight from '@/src/assets/images/favicon-light.png';
   import favIconDark from '@/src/assets/images/favicon-dark.png';
   import { Notpad } from '@/helpers/notpad';
   import AboutDialog from '@/components/AboutDialog.svelte';
@@ -17,7 +17,12 @@
   import { get } from 'svelte/store';
 
   const settings = Notpad.stores.settings;
-  document.documentElement.setAttribute('data-theme', get(settings).theme);
+  document.documentElement.setAttribute('data-theme-mode', get(settings).theme.mode);
+  document.documentElement.setAttribute('data-theme-color', get(settings).theme.color);
+  document.documentElement.style.setProperty(
+    '--theme-roundness',
+    `${get(settings).theme.roundness}rem`
+  );
 </script>
 
 {#await Notpad.init()}
@@ -42,9 +47,9 @@
 <Toaster />
 
 <svelte:head>
-  {#if $settings.theme == 'dark'}
+  {#if $settings.theme.mode == 'dark'}
     <link rel="icon" href={favIconDark} />
   {:else}
-    <link rel="icon" href={favIcon} />
+    <link rel="icon" href={favIconLight} />
   {/if}
 </svelte:head>

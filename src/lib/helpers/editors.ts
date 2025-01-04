@@ -1,10 +1,10 @@
-import { activeTabId, editors } from '@/store/store';
 import { get } from 'svelte/store';
 import { generate as genId } from 'short-uuid';
 import { toast } from 'svelte-sonner';
 import Quill from 'quill';
 import { Delta, Range } from 'quill/core';
 import type { EditorType } from '@/types/EditorType';
+import { Notpad } from '@/helpers/notpad';
 
 /**
  * A helper class for performing various editor-related tasks such as opening
@@ -19,15 +19,15 @@ export class Editors {
   };
 
   init = async () => {
-    const activeId = get(activeTabId);
-    const editorsList = get(editors);
+    const activeId = get(Notpad.stores.activeTabId);
+    const editorsList = get(Notpad.stores.editors);
 
     if (!editorsList.some((editor) => editor.id === activeId) && editorsList.length > 0) {
-      activeTabId.set(editorsList[0].id);
+      Notpad.stores.activeTabId.set(editorsList[0].id);
     }
 
     // Focus on the textarea when the active tab changes
-    activeTabId.subscribe(async (editorId) => {
+    Notpad.stores.activeTabId.subscribe(async (editorId) => {
       // Adding a small delay, I don't know why, but it won't work without this
       await new Promise((resolve) => setTimeout(resolve, 120));
       this.focus(editorId);
@@ -35,13 +35,13 @@ export class Editors {
   };
 
   getActive = (): EditorType => {
-    const activeId = get(activeTabId);
-    const editorsList = get(editors);
+    const activeId = get(Notpad.stores.activeTabId);
+    const editorsList = get(Notpad.stores.editors);
     return editorsList.find((editor) => editor.id === activeId)!;
   };
 
   getEditor = (editorId?: string) => {
-    const editorsList = get(editors);
+    const editorsList = get(Notpad.stores.editors);
     if (editorId) {
       const editor = editorsList.find((editor) => editor.id === editorId);
       if (editor) {
@@ -53,7 +53,7 @@ export class Editors {
 
   createNew({ content, fileName, fileHandle, filePath, isSaved }: Partial<EditorType> = {}) {
     const newId = genId();
-    editors.update((value) => {
+    Notpad.stores.editors.update((value) => {
       value.push({
         fileName: fileName ?? 'Untitled.txt',
         content: content ?? new Delta(),
@@ -65,22 +65,22 @@ export class Editors {
 
       return value;
     });
-    activeTabId.update(() => newId);
+    Notpad.stores.activeTabId.update(() => newId);
   }
 
   remove = async (editorId?: string) => {
     const editor = this.getEditor(editorId);
-    const editorsList = get(editors);
+    const editorsList = get(Notpad.stores.editors);
 
     if (editorsList.length === 1) {
       this.createNew();
     }
 
-    editors.update((value) => {
+    Notpad.stores.editors.update((value) => {
       return value.filter((e) => e.id !== editor.id);
     });
 
-    activeTabId.update((currentId) => {
+    Notpad.stores.activeTabId.update((currentId) => {
       if (currentId === editor.id && editorsList.length > 0) {
         if (editorsList.length > 0) {
           const index = editorsList.findIndex((editor) => editor.id === editorId);
@@ -95,7 +95,7 @@ export class Editors {
   };
 
   updateContent(id: string, content: Delta) {
-    editors.update((value) => {
+    Notpad.stores.editors.update((value) => {
       return value.map((editor) => {
         if (editor.id === id) {
           editor.content = content;
@@ -106,7 +106,7 @@ export class Editors {
   }
 
   updateFileName(editorId: string, fileName: string) {
-    editors.update((value) => {
+    Notpad.stores.editors.update((value) => {
       return value.map((editor) => {
         if (editor.id === editorId) {
           editor.fileName = fileName;
@@ -119,7 +119,7 @@ export class Editors {
   }
 
   updateFileHandle(editorId: string, fileHandle: FileSystemFileHandle) {
-    editors.update((value) => {
+    Notpad.stores.editors.update((value) => {
       return value.map((e) => {
         if (e.id === editorId) {
           return { ...e, fileHandle, fileName: fileHandle.name };
@@ -130,7 +130,7 @@ export class Editors {
   }
 
   updateFilePath(editorId: string, filePath: string) {
-    editors.update((value) => {
+    Notpad.stores.editors.update((value) => {
       return value.map((e) => {
         if (e.id === editorId) {
           return { ...e, filePath };
@@ -141,12 +141,12 @@ export class Editors {
   }
 
   getContent(editorId: string) {
-    return get(editors).find((e) => e.id == editorId)?.content;
+    return get(Notpad.stores.editors).find((e) => e.id == editorId)?.content;
   }
 
   setQuill = async (editorId: string, quill: Quill) => {
     let editor: EditorType;
-    editors.update((value) => {
+    Notpad.stores.editors.update((value) => {
       return value.map((e) => {
         if (e.id === editorId) {
           editor = e;
@@ -163,7 +163,7 @@ export class Editors {
   };
 
   setSelection(editorId: string, selection: Range, focus = false) {
-    editors.update((value) => {
+    Notpad.stores.editors.update((value) => {
       return value.map((e) => {
         if (e.id === editorId) {
           return { ...e, selection };
@@ -175,7 +175,7 @@ export class Editors {
   }
 
   setIsSaved(editorId: string, isSaved: boolean) {
-    editors.update((value) => {
+    Notpad.stores.editors.update((value) => {
       return value.map((e) => {
         if (e.id === editorId) {
           return { ...e, isSaved };

@@ -23,10 +23,56 @@
     <Menubar.Sub>
       <Menubar.SubTrigger>Theme</Menubar.SubTrigger>
       <Menubar.SubContent>
-        <Menubar.CheckboxItem>Light</Menubar.CheckboxItem>
-        <Menubar.CheckboxItem>Dark</Menubar.CheckboxItem>
-        <Menubar.CheckboxItem>Sepia</Menubar.CheckboxItem>
-        <Menubar.CheckboxItem>Classic</Menubar.CheckboxItem>
+        <Menubar.Sub>
+          <Menubar.SubTrigger class="gap-2">Mode</Menubar.SubTrigger>
+          <Menubar.SubContent>
+            {#each Settings.theme.modes as mode}
+              <Menubar.CheckboxItem
+                checked={$settings.theme.mode == mode}
+                onclick={() => {
+                  Notpad.settings.updateTheme({ mode });
+                }}
+                class="capitalize"
+              >
+                {mode}
+              </Menubar.CheckboxItem>
+            {/each}
+          </Menubar.SubContent>
+        </Menubar.Sub>
+
+        <Menubar.Sub>
+          <Menubar.SubTrigger class="gap-2">Color</Menubar.SubTrigger>
+          <Menubar.SubContent>
+            {#each Settings.theme.colors as color}
+              <Menubar.CheckboxItem
+                checked={$settings.theme.color == color}
+                onclick={() => {
+                  Notpad.settings.updateTheme({ color: color });
+                }}
+                class="capitalize"
+              >
+                {color}
+              </Menubar.CheckboxItem>
+            {/each}
+          </Menubar.SubContent>
+        </Menubar.Sub>
+
+        <Menubar.Sub>
+          <Menubar.SubTrigger class="gap-2">Roundness</Menubar.SubTrigger>
+          <Menubar.SubContent>
+            {#each Settings.theme.roundnesses as roundness}
+              <Menubar.CheckboxItem
+                checked={$settings.theme.roundness == roundness}
+                onclick={() => {
+                  Notpad.settings.updateTheme({ roundness: roundness });
+                }}
+                class="capitalize"
+              >
+                {roundness}
+              </Menubar.CheckboxItem>
+            {/each}
+          </Menubar.SubContent>
+        </Menubar.Sub>
       </Menubar.SubContent>
     </Menubar.Sub>
 

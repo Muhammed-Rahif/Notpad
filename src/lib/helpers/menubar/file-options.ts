@@ -1,4 +1,3 @@
-import { activeTabId, editors, settings } from '@/store/store';
 import { get } from 'svelte/store';
 import { findAsyncSequential } from '@/utils';
 import { Notpad } from '@/helpers/notpad';
@@ -34,13 +33,13 @@ export class FileOptions {
     const file = await fileHandle.getFile();
     const content = await file.text();
 
-    const alreadyOpened = await findAsyncSequential(get(editors), async (edtr) => {
+    const alreadyOpened = await findAsyncSequential(get(Notpad.stores.editors), async (edtr) => {
       if (!edtr.fileHandle) return false;
       return await fileHandle.isSameEntry(edtr.fileHandle);
     });
 
     if (alreadyOpened) {
-      activeTabId.set(alreadyOpened.id);
+      Notpad.stores.activeTabId.set(alreadyOpened.id);
     } else {
       Notpad.editors.createNew({
         isSaved: true,
@@ -254,8 +253,8 @@ export class FileOptions {
    */
   print = async (editorId?: string) => {
     const editor = Notpad.editors.getEditor(editorId);
-    const _settings = get(settings);
-    const isDarkMode = _settings.theme == 'dark';
+    const _settings = get(Notpad.stores.settings);
+    const isDarkMode = _settings.theme.mode == 'dark';
     const fontFamily = _settings.font.family;
 
     if (!editor) return;

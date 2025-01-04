@@ -1,4 +1,3 @@
-import { settings } from '@/store/store';
 import { type SettingsType } from '@/types/SettingsType';
 import clickSound from '@/src/assets/sounds/click.wav';
 import beepSound from '@/src/assets/sounds/beep.wav';
@@ -18,11 +17,15 @@ import { Notpad } from '@/helpers/notpad';
 export class Settings {
   init = () => {
     Notpad.stores.settings.subscribe((settings) => {
-      document.documentElement.setAttribute('data-theme', settings.theme);
+      document.documentElement.setAttribute('data-theme-mode', settings.theme.mode);
+      document.documentElement.setAttribute('data-theme-color', settings.theme.color);
+      document.documentElement.style.setProperty(
+        '--theme-roundness',
+        `${settings.theme.roundness}rem`
+      );
     });
   };
 
-  static themes = ['light', 'dark', 'sepia', 'classic'] as const;
   static fontFamilies = [
     'SUSE',
     'Baloo 2',
@@ -60,6 +63,7 @@ export class Settings {
       Typewriter: typewriterSound,
       None: null
     },
+    // TODO: unified key system. ex: Missed Punch -> missed-punch
     volumes: {
       None: 0,
       OneQuarter: 0.25,
@@ -74,6 +78,11 @@ export class Settings {
       Low: 0.25,
       None: 0
     }
+  } as const;
+  static theme = {
+    modes: ['dark', 'light'],
+    roundnesses: [0, 0.5, 0.75, 1, 1.3],
+    colors: ['red', 'classic', 'blue', 'sepia']
   } as const;
 
   static defaultSettings: SettingsType = {
@@ -94,38 +103,36 @@ export class Settings {
       vibration: 'Medium',
       volume: 'Full'
     },
-    theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    theme: {
+      mode: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+      roundness: 0.5,
+      color: 'classic'
+    }
   };
 
-  setFontFamily(family: SettingsType['font']['family']) {
-    settings.update((value) => ({
+  updateFont(font: SettingsType['font']) {
+    Notpad.stores.settings.update((value) => ({
       ...value,
-      font: {
-        ...value.font,
-        family
-      }
+      font: { ...value.font, ...font }
     }));
   }
 
-  setFontSize(size: SettingsType['font']['size']) {
-    settings.update((value) => ({
+  updateTheme(theme: Partial<SettingsType['theme']>) {
+    Notpad.stores.settings.update((value) => ({
       ...value,
-      font: {
-        ...value.font,
-        size
-      }
+      theme: { ...value.theme, ...theme }
     }));
   }
 
   updateCaret(caret: Partial<SettingsType['caret']>) {
-    settings.update((value) => ({
+    Notpad.stores.settings.update((value) => ({
       ...value,
       caret: { ...value.caret, ...caret }
     }));
   }
 
   updateTypeEffect(typeEffect: Partial<SettingsType['typeEffect']>) {
-    settings.update((value) => ({
+    Notpad.stores.settings.update((value) => ({
       ...value,
       typeEffect: { ...value.typeEffect, ...typeEffect }
     }));

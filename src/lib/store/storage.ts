@@ -1,10 +1,10 @@
 import localforage from 'localforage';
-import { activeTabId, editors, settings } from '@/store/store';
 import type { EditorType } from '@/types/EditorType';
 import type { SettingsType } from '@/src/lib/types/SettingsType';
 import { Editors } from '@/helpers/editors';
 import { Settings } from '@/helpers/settings';
 import merge from 'lodash.merge';
+import { Notpad } from '@/helpers/notpad';
 
 export const EDITORS_STORAGE_KEY = 'editors';
 export const ACTIVE_TAB_ID_STORAGE_KEY = 'active-tab-id';
@@ -28,12 +28,12 @@ export class NotpadStorage {
         const defaultValue = { ...Editors.defaultEditor, id, content };
         return merge(defaultValue, rest);
       });
-      editors.set(editorsValueRefined);
+      Notpad.stores.editors.set(editorsValueRefined);
     }
 
     const activeTabIdValue = await localforage.getItem<string>(ACTIVE_TAB_ID_STORAGE_KEY);
     if (activeTabIdValue) {
-      activeTabId.set(activeTabIdValue);
+      Notpad.stores.activeTabId.set(activeTabIdValue);
     }
 
     const settingsValue = await localforage.getItem<SettingsType>(SETTINGS_STORAGE_KEY);
@@ -41,12 +41,12 @@ export class NotpadStorage {
     // on in any circumstances if new values are introduced in the future.
     if (settingsValue) {
       const settingsValueRefined = merge(Settings.defaultSettings, settingsValue);
-      settings.set(settingsValueRefined);
+      Notpad.stores.settings.set(settingsValueRefined);
     }
   };
 
   subscribeStoreUpdates = () => {
-    editors.subscribe((value) => {
+    Notpad.stores.editors.subscribe((value) => {
       // Quill instance will not be stored on indexedDb.
       localforage.setItem(
         EDITORS_STORAGE_KEY,
@@ -55,10 +55,12 @@ export class NotpadStorage {
         })
       );
     });
-    activeTabId.subscribe((value) => {
+
+    Notpad.stores.activeTabId.subscribe((value) => {
       localforage.setItem(ACTIVE_TAB_ID_STORAGE_KEY, value);
     });
-    settings.subscribe((value) => {
+
+    Notpad.stores.settings.subscribe((value) => {
       localforage.setItem(SETTINGS_STORAGE_KEY, value);
     });
   };

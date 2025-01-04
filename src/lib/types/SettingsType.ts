@@ -37,9 +37,13 @@ export interface SettingsType {
   };
 
   /**
-   *
+   * Theme customizations.
    */
-  theme: ElementType<typeof Settings.themes>;
+  theme: {
+    mode: ElementType<typeof Settings.theme.modes>;
+    roundness: ElementType<typeof Settings.theme.roundnesses>;
+    color: ElementType<typeof Settings.theme.colors>;
+  };
 
   /**
    * Should wrap long lines.

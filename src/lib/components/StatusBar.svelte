@@ -21,7 +21,7 @@
 
 {#if $settings.statusBar}
   <div
-    class="sticky bottom-0 z-10 h-[30px] w-screen bg-primary-foreground"
+    class="sticky bottom-0 z-10 h-[30px] w-screen rounded-lg border bg-primary/5"
     transition:slide
     oncontextmenu={stopPropagation(preventDefault(bubble('contextmenu')))}
     role="contentinfo"

@@ -19,8 +19,10 @@
   function closeFontDialog({ submit } = { submit: false }) {
     open.set(false);
     if (submit) {
-      Notpad.settings.setFontFamily(fontFamily);
-      Notpad.settings.setFontSize(fontSize);
+      Notpad.settings.updateFont({
+        family: fontFamily,
+        size: fontSize
+      });
     }
     Notpad.editors.focus();
   }

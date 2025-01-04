@@ -2,19 +2,20 @@
   import { Notpad } from '@/helpers/notpad';
   import { tick } from 'svelte';
   import { longpress } from '@/actions/longpress';
-  import { activeTabId } from '@/store/store';
   import * as Tooltip from '@/components/ui/tooltip';
   import CloseIcon from '@/components/icons/Close.svelte';
   import Button from '@/components/ui/button/button.svelte';
-  import type { EditorType } from '@/src/lib/types/EditorTypes';
+  import type { EditorType } from '@/src/lib/types/EditorType';
   import { cn } from '@/utils';
-  import { resizeInputOnDynamicContent } from '../actions/input-auto-width';
+  import { resizeInputOnDynamicContent } from '@/actions/input-auto-width';
 
   interface Props {
     editor: EditorType;
   }
 
   const maxlength = 54;
+  const activeTabId = Notpad.stores.activeTabId;
+
   let { editor }: Props = $props();
   let readonly = $state(true);
   let input: HTMLInputElement = $state(null!);
@@ -53,12 +54,15 @@
     readonly = true;
   }
 
-  function onEditorClose(id: string) {
-    return (e: MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      Notpad.editors.remove(id);
-    };
+  function onEditorClose(e: MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (editor.isSaved) {
+      Notpad.editors.remove(editor.id);
+    } else {
+      Notpad.dialogs.editorCloseConfirmation.set(editor.id);
+    }
   }
 </script>
 
@@ -91,7 +95,7 @@
         {/if}
 
         <Button
-          onclick={onEditorClose(editor.id)}
+          onclick={onEditorClose}
           size="sm"
           class={cn('h-6 w-6 p-0', {
             'pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100':
@@ -100,7 +104,7 @@
           })}
           variant={$activeTabId === editor.id ? 'secondary' : 'link'}
         >
-          <CloseIcon class="text-base" />
+          <CloseIcon />
         </Button>
       </div>
     </Tooltip.Trigger>

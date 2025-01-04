@@ -1,19 +1,11 @@
-<script module>
-  import { get, writable } from 'svelte/store';
-
-  const open = writable(false);
-
-  export function toggleGoToDialog() {
-    open.set(!get(open));
-  }
-</script>
-
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import { Input } from '@/components/ui/input';
   import Label from '@/components/ui/label/label.svelte';
   import { Notpad } from '@/helpers/notpad';
+
+  const open = Notpad.dialogs.goTo;
 
   let line: string | undefined = $state();
   let column: string | undefined = $state();

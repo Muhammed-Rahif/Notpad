@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Menubar as MenubarPrimitive } from 'bits-ui';
   import { cn } from '@/utils.js';
-  import ChevronRight from '@/components/icons/ChevronRight.svelte';
+  import ChevronRightIcon from '@/components/icons/ChevronRight.svelte';
 
   let {
     ref = $bindable(null),
@@ -24,5 +24,5 @@
   {...restProps}
 >
   {@render children?.()}
-  <ChevronRight class="ml-auto size-4" />
+  <ChevronRightIcon class="ml-auto size-4" />
 </MenubarPrimitive.SubTrigger>

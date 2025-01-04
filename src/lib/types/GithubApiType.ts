@@ -4,6 +4,7 @@ export interface ContributorType {
   url: string;
   html_url: string;
   contributions: number;
+  type: 'User' | 'Bot';
 }
 
 export interface ReleasesType {

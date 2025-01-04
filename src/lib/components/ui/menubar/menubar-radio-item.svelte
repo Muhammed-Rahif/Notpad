@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Menubar as MenubarPrimitive, type WithoutChild } from 'bits-ui';
-  import Circle from '@/components/icons/Circle.svelte';
+  import CircleIcon from '@/components/icons/Circle.svelte';
   import { cn } from '@/utils.js';
 
   let {
@@ -22,7 +22,7 @@
   {#snippet children({ checked })}
     <span class="absolute left-2 flex size-3.5 items-center justify-center">
       {#if checked}
-        <Circle class="size-2 fill-current" />
+        <CircleIcon class="size-2 fill-current" />
       {/if}
     </span>
     {@render childrenProp?.({ checked })}

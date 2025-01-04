@@ -1,9 +1,7 @@
 <script lang="ts">
   import { createBubbler, preventDefault, stopPropagation } from 'svelte/legacy';
-
-  const bubble = createBubbler();
-  import { settings } from '@/store/store';
   import { slide } from 'svelte/transition';
+  import { Notpad } from '@/helpers/notpad';
 
   interface Props {
     caretLineNo?: number;
@@ -14,6 +12,8 @@
 
   let { caretLineNo = 1, caretColumnNo = 1, characterCount = 0, wordCount = 0 }: Props = $props();
 
+  const bubble = createBubbler();
+  const settings = Notpad.stores.settings;
   const inAnimation = {
     duration: 80
   };
@@ -21,7 +21,7 @@
 
 {#if $settings.statusBar}
   <div
-    class="sticky bottom-0 z-10 h-[30px] w-screen bg-primary-foreground"
+    class="sticky bottom-0 z-10 h-[30px] w-screen rounded-lg border bg-primary/5"
     transition:slide
     oncontextmenu={stopPropagation(preventDefault(bubble('contextmenu')))}
     role="contentinfo"

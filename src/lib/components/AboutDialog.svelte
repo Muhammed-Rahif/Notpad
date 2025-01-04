@@ -1,27 +1,18 @@
-<script module>
-  import { writable } from 'svelte/store';
-
-  const open = writable(false);
-
-  export function openAboutDialog() {
-    open.set(true);
-  }
-</script>
-
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import appIconLight from '@/src/assets/images/Notpad Logo Light.svg';
   import appIconDark from '@/src/assets/images/Notpad Logo Dark.svg';
-  import GitHubIcon from '@/src/lib/components/icons/GitHub.svelte';
+  import GitHubIcon from '@/components/icons/GitHub.svelte';
   import Separator from '@/components/ui/separator/separator.svelte';
   import { Badge } from '@/components/ui/badge';
-  import { openLicenseDialog } from '@/components/LicenseDialog.svelte';
-  import { mode } from 'mode-watcher';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
   import appJson from '@/src/app.json';
   import { tick } from 'svelte';
+
+  const open = Notpad.dialogs.about;
+  const settings = Notpad.stores.settings;
 
   function closeDialog() {
     open.set(false);
@@ -30,7 +21,7 @@
   async function showLicense() {
     closeDialog();
     await tick();
-    openLicenseDialog();
+    Notpad.dialogs.license.set(true);
   }
 
   function openGithubRepo(e: MouseEvent) {
@@ -48,7 +39,7 @@
 
     <div class="max-h-[60vh] overflow-y-auto pr-2 text-base">
       <div class="mb-3 flex flex-row items-center justify-start gap-4 text-left">
-        <img class="w-20" alt="icon" src={$mode == 'dark' ? appIconDark : appIconLight} />
+        <img class="w-20" alt="icon" src={$settings.theme == 'dark' ? appIconDark : appIconLight} />
 
         <div>
           <span class="text-xl font-bold">Notpad</span><br />
@@ -131,7 +122,7 @@
           class="absolute right-0 rounded-l-none border-l border-l-foreground/10"
           onclick={openGithubRepo}
         >
-          <GitHubIcon class="text-2xl" />
+          <GitHubIcon />
         </Button>
       </Button>
 

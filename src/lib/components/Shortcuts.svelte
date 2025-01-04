@@ -1,8 +1,6 @@
 <script lang="ts">
   import { Notpad } from '@/helpers/notpad';
   import { shortcut } from '@svelte-put/shortcut';
-  import { toggleGoToDialog } from '@/components/GoToDialog.svelte';
-  import { toggleFindDialog } from '@/components/FindDialog.svelte';
 </script>
 
 <svelte:window
@@ -19,71 +17,61 @@
         modifier: 'ctrl',
         callback: () => Notpad.fileOptions.save(),
         preventDefault: true
+      },
+      {
+        key: 'S',
+        modifier: 'ctrl',
+        callback: () => Notpad.fileOptions.save({ saveAs: true }),
+        preventDefault: true
+      },
+      {
+        key: 'o',
+        modifier: 'ctrl',
+        callback: () => Notpad.fileOptions.open(),
+        preventDefault: true
+      },
+      {
+        key: 'p',
+        modifier: ['ctrl', 'shift'],
+        callback: () => Notpad.fileOptions.print(),
+        preventDefault: true
+      },
+      {
+        key: 'g',
+        modifier: ['ctrl'],
+        callback: () => Notpad.dialogs.goTo.update((open) => !open),
+        preventDefault: true
+      },
+      {
+        key: 'f',
+        modifier: ['ctrl'],
+        callback: () => Notpad.dialogs.find.update((open) => !open),
+        preventDefault: true
+      },
+      {
+        key: '+',
+        modifier: ['ctrl'],
+        callback: () => Notpad.viewOptions.zoom('in'),
+        preventDefault: true
+      },
+      {
+        key: '-',
+        modifier: ['ctrl'],
+        callback: () => Notpad.viewOptions.zoom('out'),
+        preventDefault: true
+      },
+      {
+        key: '0',
+        modifier: ['ctrl'],
+        callback: () => Notpad.viewOptions.zoom('reset'),
+        preventDefault: true
+      },
+      {
+        key: 'w',
+        modifier: ['ctrl'],
+        callback: () => Notpad.editors.remove(),
+        preventDefault: true
       }
     ]
-  }}
-  use:shortcut={{
-    trigger: {
-      key: 'o',
-      modifier: 'ctrl',
-      callback: () => Notpad.fileOptions.open(),
-      preventDefault: true
-    }
-  }}
-  use:shortcut={{
-    trigger: {
-      key: 'p',
-      modifier: ['ctrl', 'shift'],
-      callback: () => Notpad.fileOptions.print(),
-      preventDefault: true
-    }
-  }}
-  use:shortcut={{
-    trigger: {
-      key: 'g',
-      modifier: ['ctrl'],
-      callback: () => toggleGoToDialog(),
-      preventDefault: true
-    }
-  }}
-  use:shortcut={{
-    trigger: {
-      key: 'f',
-      modifier: ['ctrl'],
-      callback: () => toggleFindDialog(),
-      preventDefault: true
-    }
-  }}
-  use:shortcut={{
-    trigger: {
-      key: '+',
-      modifier: ['ctrl'],
-      callback: () => Notpad.viewOptions.zoom('in'),
-      preventDefault: true
-    }
-  }}
-  use:shortcut={{
-    trigger: {
-      key: '-',
-      modifier: ['ctrl'],
-      callback: () => Notpad.viewOptions.zoom('out'),
-      preventDefault: true
-    }
-  }}
-  use:shortcut={{
-    trigger: {
-      key: '0',
-      modifier: ['ctrl'],
-      callback: () => Notpad.viewOptions.zoom('reset'),
-      preventDefault: true
-    }
-  }}
-  use:shortcut={{
-    trigger: {
-      key: 'w',
-      modifier: ['ctrl'],
-      callback: () => Notpad.editors.remove(),
-      preventDefault: true
-    }
   }}
 />

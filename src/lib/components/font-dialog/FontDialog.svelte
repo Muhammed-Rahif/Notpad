@@ -1,40 +1,35 @@
-<script module>
-  import { get, writable } from 'svelte/store';
-  const open = writable(false);
-
-  export function openFontDialog() {
-    open.set(true);
-  }
-</script>
-
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import FontFamilyCombobox from './FontFamilyCombobox.svelte';
-  import { settings } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import FontSizeCombobox from './FontSizeCombobox.svelte';
   import { Label } from '@/components/ui/label';
   import * as Card from '@/components/ui/card';
-  import { FontFamily, FontSize } from '@/types/SettingsTypes';
+  import { get } from 'svelte/store';
+  import type { SettingsType } from '@/types/SettingsType';
 
+  const settings = Notpad.stores.settings;
   const currentSettings = get(settings);
+  const open = Notpad.dialogs.font;
 
-  let fontFamily: FontFamily = $state(currentSettings.fontFamily);
-  let fontSize: FontSize = $state(currentSettings.fontSize);
+  let fontFamily: SettingsType['font']['family'] = $state(currentSettings.font.family);
+  let fontSize: SettingsType['font']['size'] = $state(currentSettings.font.size);
 
   function closeFontDialog({ submit } = { submit: false }) {
     open.set(false);
     if (submit) {
-      Notpad.settings.setFontFamily(fontFamily);
-      Notpad.settings.setFontSize(fontSize);
+      Notpad.settings.updateFont({
+        family: fontFamily,
+        size: fontSize
+      });
     }
     Notpad.editors.focus();
   }
 
   function resetFontDefault() {
-    fontFamily = FontFamily.SUSE;
-    fontSize = FontSize.Size16;
+    fontFamily = 'SUSE';
+    fontSize = 16;
   }
 </script>
 

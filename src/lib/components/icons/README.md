@@ -4,11 +4,7 @@ Icons are taken from: https://icones.js.org/
 
 ## Icon Usage
 
-Icons used in this project are sourced from [Icones](https://icones.js.org/). The preferred icon set is Lucide, although other icon sets are also allowed.
-
-## Icon Usage
-
-Icons used in this project are sourced from [Icones](https://icones.js.org/). The preferred icon set is Lucide, although other icon sets are also allowed.
+Icons used in this project are sourced from [Icones](https://icones.js.org/). The preferred icon set is [Lucide](https://icones.js.org/collection/lucide), although other icon sets are also allowed.
 
 ### Adding a New Icon
 

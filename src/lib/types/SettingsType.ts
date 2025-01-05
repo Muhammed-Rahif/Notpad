@@ -40,7 +40,7 @@ export interface SettingsType {
    * Theme customizations.
    */
   theme: {
-    roundness: ElementType<typeof Settings.theme.roundnesses>;
+    roundness: keyof typeof Settings.theme.roundnesses;
     preset: ElementType<typeof Settings.theme.presets>;
   };
 
@@ -62,7 +62,7 @@ export interface SettingsType {
    */
   typeEffect: {
     sound: keyof typeof Settings.typeEffect.sounds;
-    volume: keyof typeof Settings.typeEffect.volumes;
+    volume: ElementType<typeof Settings.typeEffect.volumes>;
     vibration: keyof typeof Settings.typeEffect.vibrations;
   };
 }

@@ -66,13 +66,13 @@ Maybe Helpful:-
 [data-theme-preset='pastel'] {
   --background: 112.94 30.36% 78.04%;
   --foreground: 79.09 22% 19.61%;
-  --primary: 78.62 40.85% 86.08%;
-  --primary-foreground: 79.09 22% 19.61%;
+  --primary: 265.38 23.64% 56.86%;
+  --primary-foreground: 0 0% 100%;
   --card: 90 33.33% 98.82%;
   --card-foreground: 105 10% 7.84%;
   --popover: 50.53 61.29% 93.92%;
   --popover-foreground: 105 10% 7.84%;
-  --secondary: 265.38 23.64% 56.86%;
+  --secondary: 78.62 40.85% 86.08%;
   --secondary-foreground: 0 0% 0%;
   --muted: 120 27.27% 97.84%;
   --muted-foreground: 0 0% 40%;

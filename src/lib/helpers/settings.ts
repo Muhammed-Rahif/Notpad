@@ -13,6 +13,7 @@ import squareSound from '@/src/assets/sounds/square.wav';
 import triangleSound from '@/src/assets/sounds/triangle.wav';
 import typewriterSound from '@/src/assets/sounds/typewriter.wav';
 import { Notpad } from '@/helpers/notpad';
+import { get } from 'svelte/store';
 
 export class Settings {
   init = () => {
@@ -20,9 +21,16 @@ export class Settings {
       document.documentElement.setAttribute('data-theme-preset', settings.theme.preset);
       document.documentElement.style.setProperty(
         '--theme-roundness',
-        `${settings.theme.roundness}rem`
+        `${Settings.theme.roundnesses[settings.theme.roundness]}rem`
       );
     });
+
+    const settings = get(Notpad.stores.settings);
+    document.documentElement.setAttribute('data-theme-preset', settings.theme.preset);
+    document.documentElement.style.setProperty(
+      '--theme-roundness',
+      `${Settings.theme.roundnesses[settings.theme.roundness]}rem`
+    );
   };
 
   static fontFamilies = [
@@ -38,48 +46,48 @@ export class Settings {
   static zooms = [0.5, 0.75, 0.9, 1, 1.2, 1.5, 1.75, 2] as const;
   static caret = {
     animations: {
-      Slow: '600ms',
-      Medium: '300ms',
-      Fast: '100ms',
-      Off: '0ms'
+      slow: '600ms',
+      medium: '300ms',
+      fast: '100ms',
+      off: '0ms'
     },
-    styles: ['Vertical Bar', 'Block', 'Hollow Block', 'Underline'] as const
+    styles: ['vertical-bar', 'block', 'hollow-block', 'underline'] as const
   } as const;
   static typeEffect = {
     sounds: {
-      Click: clickSound,
-      Beep: beepSound,
-      Damage: damageSound,
-      'Fist Fight': fistFightSound,
-      Hitmarker: hitmarkerSound,
-      'Missed Punch': missedPunchSound,
-      'Nk Creams': nkCreamsSound,
-      Osu: osuSound,
-      Pop: popSound,
-      'Rubber Keys': rubberKeysSound,
-      Square: squareSound,
-      Triangle: triangleSound,
-      Typewriter: typewriterSound,
-      None: null
+      click: clickSound,
+      beep: beepSound,
+      damage: damageSound,
+      'fist-fight': fistFightSound,
+      hitmarker: hitmarkerSound,
+      'missed-punch': missedPunchSound,
+      'nk-creams': nkCreamsSound,
+      osu: osuSound,
+      pop: popSound,
+      'rubber-keys': rubberKeysSound,
+      square: squareSound,
+      triangle: triangleSound,
+      typewriter: typewriterSound,
+      none: null
     },
-    // TODO: unified key system. ex: Missed Punch -> missed-punch
-    volumes: {
-      None: 0,
-      OneQuarter: 0.25,
-      Half: 0.5,
-      ThreeQuarter: 0.75,
-      Full: 1
-    },
+    volumes: [0, 0.25, 0.5, 0.75, 1],
     vibrations: {
-      Strong: 1,
-      High: 0.75,
-      Medium: 0.5,
-      Low: 0.25,
-      None: 0
+      strong: 1,
+      high: 0.75,
+      medium: 0.5,
+      low: 0.25,
+      none: 0
     }
   } as const;
   static theme = {
-    roundnesses: [0, 0.3, 0.5, 0.75, 1, 1.3],
+    roundnesses: {
+      none: 0,
+      low: 0.3,
+      medium: 0.5,
+      high: 0.75,
+      full: 1,
+      extra: 1.3
+    },
     presets: ['light', 'dark', 'pastel']
   } as const;
 
@@ -93,17 +101,17 @@ export class Settings {
     lineNumbers: false,
     wrapLines: true,
     caret: {
-      animation: 'Medium',
-      style: 'Vertical Bar'
+      animation: 'medium',
+      style: 'vertical-bar'
     },
     typeEffect: {
-      sound: 'Nk Creams',
-      vibration: 'Medium',
-      volume: 'Full'
+      sound: 'nk-creams',
+      vibration: 'medium',
+      volume: 1
     },
     theme: {
-      roundness: 0.5,
-      preset: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      roundness: 'medium',
+      preset: 'light'
     }
   };
 

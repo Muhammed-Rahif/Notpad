@@ -91,9 +91,8 @@ export class TypeEffectPlayer {
     const panner = this.audioContext.createStereoPanner();
     panner.pan.value = key ? this.calculatePan(key) : 0;
 
-    const volume = Settings.typeEffect.volumes[this.settings.volume];
     const gainNode = this.audioContext.createGain();
-    gainNode.gain.value = volume;
+    gainNode.gain.value = this.settings.volume;
 
     source.connect(panner).connect(gainNode).connect(this.audioContext.destination);
     source.start(0);

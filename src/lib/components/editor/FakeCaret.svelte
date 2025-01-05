@@ -56,13 +56,13 @@
     'fake-caret absolute z-0 w-0.5 animate-caret-blink rounded-[.06em]',
     '[transition:left_var(--caret-animation-duration),top_var(--caret-animation-duration)]',
     {
-      'bg-foreground': caretStyle != 'Hollow Block',
-      'border border-foreground': caretStyle == 'Hollow Block'
+      'bg-foreground': caretStyle != 'hollow-block',
+      'border border-foreground': caretStyle == 'hollow-block'
     }
   )}
-  style:width="calc({caretStyle == 'Vertical Bar' ? '2px' : '1ch'} * var(--editor-zoom))"
-  style:height={caretStyle == 'Underline' ? '2px' : `${caret.height}px`}
-  style:margin-top={caretStyle == 'Underline' ? `${caret.height + 2}px` : undefined}
+  style:width="calc({caretStyle == 'vertical-bar' ? '2px' : '1ch'} * var(--editor-zoom))"
+  style:height={caretStyle == 'underline' ? '2px' : `${caret.height}px`}
+  style:margin-top={caretStyle == 'underline' ? `${caret.height + 2}px` : undefined}
   style:top="{caret.top}px"
   style:left="{caret.left}px"
   style:--caret-animation-duration={Settings.caret.animations[$settings.caret.animation]}

@@ -43,11 +43,13 @@
         <Menubar.Sub>
           <Menubar.SubTrigger class="gap-2">Roundness</Menubar.SubTrigger>
           <Menubar.SubContent>
-            {#each Settings.theme.roundnesses as roundness}
+            {#each Object.keys(Settings.theme.roundnesses) as roundness}
               <Menubar.CheckboxItem
                 checked={$settings.theme.roundness == roundness}
                 onclick={() => {
-                  Notpad.settings.updateTheme({ roundness: roundness });
+                  Notpad.settings.updateTheme({
+                    roundness: roundness as keyof typeof Settings.theme.roundnesses
+                  });
                 }}
                 class="capitalize"
               >
@@ -65,16 +67,17 @@
         <Menubar.Sub>
           <Menubar.SubTrigger class="gap-2">Sound</Menubar.SubTrigger>
           <Menubar.SubContent>
-            {#each Object.keys(Settings.typeEffect.sounds) as key}
+            {#each Object.keys(Settings.typeEffect.sounds) as sound}
               <Menubar.CheckboxItem
-                checked={$settings.typeEffect.sound == key}
+                class="capitalize"
+                checked={$settings.typeEffect.sound == sound}
                 onclick={() => {
                   Notpad.settings.updateTypeEffect({
-                    sound: key as keyof typeof Settings.typeEffect.sounds
+                    sound: sound as keyof typeof Settings.typeEffect.sounds
                   });
                 }}
               >
-                {key}
+                {sound.replace('-', ' ')}
               </Menubar.CheckboxItem>
             {/each}
           </Menubar.SubContent>
@@ -83,17 +86,14 @@
         <Menubar.Sub>
           <Menubar.SubTrigger class="gap-2">Volume</Menubar.SubTrigger>
           <Menubar.SubContent>
-            {#each Object.keys(Settings.typeEffect.volumes) as key}
+            {#each Settings.typeEffect.volumes as volume}
               <Menubar.CheckboxItem
-                checked={$settings.typeEffect.volume == key}
+                checked={$settings.typeEffect.volume == volume}
                 onclick={() => {
-                  Notpad.settings.updateTypeEffect({
-                    volume: key as keyof typeof Settings.typeEffect.volumes
-                  });
+                  Notpad.settings.updateTypeEffect({ volume });
                 }}
               >
-                {Settings.typeEffect.volumes[key as keyof typeof Settings.typeEffect.volumes] *
-                  100}%
+                {volume * 100}%
               </Menubar.CheckboxItem>
             {/each}
           </Menubar.SubContent>
@@ -103,16 +103,17 @@
           <Menubar.Sub>
             <Menubar.SubTrigger class="gap-2">Vibration</Menubar.SubTrigger>
             <Menubar.SubContent>
-              {#each Object.keys(Settings.typeEffect.vibrations) as key}
+              {#each Object.keys(Settings.typeEffect.vibrations) as vibration}
                 <Menubar.CheckboxItem
-                  checked={$settings.typeEffect.vibration == key}
+                  class="capitalize"
+                  checked={$settings.typeEffect.vibration == vibration}
                   onclick={() => {
                     Notpad.settings.updateTypeEffect({
-                      vibration: key as keyof typeof Settings.typeEffect.vibrations
+                      vibration: vibration as keyof typeof Settings.typeEffect.vibrations
                     });
                   }}
                 >
-                  {key}
+                  {vibration}
                 </Menubar.CheckboxItem>
               {/each}
             </Menubar.SubContent>
@@ -129,12 +130,13 @@
           <Menubar.SubContent>
             {#each Settings.caret.styles as style}
               <Menubar.CheckboxItem
+                class="capitalize"
                 checked={$settings.caret.style == style}
                 onclick={() => {
                   Notpad.settings.updateCaret({ style });
                 }}
               >
-                {style}
+                {style.replace('-', ' ')}
               </Menubar.CheckboxItem>
             {/each}
           </Menubar.SubContent>
@@ -143,16 +145,17 @@
         <Menubar.Sub>
           <Menubar.SubTrigger class="gap-2">Animation</Menubar.SubTrigger>
           <Menubar.SubContent>
-            {#each Object.keys(Settings.caret.animations) as key}
+            {#each Object.keys(Settings.caret.animations) as animation}
               <Menubar.CheckboxItem
-                checked={$settings.caret.animation == key}
+                class="capitalize"
+                checked={$settings.caret.animation == animation}
                 onclick={() => {
                   Notpad.settings.updateCaret({
-                    animation: key as keyof typeof Settings.caret.animations
+                    animation: animation as keyof typeof Settings.caret.animations
                   });
                 }}
               >
-                {key}
+                {animation}
               </Menubar.CheckboxItem>
             {/each}
           </Menubar.SubContent>

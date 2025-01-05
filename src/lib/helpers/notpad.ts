@@ -15,10 +15,10 @@ import { Stores } from '@/store/store';
 
 export class Notpad {
   public static init = async () => {
+    this.settings.init();
     this.typeEffectPlayer.init();
     await this.storage.init();
     await this.editors.init();
-    await this.settings.init();
   };
 
   public static fileOptions: FileOptions = new FileOptions();

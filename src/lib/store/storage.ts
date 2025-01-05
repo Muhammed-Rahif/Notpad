@@ -19,6 +19,19 @@ export class NotpadStorage {
   };
 
   private loadStorage = async () => {
+    const settingsValue = await localforage.getItem<SettingsType>(SETTINGS_STORAGE_KEY);
+    // Adding default values to the settings if they are not present
+    // on in any circumstances if new values are introduced in the future.
+    if (settingsValue) {
+      const settingsValueRefined = merge(Settings.defaultSettings, settingsValue);
+      Notpad.stores.settings.set(settingsValueRefined);
+    }
+
+    const activeTabIdValue = await localforage.getItem<string>(ACTIVE_TAB_ID_STORAGE_KEY);
+    if (activeTabIdValue) {
+      Notpad.stores.activeTabId.set(activeTabIdValue);
+    }
+
     const editorsValue = await localforage.getItem<EditorType[]>(EDITORS_STORAGE_KEY);
     if (editorsValue) {
       // Adding default values to the editors if they are not present
@@ -30,22 +43,17 @@ export class NotpadStorage {
       });
       Notpad.stores.editors.set(editorsValueRefined);
     }
-
-    const activeTabIdValue = await localforage.getItem<string>(ACTIVE_TAB_ID_STORAGE_KEY);
-    if (activeTabIdValue) {
-      Notpad.stores.activeTabId.set(activeTabIdValue);
-    }
-
-    const settingsValue = await localforage.getItem<SettingsType>(SETTINGS_STORAGE_KEY);
-    // Adding default values to the settings if they are not present
-    // on in any circumstances if new values are introduced in the future.
-    if (settingsValue) {
-      const settingsValueRefined = merge(Settings.defaultSettings, settingsValue);
-      Notpad.stores.settings.set(settingsValueRefined);
-    }
   };
 
   subscribeStoreUpdates = () => {
+    Notpad.stores.settings.subscribe((value) => {
+      localforage.setItem(SETTINGS_STORAGE_KEY, value);
+    });
+
+    Notpad.stores.activeTabId.subscribe((value) => {
+      localforage.setItem(ACTIVE_TAB_ID_STORAGE_KEY, value);
+    });
+
     Notpad.stores.editors.subscribe((value) => {
       // Quill instance will not be stored on indexedDb.
       localforage.setItem(
@@ -55,19 +63,11 @@ export class NotpadStorage {
         })
       );
     });
-
-    Notpad.stores.activeTabId.subscribe((value) => {
-      localforage.setItem(ACTIVE_TAB_ID_STORAGE_KEY, value);
-    });
-
-    Notpad.stores.settings.subscribe((value) => {
-      localforage.setItem(SETTINGS_STORAGE_KEY, value);
-    });
   };
 
   init = async () => {
     this.config();
-    await this.loadStorage();
     this.subscribeStoreUpdates();
+    await this.loadStorage();
   };
 }

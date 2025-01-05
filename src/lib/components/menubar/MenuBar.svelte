@@ -21,7 +21,7 @@
 
 <svelte:window bind:innerWidth />
 
-<Menubar.Root class="relative z-10 bg-popover">
+<Menubar.Root class="relative z-10 bg-popover text-popover-foreground">
   <FileMenu />
   <EditMenu />
   <SearchMenu />

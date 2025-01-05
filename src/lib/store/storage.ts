@@ -67,7 +67,7 @@ export class NotpadStorage {
 
   init = async () => {
     this.config();
-    this.subscribeStoreUpdates();
     await this.loadStorage();
+    this.subscribeStoreUpdates();
   };
 }

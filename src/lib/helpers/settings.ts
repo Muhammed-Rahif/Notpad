@@ -88,7 +88,7 @@ export class Settings {
       full: 1,
       extra: 1.3
     },
-    presets: ['light', 'dark', 'pastel']
+    presets: ['light', 'dark', 'pixie', 'cosmic', 'kelp', 'coral']
   } as const;
 
   static defaultSettings: SettingsType = {

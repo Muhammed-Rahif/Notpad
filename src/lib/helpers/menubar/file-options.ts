@@ -254,7 +254,8 @@ export class FileOptions {
   print = async (editorId?: string) => {
     const editor = Notpad.editors.getEditor(editorId);
     const _settings = get(Notpad.stores.settings);
-    const isDarkMode = _settings.theme.mode == 'dark';
+    // TODO: capture from ui not rebuilding it; for printing
+    const isDarkMode = _settings.theme.preset == 'dark';
     const fontFamily = _settings.font.family;
 
     if (!editor) return;

@@ -128,7 +128,7 @@
   class="relative h-full overflow-hidden"
   style:--editor-zoom={$settings.zoom}
   style:--editor-font-size="{$settings.font.size}px"
-  style:--editor-font-family={$settings.font.family}
+  style:--editor-font-family="'{$settings.font.family}'"
   style:--line-no-digits-count={lineNo.toString().length}
 >
   <div

@@ -4,8 +4,6 @@
   import FontDialog from '@/components/font-dialog/FontDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
   import { Toaster } from '@/components/ui/sonner';
-  import favIconLight from '@/src/assets/images/favicon-light.png';
-  import favIconDark from '@/src/assets/images/favicon-dark.png';
   import { Notpad } from '@/helpers/notpad';
   import AboutDialog from '@/components/AboutDialog.svelte';
   import LicenseDialog from '@/components/LicenseDialog.svelte';
@@ -14,20 +12,20 @@
   import Loading from '@/components/Loading.svelte';
   import ShortcutsDialog from '@/components/ShortcutsDialog.svelte';
   import EditorCloseConfirmationDialog from '@/components/EditorCloseConfirmationDialog.svelte';
-  import { get } from 'svelte/store';
+  import DynamicFavicon from '@/components/DynamicFavicon.svelte';
 
-  const settings = Notpad.stores.settings;
-  document.documentElement.setAttribute('data-theme-mode', get(settings).theme.mode);
-  document.documentElement.setAttribute('data-theme-color', get(settings).theme.color);
-  document.documentElement.style.setProperty(
-    '--theme-roundness',
-    `${get(settings).theme.roundness}rem`
-  );
+  let isLoading = $state(true);
+
+  Notpad.init().then(() => {
+    isLoading = false;
+  });
 </script>
 
-{#await Notpad.init()}
+<DynamicFavicon />
+
+{#if isLoading}
   <Loading />
-{:then}
+{:else}
   <!-- What user see on initially -->
   <div class="flex h-full flex-col">
     <MenuBar />
@@ -43,13 +41,5 @@
   <GoToDialog />
   <FindDialog />
   <Shortcuts />
-{/await}
-<Toaster />
-
-<svelte:head>
-  {#if $settings.theme.mode == 'dark'}
-    <link rel="icon" href={favIconDark} />
-  {:else}
-    <link rel="icon" href={favIconLight} />
-  {/if}
-</svelte:head>
+  <Toaster />
+{/if}

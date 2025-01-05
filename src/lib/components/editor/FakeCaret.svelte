@@ -56,8 +56,8 @@
     'fake-caret absolute z-0 w-0.5 animate-caret-blink rounded-[.06em]',
     '[transition:left_var(--caret-animation-duration),top_var(--caret-animation-duration)]',
     {
-      'bg-primary': caretStyle != 'Hollow Block',
-      'border border-primary': caretStyle == 'Hollow Block'
+      'bg-foreground': caretStyle != 'Hollow Block',
+      'border border-foreground': caretStyle == 'Hollow Block'
     }
   )}
   style:width="calc({caretStyle == 'Vertical Bar' ? '2px' : '1ch'} * var(--editor-zoom))"

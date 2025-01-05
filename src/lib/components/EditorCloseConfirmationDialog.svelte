@@ -6,9 +6,9 @@
 
   const openOrEditorId = Notpad.dialogs.editorCloseConfirmation;
 
-  let fileName = $derived.by(() => {
-    if (typeof openOrEditorId == 'string') return Notpad.editors.getEditor(openOrEditorId).fileName;
-  });
+  let fileName = $derived(
+    typeof $openOrEditorId == 'string' ? Notpad.editors.getEditor($openOrEditorId).fileName : ''
+  );
 
   async function onSave() {
     if (typeof get(openOrEditorId) != 'string') return;

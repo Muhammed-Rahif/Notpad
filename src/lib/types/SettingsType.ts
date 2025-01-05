@@ -40,9 +40,8 @@ export interface SettingsType {
    * Theme customizations.
    */
   theme: {
-    mode: ElementType<typeof Settings.theme.modes>;
     roundness: ElementType<typeof Settings.theme.roundnesses>;
-    color: ElementType<typeof Settings.theme.colors>;
+    preset: ElementType<typeof Settings.theme.presets>;
   };
 
   /**

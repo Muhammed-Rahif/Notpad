@@ -1,10 +1,9 @@
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
-  import appIconLight from '@/src/assets/images/Notpad Logo Light.svg';
-  import appIconDark from '@/src/assets/images/Notpad Logo Dark.svg';
   import GitHubIcon from '@/components/icons/GitHub.svelte';
   import Separator from '@/components/ui/separator/separator.svelte';
+  import AppLogo from '@/components/AppLogo.svelte';
   import { Badge } from '@/components/ui/badge';
   import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
@@ -12,7 +11,6 @@
   import { tick } from 'svelte';
 
   const open = Notpad.dialogs.about;
-  const settings = Notpad.stores.settings;
 
   function closeDialog() {
     open.set(false);
@@ -39,7 +37,7 @@
 
     <div class="max-h-[60vh] overflow-y-auto pr-2 text-base">
       <div class="mb-3 flex flex-row items-center justify-start gap-4 text-left">
-        <img class="w-20" alt="icon" src={$settings.theme == 'dark' ? appIconDark : appIconLight} />
+        <AppLogo />
 
         <div>
           <span class="text-xl font-bold">Notpad</span><br />
@@ -90,7 +88,7 @@
                     </Badge>
                   </li>
                 </a>
-                <Separator class="my-1 first:hidden last:hidden" />
+                <Separator class="my-1 bg-popover-foreground/10 first:hidden last:hidden" />
               {/each}
             </ul>
             <p class="mt-1 text-sm">

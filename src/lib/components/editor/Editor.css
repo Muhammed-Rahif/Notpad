@@ -21,7 +21,7 @@
 }
 
 .ql-editor > * {
-  @apply !pl-0 duration-300;
+  @apply !pl-0 [transition:margin-left_300ms,padding-left_300ms];
 }
 
 .editor-container[data-line-numbers='true'] .ql-editor {
@@ -35,7 +35,7 @@
     max(var(--line-no-digits-count), 3) * 1em * var(--line-no-font-size-factor)
   ) !important;
   padding-left: calc(var(--editor-font-size) * 0.5) !important;
-  @apply relative border-l-2 border-muted duration-300;
+  @apply relative border-l-2 border-foreground;
 }
 
 .editor-container[data-line-numbers='true'] .ql-editor > *::before {
@@ -45,7 +45,7 @@
   width: calc(max(var(--line-no-digits-count), 3) * 1em) !important;
   transform: translateX(0);
   /* padding: 0 1em; */
-  @apply absolute left-0 top-0 -translate-x-full text-center text-primary duration-300;
+  @apply absolute left-0 top-0 -translate-x-full text-center text-foreground duration-300;
 }
 
 .editor-container[data-wrap-lines='false'] .ql-editor > * {

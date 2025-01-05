@@ -49,7 +49,10 @@
       </div>
 
       <Card.Root id="sample-font" class="relative w-full">
-        <Label for="sample-font" class="absolute left-3 top-0 -translate-y-1/2 bg-background px-2">
+        <Label
+          for="sample-font"
+          class="absolute left-3 top-0 -translate-y-1/2 rounded-lg bg-card px-2 py-1"
+        >
           Sample
         </Label>
         <Card.Content class="break-words max-[420px]:max-w-xs">

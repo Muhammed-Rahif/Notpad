@@ -17,8 +17,7 @@ import { Notpad } from '@/helpers/notpad';
 export class Settings {
   init = () => {
     Notpad.stores.settings.subscribe((settings) => {
-      document.documentElement.setAttribute('data-theme-mode', settings.theme.mode);
-      document.documentElement.setAttribute('data-theme-color', settings.theme.color);
+      document.documentElement.setAttribute('data-theme-preset', settings.theme.preset);
       document.documentElement.style.setProperty(
         '--theme-roundness',
         `${settings.theme.roundness}rem`
@@ -80,9 +79,8 @@ export class Settings {
     }
   } as const;
   static theme = {
-    modes: ['dark', 'light'],
-    roundnesses: [0, 0.5, 0.75, 1, 1.3],
-    colors: ['red', 'classic', 'blue', 'sepia']
+    roundnesses: [0, 0.3, 0.5, 0.75, 1, 1.3],
+    presets: ['light', 'dark', 'pastel']
   } as const;
 
   static defaultSettings: SettingsType = {
@@ -104,9 +102,8 @@ export class Settings {
       volume: 'Full'
     },
     theme: {
-      mode: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
       roundness: 0.5,
-      color: 'classic'
+      preset: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
   };
 

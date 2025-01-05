@@ -24,34 +24,17 @@
       <Menubar.SubTrigger>Theme</Menubar.SubTrigger>
       <Menubar.SubContent>
         <Menubar.Sub>
-          <Menubar.SubTrigger class="gap-2">Mode</Menubar.SubTrigger>
+          <Menubar.SubTrigger class="gap-2">Preset</Menubar.SubTrigger>
           <Menubar.SubContent>
-            {#each Settings.theme.modes as mode}
+            {#each Settings.theme.presets as preset}
               <Menubar.CheckboxItem
-                checked={$settings.theme.mode == mode}
+                checked={$settings.theme.preset == preset}
                 onclick={() => {
-                  Notpad.settings.updateTheme({ mode });
+                  Notpad.settings.updateTheme({ preset: preset });
                 }}
                 class="capitalize"
               >
-                {mode}
-              </Menubar.CheckboxItem>
-            {/each}
-          </Menubar.SubContent>
-        </Menubar.Sub>
-
-        <Menubar.Sub>
-          <Menubar.SubTrigger class="gap-2">Color</Menubar.SubTrigger>
-          <Menubar.SubContent>
-            {#each Settings.theme.colors as color}
-              <Menubar.CheckboxItem
-                checked={$settings.theme.color == color}
-                onclick={() => {
-                  Notpad.settings.updateTheme({ color: color });
-                }}
-                class="capitalize"
-              >
-                {color}
+                {preset}
               </Menubar.CheckboxItem>
             {/each}
           </Menubar.SubContent>

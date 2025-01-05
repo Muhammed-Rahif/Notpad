@@ -1,10 +1,26 @@
+/* 
+
+Themes can be crafted from:-
+- Theme generator: https://oxidus.vercel.app/ -- https://github.com/JairHuamanBellido/Oxidus
+- Color Palettes: https://colorhunt.co/palettes/pastel
+- Darken color: https://mdigi.tools/darken-color/
+- Lighten color: https://mdigi.tools/lighten-color/
+- Name that color: https://chir.ag/projects/name-that-color/
+
+
+Maybe Helpful:-
+- https://shadesigner.com/
+- https://shadcn.rlabs.art/generate
+- https://shadcn-themes-eight.vercel.app/
+- https://uicolorful.com/
+
+*/
+
 :root {
   --radius: var(--theme-roundness);
 }
 
-/* TODO: customize each themes, especially lighers ones */
-
-[data-theme-mode='light'][data-theme-color='classic'] {
+[data-theme-preset='light'] {
   --background: 0 0% 100%;
   --foreground: 0 0% 3.9%;
   --card: 0 0% 100%;
@@ -26,7 +42,7 @@
   --ring: 0 0% 3.9%;
 }
 
-[data-theme-mode='dark'][data-theme-color='classic'] {
+[data-theme-preset='dark'] {
   --background: 0 0% 3.9%;
   --foreground: 0 0% 98%;
   --card: 0 0% 3.9%;
@@ -47,134 +63,24 @@
   --input: 0 0% 14.9%;
 }
 
-[data-theme-mode='light'][data-theme-color='blue'] {
-  --background: 211 100% 95%;
-  --foreground: 211 5% 0%;
-  --card: 211 50% 90%;
-  --card-foreground: 211 5% 10%;
-  --popover: 211 100% 95%;
-  --popover-foreground: 211 100% 0%;
-  --primary: 211 100% 50%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 211 30% 70%;
+[data-theme-preset='pastel'] {
+  --background: 112.94 30.36% 78.04%;
+  --foreground: 79.09 22% 19.61%;
+  --primary: 78.62 40.85% 86.08%;
+  --primary-foreground: 79.09 22% 19.61%;
+  --card: 90 33.33% 98.82%;
+  --card-foreground: 105 10% 7.84%;
+  --popover: 50.53 61.29% 93.92%;
+  --popover-foreground: 105 10% 7.84%;
+  --secondary: 265.38 23.64% 56.86%;
   --secondary-foreground: 0 0% 0%;
-  --muted: 173 30% 85%;
-  --muted-foreground: 211 5% 35%;
-  --accent: 173 30% 80%;
-  --accent-foreground: 211 5% 10%;
-  --destructive: 0 100% 30%;
-  --destructive-foreground: 211 5% 90%;
-  --border: 211 30% 50%;
-  --input: 211 30% 18%;
-  --ring: 211 100% 50%;
-}
-
-[data-theme-mode='dark'][data-theme-color='blue'] {
-  --background: 211 50% 10%;
-  --foreground: 211 5% 100%;
-  --card: 211 50% 10%;
-  --card-foreground: 211 5% 100%;
-  --popover: 211 50% 5%;
-  --popover-foreground: 211 5% 100%;
-  --primary: 211 100% 50%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 211 30% 20%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 173 30% 25%;
-  --muted-foreground: 211 5% 65%;
-  --accent: 173 30% 25%;
-  --accent-foreground: 211 5% 95%;
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 211 5% 100%;
-  --border: 211 30% 50%;
-  --input: 211 30% 50%;
-  --ring: 211 100% 50%;
-}
-
-[data-theme-mode='light'][data-theme-color='red'] {
-  --background: 360 100% 100%;
-  --foreground: 360 5% 10%;
-  --card: 360 50% 100%;
-  --card-foreground: 360 5% 15%;
-  --popover: 360 100% 100%;
-  --popover-foreground: 360 100% 10%;
-  --primary: 360 100% 50%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 360 30% 90%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: 322 30% 95%;
-  --muted-foreground: 360 5% 40%;
-  --accent: 322 30% 90%;
-  --accent-foreground: 360 5% 15%;
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 360 5% 100%;
-  --border: 360 30% 82%;
-  --input: 360 30% 50%;
-  --ring: 360 100% 50%;
-}
-
-[data-theme-mode='dark'][data-theme-color='red'] {
-  --background: 360 50% 10%;
-  --foreground: 360 5% 100%;
-  --card: 360 50% 10%;
-  --card-foreground: 360 5% 100%;
-  --popover: 360 50% 5%;
-  --popover-foreground: 360 5% 100%;
-  --primary: 360 100% 50%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 360 30% 20%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 322 30% 25%;
-  --muted-foreground: 360 5% 65%;
-  --accent: 322 30% 25%;
-  --accent-foreground: 360 5% 95%;
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 360 5% 100%;
-  --border: 360 30% 50%;
-  --input: 360 30% 50%;
-  --ring: 360 100% 50%;
-}
-
-[data-theme-mode='light'][data-theme-color='sepia'] {
-  --background: 28 100% 100%;
-  --foreground: 28 5% 10%;
-  --card: 28 50% 100%;
-  --card-foreground: 28 5% 15%;
-  --popover: 28 100% 100%;
-  --popover-foreground: 28 100% 10%;
-  --primary: 28 78% 50%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 28 30% 90%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: -10 30% 95%;
-  --muted-foreground: 28 5% 40%;
-  --accent: -10 30% 90%;
-  --accent-foreground: 28 5% 15%;
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 28 5% 100%;
-  --border: 28 30% 82%;
-  --input: 28 30% 50%;
-  --ring: 28 78% 50%;
-}
-
-[data-theme-mode='dark'][data-theme-color='sepia'] {
-  --background: 28 50% 10%;
-  --foreground: 28 5% 100%;
-  --card: 28 50% 10%;
-  --card-foreground: 28 5% 100%;
-  --popover: 28 50% 5%;
-  --popover-foreground: 28 5% 100%;
-  --primary: 28 78% 50%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 28 30% 20%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: -10 30% 25%;
-  --muted-foreground: 28 5% 65%;
-  --accent: -10 30% 25%;
-  --accent-foreground: 28 5% 95%;
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 28 5% 100%;
-  --border: 28 30% 50%;
-  --input: 28 30% 50%;
-  --ring: 28 78% 50%;
+  --muted: 120 27.27% 97.84%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 120 27.27% 97.84%;
+  --accent-foreground: 108 8.47% 11.57%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 111.43 30.43% 95.49%;
+  --input: 105 5.13% 84.71%;
+  --ring: 112.94 30.36% 78.04%;
 }

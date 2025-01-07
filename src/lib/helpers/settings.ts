@@ -13,26 +13,8 @@ import squareSound from '@/src/assets/sounds/square.wav';
 import triangleSound from '@/src/assets/sounds/triangle.wav';
 import typewriterSound from '@/src/assets/sounds/typewriter.wav';
 import { Notpad } from '@/helpers/notpad';
-import { get } from 'svelte/store';
 
 export class Settings {
-  init = () => {
-    Notpad.stores.settings.subscribe((settings) => {
-      document.documentElement.setAttribute('data-theme-preset', settings.theme.preset);
-      document.documentElement.style.setProperty(
-        '--theme-roundness',
-        `${Settings.theme.roundnesses[settings.theme.roundness]}rem`
-      );
-    });
-
-    const settings = get(Notpad.stores.settings);
-    document.documentElement.setAttribute('data-theme-preset', settings.theme.preset);
-    document.documentElement.style.setProperty(
-      '--theme-roundness',
-      `${Settings.theme.roundnesses[settings.theme.roundness]}rem`
-    );
-  };
-
   static fontFamilies = [
     'SUSE',
     'Baloo 2',
@@ -88,7 +70,7 @@ export class Settings {
       full: 1,
       extra: 1.3
     },
-    presets: ['light', 'dark', 'pixie', 'cosmic', 'kelp', 'coral']
+    presets: ['light', 'dark', 'pixie']
   } as const;
 
   static defaultSettings: SettingsType = {
@@ -111,7 +93,10 @@ export class Settings {
     },
     theme: {
       roundness: 'medium',
-      preset: 'light'
+      preset:
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
     }
   };
 

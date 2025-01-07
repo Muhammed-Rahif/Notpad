@@ -16,6 +16,28 @@ Maybe Helpful:-
 
 */
 
+/* HOW THEMES ARE CREATED:
+ - Go to https://colorhunt.co/palettes. And pick one palette.
+ - There will be 4 colors stacked. In there, the bottom color
+   is primary and top color is background.
+ - Now go to: https://oxidus.vercel.app/, manually identify that
+   the palette is more like light or dark. Then select this on website
+   (top right icon button). After that select the primary 
+   color from [colorhunt] in 'pick you color' color input. 
+ - Now appropriately add other colors, use the below technique:
+   - Background: top one.
+   - Primary: bottom one.
+   - Card: take one appropriate from the palette.
+   - Popover: same as the [Card].
+   - Secondary: choose a lighter color of primary color.
+   - Muted: convert [Popover] color to light (30%) version from 
+     here: https://mdigi.tools/lighten-color/
+   - Accent: convert [Background] color to light (30%) version from 
+     here: https://mdigi.tools/lighten-color/
+ - Copy the css variables code from the website, remember to
+   pick the mode of your theme as that you are previously manually
+   selected at the beginning.
+*/
 :root {
   --radius: var(--theme-roundness);
 }
@@ -65,96 +87,22 @@ Maybe Helpful:-
 
 [data-theme-preset='pixie'] {
   --background: 112.94 30.36% 78.04%;
-  --foreground: 79.09 22% 19.61%;
+  --foreground: 264 17.24% 5.69%;
   --primary: 265.38 23.64% 56.86%;
-  --primary-foreground: 0 0% 100%;
-  --card: 90 33.33% 98.82%;
-  --card-foreground: 105 10% 7.84%;
+  --primary-foreground: 270 27.27% 95.69%;
+  --card: 50.53 61.29% 93.92%;
+  --card-foreground: 264 17.24% 5.69%;
   --popover: 50.53 61.29% 93.92%;
-  --popover-foreground: 105 10% 7.84%;
-  --secondary: 78.62 40.85% 86.08%;
+  --popover-foreground: 264 17.24% 5.69%;
+  --secondary: 120 16.05% 84.12%;
   --secondary-foreground: 0 0% 0%;
-  --muted: 120 27.27% 97.84%;
-  --muted-foreground: 0 0% 40%;
-  --accent: 120 27.27% 97.84%;
-  --accent-foreground: 108 8.47% 11.57%;
+  --muted: 51.43 63.64% 95.69%;
+  --muted-foreground: 0 0% 0%;
+  --accent: 113.33 30.34% 82.55%;
+  --accent-foreground: 262.5 18.18% 8.63%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
-  --border: 111.43 30.43% 95.49%;
-  --input: 105 5.13% 84.71%;
-  --ring: 112.94 30.36% 78.04%;
-}
-
-[data-theme-preset='cosmic'] {
-  --background: 9.36 70.15% 60.59%;
-  --foreground: 0 0% 0%;
-  --primary: 348.21 29.17% 37.65%;
-  --primary-foreground: 350 18.75% 93.73%;
-  --card: 25.31 85.96% 66.47%;
-  --card-foreground: 0 0% 0%;
-  --popover: 25.31 85.96% 66.47%;
-  --popover-foreground: 0 0% 0%;
-  --secondary: 347.37 28.36% 13.14%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 357.66 31.95% 47.25%;
-  --muted-foreground: 0 0% 100%;
-  --accent: 347.37 28.36% 13.14%;
-  --accent-foreground: 345 16.67% 90.59%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 349.09 28.21% 7.65%;
-  --input: 350 6.25% 18.82%;
-  --ring: 348.21 29.17% 37.65%;
-}
-
-[data-theme-preset='kelp'] {
-  --background: 120 3.23% 12.16%;
-  --foreground: 35.63 45.71% 86.27%;
-  --primary: 70 5.17% 22.75%;
-  --primary-foreground: 0 0% 91.37%;
-  --card: 0 0% 4.31%;
-  --card-foreground: 120 1.49% 86.86%;
-  --popover: 105 7.34% 42.75%;
-  --popover-foreground: 0 0% 100%;
-  --secondary: 0 0% 4.31%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 0 0% 9.8%;
-  --muted-foreground: 0 0% 100%;
-  --accent: 0 0% 4.31%;
-  --accent-foreground: 120 1.49% 86.86%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 0 0% 2.35%;
-  --input: 0 0% 16.08%;
-  --ring: 120 3.23% 12.16%;
-}
-
-[data-theme-preset='coral'] {
-  --background: 20.44 75.83% 52.94%;
-  --foreground: 0 0% 100%;
-
-  --primary: 37.97 100% 74.9%;
-  --primary-foreground: 0 0% 7.84%;
-
-  --card: 27.38 97.56% 67.84%;
-  --card-foreground: 22.11 70.37% 5.29%;
-
-  --popover: 27.38 97.56% 67.84%;
-  --popover-foreground: 22.11 70.37% 5.29%;
-
-  --secondary: 21.43 77.78% 92.94%;
-  --secondary-foreground: 0 0% 0%;
-
-  --muted: 37.97 100% 74.9%;
-  --muted-foreground: 0 0% 20%;
-
-  --accent: 20 75% 95.29%;
-  --accent-foreground: 20 65.85% 8.04%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 20 75% 90.59%;
-  --input: 20.87 24.73% 81.76%;
-  --ring: 20.44 75.83% 52.94%;
+  --border: 264 22.73% 91.37%;
+  --input: 265.71 7.69% 82.16%;
+  --ring: 265.38 23.64% 56.86%;
 }

@@ -28,14 +28,16 @@
       if (!appLogo) return;
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      const backgroundColor = getComputedStyle(document.querySelector('.fill-background')!).fill;
-      const foregroundColor = getComputedStyle(document.querySelector('.fill-foreground')!).fill;
+      const accentColor = getComputedStyle(document.querySelector('.fill-accent')!).fill;
+      const accentForegroundColor = getComputedStyle(
+        document.querySelector('.fill-accent-foreground')!
+      ).fill;
       const styles = `
-      .fill-background { 
-        fill: ${backgroundColor};
+      .fill-accent {
+        fill: ${accentColor};
       }
-      .fill-foreground { 
-        fill: ${foregroundColor};
+      .fill-accent-foreground {
+        fill: ${accentForegroundColor};
       }
     `;
 

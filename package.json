@@ -1,6 +1,6 @@
 {
   "name": "notpad",
-  "version": "1.0.0-4",
+  "version": "1.0.0-5",
   "type": "module",
   "license": "AGPL-3.0-or-later",
   "author": {
@@ -78,6 +78,7 @@
     "sharp-ico": "0.1.5"
   },
   "dependencies": {
+    "@neodrag/svelte": "^2.2.0",
     "@svelte-put/shortcut": "^4.0.0",
     "@tauri-apps/api": "^2.1.1",
     "@tauri-apps/plugin-dialog": "^2.0.1",
@@ -85,11 +86,11 @@
     "@tauri-apps/plugin-process": "^2.0.0",
     "@tauri-apps/plugin-shell": "^2.0.1",
     "caret-pos": "^2.0.0",
+    "dayjs": "^1.11.13",
     "localforage": "^1.10.0",
     "lodash.debounce": "^4.0.8",
     "lodash.merge": "^4.6.2",
     "lodash.throttle": "^4.1.1",
-    "mode-watcher": "^0.5.0",
     "print-js": "^1.6.0",
     "quill": "^2.0.3",
     "screenfull": "^6.0.2",

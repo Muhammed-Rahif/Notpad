@@ -1,25 +1,33 @@
 import { get } from 'svelte/store';
-import { settings } from '@/store/store';
 import { Notpad } from '@/helpers/notpad';
-import type { SettingsType } from '@/types/SettingsTypes';
+import type { SettingsType } from '@/src/lib/types/SettingsType';
 
 export class ViewOptions {
   public toggleStatusBar() {
-    settings.update((value) => ({ ...value, statusBar: !get(settings).statusBar }));
+    Notpad.stores.settings.update((value) => ({
+      ...value,
+      statusBar: !get(Notpad.stores.settings).statusBar
+    }));
   }
 
   public toggleLineNumbers() {
     Notpad.editors.focus();
-    settings.update((value) => ({ ...value, lineNumbers: !get(settings).lineNumbers }));
+    Notpad.stores.settings.update((value) => ({
+      ...value,
+      lineNumbers: !get(Notpad.stores.settings).lineNumbers
+    }));
   }
 
-  public toggleWrapLongLines() {
+  public toggleWrapLines() {
     Notpad.editors.focus();
-    settings.update((value) => ({ ...value, wrapLongLines: !get(settings).wrapLongLines }));
+    Notpad.stores.settings.update((value) => ({
+      ...value,
+      wrapLines: !get(Notpad.stores.settings).wrapLines
+    }));
   }
 
   public zoom(zoom: 'in' | 'out' | 'reset') {
-    const zoomSettings = get(settings).zoom;
+    const zoomSettings = get(Notpad.stores.settings).zoom;
     const zoomLevels: SettingsType['zoom'][] = [0.5, 0.75, 0.9, 1, 1.2, 1.5, 1.75, 2];
 
     let newZoom: SettingsType['zoom'];
@@ -38,6 +46,6 @@ export class ViewOptions {
       }
     }
 
-    settings.update((value) => ({ ...value, zoom: newZoom }));
+    Notpad.stores.settings.update((value) => ({ ...value, zoom: newZoom }));
   }
 }

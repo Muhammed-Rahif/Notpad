@@ -1,62 +1,48 @@
-<script module>
-  import { writable } from 'svelte/store';
-
-  export type Status = 'save' | 'dont-save' | 'cancel';
-
-  const open = writable(false);
-  const resolve = writable<(value: Status) => void>(() => {});
-  const fileName = writable('');
-
-  export function openEditorCloseConfirmationDialog({
-    fileName: fl
-  }: {
-    fileName: string;
-  }): Promise<Status> {
-    fileName.set(fl);
-    open.set(true);
-
-    return new Promise((res) => {
-      resolve.set(res);
-    });
-  }
-</script>
-
 <script lang="ts">
   import * as AlertDialog from '@/components/ui/alert-dialog';
   import Button from '@/components/ui/button/button.svelte';
+  import { Notpad } from '@/helpers/notpad';
+  import { get } from 'svelte/store';
 
-  function onSave() {
-    $resolve('save');
-    open.set(false);
+  const openOrEditorId = Notpad.dialogs.editorCloseConfirmation;
+
+  let fileName = $derived(
+    typeof $openOrEditorId == 'string' ? Notpad.editors.getEditor($openOrEditorId).fileName : ''
+  );
+
+  async function onSave() {
+    if (typeof get(openOrEditorId) != 'string') return;
+
+    await Notpad.fileOptions.save({ saveAs: true });
+    openOrEditorId.set(false);
+    await Notpad.editors.remove($openOrEditorId as string);
   }
 
-  function onDontSave(e: Event) {
+  async function onDontSave(e: Event) {
+    if (typeof get(openOrEditorId) != 'string') return;
+
     e.preventDefault();
     e.stopPropagation();
-    $resolve('dont-save');
-    open.set(false);
+    await Notpad.editors.remove(get(openOrEditorId) as string);
+    openOrEditorId.set(false);
   }
 
   function onCancel() {
-    $resolve('cancel');
-    open.set(false);
+    openOrEditorId.set(false);
   }
 
   function onOpenChange(op: boolean) {
-    open.set(op);
-    if (op == false) {
-      $resolve('cancel');
-    }
+    openOrEditorId.set(op && false);
   }
 </script>
 
-<AlertDialog.Root open={$open} {onOpenChange}>
+<AlertDialog.Root open={Boolean($openOrEditorId)} {onOpenChange}>
   <AlertDialog.Content>
     <AlertDialog.Header>
       <AlertDialog.Title>Unsaved Changes</AlertDialog.Title>
       <AlertDialog.Description>
-        The contents from "{$fileName}" are not saved to local file. Do you want to save it to a
-        file before closing this editor? If you don't save, your changes will be lost.
+        The contents from "{fileName}" are not saved to local file. Do you want to save it to a file
+        before closing this editor? If you don't save, your changes will be lost.
       </AlertDialog.Description>
     </AlertDialog.Header>
     <AlertDialog.Footer>

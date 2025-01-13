@@ -11,6 +11,7 @@ function baseUrl() {
   }
   return null;
 }
+const BASE_URL = baseUrl() ?? '/Notpad/';
 
 (function () {
   // create a app.json with version using process.env.npm_package_version
@@ -32,7 +33,7 @@ export default defineConfig({
   define: {
     APP_VERSION: JSON.stringify(process.env.npm_package_version)
   },
-  base: '/Notpad/',
+  base: BASE_URL,
   build: {
     outDir: 'www',
     rollupOptions: {
@@ -63,7 +64,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
-      base: baseUrl() ?? '/Notpad/',
+      base: BASE_URL,
       pwaAssets: {
         disabled: false,
         config: true
@@ -92,7 +93,7 @@ export default defineConfig({
         display: 'standalone',
         dir: 'ltr',
         lang: 'en-IN',
-        start_url: '/Notpad',
+        start_url: baseUrl() ?? '/Notpad',
         scope: '.'
       },
       workbox: {

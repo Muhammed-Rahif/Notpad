@@ -1,14 +1,16 @@
 <script lang="ts">
-  import Editor from '@/src/lib/components/Editor/Editor.svelte';
+  import Editor from '@/components/editor/Editor.svelte';
   import * as Tabs from '@/components/ui/tabs';
   import * as ContextMenu from '@/components/ui/context-menu';
   import EditorTitle from '@/components/EditorTitle.svelte';
-  import { activeTabId, editors } from '@/store/store';
-  import { Notpad } from '@/helpers/notpad';
   import { slide } from 'svelte/transition';
+  import EditMenuItems from '@/components/EditMenuItems.svelte';
+  import { Notpad } from '@/helpers/notpad';
+
+  const activeTabId = Notpad.stores.activeTabId;
+  const editors = Notpad.stores.editors;
 
   let innerWidth = $state(window.innerWidth);
-
   let isMD = $derived(innerWidth <= 768);
   /**
    * Compact mode is disabled on mobile devices (width <= 450px)
@@ -24,7 +26,7 @@
     <div transition:slide>
       <Tabs.List
         class="w-full justify-start gap-1 overflow-x-auto
-        overflow-y-clip rounded-none shadow"
+        overflow-y-clip bg-muted shadow"
       >
         {#each $editors as editor}
           <Tabs.Trigger value={editor.id} class="h-8 pl-2 pr-0">
@@ -55,30 +57,7 @@
         </ContextMenu.Trigger>
 
         <ContextMenu.Content class="w-48">
-          <ContextMenu.Item onclick={() => Notpad.editOptions.undo()}>
-            Undo<ContextMenu.Shortcut>Ctrl+Z</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Item onclick={() => Notpad.editOptions.redo()}>
-            Redo<ContextMenu.Shortcut>Ctrl+Y</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Separator />
-          <ContextMenu.Item onclick={() => Notpad.editOptions.cut()}>
-            Cut<ContextMenu.Shortcut>Ctrl+X</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Item onclick={() => Notpad.editOptions.copy()}>
-            Copy<ContextMenu.Shortcut>Ctrl+C</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Item onclick={() => Notpad.editOptions.paste()}>
-            Paste<ContextMenu.Shortcut>Ctrl+V</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Separator />
-          <ContextMenu.Item onclick={() => Notpad.editOptions.selectAll()}>
-            Select All
-            <ContextMenu.Shortcut>Ctrl+A</ContextMenu.Shortcut>
-          </ContextMenu.Item>
-          <ContextMenu.Item onclick={() => Notpad.editOptions.insertDateAndTime()}>
-            Time/Date
-          </ContextMenu.Item>
+          <EditMenuItems type="contextmenu" />
         </ContextMenu.Content>
       </ContextMenu.Root>
     </Tabs.Content>

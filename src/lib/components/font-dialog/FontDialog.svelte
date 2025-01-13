@@ -1,40 +1,35 @@
-<script module>
-  import { get, writable } from 'svelte/store';
-  const open = writable(false);
-
-  export function openFontDialog() {
-    open.set(true);
-  }
-</script>
-
 <script lang="ts">
   import { Button } from '@/components/ui/button';
   import * as Dialog from '@/components/ui/dialog';
   import FontFamilyCombobox from './FontFamilyCombobox.svelte';
-  import { settings } from '@/store/store';
   import { Notpad } from '@/helpers/notpad';
   import FontSizeCombobox from './FontSizeCombobox.svelte';
   import { Label } from '@/components/ui/label';
   import * as Card from '@/components/ui/card';
-  import { FontFamily, FontSize } from '@/types/SettingsTypes';
+  import { get } from 'svelte/store';
+  import type { SettingsType } from '@/types/SettingsType';
 
+  const settings = Notpad.stores.settings;
   const currentSettings = get(settings);
+  const open = Notpad.dialogs.font;
 
-  let fontFamily: FontFamily = $state(currentSettings.fontFamily);
-  let fontSize: FontSize = $state(currentSettings.fontSize);
+  let fontFamily: SettingsType['font']['family'] = $state(currentSettings.font.family);
+  let fontSize: SettingsType['font']['size'] = $state(currentSettings.font.size);
 
   function closeFontDialog({ submit } = { submit: false }) {
     open.set(false);
     if (submit) {
-      Notpad.settings.setFontFamily(fontFamily);
-      Notpad.settings.setFontSize(fontSize);
+      Notpad.settings.updateFont({
+        family: fontFamily,
+        size: fontSize
+      });
     }
     Notpad.editors.focus();
   }
 
   function resetFontDefault() {
-    fontFamily = FontFamily.SUSE;
-    fontSize = FontSize.Size16;
+    fontFamily = 'SUSE';
+    fontSize = 16;
   }
 </script>
 
@@ -54,7 +49,10 @@
       </div>
 
       <Card.Root id="sample-font" class="relative w-full">
-        <Label for="sample-font" class="absolute left-3 top-0 -translate-y-1/2 bg-background px-2">
+        <Label
+          for="sample-font"
+          class="absolute left-3 top-0 -translate-y-1/2 rounded-lg bg-card px-2 py-1"
+        >
           Sample
         </Label>
         <Card.Content class="break-words max-[420px]:max-w-xs">

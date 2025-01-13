@@ -1,5 +1,5 @@
 .ql-editor {
-  @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none duration-300;
+  @apply h-full w-full overflow-y-auto border-none !px-3 !py-2.5 text-base leading-[136%] outline-none;
 }
 
 .ql-editor,
@@ -21,7 +21,7 @@
 }
 
 .ql-editor > * {
-  @apply !pl-0 duration-300;
+  @apply !pl-0 [transition:margin-left_300ms,padding-left_300ms];
 }
 
 .editor-container[data-line-numbers='true'] .ql-editor {
@@ -35,7 +35,7 @@
     max(var(--line-no-digits-count), 3) * 1em * var(--line-no-font-size-factor)
   ) !important;
   padding-left: calc(var(--editor-font-size) * 0.5) !important;
-  @apply relative border-l-2 border-muted duration-300;
+  @apply relative border-l-2 border-foreground;
 }
 
 .editor-container[data-line-numbers='true'] .ql-editor > *::before {
@@ -45,26 +45,9 @@
   width: calc(max(var(--line-no-digits-count), 3) * 1em) !important;
   transform: translateX(0);
   /* padding: 0 1em; */
-  @apply absolute left-0 top-0 -translate-x-full text-center text-primary duration-300;
+  @apply absolute left-0 top-0 -translate-x-full text-center text-foreground duration-300;
 }
 
-.editor-container[data-wrap-long-lines='true'] .ql-editor > * {
+.editor-container[data-wrap-lines='false'] .ql-editor > * {
   @apply w-max;
-}
-
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.fake-caret {
-  animation: blink 1s infinite;
-  transition: all 250ms cubic-bezier(0, 0.55, 0.45, 1);
 }

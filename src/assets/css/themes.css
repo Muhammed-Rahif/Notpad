@@ -1,0 +1,130 @@
+/* 
+  Tools used:-
+  - Theme generator: https://oxidus.vercel.app/ -- https://github.com/JairHuamanBellido/Oxidus
+  - Color Palettes: https://colorhunt.co/palettes/
+  - Darken color: https://mdigi.tools/darken-color/
+  - Lighten color: https://mdigi.tools/lighten-color/
+  - Name that color: https://chir.ag/projects/name-that-color/
+
+
+  Maybe Helpful:-
+  - https://shadesigner.com/
+  - https://shadcn.rlabs.art/generate
+  - https://shadcn-themes-eight.vercel.app/
+  - https://uicolorful.com/
+*/
+:root {
+  --radius: var(--theme-roundness);
+}
+
+[data-theme-preset='light'] {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 72.22% 50.59%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+}
+
+[data-theme-preset='dark'] {
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+}
+
+/* https://colorhunt.co/palette/bad8b6e1eacdf9f6e68d77ab */
+[data-theme-preset='pixie'] {
+  --background: 112.94 30.36% 78.04%;
+  --foreground: 264 17.24% 5.69%;
+  --primary: 265.38 23.64% 56.86%;
+  --primary-foreground: 270 27.27% 95.69%;
+  --card: 50.53 61.29% 93.92%;
+  --card-foreground: 264 17.24% 5.69%;
+  --popover: 50.53 61.29% 93.92%;
+  --popover-foreground: 264 17.24% 5.69%;
+  --secondary: 120 16.05% 84.12%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 51.43 63.64% 95.69%;
+  --muted-foreground: 0 0% 0%;
+  --accent: 113.33 30.34% 82.55%;
+  --accent-foreground: 262.5 18.18% 8.63%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 264 22.73% 91.37%;
+  --input: 265.71 7.69% 82.16%;
+  --ring: 265.38 23.64% 56.86%;
+}
+
+/* https://colorhunt.co/palette/5d8736809d3ca9c46cf4ffc3 */
+[data-theme-preset='verdant'] {
+  --background: 71.43 87.27% 88.24%;
+  --foreground: 90 26.47% 20%;
+  --primary: 87.27 46.51% 51.96%;
+  --primary-foreground: 88 72.73% 95.69%;
+  --card: 88.89 40% 78.43%;
+  --card-foreground: 90 26.47% 20%;
+  --popover: 88.89 40% 78.43%;
+  --popover-foreground: 90 26.47% 20%;
+  --secondary: 86.96 50% 66.27%;
+  --secondary-foreground: 90 26.47% 20%;
+  --muted: 87.27 71.43% 91.76%;
+  --muted-foreground: 90 26.47% 20%;
+  --accent: 71.43 87.27% 88.24%;
+  --accent-foreground: 90 35% 15%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 88 15.96% 63.14%;
+  --input: 87.27 31.43% 77.65%;
+  --ring: 87.27 46.51% 51.96%;
+}
+
+/* https://colorhunt.co/palette/fff7d18b5dff6a42c2563a9c */
+[data-theme-preset='fuchsia'] {
+  --background: 258.75 51.2% 50.98%;
+  --foreground: 49.57 100% 90.98%;
+  --primary: 49.57 100% 90.98%;
+  --primary-foreground: 258.1 54.78% 22.55%;
+  --card: 257.04 100% 68.24%;
+  --card-foreground: 49.57 100% 90.98%;
+  --popover: 257.04 100% 68.24%;
+  --popover-foreground: 49.57 100% 90.98%;
+  --secondary: 258.75 51.2% 50.98%;
+  --secondary-foreground: 49.57 100% 90.98%;
+  --muted: 257.04 100% 68.24%;
+  --muted-foreground: 49.57 100% 90.98%;
+  --accent: 257.14 45.79% 41.96%;
+  --accent-foreground: 49.57 100% 90.98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 256.76 91.74% 76.27%;
+  --input: 256.76 91.74% 76.27%;
+  --ring: 256.76 91.74% 76.27%;
+}

@@ -84,10 +84,10 @@ svg {
 
 ::selection,
 ::-webkit-selection {
-  @apply bg-neutral-500/50;
+  @apply bg-foreground/20;
 }
 ::-moz-selection {
-  @apply bg-neutral-500/50;
+  @apply bg-foreground/20;
 }
 
 /* https://github.com/tailwindlabs/tailwindcss/issues/9979 */

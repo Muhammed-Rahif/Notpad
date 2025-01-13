@@ -70,7 +70,7 @@ export class Settings {
       full: 1,
       extra: 1.3
     },
-    presets: ['light', 'dark', 'pixie']
+    presets: ['light', 'dark', 'pixie', 'verdant', 'fuchsia']
   } as const;
 
   static defaultSettings: SettingsType = {

@@ -75,14 +75,14 @@
                     />
                     <p>
                       {contributor.login}
-                      <span class="block text-xs text-foreground">
+                      <span class="block text-xs text-card-foreground">
                         {contributor.contributions}
                         {contributor.contributions == 1 ? 'contribution' : 'contributions'}
                       </span>
                     </p>
                     <Badge
                       variant={isAuthor ? 'default' : 'outline'}
-                      class="ml-auto {isAuthor ? 'bg-green-500' : ''}"
+                      class="ml-auto text-card-foreground {isAuthor ? 'bg-green-500' : ''}"
                     >
                       {isAuthor ? 'Author' : 'Contributor'}
                     </Badge>

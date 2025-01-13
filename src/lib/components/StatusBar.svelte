@@ -21,14 +21,15 @@
 
 {#if $settings.statusBar}
   <div
-    class="sticky bottom-0 z-10 h-[30px] w-screen rounded-lg bg-muted"
+    class="sticky bottom-0 z-10 h-[30px] w-screen rounded-lg bg-muted
+    text-muted-foreground shadow-[0_1px_3px_0]"
     transition:slide
     oncontextmenu={stopPropagation(preventDefault(bubble('contextmenu')))}
     role="contentinfo"
   >
     <p
       class="flex h-full w-full items-center justify-start divide-x-2
-      divide-foreground/30 overflow-x-auto px-2 text-sm text-foreground
+      divide-muted-foreground/30 overflow-x-auto px-2 text-sm
       [&>span]:px-4 first:[&>span]:pl-0 last:[&>span]:pr-0"
     >
       <span class="inline-flex items-center justify-center whitespace-nowrap">

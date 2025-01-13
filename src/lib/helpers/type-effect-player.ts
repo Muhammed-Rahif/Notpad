@@ -77,6 +77,8 @@ export class TypeEffectPlayer {
   }
 
   public async play(key?: string): Promise<void> {
+    if (this.settings.sound == 'none' || this.settings.volume == 0) return;
+
     this.resumeAudioContext();
     await this.audioReady;
 

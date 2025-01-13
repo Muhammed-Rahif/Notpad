@@ -1,42 +1,17 @@
 /* 
+  Tools used:-
+  - Theme generator: https://oxidus.vercel.app/ -- https://github.com/JairHuamanBellido/Oxidus
+  - Color Palettes: https://colorhunt.co/palettes/
+  - Darken color: https://mdigi.tools/darken-color/
+  - Lighten color: https://mdigi.tools/lighten-color/
+  - Name that color: https://chir.ag/projects/name-that-color/
 
-Themes can be crafted from:-
-- Theme generator: https://oxidus.vercel.app/ -- https://github.com/JairHuamanBellido/Oxidus
-- Color Palettes: https://colorhunt.co/palettes/pastel
-- Darken color: https://mdigi.tools/darken-color/
-- Lighten color: https://mdigi.tools/lighten-color/
-- Name that color: https://chir.ag/projects/name-that-color/
 
-
-Maybe Helpful:-
-- https://shadesigner.com/
-- https://shadcn.rlabs.art/generate
-- https://shadcn-themes-eight.vercel.app/
-- https://uicolorful.com/
-
-*/
-
-/* HOW THEMES ARE CREATED:
- - Go to https://colorhunt.co/palettes. And pick one palette.
- - There will be 4 colors stacked. In there, the bottom color
-   is primary and top color is background.
- - Now go to: https://oxidus.vercel.app/, manually identify that
-   the palette is more like light or dark. Then select this on website
-   (top right icon button). After that select the primary 
-   color from [colorhunt] in 'pick you color' color input. 
- - Now appropriately add other colors, use the below technique:
-   - Background: top one.
-   - Primary: bottom one.
-   - Card: take one appropriate from the palette.
-   - Popover: same as the [Card].
-   - Secondary: choose a lighter color of primary color.
-   - Muted: convert [Popover] color to light (30%) version from 
-     here: https://mdigi.tools/lighten-color/
-   - Accent: convert [Background] color to light (30%) version from 
-     here: https://mdigi.tools/lighten-color/
- - Copy the css variables code from the website, remember to
-   pick the mode of your theme as that you are previously manually
-   selected at the beginning.
+  Maybe Helpful:-
+  - https://shadesigner.com/
+  - https://shadcn.rlabs.art/generate
+  - https://shadcn-themes-eight.vercel.app/
+  - https://uicolorful.com/
 */
 :root {
   --radius: var(--theme-roundness);
@@ -85,6 +60,7 @@ Maybe Helpful:-
   --input: 0 0% 14.9%;
 }
 
+/* https://colorhunt.co/palette/bad8b6e1eacdf9f6e68d77ab */
 [data-theme-preset='pixie'] {
   --background: 112.94 30.36% 78.04%;
   --foreground: 264 17.24% 5.69%;
@@ -105,4 +81,50 @@ Maybe Helpful:-
   --border: 264 22.73% 91.37%;
   --input: 265.71 7.69% 82.16%;
   --ring: 265.38 23.64% 56.86%;
+}
+
+/* https://colorhunt.co/palette/5d8736809d3ca9c46cf4ffc3 */
+[data-theme-preset='verdant'] {
+  --background: 71.43 87.27% 88.24%;
+  --foreground: 90 26.47% 20%;
+  --primary: 87.27 46.51% 51.96%;
+  --primary-foreground: 88 72.73% 95.69%;
+  --card: 88.89 40% 78.43%;
+  --card-foreground: 90 26.47% 20%;
+  --popover: 88.89 40% 78.43%;
+  --popover-foreground: 90 26.47% 20%;
+  --secondary: 86.96 50% 66.27%;
+  --secondary-foreground: 90 26.47% 20%;
+  --muted: 87.27 71.43% 91.76%;
+  --muted-foreground: 90 26.47% 20%;
+  --accent: 71.43 87.27% 88.24%;
+  --accent-foreground: 90 35% 15%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 88 15.96% 63.14%;
+  --input: 87.27 31.43% 77.65%;
+  --ring: 87.27 46.51% 51.96%;
+}
+
+/* https://colorhunt.co/palette/fff7d18b5dff6a42c2563a9c */
+[data-theme-preset='fuchsia'] {
+  --background: 258.75 51.2% 50.98%;
+  --foreground: 49.57 100% 90.98%;
+  --primary: 49.57 100% 90.98%;
+  --primary-foreground: 258.1 54.78% 22.55%;
+  --card: 257.04 100% 68.24%;
+  --card-foreground: 49.57 100% 90.98%;
+  --popover: 257.04 100% 68.24%;
+  --popover-foreground: 49.57 100% 90.98%;
+  --secondary: 258.75 51.2% 50.98%;
+  --secondary-foreground: 49.57 100% 90.98%;
+  --muted: 257.04 100% 68.24%;
+  --muted-foreground: 49.57 100% 90.98%;
+  --accent: 257.14 45.79% 41.96%;
+  --accent-foreground: 49.57 100% 90.98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 256.76 91.74% 76.27%;
+  --input: 256.76 91.74% 76.27%;
+  --ring: 256.76 91.74% 76.27%;
 }

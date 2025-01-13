@@ -1,33 +1,31 @@
 # [1.0.0-alpha.5](https://github.com/Muhammed-Rahif/Notpad/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2025-01-13)
 
-
 ### Bug Fixes
 
-* **editor:** confirm editor close wheather to save or not ([1743adb](https://github.com/Muhammed-Rahif/Notpad/commit/1743adb2ab64f992edcac9e05895eeebbd25af54))
-* **editor:** line numbers visibility; scroll issues ([a1862dd](https://github.com/Muhammed-Rahif/Notpad/commit/a1862ddf0aa41ba428f728840426fd48929a066f))
-* **editor:** status bar hidden if content is overflowing ([6ea0fd1](https://github.com/Muhammed-Rahif/Notpad/commit/6ea0fd1ced3dddb171f453a4a33244df67d5ee8c))
-* **fonts:** inconsolata and parkinsans fonts not loaded ([b40c40e](https://github.com/Muhammed-Rahif/Notpad/commit/b40c40e1fd09cd21c0531a0eb3f7bc0fa6f69ae8))
-* **loading:** theme wasn't matching ([c70a8db](https://github.com/Muhammed-Rahif/Notpad/commit/c70a8dbfb27ef5cf8c1a0dc260ab08aca04fcd82))
-* **menubar:** rearrange menubar items ([3b21534](https://github.com/Muhammed-Rahif/Notpad/commit/3b2153481bb6342e2dd5eb2df50d6255ce565b81)), closes [#278](https://github.com/Muhammed-Rahif/Notpad/issues/278)
-* **theme:** add intructions to add themes in 'src/assets/css/themes.css' ([6cf92c2](https://github.com/Muhammed-Rahif/Notpad/commit/6cf92c27e44e42fb42021f374870e5eeea497097))
-* **theme:** rearrange themes ([b02204a](https://github.com/Muhammed-Rahif/Notpad/commit/b02204a78b37a676c7225341b1dd308174dba270))
-
+- **editor:** confirm editor close wheather to save or not ([1743adb](https://github.com/Muhammed-Rahif/Notpad/commit/1743adb2ab64f992edcac9e05895eeebbd25af54))
+- **editor:** line numbers visibility; scroll issues ([a1862dd](https://github.com/Muhammed-Rahif/Notpad/commit/a1862ddf0aa41ba428f728840426fd48929a066f))
+- **editor:** status bar hidden if content is overflowing ([6ea0fd1](https://github.com/Muhammed-Rahif/Notpad/commit/6ea0fd1ced3dddb171f453a4a33244df67d5ee8c))
+- **fonts:** inconsolata and parkinsans fonts not loaded ([b40c40e](https://github.com/Muhammed-Rahif/Notpad/commit/b40c40e1fd09cd21c0531a0eb3f7bc0fa6f69ae8))
+- **loading:** theme wasn't matching ([c70a8db](https://github.com/Muhammed-Rahif/Notpad/commit/c70a8dbfb27ef5cf8c1a0dc260ab08aca04fcd82))
+- **menubar:** rearrange menubar items ([3b21534](https://github.com/Muhammed-Rahif/Notpad/commit/3b2153481bb6342e2dd5eb2df50d6255ce565b81)), closes [#278](https://github.com/Muhammed-Rahif/Notpad/issues/278)
+- **theme:** add intructions to add themes in 'src/assets/css/themes.css' ([6cf92c2](https://github.com/Muhammed-Rahif/Notpad/commit/6cf92c27e44e42fb42021f374870e5eeea497097))
+- **theme:** rearrange themes ([b02204a](https://github.com/Muhammed-Rahif/Notpad/commit/b02204a78b37a676c7225341b1dd308174dba270))
 
 ### Features
 
-* **Confirmation-Popup:** Add SaveAndQuit ([7ab4453](https://github.com/Muhammed-Rahif/Notpad/commit/7ab44530bc7534018c06227599552d61839ec109))
-* **dialog:** make dialogs draggable ([080ed37](https://github.com/Muhammed-Rahif/Notpad/commit/080ed376cae892c25d6d4731aafb077b932e589c))
-* **editor:** add delete option in Edit > Delete ([9c7785c](https://github.com/Muhammed-Rahif/Notpad/commit/9c7785c344a046741732c3b1b622310a70a85c8a)), closes [#290](https://github.com/Muhammed-Rahif/Notpad/issues/290)
-* **editor:** custom caret options (enable/disable, caret style and caret animation) ([7a5f61e](https://github.com/Muhammed-Rahif/Notpad/commit/7a5f61e825b5a06ac68a50c103ca6e0ce2917722))
-* **editor:** multiple date/time formats; resolves [#291](https://github.com/Muhammed-Rahif/Notpad/issues/291) ([0fe6f6a](https://github.com/Muhammed-Rahif/Notpad/commit/0fe6f6a6030ebe3ec86f3ce0a14c28a94efbf2e5))
-* **editor:** wrap long lines ([20c45cd](https://github.com/Muhammed-Rahif/Notpad/commit/20c45cd829ed42105f85372444dc94eb5a5e383c))
-* **effect:** type effects such as click sound, vibration, volume ([bcd1747](https://github.com/Muhammed-Rahif/Notpad/commit/bcd174790c30c1e93f6aa8020624ecb14fbea51c))
-* **head:** Add SEO meta tags for better search optimization ([6f32f63](https://github.com/Muhammed-Rahif/Notpad/commit/6f32f6317fefdbf6bfbc6987310b322389944e07))
-* **icon:** dynamic fav icon based on themes ([960753b](https://github.com/Muhammed-Rahif/Notpad/commit/960753b4597902390822e5af373929fb78a09245))
-* **settings:** add themes classic, sepia, blue and red ([0955e45](https://github.com/Muhammed-Rahif/Notpad/commit/0955e452c9c9ebaea7f32c0dc62062318d9bd972))
-* **settings:** add type effect sounds ([17f0d21](https://github.com/Muhammed-Rahif/Notpad/commit/17f0d212e15e1055d4241343736cde8688e42250))
-* **settings:** setup caret style and animation store ([802e953](https://github.com/Muhammed-Rahif/Notpad/commit/802e953a7567bc41e6c1d8aa317ae6b039a31a0d))
-* **themes:** add themes 'cosmic', 'kelp' and 'coral' ([5ec4f7d](https://github.com/Muhammed-Rahif/Notpad/commit/5ec4f7d6280ceab27eef0baee6f4707659d5cb27))
+- **Confirmation-Popup:** Add SaveAndQuit ([7ab4453](https://github.com/Muhammed-Rahif/Notpad/commit/7ab44530bc7534018c06227599552d61839ec109))
+- **dialog:** make dialogs draggable ([080ed37](https://github.com/Muhammed-Rahif/Notpad/commit/080ed376cae892c25d6d4731aafb077b932e589c))
+- **editor:** add delete option in Edit > Delete ([9c7785c](https://github.com/Muhammed-Rahif/Notpad/commit/9c7785c344a046741732c3b1b622310a70a85c8a)), closes [#290](https://github.com/Muhammed-Rahif/Notpad/issues/290)
+- **editor:** custom caret options (enable/disable, caret style and caret animation) ([7a5f61e](https://github.com/Muhammed-Rahif/Notpad/commit/7a5f61e825b5a06ac68a50c103ca6e0ce2917722))
+- **editor:** multiple date/time formats; resolves [#291](https://github.com/Muhammed-Rahif/Notpad/issues/291) ([0fe6f6a](https://github.com/Muhammed-Rahif/Notpad/commit/0fe6f6a6030ebe3ec86f3ce0a14c28a94efbf2e5))
+- **editor:** wrap long lines ([20c45cd](https://github.com/Muhammed-Rahif/Notpad/commit/20c45cd829ed42105f85372444dc94eb5a5e383c))
+- **effect:** type effects such as click sound, vibration, volume ([bcd1747](https://github.com/Muhammed-Rahif/Notpad/commit/bcd174790c30c1e93f6aa8020624ecb14fbea51c))
+- **head:** Add SEO meta tags for better search optimization ([6f32f63](https://github.com/Muhammed-Rahif/Notpad/commit/6f32f6317fefdbf6bfbc6987310b322389944e07))
+- **icon:** dynamic fav icon based on themes ([960753b](https://github.com/Muhammed-Rahif/Notpad/commit/960753b4597902390822e5af373929fb78a09245))
+- **settings:** add themes classic, sepia, blue and red ([0955e45](https://github.com/Muhammed-Rahif/Notpad/commit/0955e452c9c9ebaea7f32c0dc62062318d9bd972))
+- **settings:** add type effect sounds ([17f0d21](https://github.com/Muhammed-Rahif/Notpad/commit/17f0d212e15e1055d4241343736cde8688e42250))
+- **settings:** setup caret style and animation store ([802e953](https://github.com/Muhammed-Rahif/Notpad/commit/802e953a7567bc41e6c1d8aa317ae6b039a31a0d))
+- **themes:** add themes 'cosmic', 'kelp' and 'coral' ([5ec4f7d](https://github.com/Muhammed-Rahif/Notpad/commit/5ec4f7d6280ceab27eef0baee6f4707659d5cb27))
 
 # [1.0.0-alpha.4](https://github.com/Muhammed-Rahif/Notpad/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2024-12-02)
 

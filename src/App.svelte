@@ -1,12 +1,9 @@
 <script lang="ts">
-  import MenuBar from '@/components/MenuBar.svelte';
+  import MenuBar from '@/components/menubar/MenuBar.svelte';
   import EditorTabs from '@/components/EditorTabs.svelte';
   import FontDialog from '@/components/font-dialog/FontDialog.svelte';
   import Shortcuts from '@/components/Shortcuts.svelte';
   import { Toaster } from '@/components/ui/sonner';
-  import favIcon from '@/src/assets/images/favicon.png';
-  import favIconDark from '@/src/assets/images/favicon-dark.png';
-  import { mode, ModeWatcher } from 'mode-watcher';
   import { Notpad } from '@/helpers/notpad';
   import AboutDialog from '@/components/AboutDialog.svelte';
   import LicenseDialog from '@/components/LicenseDialog.svelte';
@@ -15,11 +12,20 @@
   import Loading from '@/components/Loading.svelte';
   import ShortcutsDialog from '@/components/ShortcutsDialog.svelte';
   import EditorCloseConfirmationDialog from '@/components/EditorCloseConfirmationDialog.svelte';
+  import DynamicFavicon from '@/components/DynamicFavicon.svelte';
+
+  let isLoading = $state(true);
+
+  Notpad.init().then(() => {
+    isLoading = false;
+  });
 </script>
 
-{#await Notpad.init()}
+<DynamicFavicon />
+
+{#if isLoading}
   <Loading />
-{:then}
+{:else}
   <!-- What user see on initially -->
   <div class="flex h-full flex-col">
     <MenuBar />
@@ -35,13 +41,5 @@
   <GoToDialog />
   <FindDialog />
   <Shortcuts />
-{/await}
-<Toaster />
-<ModeWatcher />
-<svelte:head>
-  {#if $mode == 'dark'}
-    <link rel="icon" href={favIconDark} />
-  {:else}
-    <link rel="icon" href={favIcon} />
-  {/if}
-</svelte:head>
+  <Toaster />
+{/if}

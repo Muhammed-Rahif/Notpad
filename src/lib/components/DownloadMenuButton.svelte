@@ -43,7 +43,7 @@
             <a href={asset.browser_download_url} download={asset.browser_download_url}>
               <Menubar.Item class="flex items-center justify-between gap-3">
                 {text}
-                <Icon class="text-xl" />
+                <Icon />
               </Menubar.Item>
             </a>
           {/each}

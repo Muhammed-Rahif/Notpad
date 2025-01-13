@@ -7,19 +7,21 @@
   import { Button } from '@/components/ui/button';
   import { Label } from '@/components/ui/label';
   import { cn } from '@/utils';
-  import { settings } from '@/store/store';
   import { get } from 'svelte/store';
-  import { FontSize } from '@/types/SettingsTypes';
+  import { Notpad } from '@/helpers/notpad';
+  import type { SettingsType } from '@/types/SettingsType';
+  import { Settings } from '@/helpers/settings';
 
   interface Props {
-    value: FontSize;
+    value: SettingsType['font']['size'];
   }
 
+  const settings = Notpad.stores.settings;
   let triggerRef = $state<HTMLButtonElement>(null!);
   let open = $state(false);
   let { value = $bindable() }: Props = $props();
   let selectedValue = $derived(
-    Object.values(FontSize).find((f) => f === value) ?? $settings.fontSize
+    Object.values(Settings.fontSizes).find((f) => f === value) ?? $settings.font.size
   );
 
   // We want to refocus the trigger button when the user selects
@@ -32,13 +34,13 @@
     });
   }
 
-  const onSelect = (currentValue: FontSize | string) => {
-    value = currentValue as FontSize;
+  const onSelect = (currentValue: number | string) => {
+    value = currentValue as SettingsType['font']['size'];
     closeAndFocusTrigger();
   };
 
   onMount(() => () => {
-    value = get(settings).fontSize;
+    value = get(settings).font.size;
   });
 </script>
 
@@ -56,8 +58,8 @@
           role="combobox"
           aria-expanded={open}
         >
-          {selectedValue == FontSize.Size16 ? `${selectedValue} (Default)` : selectedValue}
-          <ChevronsUpDownIcon class="ml-2 shrink-0 text-base opacity-50" />
+          {selectedValue == 16 ? `${selectedValue} (Default)` : selectedValue}
+          <ChevronsUpDownIcon class="ml-2 shrink-0 opacity-50" />
         </Button>
       </div>
     {/snippet}
@@ -67,11 +69,11 @@
       <Command.Input placeholder="Search font size" />
       <Command.Empty>No font size found.</Command.Empty>
       <Command.Group class="max-h-56 overflow-y-auto">
-        {#each Object.values(FontSize).filter((s) => !isNaN(Number(s))) as fontSize}
+        {#each Object.values(Settings.fontSizes) as fontSize}
           {@const fSize = fontSize.toString()}
           <Command.Item value={fSize} onSelect={() => onSelect(fontSize)}>
-            <CheckIcon class={cn('mr-2 text-lg', value !== fontSize && 'text-transparent')} />
-            {fontSize == FontSize.Size16 ? `${fontSize} (Default)` : fontSize}
+            <CheckIcon class={cn('mr-2', value !== fontSize && 'text-transparent')} />
+            {fontSize == 16 ? `${fontSize} (Default)` : fontSize}
           </Command.Item>
         {/each}
       </Command.Group>

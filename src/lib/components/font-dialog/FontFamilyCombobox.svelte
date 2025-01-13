@@ -5,21 +5,23 @@
   import { Button } from '@/components/ui/button';
   import { Label } from '@/components/ui/label';
   import { cn } from '@/utils';
-  import { settings } from '@/store/store';
   import { get } from 'svelte/store';
   import CheckIcon from '@/components/icons/Check.svelte';
   import ChevronsUpDownIcon from '@/components/icons/ChevronsUpDown.svelte';
-  import { FontFamily } from '@/types/SettingsTypes';
+  import { Notpad } from '@/helpers/notpad';
+  import type { SettingsType } from '@/types/SettingsType';
+  import { Settings } from '@/helpers/settings';
 
   interface Props {
-    value: FontFamily;
+    value: SettingsType['font']['family'];
   }
 
+  const settings = Notpad.stores.settings;
   let triggerRef = $state<HTMLButtonElement>(null!);
   let open = $state(false);
   let { value = $bindable() }: Props = $props();
   let selectedValue = $derived(
-    Object.values(FontFamily).find((f) => f === value) ?? $settings.fontFamily
+    Object.values(Settings.fontFamilies).find((f) => f === value) ?? $settings.font.family
   );
 
   // We want to refocus the trigger button when the user selects
@@ -32,13 +34,13 @@
     });
   }
 
-  const onSelect = (currentValue: FontFamily) => {
+  const onSelect = (currentValue: SettingsType['font']['family']) => {
     value = currentValue;
     closeAndFocusTrigger();
   };
 
   onMount(() => () => {
-    value = get(settings).fontFamily;
+    value = get(settings).font.family;
   });
 </script>
 
@@ -56,8 +58,8 @@
           role="combobox"
           aria-expanded={open}
         >
-          {selectedValue == FontFamily.SUSE ? `${selectedValue} (Default)` : selectedValue}
-          <ChevronsUpDownIcon class="ml-2 shrink-0 text-base opacity-50" />
+          {selectedValue == 'SUSE' ? `${selectedValue} (Default)` : selectedValue}
+          <ChevronsUpDownIcon class="ml-2 shrink-0 opacity-50" />
         </Button>
       </div>
     {/snippet}
@@ -67,10 +69,15 @@
       <Command.Input placeholder="Search font family" />
       <Command.Empty>No font family found.</Command.Empty>
       <Command.Group class="max-h-56 overflow-y-auto">
-        {#each Object.values(FontFamily) as fontFamily}
-          <Command.Item value={fontFamily} onSelect={() => onSelect(fontFamily)}>
-            <CheckIcon class={cn('mr-2 text-lg', value !== fontFamily && 'text-transparent')} />
-            {fontFamily == FontFamily.SUSE ? `${fontFamily} (Default)` : fontFamily}
+        {#each Object.values(Settings.fontFamilies) as fontFamily}
+          <Command.Item
+            value={fontFamily}
+            onSelect={() => {
+              onSelect(fontFamily as SettingsType['font']['family']);
+            }}
+          >
+            <CheckIcon class={cn('mr-2', value !== fontFamily && 'text-transparent')} />
+            {fontFamily == 'SUSE' ? `${fontFamily} (Default)` : fontFamily}
           </Command.Item>
         {/each}
       </Command.Group>

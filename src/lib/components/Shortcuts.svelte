@@ -55,6 +55,12 @@
         preventDefault: true
       },
       {
+        key: '+',
+        modifier: ['ctrl'],
+        callback: () => Notpad.viewOptions.zoom('in'),
+        preventDefault: true
+      },
+      {
         key: '-',
         modifier: ['ctrl'],
         callback: () => Notpad.viewOptions.zoom('out'),

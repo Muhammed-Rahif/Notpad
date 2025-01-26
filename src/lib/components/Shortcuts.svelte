@@ -49,7 +49,7 @@
         preventDefault: true
       },
       {
-        key: '+',
+        key: '=',
         modifier: ['ctrl'],
         callback: () => Notpad.viewOptions.zoom('in'),
         preventDefault: true

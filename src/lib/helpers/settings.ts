@@ -22,7 +22,8 @@ export class Settings {
     'Lora',
     'Roboto Slab',
     'Inconsolata',
-    'Parkinsans'
+    'Parkinsans',
+    'JetBrains Mono'
   ] as const;
   static fontSizes = [6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72] as const;
   static zooms = [0.5, 0.75, 0.9, 1, 1.2, 1.5, 1.75, 2] as const;

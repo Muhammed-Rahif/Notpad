@@ -32,3 +32,8 @@
   font-family: 'Parkinsans';
   src: url('../../assets/fonts/Parkinsans-VariableFont.ttf');
 }
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../assets/fonts/JetBrainsMono-VariableFont.ttf');
+}

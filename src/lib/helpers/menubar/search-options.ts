@@ -5,21 +5,15 @@ import { isTauri } from '@/src/lib';
 import { open as tauriLaunchUrl } from '@tauri-apps/plugin-shell';
 
 export class SearchOptions {
-  private searchEngineMap: {
-    google: string;
-    bing: string;
-    duckduckgo: string;
-    yahoo: string;
-    brave: string;
-  } = {
+  private searchEngines = {
     google: 'google.com/search',
     bing: 'bing.com/search',
     duckduckgo: 'duckduckgo.com/',
     yahoo: 'search.yahoo.com/search',
     brave: 'search.brave.com/search'
-  };
+  } as const;
 
-  public searchOnWeb = (searchEngine: string, editorId?: string) => {
+  public searchOnWeb = (searchEngine: keyof typeof this.searchEngines, editorId?: string) => {
     const editor = Notpad.editors.getEditor(editorId);
     if (!editor) return;
 
@@ -30,7 +24,7 @@ export class SearchOptions {
     selectedText = selectedText?.trim();
     if (!selectedText) return Notpad.showError('Please select some text to search on the web.');
 
-    const url = `https://${this.searchEngineMap[searchEngine]}?q=${encodeURIComponent(selectedText)}`;
+    const url = `https://${this.searchEngines[searchEngine]}?q=${encodeURIComponent(selectedText)}`;
 
     if (isTauri) {
       tauriLaunchUrl(url);

@@ -23,15 +23,14 @@
 
 <DynamicFavicon />
 
+<div class="flex h-full flex-col">
+  <MenuBar />
+  <EditorTabs />
+</div>
+
 {#if isLoading}
   <Loading />
 {:else}
-  <!-- What user see on initially -->
-  <div class="flex h-full flex-col">
-    <MenuBar />
-    <EditorTabs />
-  </div>
-
   <!-- Components that aren't appear on initial roll -->
   <EditorCloseConfirmationDialog />
   <FontDialog />

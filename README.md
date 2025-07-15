@@ -206,6 +206,20 @@ Resources that are helpful and would like to give credit to.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- STAR HISTORY -->
+
+## Star History
+
+<a href="https://www.star-history.com/#Muhammed-Rahif/Notpad&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Muhammed-Rahif/Notpad&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Muhammed-Rahif/Notpad&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Muhammed-Rahif/Notpad&type=Date" />
+ </picture>
+</a>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## FAQ
 
 **Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**

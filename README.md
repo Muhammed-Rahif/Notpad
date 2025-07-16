@@ -66,7 +66,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#running">Running</a></li>
+        <li><a href="#running-the-project">Running the Project</a></li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -74,6 +74,8 @@
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#star-history">Star History</a></li>
+    <li><a href="#faq">FAQ</a></li>
   </ol>
 </details>
 
@@ -203,6 +205,20 @@ Resources that are helpful and would like to give credit to.
 
 - [Localforage](https://localforage.github.io/localForage)
 - [What you need to know about persistent state in Tauri apps](https://aptabase.com/blog/persistent-state-tauri-apps)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- STAR HISTORY -->
+
+## Star History
+
+<a href="https://www.star-history.com/#Muhammed-Rahif/Notpad&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Muhammed-Rahif/Notpad&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Muhammed-Rahif/Notpad&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Muhammed-Rahif/Notpad&type=Date" />
+ </picture>
+</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

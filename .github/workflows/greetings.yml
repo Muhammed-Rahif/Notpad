@@ -16,7 +16,10 @@ jobs:
   greet:
     name: Greet, Celebrate, and Encourage
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: read
     steps:
       - name: Check User Contributions
         id: check_contributions

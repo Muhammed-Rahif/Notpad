@@ -66,7 +66,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#running">Running</a></li>
+        <li><a href="#running-the-project">Running the Project</a></li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -74,6 +74,8 @@
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#star-history">Star History</a></li>
+    <li><a href="#faq">FAQ</a></li>
   </ol>
 </details>
 
